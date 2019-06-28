@@ -1,0 +1,269 @@
+
+R version 3.2.2 (2015-08-14) -- "Fire Safety"
+Copyright (C) 2015 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> 
+> source("~/research/Deconvolution/R_batch1/_lib.R")
+> 
+> setwd("~/research/Deconvolution/data")
+> 
+> library(multcomp)
+Loading required package: mvtnorm
+Loading required package: survival
+Loading required package: TH.data
+Loading required package: MASS
+
+Attaching package: ‘TH.data’
+
+The following object is masked from ‘package:MASS’:
+
+    geyser
+
+Warning messages:
+1: package ‘multcomp’ was built under R version 3.2.5 
+2: package ‘mvtnorm’ was built under R version 3.2.3 
+3: package ‘survival’ was built under R version 3.2.5 
+4: package ‘TH.data’ was built under R version 3.2.3 
+> library(data.table)
+Warning message:
+package ‘data.table’ was built under R version 3.2.5 
+> 
+> # ------------------------------------------------------------
+> # read in data
+> # ------------------------------------------------------------
+> 
+> info = read.table("methylation_pure_ct_info.txt", as.is=TRUE, sep="\t",
++                   header=TRUE, quote="")
+> dim(info)
+[1] 220886     31
+> info[1:2,]
+          ID       Name Infinium_Design_Type Next_Base Color_Channel
+1 cg00000029 cg00000029                   II                        
+2 cg00000236 cg00000236                   II                        
+  Genome_Build CHR  MAPINFO Chromosome_36 Coordinate_36 Strand Probe_SNPs
+1           37  16 53468112            16      52025613      F         NA
+2           37   8 42263294             8      42382451      R         NA
+  Probe_SNPs_10 Random_Loci Methyl27_Loci UCSC_RefGene_Name
+1            NA          NA            NA              RBL2
+2            NA          NA            NA       VDAC3;VDAC3
+  UCSC_RefGene_Accession UCSC_RefGene_Group   UCSC_CpG_Islands_Name
+1              NM_005611            TSS1500 chr16:53468284-53469209
+2 NM_005662;NM_001135694        3'UTR;3'UTR                        
+  Relation_to_UCSC_CpG_Island Phantom DMR Enhancer HMM_Island
+1                     N_Shore                   NA           
+2                                               NA           
+  Regulatory_Feature_Name Regulatory_Feature_Group  DHS RANGE_START RANGE_END
+1    16:53467838-53469685      Promoter_Associated TRUE    53468112  53468235
+2                                                    NA    42263294  42263417
+      RANGE_GB SPOT_ID
+1  NC_000016.9      NA
+2 NC_000008.10      NA
+> 
+> dat = fread("methylation_pure_ct_rmPC2_data.txt")
+Read 0.0% of 220886 rowsRead 36.2% of 220886 rowsRead 72.4% of 220886 rowsRead 220886 rows and 189 (of 189) columns from 0.382 GB file in 00:00:05
+> dim(dat)
+[1] 220886    189
+> dat[1:2,1:5]
+   GSM861653 GSM861654 GSM861655 GSM861656 GSM861657
+1: 0.6328456 0.6210717 0.6287278 0.6396724 0.6259747
+2: 0.8424159 0.8050328 0.8104085 0.8337636 0.8414988
+> 
+> dat0 = fread("methylation_pure_ct_data.txt")
+Read 27.2% of 220886 rowsRead 58.9% of 220886 rowsRead 90.5% of 220886 rowsRead 220886 rows and 189 (of 189) columns from 0.384 GB file in 00:00:05
+> dim(dat0)
+[1] 220886    189
+> dat0[1:2,1:5]
+   GSM861653 GSM861654 GSM861655 GSM861656 GSM861657
+1: 0.6784794 0.6772099 0.6826744 0.6951093 0.6827040
+2: 0.8800888 0.8513776 0.8549440 0.8795295 0.8883315
+> 
+> sam = read.table("methylation_pure_ct_sample.txt", as.is=TRUE,
++     sep="\t", header=TRUE)
+> dim(sam)
+[1] 189   3
+> sam[1:2,]
+         id label   study
+1 GSM861653  CD4T Reinius
+2 GSM861654  CD4T Reinius
+> 
+> table(names(dat) == sam$id)
+
+TRUE 
+ 189 
+> 
+> dat  = data.matrix(dat)
+> dat0 = data.matrix(dat0)
+> table(sam$label)
+
+         B       CD4T       CD8T   Monocyte Neutrophil         NK       Treg 
+         6         60         37         40         21         21          4 
+> 
+> rownames(dat)  = info$ID
+> rownames(dat0) = info$ID
+> 
+> cr1 = cor(dat, dat0, use="pair")
+> summary(diag(cr1))
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.9878  0.9968  0.9988  0.9975  0.9997  1.0000 
+> summary(cr1[upper.tri(cr1)])
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.8391  0.9270  0.9551  0.9511  0.9800  0.9978 
+> 
+> pdf("../figures/before_vs_after_rmPC2.pdf", width=4, height=4)
+> par(mar=c(5,4,1,1), bty="n")
+> smoothScatter(as.numeric(dat0), as.numeric(dat), xlab="before", ylab="after")
+> abline(0,1)
+> dev.off()
+null device 
+          1 
+> 
+> # ------------------------------------------------------------
+> # define the cell types to separate
+> # ------------------------------------------------------------
+> 
+> panT = c("CD4T", "CD8T", "Treg")
+> p2use = levels = list()
+> 
+> level1 = list()
+> level1[["lymphoid"]] = c("B", "CD4T", "CD8T", "Treg", "NK")
+> level1[["myeloid"]]  = c("Monocyte", "Neutrophil")
+> 
+> levels[[1]] = level1
+> 
+> level1 = list()
+> level1[["B_NK"]] = c("B", "NK")
+> level1[["T"]]    = panT
+> 
+> levels[[2]] = level1
+> 
+> level1 = list()
+> level1[["B"]]  = "B"
+> level1[["NK"]] = "NK"
+> 
+> levels[[3]] = level1
+> 
+> level1 = list()
+> level1[["CD4T_Tregs"]] = c("CD4T", "Tregs")
+> level1[["CD8T"]] = "CD8T"
+> 
+> levels[[4]] = level1
+> 
+> level1 = list()
+> level1[["CD4T"]] = "CD4T"
+> level1[["Tregs"]]   = "Tregs"
+> 
+> levels[[5]] = level1
+> 
+> level1 = list()
+> 
+> level1[["Neutrophil"]] = "Neutrophil"
+> level1[["Monocyte"]]   = "Monocyte"
+> 
+> levels[[6]] = level1
+> 
+> uct = unique(sam$label)
+> uct
+[1] "CD4T"       "CD8T"       "Monocyte"   "B"          "NK"        
+[6] "Neutrophil" "Treg"      
+> 
+> for(k in 1:length(uct)){
++   ct1 = uct[k]
++   ct2 = paste("Non", ct1)
++   
++   level1 = list()
++ 
++   level1[[ct1]] = ct1
++   level1[[ct2]] = setdiff(uct, ct1)
++   
++   levels[[6+k]] = level1
++ }
+> 
+> length(levels)
+[1] 13
+> 
+> path  = "../figures_methylation"
+> dataType = "methylation"
+> 
+> for(kk in 1:length(levels)){
++   cat(kk, date(), "\n")
++   level1 = levels[[kk]]
++   nms    = names(level1)
++   nm1    = sprintf("%s_vs_%s", nms[1], nms[2])
++   
++   p2use[[nm1]] = probeSelect(level1, sam, dat, path=path, dataType=dataType)
++ }
+1 Thu Feb 16 00:21:43 2017 
+2 Thu Feb 16 00:22:17 2017 
+3 Thu Feb 16 00:22:53 2017 
+4 Thu Feb 16 00:23:26 2017 
+5 Thu Feb 16 00:24:01 2017 
+6 Thu Feb 16 00:24:18 2017 
+7 Thu Feb 16 00:24:50 2017 
+8 Thu Feb 16 00:25:24 2017 
+9 Thu Feb 16 00:25:57 2017 
+10 Thu Feb 16 00:26:30 2017 
+11 Thu Feb 16 00:27:02 2017 
+12 Thu Feb 16 00:27:33 2017 
+13 Thu Feb 16 00:28:08 2017 
+> 
+> lapply(p2use, dim)
+$lymphoid_vs_myeloid
+[1] 99 12
+
+$B_NK_vs_T
+[1] 79 12
+
+$B_vs_NK
+[1] 79 12
+
+$CD4T_Tregs_vs_CD8T
+[1] 18 12
+
+$Neutrophil_vs_Monocyte
+[1] 189  12
+
+$`CD4T_vs_Non CD4T`
+[1] 63 12
+
+$`CD8T_vs_Non CD8T`
+[1] 24 12
+
+$`Monocyte_vs_Non Monocyte`
+[1] 81 12
+
+$`B_vs_Non B`
+[1] 208  12
+
+$`NK_vs_Non NK`
+[1] 66 12
+
+$`Neutrophil_vs_Non Neutrophil`
+[1] 366  12
+
+$`Treg_vs_Non Treg`
+[1] 51 12
+
+> 
+> setwd("~/research/Deconvolution/data")
+> 
+> save(p2use, file="methylation_p2use.RData")
+> 
+> quit(save="no")
+> proc.time()
+   user  system elapsed 
+528.609  32.440 564.657 

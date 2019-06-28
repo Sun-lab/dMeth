@@ -1,0 +1,3511 @@
+
+R version 3.2.2 (2015-08-14) -- "Fire Safety"
+Copyright (C) 2015 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> 
+> library("GEOquery")
+Loading required package: Biobase
+Loading required package: BiocGenerics
+Loading required package: parallel
+
+Attaching package: ‘BiocGenerics’
+
+The following objects are masked from ‘package:parallel’:
+
+    clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
+    clusterExport, clusterMap, parApply, parCapply, parLapply,
+    parLapplyLB, parRapply, parSapply, parSapplyLB
+
+The following objects are masked from ‘package:stats’:
+
+    IQR, mad, xtabs
+
+The following objects are masked from ‘package:base’:
+
+    anyDuplicated, append, as.data.frame, as.vector, cbind, colnames,
+    do.call, duplicated, eval, evalq, Filter, Find, get, grep, grepl,
+    intersect, is.unsorted, lapply, lengths, Map, mapply, match, mget,
+    order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,
+    rbind, Reduce, rownames, sapply, setdiff, sort, table, tapply,
+    union, unique, unlist, unsplit
+
+Welcome to Bioconductor
+
+    Vignettes contain introductory material; view with
+    'browseVignettes()'. To cite Bioconductor, see
+    'citation("Biobase")', and for packages 'citation("pkgname")'.
+
+Setting options('download.file.method.GEOquery'='auto')
+Setting options('GEOquery.inmemory.gpl'=FALSE)
+> 
+> setwd("~/research/TCGA/_microE/methylation/data")
+> 
+> # ------------------------------------------------------------
+> # GSE35069: Reinius et al.
+> # ------------------------------------------------------------
+> 
+> gse3 = getGEO("GSE35069", destdir="~/research/TCGA/_microE/methylation/data")
+ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE35nnn/GSE35069/matrix/
+Found 1 file(s)
+GSE35069_series_matrix.txt.gz
+Using locally cached version: ~/research/TCGA/_microE/methylation/data/GSE35069_series_matrix.txt.gz
+Using locally cached version of GPL13534 found here:
+~/research/TCGA/_microE/methylation/data/GPL13534.soft 
+> 
+> show(gse3)
+$GSE35069_series_matrix.txt.gz
+ExpressionSet (storageMode: lockedEnvironment)
+assayData: 485577 features, 60 samples 
+  element names: exprs 
+protocolData: none
+phenoData
+  sampleNames: GSM861635 GSM861636 ... GSM861694 (60 total)
+  varLabels: title geo_accession ... data_row_count (31 total)
+  varMetadata: labelDescription
+featureData
+  featureNames: cg00000029 cg00000108 ... rs9839873 (485577 total)
+  fvarLabels: ID Name ... SPOT_ID (37 total)
+  fvarMetadata: Column Description labelDescription
+experimentData: use 'experimentData(object)'
+Annotation: GPL13534 
+
+> gse3 = gse3[[1]]
+> 
+> mDat3 = as.data.frame(gse3)
+> dim(mDat3)
+[1]     60 485608
+> mDat3[1:2,1:5]
+          cg00000029 cg00000108 cg00000109 cg00000165 cg00000236
+GSM861635  0.5413522  0.9644357  0.7937799  0.2204557  0.8289168
+GSM861636  0.4889614  0.9412175  0.8655354  0.1613999  0.7181840
+> 
+> pDat3 = pData(phenoData(gse3))
+> dim(pDat3)
+[1] 60 31
+> names(pDat3)
+ [1] "title"                   "geo_accession"          
+ [3] "status"                  "submission_date"        
+ [5] "last_update_date"        "type"                   
+ [7] "channel_count"           "source_name_ch1"        
+ [9] "organism_ch1"            "characteristics_ch1"    
+[11] "characteristics_ch1.1"   "molecule_ch1"           
+[13] "extract_protocol_ch1"    "label_ch1"              
+[15] "label_protocol_ch1"      "taxid_ch1"              
+[17] "hyb_protocol"            "scan_protocol"          
+[19] "description"             "data_processing"        
+[21] "platform_id"             "contact_name"           
+[23] "contact_email"           "contact_department"     
+[25] "contact_institute"       "contact_address"        
+[27] "contact_city"            "contact_zip/postal_code"
+[29] "contact_country"         "supplementary_file"     
+[31] "data_row_count"         
+> pDat3[1:2,]
+          title geo_accession                status submission_date
+GSM861635  WB_1     GSM861635 Public on Aug 03 2012     Jan 12 2012
+GSM861636  WB_2     GSM861636 Public on Aug 03 2012     Jan 12 2012
+          last_update_date    type channel_count source_name_ch1 organism_ch1
+GSM861635      Aug 03 2012 genomic             1     Whole blood Homo sapiens
+GSM861636      Aug 03 2012 genomic             1     Whole blood Homo sapiens
+          characteristics_ch1         characteristics_ch1.1 molecule_ch1
+GSM861635        gender: Male tissue/cell type: Whole blood  genomic DNA
+GSM861636        gender: Male tissue/cell type: Whole blood  genomic DNA
+                                                                                                                            extract_protocol_ch1
+GSM861635 Genomic DNA was extracted and purified from all samples using QIAmp DNA Micro Kit (QIAGEN, Germany) according to standard instructions
+GSM861636 Genomic DNA was extracted and purified from all samples using QIAmp DNA Micro Kit (QIAGEN, Germany) according to standard instructions
+            label_ch1         label_protocol_ch1 taxid_ch1
+GSM861635 Cy5 and Cy3 Standard Illumina Protocol      9606
+GSM861636 Cy5 and Cy3 Standard Illumina Protocol      9606
+                                                                                                                                                   hyb_protocol
+GSM861635 bisulphite converted DNA was amplified, fragmented and hybridised to Illumina Infinium Human Methylation540 Beadchip using standard Illumina protocol
+GSM861636 bisulphite converted DNA was amplified, fragmented and hybridised to Illumina Infinium Human Methylation540 Beadchip using standard Illumina protocol
+                                                                                          scan_protocol
+GSM861635 Arrays were imaged using BeadArray Reader using standard recommended Illumina scanner setting
+GSM861636 Arrays were imaged using BeadArray Reader using standard recommended Illumina scanner setting
+                                       description
+GSM861635 Whole blood obtained from blood donation
+GSM861636 Whole blood obtained from blood donation
+                                                                                                                                                                                                                                                                                         data_processing
+GSM861635 The raw data from GenomeStudio software (v2011.1) methylation module (v1.9.0) were imported into R v. 2.13 and analyzed with the Bioconductor lumi package. Color channel imbalance adjusted, background corrected, and quantile normalized M values followed by fitting a Gamma distribution.
+GSM861636 The raw data from GenomeStudio software (v2011.1) methylation module (v1.9.0) were imported into R v. 2.13 and analyzed with the Bioconductor lumi package. Color channel imbalance adjusted, background corrected, and quantile normalized M values followed by fitting a Gamma distribution.
+          platform_id     contact_name        contact_email
+GSM861635    GPL13534 Lovisa,E,Reinius lovisa.reinius@ki.se
+GSM861636    GPL13534 Lovisa,E,Reinius lovisa.reinius@ki.se
+                               contact_department     contact_institute
+GSM861635 Department of Biosciences and Nutrition Karolinska Institutet
+GSM861636 Department of Biosciences and Nutrition Karolinska Institutet
+                contact_address contact_city contact_zip/postal_code
+GSM861635 Novum, Halsovagen 7-9     Huddinge                   14157
+GSM861636 Novum, Halsovagen 7-9     Huddinge                   14157
+          contact_country supplementary_file data_row_count
+GSM861635          Sweden               NONE         485577
+GSM861636          Sweden               NONE         485577
+> 
+> table(pDat3$source_name_ch1)
+
+CD14+ Monocytes   CD19+ B cells    CD4+ T cells  CD56+ NK cells    CD8+ T cells 
+              6               6               6               6               6 
+    Eosinophils    Granulocytes     Neutrophils            PBMC     Whole blood 
+              6               6               6               6               6 
+> 
+> sDat3 = pDat3[,c("geo_accession", "source_name_ch1")]
+> 
+> names(sDat3) = c("id", "label")
+> sDat3[1:2,]
+                 id       label
+GSM861635 GSM861635 Whole blood
+GSM861636 GSM861636 Whole blood
+> table(sDat3$label)
+
+CD14+ Monocytes   CD19+ B cells    CD4+ T cells  CD56+ NK cells    CD8+ T cells 
+              6               6               6               6               6 
+    Eosinophils    Granulocytes     Neutrophils            PBMC     Whole blood 
+              6               6               6               6               6 
+> 
+> i450 = pData(featureData(gse3))
+> dim(i450)
+[1] 485577     37
+> i450[1:5,1:5]
+                   ID       Name AddressA_ID
+cg00000029 cg00000029 cg00000029    14782418
+cg00000108 cg00000108 cg00000108    12709357
+cg00000109 cg00000109 cg00000109    59755374
+cg00000165 cg00000165 cg00000165    12637463
+cg00000236 cg00000236 cg00000236    12649348
+                                             AlleleA_ProbeSeq AddressB_ID
+cg00000029 AACTATACTAACRAAAAAATATCCAAAAAACACTAACRTATAAAAATTTC            
+cg00000108 ATACAATAAAACAAACCTAAAATAATCCTAACTCCRCTATCATCCTAACC            
+cg00000109 CAATACTAACAAACACATATACCCCCCCACAAATCTTAACTTCTAAATAC            
+cg00000165 CAAAATCTATTAATACAATAACTTTTAATAAAACAACTAAAACACACATC            
+cg00000236 TATAACRTCATATTAAAAAAAACRATCTAACCCACCAATTTATACATCAC            
+> 
+> # ------------------------------------------------------------
+> # select probes to be used
+> # ------------------------------------------------------------
+> 
+> names(i450)
+ [1] "ID"                          "Name"                       
+ [3] "AddressA_ID"                 "AlleleA_ProbeSeq"           
+ [5] "AddressB_ID"                 "AlleleB_ProbeSeq"           
+ [7] "Infinium_Design_Type"        "Next_Base"                  
+ [9] "Color_Channel"               "Forward_Sequence"           
+[11] "Genome_Build"                "CHR"                        
+[13] "MAPINFO"                     "SourceSeq"                  
+[15] "Chromosome_36"               "Coordinate_36"              
+[17] "Strand"                      "Probe_SNPs"                 
+[19] "Probe_SNPs_10"               "Random_Loci"                
+[21] "Methyl27_Loci"               "UCSC_RefGene_Name"          
+[23] "UCSC_RefGene_Accession"      "UCSC_RefGene_Group"         
+[25] "UCSC_CpG_Islands_Name"       "Relation_to_UCSC_CpG_Island"
+[27] "Phantom"                     "DMR"                        
+[29] "Enhancer"                    "HMM_Island"                 
+[31] "Regulatory_Feature_Name"     "Regulatory_Feature_Group"   
+[33] "DHS"                         "RANGE_START"                
+[35] "RANGE_END"                   "RANGE_GB"                   
+[37] "SPOT_ID"                    
+> i450[1:2,]
+                   ID       Name AddressA_ID
+cg00000029 cg00000029 cg00000029    14782418
+cg00000108 cg00000108 cg00000108    12709357
+                                             AlleleA_ProbeSeq AddressB_ID
+cg00000029 AACTATACTAACRAAAAAATATCCAAAAAACACTAACRTATAAAAATTTC            
+cg00000108 ATACAATAAAACAAACCTAAAATAATCCTAACTCCRCTATCATCCTAACC            
+           AlleleB_ProbeSeq Infinium_Design_Type Next_Base Color_Channel
+cg00000029                                    II                        
+cg00000108                                    II                        
+                                                                                                                       Forward_Sequence
+cg00000029 TTTTTTAGATAAGGATATCCAGGCGATGAGGAAGTTTTACTTCTGGGAACAGCCTGGATA[CG]AAACCTTCACACGTCAGTGTCTTTTGGACATTTTCTCGTCAGTACAGCCCTGTTGAATGT
+cg00000108 TCCATTTTGAAGGAAAAAAATGAAGGCTCTGAAAGTGTAAATCGCTTACTGAAGGGCACA[CG]GCCAGGATGACAGCGGAGCCAGGATCACCCCAGGTCTGTCTCATTGCATATGTCATGGCT
+           Genome_Build CHR  MAPINFO
+cg00000029           37  16 53468112
+cg00000108           37   3 37459206
+                                                    SourceSeq Chromosome_36
+cg00000029 GCTGTACTGACGAGAAAATGTCCAAAAGACACTGACGTGTGAAGGTTTCG            16
+cg00000108 CGGCCAGGATGACAGCGGAGCCAGGATCACCCCAGGTCTGTCTCATTGCA             3
+           Coordinate_36 Strand Probe_SNPs Probe_SNPs_10 Random_Loci
+cg00000029      52025613      F                                     
+cg00000108      37434210      F  rs9857774                          
+           Methyl27_Loci UCSC_RefGene_Name UCSC_RefGene_Accession
+cg00000029                            RBL2              NM_005611
+cg00000108                 C3orf35;C3orf35    NM_178339;NM_178342
+           UCSC_RefGene_Group   UCSC_CpG_Islands_Name
+cg00000029            TSS1500 chr16:53468284-53469209
+cg00000108         Body;3'UTR                        
+           Relation_to_UCSC_CpG_Island Phantom DMR Enhancer HMM_Island
+cg00000029                     N_Shore                                
+cg00000108                                                            
+           Regulatory_Feature_Name Regulatory_Feature_Group  DHS RANGE_START
+cg00000029    16:53467838-53469685      Promoter_Associated TRUE    53468112
+cg00000108                                                          37459206
+           RANGE_END     RANGE_GB SPOT_ID
+cg00000029  53468235  NC_000016.9        
+cg00000108  37459329 NC_000003.11        
+> 
+> table(i450$Genome_Build)
+
+           36     37 
+    65   3091 482421 
+> table(i450$CHR)
+
+    Y     X     1     2     3     4     5     6     7     8     9    10    11 
+  416 11232 46857 34810 25159 20464 24327 36611 30017 20950  9861 24388 28794 
+   12    13    14    15    16    17    18    19    20    21    22       
+24539 12285 15078 15259 21969 27879  5922 25521 10379  4243  8552    65 
+> 
+> table(i450$Methyl27_Loci)
+
+         TRUE 
+459500  25978 
+> table(i450$Probe_SNPs=="")
+
+ FALSE   TRUE 
+ 59892 425685 
+> table(i450$Probe_SNPs_10=="")
+
+ FALSE   TRUE 
+ 36535 449042 
+> 
+> w2use = (i450$Genome_Build=="37" & i450$CHR != "")
+> w2use = w2use & (i450$Probe_SNPs=="" & i450$Probe_SNPs_10=="")
+> 
+> table(w2use)
+w2use
+ FALSE   TRUE 
+ 92176 393401 
+> 
+> info = i450[which(w2use),]
+> dim(info)
+[1] 393401     37
+> info[1:2,]
+                   ID       Name AddressA_ID
+cg00000029 cg00000029 cg00000029    14782418
+cg00000165 cg00000165 cg00000165    12637463
+                                             AlleleA_ProbeSeq AddressB_ID
+cg00000029 AACTATACTAACRAAAAAATATCCAAAAAACACTAACRTATAAAAATTTC            
+cg00000165 CAAAATCTATTAATACAATAACTTTTAATAAAACAACTAAAACACACATC            
+           AlleleB_ProbeSeq Infinium_Design_Type Next_Base Color_Channel
+cg00000029                                    II                        
+cg00000165                                    II                        
+                                                                                                                       Forward_Sequence
+cg00000029 TTTTTTAGATAAGGATATCCAGGCGATGAGGAAGTTTTACTTCTGGGAACAGCCTGGATA[CG]AAACCTTCACACGTCAGTGTCTTTTGGACATTTTCTCGTCAGTACAGCCCTGTTGAATGT
+cg00000165 CTAAGTGCAGTCAGGATCTGTTAGTACAGTGGCTTTTGATGGAACAGCTGAGGCACACAT[CG]CCCGTGGCATGGACTCCGGGGCCGAACGCTCACGACCAAGACTTTTGCCCTTTTGAAATG
+           Genome_Build CHR  MAPINFO
+cg00000029           37  16 53468112
+cg00000165           37   1 91194674
+                                                    SourceSeq Chromosome_36
+cg00000029 GCTGTACTGACGAGAAAATGTCCAAAAGACACTGACGTGTGAAGGTTTCG            16
+cg00000165 AGGATCTGTTAGTACAGTGGCTTTTGATGGAACAGCTGAGGCACACATCG             1
+           Coordinate_36 Strand Probe_SNPs Probe_SNPs_10 Random_Loci
+cg00000029      52025613      F                                     
+cg00000165      90967262      R                                     
+           Methyl27_Loci UCSC_RefGene_Name UCSC_RefGene_Accession
+cg00000029                            RBL2              NM_005611
+cg00000165                                                       
+           UCSC_RefGene_Group   UCSC_CpG_Islands_Name
+cg00000029            TSS1500 chr16:53468284-53469209
+cg00000165                     chr1:91190489-91192804
+           Relation_to_UCSC_CpG_Island Phantom  DMR Enhancer
+cg00000029                     N_Shore                      
+cg00000165                     S_Shore         CDMR     TRUE
+                    HMM_Island Regulatory_Feature_Name Regulatory_Feature_Group
+cg00000029                        16:53467838-53469685      Promoter_Associated
+cg00000165 1:90967262-90967361                                                 
+            DHS RANGE_START RANGE_END     RANGE_GB SPOT_ID
+cg00000029 TRUE    53468112  53468235  NC_000016.9        
+cg00000165         91194674  91194797 NC_000001.10        
+> 
+> info$ID = as.character(info$ID)
+> table(info$ID %in% names(mDat3))
+
+  TRUE 
+393401 
+> 
+> setwd("~/research/Deconvolution/data")
+> 
+> write.table(info, file = "i450_filtered_probes.txt", append = FALSE,
++             quote = FALSE, sep = "\t", row.names = FALSE, col.names = TRUE)
+> 
+> # ------------------------------------------------------------
+> # write out data
+> # ------------------------------------------------------------
+> 
+> mDat3 = mDat3[,match(info$ID,names(mDat3))]
+> 
+> dim(mDat3)
+[1]     60 393401
+> mDat3 = t(mDat3)
+> dim(mDat3)
+[1] 393401     60
+> mDat3[1:2,1:5]
+           GSM861635 GSM861636 GSM861637 GSM861638 GSM861639
+cg00000029 0.5413522 0.4889614 0.5140406 0.5423428  0.462014
+cg00000165 0.2204557 0.1613999 0.1826917 0.1668749  0.150886
+> 
+> mDat3 = data.frame(id=rownames(mDat3), mDat3)
+> dim(mDat3)
+[1] 393401     61
+> mDat3[1:2,1:5]
+                   id GSM861635 GSM861636 GSM861637 GSM861638
+cg00000029 cg00000029 0.5413522 0.4889614 0.5140406 0.5423428
+cg00000165 cg00000165 0.2204557 0.1613999 0.1826917 0.1668749
+> 
+> write.table(mDat3, file = "Reinius_methy_data.txt", append = FALSE,
++   quote = FALSE, sep = "\t", row.names = FALSE, col.names = TRUE)
+> 
+> write.table(sDat3, file = "Reinius_methy_samples.txt", append = FALSE,
++   quote = FALSE, sep = "\t", row.names = FALSE, col.names = TRUE)
+> 
+> # ------------------------------------------------------------
+> # ------------------------------------------------------------
+> # CD4T_CD8T_E-GEOD-71957
+> # ------------------------------------------------------------
+> # ------------------------------------------------------------
+> 
+> setwd("~/research/Deconvolution/original_data/methy_450k")
+> 
+> sams = read.table("CD4T_CD8T_E-GEOD-71957/E-GEOD-71957.hyb.sdrf.txt", 
++                   header=TRUE, sep="\t", as.is=TRUE, quote="")
+> dim(sams)
+[1] 319  49
+> sams[1:2,]
+   Source.Name Comment..Sample_description.    Comment..Sample_source_name.
+1 GSM1848183 1                           NA Total RNA, CD8, Graves' patient
+2 GSM1848182 1                           NA Total RNA, CD8, Graves' patient
+  Comment..Sample_title. Characteristics..age. Characteristics..antibody.
+1   RNA_CD8_Graves_rep16                    38                         NA
+2   RNA_CD8_Graves_rep15                    54                         NA
+  Characteristics..cell.type. Characteristics..diagnosis.
+1                 CD8 T cells                            
+2                 CD8 T cells                            
+  Characteristics..diagonsis. Characteristics..organism. Term.Source.REF
+1             Graves' Patient               Homo sapiens             EFO
+2             Graves' Patient               Homo sapiens             EFO
+                          Term.Accession.Number Characteristics..organism.part.
+1 http://purl.obolibrary.org/obo/NCBITaxon_9606                           blood
+2 http://purl.obolibrary.org/obo/NCBITaxon_9606                           blood
+  Term.Source.REF.1                       Term.Accession.Number.1
+1               EFO http://purl.obolibrary.org/obo/UBERON_0000178
+2               EFO http://purl.obolibrary.org/obo/UBERON_0000178
+  Characteristics..sex. Term.Source.REF.2
+1                female               EFO
+2                female               EFO
+                      Term.Accession.Number.2   Protocol.REF Term.Source.REF.3
+1 http://purl.obolibrary.org/obo/PATO_0000383 P-GSE71957-190      ArrayExpress
+2 http://purl.obolibrary.org/obo/PATO_0000383 P-GSE71957-190      ArrayExpress
+          Extract.Name Material.Type Protocol.REF.1 Term.Source.REF.4
+1 GSM1848183 extract 1     total RNA P-GSE71957-191      ArrayExpress
+2 GSM1848182 extract 1     total RNA P-GSE71957-191      ArrayExpress
+  Labeled.Extract.Name  Label Protocol.REF.2 Term.Source.REF.5 Assay.Name
+1      GSM1848183 LE 1 Biotin P-GSE71957-192      ArrayExpress GSM1848183
+2      GSM1848182 LE 1 Biotin P-GSE71957-192      ArrayExpress GSM1848182
+  Array.Design.REF Term.Source.REF.6 Technology.Type Protocol.REF.3
+1     A-GEOD-10558      ArrayExpress     array assay P-GSE71957-193
+2     A-GEOD-10558      ArrayExpress     array assay P-GSE71957-193
+  Term.Source.REF.7                  Array.Data.File
+1      ArrayExpress GSM1848183_9389333069_K_Grn.idat
+2      ArrayExpress GSM1848182_9389333069_D_Grn.idat
+                                                                        Comment..ArrayExpress.FTP.file.
+1 ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/GEOD/E-GEOD-71957/E-GEOD-71957.raw.1.zip
+2 ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/GEOD/E-GEOD-71957/E-GEOD-71957.raw.1.zip
+  Protocol.REF.4 Term.Source.REF.8               Normalization.Name
+1 P-GSE71957-184      ArrayExpress GSM1848183_sample_table.txt norm
+2 P-GSE71957-183      ArrayExpress GSM1848182_sample_table.txt norm
+      Derived.Array.Data.File
+1 GSM1848183_sample_table.txt
+2 GSM1848182_sample_table.txt
+                                                                      Comment..Derived.ArrayExpress.FTP.file.
+1 ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/GEOD/E-GEOD-71957/E-GEOD-71957.processed.1.zip
+2 ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/GEOD/E-GEOD-71957/E-GEOD-71957.processed.1.zip
+  FactorValue..age. FactorValue..antibody. FactorValue..cell.type.
+1                38          not specified             CD8 T cells
+2                54          not specified             CD8 T cells
+  FactorValue..diagnosis. FactorValue..diagonsis. FactorValue..sex.
+1           not specified         Graves' Patient            female
+2           not specified         Graves' Patient            female
+  Term.Source.REF.9                     Term.Accession.Number.3
+1               EFO http://purl.obolibrary.org/obo/PATO_0000383
+2               EFO http://purl.obolibrary.org/obo/PATO_0000383
+> names(sams)
+ [1] "Source.Name"                            
+ [2] "Comment..Sample_description."           
+ [3] "Comment..Sample_source_name."           
+ [4] "Comment..Sample_title."                 
+ [5] "Characteristics..age."                  
+ [6] "Characteristics..antibody."             
+ [7] "Characteristics..cell.type."            
+ [8] "Characteristics..diagnosis."            
+ [9] "Characteristics..diagonsis."            
+[10] "Characteristics..organism."             
+[11] "Term.Source.REF"                        
+[12] "Term.Accession.Number"                  
+[13] "Characteristics..organism.part."        
+[14] "Term.Source.REF.1"                      
+[15] "Term.Accession.Number.1"                
+[16] "Characteristics..sex."                  
+[17] "Term.Source.REF.2"                      
+[18] "Term.Accession.Number.2"                
+[19] "Protocol.REF"                           
+[20] "Term.Source.REF.3"                      
+[21] "Extract.Name"                           
+[22] "Material.Type"                          
+[23] "Protocol.REF.1"                         
+[24] "Term.Source.REF.4"                      
+[25] "Labeled.Extract.Name"                   
+[26] "Label"                                  
+[27] "Protocol.REF.2"                         
+[28] "Term.Source.REF.5"                      
+[29] "Assay.Name"                             
+[30] "Array.Design.REF"                       
+[31] "Term.Source.REF.6"                      
+[32] "Technology.Type"                        
+[33] "Protocol.REF.3"                         
+[34] "Term.Source.REF.7"                      
+[35] "Array.Data.File"                        
+[36] "Comment..ArrayExpress.FTP.file."        
+[37] "Protocol.REF.4"                         
+[38] "Term.Source.REF.8"                      
+[39] "Normalization.Name"                     
+[40] "Derived.Array.Data.File"                
+[41] "Comment..Derived.ArrayExpress.FTP.file."
+[42] "FactorValue..age."                      
+[43] "FactorValue..antibody."                 
+[44] "FactorValue..cell.type."                
+[45] "FactorValue..diagnosis."                
+[46] "FactorValue..diagonsis."                
+[47] "FactorValue..sex."                      
+[48] "Term.Source.REF.9"                      
+[49] "Term.Accession.Number.3"                
+> names(sams)[8] = "diagonsis1"
+> names(sams)[9] = "diagonsis2"
+> 
+> length(unique(sams$Source.Name))
+[1] 184
+> 
+> table(sams$Characteristics..organism.part., useNA="ifany")
+
+blood 
+  319 
+> table(sams$Characteristics..sex., useNA="ifany")
+
+female   male 
+   291     28 
+> summary(sams$Characteristics..age., useNA="ifany")
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  26.00   45.00   54.00   53.61   61.00   87.00 
+> 
+> table(sams$Characteristics..cell.type., useNA="ifany")
+
+CD4 T cells CD8 T cells 
+        159         160 
+> table(sams$Characteristics..cell.type., sams$FactorValue..cell.type)
+             
+              CD4 T cells CD8 T cells
+  CD4 T cells         159           0
+  CD8 T cells           0         160
+> table(sams$Material.Type, useNA="ifany")
+
+genomic DNA   total RNA 
+        270          49 
+> table(sams$diagonsis1, sams$Material.Type, useNA="ifany")
+                 
+                  genomic DNA total RNA
+                            0        49
+  Graves' Patient         146         0
+  Healthy                 124         0
+> table(sams$diagonsis2, sams$Material.Type, useNA="ifany")
+                 
+                  genomic DNA total RNA
+                          270         0
+  Graves' Patient           0        31
+  Healthy                   0        18
+> table(sams$diagonsis1, sams$diagonsis2, useNA="ifany")
+                 
+                      Graves' Patient Healthy
+                    0              31      18
+  Graves' Patient 146               0       0
+  Healthy         124               0       0
+> 
+> unique(sams$diagonsis1)
+[1] "  "              "Graves' Patient" "Healthy"        
+> 
+> ww1 = which(sams$diagonsis1 == unique(sams$diagonsis1)[1])
+> sams$diagonsis1[ww1] = sams$diagonsis2[ww1]
+> table(sams$diagonsis1, useNA="ifany")
+
+Graves' Patient         Healthy 
+            177             142 
+> 
+> w2kp = which(sams$diagonsis1 == "Healthy")
+> length(w2kp)
+[1] 142
+> sams = sams[w2kp,]
+> table(sams$Material.Type, useNA="ifany")
+
+genomic DNA   total RNA 
+        124          18 
+> table(sams$Characteristics..cell.type., sams$Material.Type, useNA="ifany")
+             
+              genomic DNA total RNA
+  CD4 T cells          62        10
+  CD8 T cells          62         8
+> 
+> # ------------------------------------------------------------
+> # write out sample information
+> # ------------------------------------------------------------
+> 
+> names(sams)
+ [1] "Source.Name"                            
+ [2] "Comment..Sample_description."           
+ [3] "Comment..Sample_source_name."           
+ [4] "Comment..Sample_title."                 
+ [5] "Characteristics..age."                  
+ [6] "Characteristics..antibody."             
+ [7] "Characteristics..cell.type."            
+ [8] "diagonsis1"                             
+ [9] "diagonsis2"                             
+[10] "Characteristics..organism."             
+[11] "Term.Source.REF"                        
+[12] "Term.Accession.Number"                  
+[13] "Characteristics..organism.part."        
+[14] "Term.Source.REF.1"                      
+[15] "Term.Accession.Number.1"                
+[16] "Characteristics..sex."                  
+[17] "Term.Source.REF.2"                      
+[18] "Term.Accession.Number.2"                
+[19] "Protocol.REF"                           
+[20] "Term.Source.REF.3"                      
+[21] "Extract.Name"                           
+[22] "Material.Type"                          
+[23] "Protocol.REF.1"                         
+[24] "Term.Source.REF.4"                      
+[25] "Labeled.Extract.Name"                   
+[26] "Label"                                  
+[27] "Protocol.REF.2"                         
+[28] "Term.Source.REF.5"                      
+[29] "Assay.Name"                             
+[30] "Array.Design.REF"                       
+[31] "Term.Source.REF.6"                      
+[32] "Technology.Type"                        
+[33] "Protocol.REF.3"                         
+[34] "Term.Source.REF.7"                      
+[35] "Array.Data.File"                        
+[36] "Comment..ArrayExpress.FTP.file."        
+[37] "Protocol.REF.4"                         
+[38] "Term.Source.REF.8"                      
+[39] "Normalization.Name"                     
+[40] "Derived.Array.Data.File"                
+[41] "Comment..Derived.ArrayExpress.FTP.file."
+[42] "FactorValue..age."                      
+[43] "FactorValue..antibody."                 
+[44] "FactorValue..cell.type."                
+[45] "FactorValue..diagnosis."                
+[46] "FactorValue..diagonsis."                
+[47] "FactorValue..sex."                      
+[48] "Term.Source.REF.9"                      
+[49] "Term.Accession.Number.3"                
+> cols2kp = c(1,3,4,5,7,8,13,16,22,29:30,40)
+> sams2kp = sams[,cols2kp]
+> dim(sams2kp)
+[1] 142  12
+> sams2kp[1:4,]
+    Source.Name    Comment..Sample_source_name. Comment..Sample_title.
+17 GSM1848167 1 Total RNA, CD8, healthy control   RNA_CD8_Control_rep8
+18 GSM1848166 1 Total RNA, CD8, healthy control   RNA_CD8_Control_rep7
+19 GSM1848165 1 Total RNA, CD8, healthy control   RNA_CD8_Control_rep6
+20 GSM1848164 1 Total RNA, CD8, healthy control   RNA_CD8_Control_rep5
+   Characteristics..age. Characteristics..cell.type. diagonsis1
+17                    54                 CD8 T cells    Healthy
+18                    54                 CD8 T cells    Healthy
+19                    36                 CD8 T cells    Healthy
+20                    52                 CD8 T cells    Healthy
+   Characteristics..organism.part. Characteristics..sex. Material.Type
+17                           blood                female     total RNA
+18                           blood                female     total RNA
+19                           blood                female     total RNA
+20                           blood                female     total RNA
+   Assay.Name Array.Design.REF     Derived.Array.Data.File
+17 GSM1848167     A-GEOD-10558 GSM1848167_sample_table.txt
+18 GSM1848166     A-GEOD-10558 GSM1848166_sample_table.txt
+19 GSM1848165     A-GEOD-10558 GSM1848165_sample_table.txt
+20 GSM1848164     A-GEOD-10558 GSM1848164_sample_table.txt
+> 
+> ## some samples are repated because the list both chanel (Cy3 and Cy5)
+> sams2kp = unique(sams2kp)
+> dim(sams2kp)
+[1] 80 12
+> 
+> names(sams2kp) = gsub("Characteristics..", "", names(sams2kp), fixed=TRUE)
+> names(sams2kp) = gsub("Comment..", "", names(sams2kp), fixed=TRUE)
+> names(sams2kp) = gsub("\\.$", "", names(sams2kp), perl=TRUE)
+> names(sams2kp) = gsub(".", "_", names(sams2kp), fixed=TRUE)
+> 
+> dim(sams2kp)
+[1] 80 12
+> sams2kp[1:4,]
+    Source_Name              Sample_source_name         Sample_title age
+17 GSM1848167 1 Total RNA, CD8, healthy control RNA_CD8_Control_rep8  54
+18 GSM1848166 1 Total RNA, CD8, healthy control RNA_CD8_Control_rep7  54
+19 GSM1848165 1 Total RNA, CD8, healthy control RNA_CD8_Control_rep6  36
+20 GSM1848164 1 Total RNA, CD8, healthy control RNA_CD8_Control_rep5  52
+     cell_type diagonsis1 organism_part    sex Material_Type Assay_Name
+17 CD8 T cells    Healthy         blood female     total RNA GSM1848167
+18 CD8 T cells    Healthy         blood female     total RNA GSM1848166
+19 CD8 T cells    Healthy         blood female     total RNA GSM1848165
+20 CD8 T cells    Healthy         blood female     total RNA GSM1848164
+   Array_Design_REF     Derived_Array_Data_File
+17     A-GEOD-10558 GSM1848167_sample_table.txt
+18     A-GEOD-10558 GSM1848166_sample_table.txt
+19     A-GEOD-10558 GSM1848165_sample_table.txt
+20     A-GEOD-10558 GSM1848164_sample_table.txt
+> apply(sams2kp[,c(5:9,11)], 2, table)
+$cell_type
+
+CD4 T cells CD8 T cells 
+         41          39 
+
+$diagonsis1
+
+Healthy 
+     80 
+
+$organism_part
+
+blood 
+   80 
+
+$sex
+
+female   male 
+    74      6 
+
+$Material_Type
+
+genomic DNA   total RNA 
+         62          18 
+
+$Array_Design_REF
+
+A-GEOD-10558 A-GEOD-13534 
+          18           62 
+
+> 
+> table(sams2kp$Material_Type, sams2kp$Array_Design_REF)
+             
+              A-GEOD-10558 A-GEOD-13534
+  genomic DNA            0           62
+  total RNA             18            0
+> 
+> samsMethy = sams2kp[which(sams2kp$Material_Type=="genomic DNA"),]
+> dim(samsMethy)
+[1] 62 12
+> samsMethy[1:4,]
+     Source_Name                      Sample_source_name           Sample_title
+124 GSM1848097 1 Genomic DNA, CD8 cells, healthy control gDNA_CD8_Control_rep31
+126 GSM1848096 1 Genomic DNA, CD8 cells, healthy control gDNA_CD8_Control_rep30
+128 GSM1848095 1 Genomic DNA, CD8 cells, healthy control gDNA_CD8_Control_rep29
+130 GSM1848094 1 Genomic DNA, CD8 cells, healthy control gDNA_CD8_Control_rep28
+    age   cell_type diagonsis1 organism_part    sex Material_Type Assay_Name
+124  71 CD8 T cells    Healthy         blood female   genomic DNA GSM1848097
+126  71 CD8 T cells    Healthy         blood female   genomic DNA GSM1848096
+128  72 CD8 T cells    Healthy         blood female   genomic DNA GSM1848095
+130  48 CD8 T cells    Healthy         blood female   genomic DNA GSM1848094
+    Array_Design_REF     Derived_Array_Data_File
+124     A-GEOD-13534 GSM1848097_sample_table.txt
+126     A-GEOD-13534 GSM1848096_sample_table.txt
+128     A-GEOD-13534 GSM1848095_sample_table.txt
+130     A-GEOD-13534 GSM1848094_sample_table.txt
+> 
+> table(gsub(" 1", "", samsMethy$Source_Name) == samsMethy$Assay_Name)
+
+TRUE 
+  62 
+> 
+> samsRNA = sams2kp[which(sams2kp$Material_Type=="total RNA"),]
+> dim(samsRNA)
+[1] 18 12
+> samsRNA[1:4,]
+    Source_Name              Sample_source_name         Sample_title age
+17 GSM1848167 1 Total RNA, CD8, healthy control RNA_CD8_Control_rep8  54
+18 GSM1848166 1 Total RNA, CD8, healthy control RNA_CD8_Control_rep7  54
+19 GSM1848165 1 Total RNA, CD8, healthy control RNA_CD8_Control_rep6  36
+20 GSM1848164 1 Total RNA, CD8, healthy control RNA_CD8_Control_rep5  52
+     cell_type diagonsis1 organism_part    sex Material_Type Assay_Name
+17 CD8 T cells    Healthy         blood female     total RNA GSM1848167
+18 CD8 T cells    Healthy         blood female     total RNA GSM1848166
+19 CD8 T cells    Healthy         blood female     total RNA GSM1848165
+20 CD8 T cells    Healthy         blood female     total RNA GSM1848164
+   Array_Design_REF     Derived_Array_Data_File
+17     A-GEOD-10558 GSM1848167_sample_table.txt
+18     A-GEOD-10558 GSM1848166_sample_table.txt
+19     A-GEOD-10558 GSM1848165_sample_table.txt
+20     A-GEOD-10558 GSM1848164_sample_table.txt
+> 
+> setwd("~/research/Deconvolution/data")
+> 
+> write.table(samsMethy, file = "CD4T_CD8T_E-GEOD-71957_methy_sample.txt", 
++             append = FALSE, quote = FALSE, sep = "\t", row.names = FALSE,
++             col.names = TRUE)
+> 
+> write.table(samsRNA, file = "CD4T_CD8T_E-GEOD-71957_RNA_sample.txt", 
++             append = FALSE, quote = FALSE, sep = "\t", row.names = FALSE,
++             col.names = TRUE)
+> 
+> # ------------------------------------------------------------
+> # read in methylation data
+> # ------------------------------------------------------------
+> 
+> setwd("~/research/Deconvolution/original_data/methy_450k/CD4T_CD8T_E-GEOD-71957")
+> fls = list.files(pattern="_sample_table.txt", recursive=TRUE)
+> length(fls)
+[1] 184
+> 
+> mDat = NULL
+> 
+> for(i in 1:nrow(samsMethy)){
++   cat(i, date(), "\n")
++   fnm   = samsMethy$Derived_Array_Data_File[i]
++   fpath = fls[grep(fnm, fls)]
++   
++   if(length(fpath) != 1){
++     stop("unexpected file path\n")
++   }
++   
++   dati = read.table(fpath, header=TRUE, sep="\t", as.is=TRUE, na.string="null")
++   dim(dati)
++   dati[1:2,]
++   
++   summary(dati$Sample_31_CD8_Detection_Pval)
++   table(dati$Sample_31_CD8_Detection_Pval > 0.01)
++  
++   if(i==1){
++     probes = dati$Reporter.Identifier
++   }else{
++     if(length(probes) != nrow(dati)){
++       stop("probe number are differnt\n")
++     }else if(any(probes != dati$Reporter.Identifier)){
++       stop("probes are differnt\n")
++     }
++   }
++  
++   mDat = cbind(mDat, dati$VALUE) 
++ }
+1 Tue Feb 14 15:05:39 2017 
+2 Tue Feb 14 15:05:41 2017 
+3 Tue Feb 14 15:05:43 2017 
+4 Tue Feb 14 15:05:45 2017 
+5 Tue Feb 14 15:05:47 2017 
+6 Tue Feb 14 15:05:49 2017 
+7 Tue Feb 14 15:05:52 2017 
+8 Tue Feb 14 15:05:54 2017 
+9 Tue Feb 14 15:05:57 2017 
+10 Tue Feb 14 15:05:59 2017 
+11 Tue Feb 14 15:06:01 2017 
+12 Tue Feb 14 15:06:04 2017 
+13 Tue Feb 14 15:06:06 2017 
+14 Tue Feb 14 15:06:10 2017 
+15 Tue Feb 14 15:06:11 2017 
+16 Tue Feb 14 15:06:13 2017 
+17 Tue Feb 14 15:06:15 2017 
+18 Tue Feb 14 15:06:17 2017 
+19 Tue Feb 14 15:06:18 2017 
+20 Tue Feb 14 15:06:21 2017 
+21 Tue Feb 14 15:06:23 2017 
+22 Tue Feb 14 15:06:24 2017 
+23 Tue Feb 14 15:06:26 2017 
+24 Tue Feb 14 15:06:29 2017 
+25 Tue Feb 14 15:06:32 2017 
+26 Tue Feb 14 15:06:36 2017 
+27 Tue Feb 14 15:06:38 2017 
+28 Tue Feb 14 15:06:40 2017 
+29 Tue Feb 14 15:06:42 2017 
+30 Tue Feb 14 15:06:44 2017 
+31 Tue Feb 14 15:06:46 2017 
+32 Tue Feb 14 15:06:48 2017 
+33 Tue Feb 14 15:06:50 2017 
+34 Tue Feb 14 15:06:53 2017 
+35 Tue Feb 14 15:06:55 2017 
+36 Tue Feb 14 15:07:00 2017 
+37 Tue Feb 14 15:07:02 2017 
+38 Tue Feb 14 15:07:04 2017 
+39 Tue Feb 14 15:07:06 2017 
+40 Tue Feb 14 15:07:08 2017 
+41 Tue Feb 14 15:07:11 2017 
+42 Tue Feb 14 15:07:13 2017 
+43 Tue Feb 14 15:07:15 2017 
+44 Tue Feb 14 15:07:18 2017 
+45 Tue Feb 14 15:07:21 2017 
+46 Tue Feb 14 15:07:23 2017 
+47 Tue Feb 14 15:07:27 2017 
+48 Tue Feb 14 15:07:29 2017 
+49 Tue Feb 14 15:07:31 2017 
+50 Tue Feb 14 15:07:35 2017 
+51 Tue Feb 14 15:07:37 2017 
+52 Tue Feb 14 15:07:39 2017 
+53 Tue Feb 14 15:07:41 2017 
+54 Tue Feb 14 15:07:43 2017 
+55 Tue Feb 14 15:07:45 2017 
+56 Tue Feb 14 15:07:48 2017 
+57 Tue Feb 14 15:07:50 2017 
+58 Tue Feb 14 15:07:54 2017 
+59 Tue Feb 14 15:07:57 2017 
+60 Tue Feb 14 15:07:59 2017 
+61 Tue Feb 14 15:08:01 2017 
+62 Tue Feb 14 15:08:03 2017 
+> 
+> dim(mDat)
+[1] 390142     62
+> rownames(mDat) = probes
+> colnames(mDat) = samsMethy$Assay_Name
+> 
+> table(probes %in% info$ID)
+
+ FALSE   TRUE 
+ 62673 327469 
+> table(info$ID %in% probes)
+
+ FALSE   TRUE 
+ 65932 327469 
+> 
+> w2kp = which(probes %in% info$ID)
+> mDat = mDat[w2kp,]
+> 
+> dim(mDat)
+[1] 327469     62
+> mDat[1:2,1:5]
+           GSM1848097 GSM1848096 GSM1848095 GSM1848094 GSM1848093
+cg00000029  0.6500930  0.6878452  0.6075558  0.6736537  0.7391058
+cg00000165  0.2606096  0.2564694  0.2985161  0.3168454  0.2442290
+> 
+> mDat = data.frame(id=rownames(mDat), mDat)
+> dim(mDat)
+[1] 327469     63
+> mDat[1:2,1:5]
+                   id GSM1848097 GSM1848096 GSM1848095 GSM1848094
+cg00000029 cg00000029  0.6500930  0.6878452  0.6075558  0.6736537
+cg00000165 cg00000165  0.2606096  0.2564694  0.2985161  0.3168454
+> 
+> setwd("~/research/Deconvolution/data")
+> 
+> write.table(mDat, file = "CD4T_CD8T_E-GEOD-71957_methy_data.txt", 
++             append = FALSE, quote = FALSE, sep = "\t", row.names = FALSE,
++             col.names = TRUE)
+> 
+> # ------------------------------------------------------------
+> # ------------------------------------------------------------
+> # CD4T_E-GEOD-72364
+> # ------------------------------------------------------------
+> # ------------------------------------------------------------
+> 
+> setwd("~/research/Deconvolution/original_data/methy_450k")
+> 
+> sams = read.table("CD4T_E-GEOD-72364/E-GEOD-72364.sdrf.txt", 
++                   header=TRUE, sep="\t", as.is=TRUE, quote="")
+> dim(sams)
+[1] 24 43
+> sams[1:2,]
+   Source.Name                  Comment..Sample_description.
+1 GSM1861062 1 Sample 12 CD4+ T cells from healthy subjects.
+2 GSM1861062 1 Sample 12 CD4+ T cells from healthy subjects.
+   Comment..Sample_source_name.
+1 CD4+ T cells, healthy subject
+2 CD4+ T cells, healthy subject
+                             Comment..Sample_title. Characteristics..cell.type.
+1 Genomic DNA from CD4 T cells of Healthy Subject 6                CD4+ T cells
+2 Genomic DNA from CD4 T cells of Healthy Subject 6                CD4+ T cells
+  Characteristics..disease.state. Term.Source.REF
+1                          normal             EFO
+2                          normal             EFO
+                        Term.Accession.Number Characteristics..organism.
+1 http://purl.obolibrary.org/obo/PATO_0000461               Homo sapiens
+2 http://purl.obolibrary.org/obo/PATO_0000461               Homo sapiens
+  Term.Source.REF.1                       Term.Accession.Number.1
+1               EFO http://purl.obolibrary.org/obo/NCBITaxon_9606
+2               EFO http://purl.obolibrary.org/obo/NCBITaxon_9606
+  Characteristics..sex. Term.Source.REF.2
+1                  male               EFO
+2                  male               EFO
+                      Term.Accession.Number.2 Protocol.REF Term.Source.REF.3
+1 http://purl.obolibrary.org/obo/PATO_0000384 P-GSE72364-2      ArrayExpress
+2 http://purl.obolibrary.org/obo/PATO_0000384 P-GSE72364-2      ArrayExpress
+          Extract.Name Material.Type Protocol.REF.1 Term.Source.REF.4
+1 GSM1861062 extract 1   genomic DNA   P-GSE72364-3      ArrayExpress
+2 GSM1861062 extract 1   genomic DNA   P-GSE72364-3      ArrayExpress
+  Labeled.Extract.Name       Label Protocol.REF.2 Term.Source.REF.5 Assay.Name
+1      GSM1861062 LE 1 Cy5 and Cy3   P-GSE72364-4      ArrayExpress GSM1861062
+2      GSM1861062 LE 1 Cy5 and Cy3   P-GSE72364-4      ArrayExpress GSM1861062
+  Array.Design.REF Term.Source.REF.6 Technology.Type Protocol.REF.3
+1     A-GEOD-13534      ArrayExpress     array assay   P-GSE72364-5
+2     A-GEOD-13534      ArrayExpress     array assay   P-GSE72364-5
+  Term.Source.REF.7                       Array.Data.File
+1      ArrayExpress GSM1861062_9373551014_R06C02_Red.idat
+2      ArrayExpress GSM1861062_9373551014_R06C02_Grn.idat
+                                                                        Comment..ArrayExpress.FTP.file.
+1 ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/GEOD/E-GEOD-72364/E-GEOD-72364.raw.1.zip
+2 ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/GEOD/E-GEOD-72364/E-GEOD-72364.raw.1.zip
+  Protocol.REF.4 Term.Source.REF.8               Normalization.Name
+1   P-GSE72364-1      ArrayExpress GSM1861062_sample_table.txt norm
+2   P-GSE72364-1      ArrayExpress GSM1861062_sample_table.txt norm
+      Derived.Array.Data.File
+1 GSM1861062_sample_table.txt
+2 GSM1861062_sample_table.txt
+                                                                      Comment..Derived.ArrayExpress.FTP.file.
+1 ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/GEOD/E-GEOD-72364/E-GEOD-72364.processed.1.zip
+2 ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/GEOD/E-GEOD-72364/E-GEOD-72364.processed.1.zip
+  FactorValue..disease.state. Term.Source.REF.9
+1                      normal               EFO
+2                      normal               EFO
+                      Term.Accession.Number.3 FactorValue..sex.
+1 http://purl.obolibrary.org/obo/PATO_0000461              male
+2 http://purl.obolibrary.org/obo/PATO_0000461              male
+  Term.Source.REF.10                     Term.Accession.Number.4
+1                EFO http://purl.obolibrary.org/obo/PATO_0000384
+2                EFO http://purl.obolibrary.org/obo/PATO_0000384
+> names(sams)
+ [1] "Source.Name"                            
+ [2] "Comment..Sample_description."           
+ [3] "Comment..Sample_source_name."           
+ [4] "Comment..Sample_title."                 
+ [5] "Characteristics..cell.type."            
+ [6] "Characteristics..disease.state."        
+ [7] "Term.Source.REF"                        
+ [8] "Term.Accession.Number"                  
+ [9] "Characteristics..organism."             
+[10] "Term.Source.REF.1"                      
+[11] "Term.Accession.Number.1"                
+[12] "Characteristics..sex."                  
+[13] "Term.Source.REF.2"                      
+[14] "Term.Accession.Number.2"                
+[15] "Protocol.REF"                           
+[16] "Term.Source.REF.3"                      
+[17] "Extract.Name"                           
+[18] "Material.Type"                          
+[19] "Protocol.REF.1"                         
+[20] "Term.Source.REF.4"                      
+[21] "Labeled.Extract.Name"                   
+[22] "Label"                                  
+[23] "Protocol.REF.2"                         
+[24] "Term.Source.REF.5"                      
+[25] "Assay.Name"                             
+[26] "Array.Design.REF"                       
+[27] "Term.Source.REF.6"                      
+[28] "Technology.Type"                        
+[29] "Protocol.REF.3"                         
+[30] "Term.Source.REF.7"                      
+[31] "Array.Data.File"                        
+[32] "Comment..ArrayExpress.FTP.file."        
+[33] "Protocol.REF.4"                         
+[34] "Term.Source.REF.8"                      
+[35] "Normalization.Name"                     
+[36] "Derived.Array.Data.File"                
+[37] "Comment..Derived.ArrayExpress.FTP.file."
+[38] "FactorValue..disease.state."            
+[39] "Term.Source.REF.9"                      
+[40] "Term.Accession.Number.3"                
+[41] "FactorValue..sex."                      
+[42] "Term.Source.REF.10"                     
+[43] "Term.Accession.Number.4"                
+> 
+> length(unique(sams$Source.Name))
+[1] 12
+> 
+> table(sams$Characteristics..sex., useNA="ifany")
+
+female   male 
+     4     20 
+> summary(sams$Characteristics..age., useNA="ifany")
+Length  Class   Mode 
+     0   NULL   NULL 
+> 
+> table(sams$Characteristics..cell.type., useNA="ifany")
+
+CD4+ T cells 
+          24 
+> table(sams$Material.Type, useNA="ifany")
+
+genomic DNA 
+         24 
+> table(sams$Characteristics..disease.state., useNA="ifany")
+
+affected   normal 
+      12       12 
+> 
+> w2kp = which(sams$Characteristics..disease.state. == "normal")
+> length(w2kp)
+[1] 12
+> sams = sams[w2kp,]
+> table(sams$Characteristics..cell.type., useNA="ifany")
+
+CD4+ T cells 
+          12 
+> 
+> # ------------------------------------------------------------
+> # write out sample information
+> # ------------------------------------------------------------
+> 
+> names(sams)
+ [1] "Source.Name"                            
+ [2] "Comment..Sample_description."           
+ [3] "Comment..Sample_source_name."           
+ [4] "Comment..Sample_title."                 
+ [5] "Characteristics..cell.type."            
+ [6] "Characteristics..disease.state."        
+ [7] "Term.Source.REF"                        
+ [8] "Term.Accession.Number"                  
+ [9] "Characteristics..organism."             
+[10] "Term.Source.REF.1"                      
+[11] "Term.Accession.Number.1"                
+[12] "Characteristics..sex."                  
+[13] "Term.Source.REF.2"                      
+[14] "Term.Accession.Number.2"                
+[15] "Protocol.REF"                           
+[16] "Term.Source.REF.3"                      
+[17] "Extract.Name"                           
+[18] "Material.Type"                          
+[19] "Protocol.REF.1"                         
+[20] "Term.Source.REF.4"                      
+[21] "Labeled.Extract.Name"                   
+[22] "Label"                                  
+[23] "Protocol.REF.2"                         
+[24] "Term.Source.REF.5"                      
+[25] "Assay.Name"                             
+[26] "Array.Design.REF"                       
+[27] "Term.Source.REF.6"                      
+[28] "Technology.Type"                        
+[29] "Protocol.REF.3"                         
+[30] "Term.Source.REF.7"                      
+[31] "Array.Data.File"                        
+[32] "Comment..ArrayExpress.FTP.file."        
+[33] "Protocol.REF.4"                         
+[34] "Term.Source.REF.8"                      
+[35] "Normalization.Name"                     
+[36] "Derived.Array.Data.File"                
+[37] "Comment..Derived.ArrayExpress.FTP.file."
+[38] "FactorValue..disease.state."            
+[39] "Term.Source.REF.9"                      
+[40] "Term.Accession.Number.3"                
+[41] "FactorValue..sex."                      
+[42] "Term.Source.REF.10"                     
+[43] "Term.Accession.Number.4"                
+> cols2kp = c(1, 3:6, 12, 18, 25:26, 36)
+> sams2kp = sams[,cols2kp]
+> dim(sams2kp)
+[1] 12 10
+> sams2kp[1:4,]
+   Source.Name  Comment..Sample_source_name.
+1 GSM1861062 1 CD4+ T cells, healthy subject
+2 GSM1861062 1 CD4+ T cells, healthy subject
+3 GSM1861061 1 CD4+ T cells, healthy subject
+4 GSM1861061 1 CD4+ T cells, healthy subject
+                             Comment..Sample_title. Characteristics..cell.type.
+1 Genomic DNA from CD4 T cells of Healthy Subject 6                CD4+ T cells
+2 Genomic DNA from CD4 T cells of Healthy Subject 6                CD4+ T cells
+3 Genomic DNA from CD4 T cells of Healthy Subject 5                CD4+ T cells
+4 Genomic DNA from CD4 T cells of Healthy Subject 5                CD4+ T cells
+  Characteristics..disease.state. Characteristics..sex. Material.Type
+1                          normal                  male   genomic DNA
+2                          normal                  male   genomic DNA
+3                          normal                  male   genomic DNA
+4                          normal                  male   genomic DNA
+  Assay.Name Array.Design.REF     Derived.Array.Data.File
+1 GSM1861062     A-GEOD-13534 GSM1861062_sample_table.txt
+2 GSM1861062     A-GEOD-13534 GSM1861062_sample_table.txt
+3 GSM1861061     A-GEOD-13534 GSM1861061_sample_table.txt
+4 GSM1861061     A-GEOD-13534 GSM1861061_sample_table.txt
+> 
+> ## some samples are repated because they list both chanel (Cy3 and Cy5)
+> sams2kp = unique(sams2kp)
+> dim(sams2kp)
+[1]  6 10
+> 
+> names(sams2kp) = gsub("Characteristics..", "", names(sams2kp), fixed=TRUE)
+> names(sams2kp) = gsub("Comment..", "", names(sams2kp), fixed=TRUE)
+> names(sams2kp) = gsub("\\.$", "", names(sams2kp), perl=TRUE)
+> names(sams2kp) = gsub(".", "_", names(sams2kp), fixed=TRUE)
+> 
+> dim(sams2kp)
+[1]  6 10
+> sams2kp[1:4,]
+   Source_Name            Sample_source_name
+1 GSM1861062 1 CD4+ T cells, healthy subject
+3 GSM1861061 1 CD4+ T cells, healthy subject
+5 GSM1861060 1 CD4+ T cells, healthy subject
+7 GSM1861059 1 CD4+ T cells, healthy subject
+                                       Sample_title    cell_type disease_state
+1 Genomic DNA from CD4 T cells of Healthy Subject 6 CD4+ T cells        normal
+3 Genomic DNA from CD4 T cells of Healthy Subject 5 CD4+ T cells        normal
+5 Genomic DNA from CD4 T cells of Healthy Subject 4 CD4+ T cells        normal
+7 Genomic DNA from CD4 T cells of Healthy Subject 3 CD4+ T cells        normal
+     sex Material_Type Assay_Name Array_Design_REF     Derived_Array_Data_File
+1   male   genomic DNA GSM1861062     A-GEOD-13534 GSM1861062_sample_table.txt
+3   male   genomic DNA GSM1861061     A-GEOD-13534 GSM1861061_sample_table.txt
+5 female   genomic DNA GSM1861060     A-GEOD-13534 GSM1861060_sample_table.txt
+7   male   genomic DNA GSM1861059     A-GEOD-13534 GSM1861059_sample_table.txt
+> apply(sams2kp[,c(2,4:7,9)], 2, table)
+$Sample_source_name
+
+CD4+ T cells, healthy subject 
+                            6 
+
+$cell_type
+
+CD4+ T cells 
+           6 
+
+$disease_state
+
+normal 
+     6 
+
+$sex
+
+female   male 
+     1      5 
+
+$Material_Type
+
+genomic DNA 
+          6 
+
+$Array_Design_REF
+
+A-GEOD-13534 
+           6 
+
+> 
+> setwd("~/research/Deconvolution/data")
+> 
+> write.table(sams2kp, file = "CD4T_E-GEOD-72364_methy_sample.txt", 
++             append = FALSE, quote = FALSE, sep = "\t", row.names = FALSE,
++             col.names = TRUE)
+> 
+> # ------------------------------------------------------------
+> # read in methylation data
+> # ------------------------------------------------------------
+> 
+> setwd("~/research/Deconvolution/original_data/methy_450k/CD4T_E-GEOD-72364")
+> fls = list.files(pattern="_sample_table.txt", recursive=TRUE)
+> length(fls)
+[1] 12
+> 
+> mDat = NULL
+> 
+> for(i in 1:nrow(sams2kp)){
++   cat(i, date(), "\n")
++   fnm   = sams2kp$Derived_Array_Data_File[i]
++   fpath = fls[grep(fnm, fls)]
++   
++   if(length(fpath) != 1){
++     stop("unexpected file path\n")
++   }
++   
++   dati = read.table(fpath, header=TRUE, sep="\t", as.is=TRUE, na.string="null")
++   dim(dati)
++   dati[1:2,]
++   
++   summary(dati$Detection.Pval)
++   table(dati$Detection.Pval > 0.01)
++   
++   if(i==1){
++     probes = dati$Reporter.Identifier
++   }else{
++     if(length(probes) != nrow(dati)){
++       stop("probe number are differnt\n")
++     }else if(any(probes != dati$Reporter.Identifier)){
++       stop("probes are differnt\n")
++     }
++   }
++   
++   mDat = cbind(mDat, dati$VALUE) 
++ }
+1 Tue Feb 14 15:08:36 2017 
+2 Tue Feb 14 15:08:37 2017 
+3 Tue Feb 14 15:08:39 2017 
+4 Tue Feb 14 15:08:41 2017 
+5 Tue Feb 14 15:08:43 2017 
+6 Tue Feb 14 15:08:45 2017 
+> 
+> dim(mDat)
+[1] 485577      6
+> rownames(mDat) = probes
+> colnames(mDat) = sams2kp$Assay_Name
+> 
+> table(probes %in% info$ID)
+
+ FALSE   TRUE 
+ 92176 393401 
+> table(info$ID %in% probes)
+
+  TRUE 
+393401 
+> 
+> w2kp = which(probes %in% info$ID)
+> mDat = mDat[w2kp,]
+> 
+> dim(mDat)
+[1] 393401      6
+> mDat[1:2,1:5]
+           GSM1861062 GSM1861061 GSM1861060 GSM1861059 GSM1861058
+cg00000029  0.6333988  0.5979014  0.6320786  0.6087118  0.6234789
+cg00000165  0.2929268  0.2965086  0.2307769  0.2656477  0.2328959
+> 
+> mDat = data.frame(id=rownames(mDat), mDat)
+> dim(mDat)
+[1] 393401      7
+> mDat[1:2,1:5]
+                   id GSM1861062 GSM1861061 GSM1861060 GSM1861059
+cg00000029 cg00000029  0.6333988  0.5979014  0.6320786  0.6087118
+cg00000165 cg00000165  0.2929268  0.2965086  0.2307769  0.2656477
+> 
+> setwd("~/research/Deconvolution/data")
+> 
+> write.table(mDat, file = "CD4T_E-GEOD-72364_methy_data.txt", 
++             append = FALSE, quote = FALSE, sep = "\t", row.names = FALSE,
++             col.names = TRUE)
+> 
+> # ------------------------------------------------------------
+> # ------------------------------------------------------------
+> # mono_CD4T_E-GEOD-56047
+> # ------------------------------------------------------------
+> # ------------------------------------------------------------
+> 
+> setwd("~/research/Deconvolution/original_data/methy_450k")
+> 
+> sams = read.table("mono_CD4T_E-GEOD-56047/E-GEOD-56047.sdrf.txt", 
++                   header=TRUE, sep="\t", as.is=TRUE, quote="")
+> dim(sams)
+[1] 2832   50
+> sams[1:2,]
+   Source.Name Comment..Sample_description. Comment..Sample_source_name.
+1 GSM1364436 1  human peripheral CD4+ cells                    CD4+ cell
+2 GSM1364435 1  human peripheral CD4+ cells                    CD4+ cell
+  Comment..Sample_title. Characteristics..age.yrs. Characteristics..bcell.
+1  101264_peripheral_CD4                        56              0.07666084
+2  101261_peripheral_CD4                        64              0.30368592
+  Characteristics..chip.id. Characteristics..immunoprecipitate.
+1                        NA                          8962917043
+2                        NA                           599194017
+  Characteristics..mono. Characteristics..neutro. Characteristics..nkcell.
+1              0.2519857               0.02330508               0.04006678
+2              0.3579959               0.06856712               0.01598819
+  Characteristics..organism. Term.Source.REF
+1               Homo sapiens             EFO
+2               Homo sapiens             EFO
+                          Term.Accession.Number
+1 http://purl.obolibrary.org/obo/NCBITaxon_9606
+2 http://purl.obolibrary.org/obo/NCBITaxon_9606
+  Characteristics..racegendersite. Characteristics..tcell.
+1                                1                      NA
+2                                4                      NA
+  Characteristics..well. Characteristics..well.id.  Protocol.REF
+1                      L                           P-GSE56047-10
+2                      K                           P-GSE56047-10
+  Term.Source.REF.1         Extract.Name Material.Type Protocol.REF.1
+1      ArrayExpress GSM1364436 extract 1     total RNA   P-GSE56047-4
+2      ArrayExpress GSM1364435 extract 1     total RNA   P-GSE56047-4
+  Term.Source.REF.2 Labeled.Extract.Name  Label Protocol.REF.2
+1      ArrayExpress      GSM1364436 LE 1 biotin  P-GSE56047-11
+2      ArrayExpress      GSM1364435 LE 1 biotin  P-GSE56047-11
+  Term.Source.REF.3 Assay.Name Array.Design.REF Term.Source.REF.4
+1      ArrayExpress GSM1364436     A-GEOD-10558      ArrayExpress
+2      ArrayExpress GSM1364435     A-GEOD-10558      ArrayExpress
+  Technology.Type Protocol.REF.3 Term.Source.REF.5 Protocol.REF.4
+1     array assay   P-GSE56047-6      ArrayExpress   P-GSE56047-2
+2     array assay   P-GSE56047-6      ArrayExpress   P-GSE56047-2
+  Term.Source.REF.6               Normalization.Name
+1      ArrayExpress GSM1364436_sample_table.txt norm
+2      ArrayExpress GSM1364435_sample_table.txt norm
+      Derived.Array.Data.File
+1 GSM1364436_sample_table.txt
+2 GSM1364435_sample_table.txt
+                                                                      Comment..Derived.ArrayExpress.FTP.file.
+1 ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/GEOD/E-GEOD-56047/E-GEOD-56047.processed.1.zip
+2 ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/GEOD/E-GEOD-56047/E-GEOD-56047.processed.1.zip
+  FactorValue..age.yrs. FactorValue..bcell. FactorValue..chip.id.
+1                    56          0.07666084         not specified
+2                    64          0.30368592         not specified
+  FactorValue..immunoprecipitate. FactorValue..mono. FactorValue..neutro.
+1                      8962917043  0.251985689016758           0.02330508
+2                       599194017  0.357995917175464           0.06856712
+  FactorValue..nkcell. FactorValue..racegendersite. FactorValue..tcell.
+1           0.04006678                            1       not specified
+2           0.01598819                            4       not specified
+  FactorValue..well. FactorValue..well.id.
+1                  L         not specified
+2                  K         not specified
+> names(sams)
+ [1] "Source.Name"                            
+ [2] "Comment..Sample_description."           
+ [3] "Comment..Sample_source_name."           
+ [4] "Comment..Sample_title."                 
+ [5] "Characteristics..age.yrs."              
+ [6] "Characteristics..bcell."                
+ [7] "Characteristics..chip.id."              
+ [8] "Characteristics..immunoprecipitate."    
+ [9] "Characteristics..mono."                 
+[10] "Characteristics..neutro."               
+[11] "Characteristics..nkcell."               
+[12] "Characteristics..organism."             
+[13] "Term.Source.REF"                        
+[14] "Term.Accession.Number"                  
+[15] "Characteristics..racegendersite."       
+[16] "Characteristics..tcell."                
+[17] "Characteristics..well."                 
+[18] "Characteristics..well.id."              
+[19] "Protocol.REF"                           
+[20] "Term.Source.REF.1"                      
+[21] "Extract.Name"                           
+[22] "Material.Type"                          
+[23] "Protocol.REF.1"                         
+[24] "Term.Source.REF.2"                      
+[25] "Labeled.Extract.Name"                   
+[26] "Label"                                  
+[27] "Protocol.REF.2"                         
+[28] "Term.Source.REF.3"                      
+[29] "Assay.Name"                             
+[30] "Array.Design.REF"                       
+[31] "Term.Source.REF.4"                      
+[32] "Technology.Type"                        
+[33] "Protocol.REF.3"                         
+[34] "Term.Source.REF.5"                      
+[35] "Protocol.REF.4"                         
+[36] "Term.Source.REF.6"                      
+[37] "Normalization.Name"                     
+[38] "Derived.Array.Data.File"                
+[39] "Comment..Derived.ArrayExpress.FTP.file."
+[40] "FactorValue..age.yrs."                  
+[41] "FactorValue..bcell."                    
+[42] "FactorValue..chip.id."                  
+[43] "FactorValue..immunoprecipitate."        
+[44] "FactorValue..mono."                     
+[45] "FactorValue..neutro."                   
+[46] "FactorValue..nkcell."                   
+[47] "FactorValue..racegendersite."           
+[48] "FactorValue..tcell."                    
+[49] "FactorValue..well."                     
+[50] "FactorValue..well.id."                  
+> 
+> length(unique(sams$Source.Name))
+[1] 2832
+> 
+> table(sams$Characteristics..racegendersite., useNA="ifany")
+
+  1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18 
+ 72 106 186 304  56  90 210 364   4 148 168   6 108 136 236 192 198 248 
+> table(sams$Characteristics..well.id., useNA="ifany")
+
+            A      B      C      D      E      F      G      H      I      J 
+   214    103     95    100    107     92    104    101     92     97    101 
+     K      L R01C01 R01C02 R02C01 R02C02 R03C01 R03C02 R04C01 R04C02 R05C01 
+   104    106    123    110    119    124    107    125    117    114    115 
+R05C02 R06C01 R06C02 
+   120    120    122 
+> 
+> summary(sams$Characteristics..age., useNA="ifany")
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  44.00   52.00   59.00   59.96   67.00   83.00 
+> 
+> apply(sams[,c(6,9:11,16)], 2, summary)
+$Characteristics..bcell.
+    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+0.001192 0.070800 0.093290 0.113800 0.126200 0.619700 
+
+$Characteristics..mono.
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+ 0.0734  0.2403  0.2950  0.2859  0.3267  0.5335    2404 
+
+$Characteristics..neutro.
+    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+0.000642 0.163900 0.206300 0.189800 0.236000 0.406900 
+
+$Characteristics..nkcell.
+     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
+0.0008666 0.0537600 0.1066000 0.1133000 0.1650000 0.4795000 
+
+$Characteristics..tcell.
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+ 0.0000  0.0018  0.0171  0.0839  0.1411  0.5098     428 
+
+> summary(rowSums(sams[,c(6,9:11,16)], na.rm=TRUE))
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.1559  0.4056  0.4958  0.5312  0.6399  1.4800 
+> 
+> table(sams$Characteristics..cell.type., useNA="ifany")
+< table of extent 0 >
+> table(sams$Material.Type, useNA="ifany")
+
+genomic DNA   total RNA 
+       1416        1416 
+> 
+> 
+> table(sams$Material.Type, sams$Characteristics..well.id., useNA="ifany")
+             
+                    A   B   C   D   E   F   G   H   I   J   K   L R01C01 R01C02
+  genomic DNA   0   0   0   0   0   0   0   0   0   0   0   0   0    123    110
+  total RNA   214 103  95 100 107  92 104 101  92  97 101 104 106      0      0
+             
+              R02C01 R02C02 R03C01 R03C02 R04C01 R04C02 R05C01 R05C02 R06C01
+  genomic DNA    119    124    107    125    117    114    115    120    120
+  total RNA        0      0      0      0      0      0      0      0      0
+             
+              R06C02
+  genomic DNA    122
+  total RNA        0
+> table(sams$Material.Type, sams$Characteristics..racegendersite., useNA="ifany")
+             
+                1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16
+  genomic DNA  36  53  93 152  28  45 105 182   2  74  84   3  54  68 118  96
+  total RNA    36  53  93 152  28  45 105 182   2  74  84   3  54  68 118  96
+             
+               17  18
+  genomic DNA  99 124
+  total RNA    99 124
+> 
+> # ------------------------------------------------------------
+> # write out sample information
+> # ------------------------------------------------------------
+> 
+> names(sams)
+ [1] "Source.Name"                            
+ [2] "Comment..Sample_description."           
+ [3] "Comment..Sample_source_name."           
+ [4] "Comment..Sample_title."                 
+ [5] "Characteristics..age.yrs."              
+ [6] "Characteristics..bcell."                
+ [7] "Characteristics..chip.id."              
+ [8] "Characteristics..immunoprecipitate."    
+ [9] "Characteristics..mono."                 
+[10] "Characteristics..neutro."               
+[11] "Characteristics..nkcell."               
+[12] "Characteristics..organism."             
+[13] "Term.Source.REF"                        
+[14] "Term.Accession.Number"                  
+[15] "Characteristics..racegendersite."       
+[16] "Characteristics..tcell."                
+[17] "Characteristics..well."                 
+[18] "Characteristics..well.id."              
+[19] "Protocol.REF"                           
+[20] "Term.Source.REF.1"                      
+[21] "Extract.Name"                           
+[22] "Material.Type"                          
+[23] "Protocol.REF.1"                         
+[24] "Term.Source.REF.2"                      
+[25] "Labeled.Extract.Name"                   
+[26] "Label"                                  
+[27] "Protocol.REF.2"                         
+[28] "Term.Source.REF.3"                      
+[29] "Assay.Name"                             
+[30] "Array.Design.REF"                       
+[31] "Term.Source.REF.4"                      
+[32] "Technology.Type"                        
+[33] "Protocol.REF.3"                         
+[34] "Term.Source.REF.5"                      
+[35] "Protocol.REF.4"                         
+[36] "Term.Source.REF.6"                      
+[37] "Normalization.Name"                     
+[38] "Derived.Array.Data.File"                
+[39] "Comment..Derived.ArrayExpress.FTP.file."
+[40] "FactorValue..age.yrs."                  
+[41] "FactorValue..bcell."                    
+[42] "FactorValue..chip.id."                  
+[43] "FactorValue..immunoprecipitate."        
+[44] "FactorValue..mono."                     
+[45] "FactorValue..neutro."                   
+[46] "FactorValue..nkcell."                   
+[47] "FactorValue..racegendersite."           
+[48] "FactorValue..tcell."                    
+[49] "FactorValue..well."                     
+[50] "FactorValue..well.id."                  
+> cols2kp = c(1, 3:6, 9:11, 16, 15, 17:18, 22, 29:30, 38)
+> sams2kp = sams[,cols2kp]
+> dim(sams2kp)
+[1] 2832   16
+> sams2kp[1:4,]
+   Source.Name Comment..Sample_source_name. Comment..Sample_title.
+1 GSM1364436 1                    CD4+ cell  101264_peripheral_CD4
+2 GSM1364435 1                    CD4+ cell  101261_peripheral_CD4
+3 GSM1364434 1                    CD4+ cell  101252_peripheral_CD4
+4 GSM1364433 1                    CD4+ cell  101250_peripheral_CD4
+  Characteristics..age.yrs. Characteristics..bcell. Characteristics..mono.
+1                        56              0.07666084              0.2519857
+2                        64              0.30368592              0.3579959
+3                        45              0.26236803              0.3204616
+4                        53              0.32630580              0.4844596
+  Characteristics..neutro. Characteristics..nkcell. Characteristics..tcell.
+1               0.02330508               0.04006678                      NA
+2               0.06856712               0.01598819                      NA
+3               0.07858243               0.08110180                      NA
+4               0.18642161               0.01258508                      NA
+  Characteristics..racegendersite. Characteristics..well.
+1                                1                      L
+2                                4                      K
+3                                4                      G
+4                                4                      J
+  Characteristics..well.id. Material.Type Assay.Name Array.Design.REF
+1                               total RNA GSM1364436     A-GEOD-10558
+2                               total RNA GSM1364435     A-GEOD-10558
+3                               total RNA GSM1364434     A-GEOD-10558
+4                               total RNA GSM1364433     A-GEOD-10558
+      Derived.Array.Data.File
+1 GSM1364436_sample_table.txt
+2 GSM1364435_sample_table.txt
+3 GSM1364434_sample_table.txt
+4 GSM1364433_sample_table.txt
+> 
+> ## some samples are repated because they list both chanel (Cy3 and Cy5)
+> sams2kp = unique(sams2kp)
+> dim(sams2kp)
+[1] 2832   16
+> 
+> names(sams2kp) = gsub("Characteristics..", "", names(sams2kp), fixed=TRUE)
+> names(sams2kp) = gsub("Comment..", "", names(sams2kp), fixed=TRUE)
+> names(sams2kp) = gsub("\\.$", "", names(sams2kp), perl=TRUE)
+> names(sams2kp) = gsub(".", "_", names(sams2kp), fixed=TRUE)
+> 
+> dim(sams2kp)
+[1] 2832   16
+> sams2kp[1:4,]
+   Source_Name Sample_source_name          Sample_title age_yrs      bcell
+1 GSM1364436 1          CD4+ cell 101264_peripheral_CD4      56 0.07666084
+2 GSM1364435 1          CD4+ cell 101261_peripheral_CD4      64 0.30368592
+3 GSM1364434 1          CD4+ cell 101252_peripheral_CD4      45 0.26236803
+4 GSM1364433 1          CD4+ cell 101250_peripheral_CD4      53 0.32630580
+       mono     neutro     nkcell tcell racegendersite well well_id
+1 0.2519857 0.02330508 0.04006678    NA              1    L        
+2 0.3579959 0.06856712 0.01598819    NA              4    K        
+3 0.3204616 0.07858243 0.08110180    NA              4    G        
+4 0.4844596 0.18642161 0.01258508    NA              4    J        
+  Material_Type Assay_Name Array_Design_REF     Derived_Array_Data_File
+1     total RNA GSM1364436     A-GEOD-10558 GSM1364436_sample_table.txt
+2     total RNA GSM1364435     A-GEOD-10558 GSM1364435_sample_table.txt
+3     total RNA GSM1364434     A-GEOD-10558 GSM1364434_sample_table.txt
+4     total RNA GSM1364433     A-GEOD-10558 GSM1364433_sample_table.txt
+> names(sams2kp)
+ [1] "Source_Name"             "Sample_source_name"     
+ [3] "Sample_title"            "age_yrs"                
+ [5] "bcell"                   "mono"                   
+ [7] "neutro"                  "nkcell"                 
+ [9] "tcell"                   "racegendersite"         
+[11] "well"                    "well_id"                
+[13] "Material_Type"           "Assay_Name"             
+[15] "Array_Design_REF"        "Derived_Array_Data_File"
+> 
+> apply(sams2kp[,c(2,10:13)], 2, table)
+$Sample_source_name
+
+CD14+ cell  CD4+ cell 
+      2404        428 
+
+$racegendersite
+
+  1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18 
+ 72 106 186 304  56  90 210 364   4 148 168   6 108 136 236 192 198 248 
+
+$well
+
+        A    B    C    D    E    F    G    H    I    J    K    L 
+2618   23   15   20   17   13   21   18   22   14   19   16   16 
+
+$well_id
+
+            A      B      C      D      E      F      G      H      I      J 
+   214    103     95    100    107     92    104    101     92     97    101 
+     K      L R01C01 R01C02 R02C01 R02C02 R03C01 R03C02 R04C01 R04C02 R05C01 
+   104    106    123    110    119    124    107    125    117    114    115 
+R05C02 R06C01 R06C02 
+   120    120    122 
+
+$Material_Type
+
+genomic DNA   total RNA 
+       1416        1416 
+
+> 
+> samsMethy = sams2kp[which(sams2kp$Material_Type=="genomic DNA"),]
+> dim(samsMethy)
+[1] 1416   16
+> samsMethy[1:4,]
+      Source_Name Sample_source_name                        Sample_title
+1417 GSM1364650 1          CD4+ cell 101264_peripheral_CD4 [methylation]
+1418 GSM1364649 1          CD4+ cell 101261_peripheral_CD4 [methylation]
+1419 GSM1364648 1          CD4+ cell 101252_peripheral_CD4 [methylation]
+1420 GSM1364647 1          CD4+ cell 101250_peripheral_CD4 [methylation]
+     age_yrs      bcell      mono     neutro     nkcell tcell racegendersite
+1417      56 0.07666084 0.2519857 0.02330508 0.04006678    NA              1
+1418      64 0.30368592 0.3579959 0.06856712 0.01598819    NA              4
+1419      45 0.26236803 0.3204616 0.07858243 0.08110180    NA              4
+1420      53 0.32630580 0.4844596 0.18642161 0.01258508    NA              4
+     well well_id Material_Type Assay_Name Array_Design_REF
+1417       R05C02   genomic DNA GSM1364650     A-GEOD-13534
+1418       R06C01   genomic DNA GSM1364649     A-GEOD-13534
+1419       R04C01   genomic DNA GSM1364648     A-GEOD-13534
+1420       R05C02   genomic DNA GSM1364647     A-GEOD-13534
+     Derived_Array_Data_File
+1417                        
+1418                        
+1419                        
+1420                        
+> 
+> samsMethy$altID = gsub("_peripheral_CD4 [methylation]", "", 
++                        samsMethy$Sample_title, fixed=TRUE)
+> 
+> samsMethy$altID = gsub("_peripheral_CD14 [methylation]", "", 
++                        samsMethy$altID, fixed=TRUE)
+> 
+> table(gsub(" 1", "", samsMethy$Source_Name) == samsMethy$Assay_Name)
+
+TRUE 
+1416 
+> 
+> samsRNA = sams2kp[which(sams2kp$Material_Type=="total RNA"),]
+> dim(samsRNA)
+[1] 1416   16
+> samsRNA[1:4,]
+   Source_Name Sample_source_name          Sample_title age_yrs      bcell
+1 GSM1364436 1          CD4+ cell 101264_peripheral_CD4      56 0.07666084
+2 GSM1364435 1          CD4+ cell 101261_peripheral_CD4      64 0.30368592
+3 GSM1364434 1          CD4+ cell 101252_peripheral_CD4      45 0.26236803
+4 GSM1364433 1          CD4+ cell 101250_peripheral_CD4      53 0.32630580
+       mono     neutro     nkcell tcell racegendersite well well_id
+1 0.2519857 0.02330508 0.04006678    NA              1    L        
+2 0.3579959 0.06856712 0.01598819    NA              4    K        
+3 0.3204616 0.07858243 0.08110180    NA              4    G        
+4 0.4844596 0.18642161 0.01258508    NA              4    J        
+  Material_Type Assay_Name Array_Design_REF     Derived_Array_Data_File
+1     total RNA GSM1364436     A-GEOD-10558 GSM1364436_sample_table.txt
+2     total RNA GSM1364435     A-GEOD-10558 GSM1364435_sample_table.txt
+3     total RNA GSM1364434     A-GEOD-10558 GSM1364434_sample_table.txt
+4     total RNA GSM1364433     A-GEOD-10558 GSM1364433_sample_table.txt
+> 
+> 
+> setwd("~/research/Deconvolution/data")
+> 
+> write.table(samsMethy, file = "mono_CD4T_E-GEOD-56047_methy_sample.txt", 
++             append = FALSE, quote = FALSE, sep = "\t", row.names = FALSE,
++             col.names = TRUE)
+> 
+> write.table(samsRNA, file = "mono_CD4T_E-GEOD-56047_RNA_sample.txt", 
++             append = FALSE, quote = FALSE, sep = "\t", row.names = FALSE,
++             col.names = TRUE)
+> 
+> # ------------------------------------------------------------
+> # read in methylation data
+> # ------------------------------------------------------------
+> 
+> setwd("~/research/Deconvolution/original_data/methy_450k/mono_CD4T_E-GEOD-56047")
+> fls = list.files(pattern="_sample_table.txt", recursive=TRUE)
+> length(fls)
+[1] 1416
+> 
+> ## ok, this is not funny.. there is no array data for methylation
+> ## hm... let's go to GEO then.
+> table(samsMethy$Derived_Array_Data_File)
+
+     
+1416 
+> 
+> # ------------------------------------------------------------
+> # read in methylation data from GEO? nope, it does not work
+> # ------------------------------------------------------------
+> 
+> # d1 = "~/research/Deconvolution/original_data/methy_450k/mono_CD4T_E-GEOD-56047"
+> # gse1 = getGEO("GSE56581", destdir=d1)
+> 
+> # ----------------------------------------------------------------
+> # mannually download data from GEO in two files,first CD4+ T cells
+> # ----------------------------------------------------------------
+> 
+> # first extract usealbe columns of the file
+> library(data.table)
+Warning message:
+package ‘data.table’ was built under R version 3.2.5 
+> 
+> setwd("~/research/Deconvolution/original_data/methy_450k/mono_CD4T_E-GEOD-56047")
+> CD4 = read.table("GSE56581_methylome_normalized.txt", sep="\t", 
++             as.is=TRUE, header=TRUE, nrows=10)
+> 
+> dim(CD4)
+[1]  10 429
+> CD4[1:5,1:10]
+      ID_REF X100001.Mvalue X100001.detectionPval X100004.Mvalue
+1 cg00000029       1.262545                     0       1.139552
+2 cg00000108       3.835496                     0       4.247515
+3 cg00000109       2.871801                     0       2.498553
+4 cg00000165      -1.388749                     0      -1.353385
+5 cg00000236       2.487730                     0       2.600258
+  X100004.detectionPval X100007.Mvalue X100007.detectionPval X100014.Mvalue
+1                     0       1.061584                     0       1.144077
+2                     0       4.011399                     0       3.691138
+3                     0       2.694705                     0       2.872290
+4                     0      -1.325551                     0      -1.252946
+5                     0       2.786016                     0       2.819398
+  X100014.detectionPval X100018.Mvalue
+1                     0       1.024216
+2                     0       3.896228
+3                     0       2.897058
+4                     0      -1.317383
+5                     0       2.994671
+> cols = c(1,grep("Mvalue", names(CD4)))
+> cols
+  [1]   1   2   4   6   8  10  12  14  16  18  20  22  24  26  28  30  32  34
+ [19]  36  38  40  42  44  46  48  50  52  54  56  58  60  62  64  66  68  70
+ [37]  72  74  76  78  80  82  84  86  88  90  92  94  96  98 100 102 104 106
+ [55] 108 110 112 114 116 118 120 122 124 126 128 130 132 134 136 138 140 142
+ [73] 144 146 148 150 152 154 156 158 160 162 164 166 168 170 172 174 176 178
+ [91] 180 182 184 186 188 190 192 194 196 198 200 202 204 206 208 210 212 214
+[109] 216 218 220 222 224 226 228 230 232 234 236 238 240 242 244 246 248 250
+[127] 252 254 256 258 260 262 264 266 268 270 272 274 276 278 280 282 284 286
+[145] 288 290 292 294 296 298 300 302 304 306 308 310 312 314 316 318 320 322
+[163] 324 326 328 330 332 334 336 338 340 342 344 346 348 350 352 354 356 358
+[181] 360 362 364 366 368 370 372 374 376 378 380 382 384 386 388 390 392 394
+[199] 396 398 400 402 404 406 408 410 412 414 416 418 420 422 424 426 428
+> 
+> date()
+[1] "Tue Feb 14 15:08:52 2017"
+> CD4 = fread("GSE56581_methylome_normalized.txt", sep="\t", 
++             header=TRUE, select=cols)
+Read 0.0% of 485577 rowsRead 8.2% of 485577 rowsRead 16.5% of 485577 rowsRead 24.7% of 485577 rowsRead 33.0% of 485577 rowsRead 41.2% of 485577 rowsRead 49.4% of 485577 rowsRead 57.7% of 485577 rowsRead 65.9% of 485577 rowsRead 74.1% of 485577 rowsRead 82.4% of 485577 rowsRead 90.6% of 485577 rowsRead 98.9% of 485577 rowsRead 485577 rows and 215 (of 429) columns from 1.891 GB file in 00:00:22
+> date()
+[1] "Tue Feb 14 15:09:17 2017"
+> 
+> dim(CD4)
+[1] 485577    215
+> CD4[1:2,1:10]
+       ID_REF 100001.Mvalue 100004.Mvalue 100007.Mvalue 100014.Mvalue
+1: cg00000029      1.262545      1.139552      1.061584      1.144077
+2: cg00000108      3.835496      4.247515      4.011399      3.691138
+   100018.Mvalue 100021.Mvalue 100022.Mvalue 100023.Mvalue 100028.Mvalue
+1:      1.024216      1.299398     0.9190671      1.158583      1.361088
+2:      3.896228      3.625511     3.8143694      3.664935      4.038348
+> 
+> table(CD4$ID_REF %in% info$ID)
+
+ FALSE   TRUE 
+ 92176 393401 
+> table(info$ID %in% CD4$ID_REF)
+
+  TRUE 
+393401 
+> 
+> w2kp = which(CD4$ID_REF %in% info$ID)
+> CD4 = CD4[w2kp,]
+> 
+> dim(CD4)
+[1] 393401    215
+> CD4[1:2,1:5]
+       ID_REF 100001.Mvalue 100004.Mvalue 100007.Mvalue 100014.Mvalue
+1: cg00000029      1.262545      1.139552      1.061584      1.144077
+2: cg00000165     -1.388749     -1.353385     -1.325551     -1.252946
+> 
+> samsMethyCD4 = samsMethy[which(samsMethy$Sample_source_name == "CD4+ cell"),]
+> dim(samsMethyCD4)
+[1] 214  17
+> samsMethyCD4[1:2,]
+      Source_Name Sample_source_name                        Sample_title
+1417 GSM1364650 1          CD4+ cell 101264_peripheral_CD4 [methylation]
+1418 GSM1364649 1          CD4+ cell 101261_peripheral_CD4 [methylation]
+     age_yrs      bcell      mono     neutro     nkcell tcell racegendersite
+1417      56 0.07666084 0.2519857 0.02330508 0.04006678    NA              1
+1418      64 0.30368592 0.3579959 0.06856712 0.01598819    NA              4
+     well well_id Material_Type Assay_Name Array_Design_REF
+1417       R05C02   genomic DNA GSM1364650     A-GEOD-13534
+1418       R06C01   genomic DNA GSM1364649     A-GEOD-13534
+     Derived_Array_Data_File  altID
+1417                         101264
+1418                         101261
+> 
+> colnames(CD4) = gsub(".Mvalue", "", colnames(CD4), fixed=TRUE)
+> 
+> dim(CD4)
+[1] 393401    215
+> CD4[1:2,1:5]
+       ID_REF    100001    100004    100007    100014
+1: cg00000029  1.262545  1.139552  1.061584  1.144077
+2: cg00000165 -1.388749 -1.353385 -1.325551 -1.252946
+> 
+> table(samsMethyCD4$altID %in% colnames(CD4))
+
+TRUE 
+ 214 
+> table(colnames(CD4) %in% samsMethyCD4$altID)
+
+FALSE  TRUE 
+    1   214 
+> 
+> cnms = samsMethyCD4$Assay_Name[match(samsMethyCD4$altID,colnames(CD4)[-1])]
+> colnames(CD4)[-1] = cnms
+> 
+> dim(CD4)
+[1] 393401    215
+> CD4[1:2,1:5]
+       ID_REF GSM1364437 GSM1364438 GSM1364439 GSM1364440
+1: cg00000029   1.262545   1.139552   1.061584   1.144077
+2: cg00000165  -1.388749  -1.353385  -1.325551  -1.252946
+> 
+> for(k in 2:ncol(CD4)){
++   CD4[[names(CD4)[k]]] = round(CD4[[names(CD4)[k]]], 7)
++ }
+> 
+> dim(CD4)
+[1] 393401    215
+> CD4[1:2,1:5]
+       ID_REF GSM1364437 GSM1364438 GSM1364439 GSM1364440
+1: cg00000029   1.262545   1.139552   1.061584   1.144077
+2: cg00000165  -1.388749  -1.353385  -1.325551  -1.252946
+> 
+> setwd("~/research/Deconvolution/data")
+> 
+> write.table(CD4, file = "CD4T_E-GEOD-56047_methy_data.txt", append = FALSE, 
++             quote = FALSE, sep = "\t", row.names = FALSE, col.names = TRUE)
+> 
+> # ----------------------------------------------------------------
+> # next CD14 monocytes
+> # ----------------------------------------------------------------
+> 
+> setwd("~/research/Deconvolution/original_data/methy_450k/mono_CD4T_E-GEOD-56047")
+> CD14 = read.table("GSE56046_methylome_normalized.txt", sep="\t", 
++                  as.is=TRUE, header=TRUE, nrows=10)
+> 
+> dim(CD14)
+[1]   10 2405
+> CD14[1:5,1:10]
+      ID_REF X100001.Mvalue X100001.detectionPval X100002.Mvalue
+1 cg00000029     -0.2482799                     0     -0.0203916
+2 cg00000108      3.5163442                     0      3.8562861
+3 cg00000109      2.7526248                     0      3.2674936
+4 cg00000165     -2.0308491                     0     -1.4621109
+5 cg00000236      1.0695492                     0      1.1464122
+  X100002.detectionPval X100003.Mvalue X100003.detectionPval X100004.Mvalue
+1                     0     -0.3737213                     0     -0.2371848
+2                     0      4.2394392                     0      3.5195160
+3                     0      2.9920552                     0      2.9265293
+4                     0     -1.4642360                     0     -1.5692278
+5                     0      1.3406832                     0      0.9621540
+  X100004.detectionPval X100005.Mvalue
+1                     0      0.2847229
+2                     0      3.8802958
+3                     0      2.8680526
+4                     0     -1.7199393
+5                     0      1.1044439
+> cols = c(1,grep("Mvalue", names(CD14)))
+> summary(cols)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+      1     601    1202    1202    1803    2404 
+> cols[1:20]
+ [1]  1  2  4  6  8 10 12 14 16 18 20 22 24 26 28 30 32 34 36 38
+> 
+> date()
+[1] "Tue Feb 14 15:10:36 2017"
+> CD14 = fread("GSE56046_methylome_normalized.txt", sep="\t", 
++             header=TRUE, select=cols)
+Read 0.0% of 485577 rowsRead 2.1% of 485577 rowsRead 4.1% of 485577 rowsRead 6.2% of 485577 rowsRead 8.2% of 485577 rowsRead 10.3% of 485577 rowsRead 12.4% of 485577 rowsRead 14.4% of 485577 rowsRead 16.5% of 485577 rowsRead 18.5% of 485577 rowsRead 20.6% of 485577 rowsRead 22.7% of 485577 rowsRead 24.7% of 485577 rowsRead 26.8% of 485577 rowsRead 28.8% of 485577 rowsRead 30.9% of 485577 rowsRead 33.0% of 485577 rowsRead 35.0% of 485577 rowsRead 37.1% of 485577 rowsRead 39.1% of 485577 rowsRead 41.2% of 485577 rowsRead 43.2% of 485577 rowsRead 45.3% of 485577 rowsRead 47.4% of 485577 rowsRead 49.4% of 485577 rowsRead 51.5% of 485577 rowsRead 53.5% of 485577 rowsRead 55.6% of 485577 rowsRead 57.7% of 485577 rowsRead 59.7% of 485577 rowsRead 61.8% of 485577 rowsRead 63.8% of 485577 rowsRead 65.9% of 485577 rowsRead 68.0% of 485577 rowsRead 70.0% of 485577 rowsRead 72.1% of 485577 rowsRead 74.1% of 485577 rowsRead 76.2% of 485577 rowsRead 78.3% of 485577 rowsRead 80.3% of 485577 rowsRead 82.4% of 485577 rowsRead 84.4% of 485577 rowsRead 86.5% of 485577 rowsRead 88.6% of 485577 rowsRead 90.6% of 485577 rowsRead 92.7% of 485577 rowsRead 94.7% of 485577 rowsRead 96.8% of 485577 rowsRead 98.9% of 485577 rowsRead 485577 rows and 1203 (of 2405) columns from 10.580 GB file in 00:02:01
+> date()
+[1] "Tue Feb 14 15:13:22 2017"
+> 
+> dim(CD14)
+[1] 485577   1203
+> CD14[1:2,1:10]
+       ID_REF 100001.Mvalue 100002.Mvalue 100003.Mvalue 100004.Mvalue
+1: cg00000029    -0.2482799    -0.0203916    -0.3737213    -0.2371848
+2: cg00000108     3.5163442     3.8562861     4.2394392     3.5195160
+   100005.Mvalue 100006.Mvalue 100007.Mvalue 100008.Mvalue 100009.Mvalue
+1:     0.2847229   -0.05261088     0.0139963     0.1536503   -0.03769121
+2:     3.8802958    3.87728752     3.7087329     3.6438073    3.96115218
+> 
+> table(CD14$ID_REF %in% info$ID)
+
+ FALSE   TRUE 
+ 92176 393401 
+> table(info$ID %in% CD14$ID_REF)
+
+  TRUE 
+393401 
+> 
+> w2kp = which(CD14$ID_REF %in% info$ID)
+> CD14 = CD14[w2kp,]
+> 
+> dim(CD14)
+[1] 393401   1203
+> CD14[1:2,1:5]
+       ID_REF 100001.Mvalue 100002.Mvalue 100003.Mvalue 100004.Mvalue
+1: cg00000029    -0.2482799    -0.0203916    -0.3737213    -0.2371848
+2: cg00000165    -2.0308491    -1.4621109    -1.4642360    -1.5692278
+> 
+> samsMethyCD14 = samsMethy[which(samsMethy$Sample_source_name == "CD14+ cell"),]
+> dim(samsMethyCD14)
+[1] 1202   17
+> samsMethyCD14[1:2,]
+      Source_Name Sample_source_name                         Sample_title
+1631 GSM1354405 1         CD14+ cell 101264_peripheral_CD14 [methylation]
+1632 GSM1354404 1         CD14+ cell 101263_peripheral_CD14 [methylation]
+     age_yrs      bcell mono    neutro     nkcell        tcell racegendersite
+1631      56 0.10489730   NA 0.2091139 0.10366679 0.0001083658              1
+1632      64 0.07765385   NA 0.2142798 0.09852137 0.0010294755              4
+     well well_id Material_Type Assay_Name Array_Design_REF
+1631       R05C02   genomic DNA GSM1354405     A-GEOD-13534
+1632       R01C02   genomic DNA GSM1354404     A-GEOD-13534
+     Derived_Array_Data_File  altID
+1631                         101264
+1632                         101263
+> 
+> colnames(CD14) = gsub(".Mvalue", "", colnames(CD14), fixed=TRUE)
+> 
+> dim(CD14)
+[1] 393401   1203
+> CD14[1:2,1:5]
+       ID_REF     100001     100002     100003     100004
+1: cg00000029 -0.2482799 -0.0203916 -0.3737213 -0.2371848
+2: cg00000165 -2.0308491 -1.4621109 -1.4642360 -1.5692278
+> 
+> table(samsMethyCD14$altID %in% colnames(CD14))
+
+TRUE 
+1202 
+> table(colnames(CD14) %in% samsMethyCD14$altID)
+
+FALSE  TRUE 
+    1  1202 
+> 
+> cnms = samsMethyCD14$Assay_Name[match(samsMethyCD14$altID,colnames(CD14)[-1])]
+> colnames(CD14)[-1] = cnms
+> 
+> dim(CD14)
+[1] 393401   1203
+> CD14[1:2,1:5]
+       ID_REF GSM1353204 GSM1353205 GSM1353206 GSM1353207
+1: cg00000029 -0.2482799 -0.0203916 -0.3737213 -0.2371848
+2: cg00000165 -2.0308491 -1.4621109 -1.4642360 -1.5692278
+> 
+> for(k in 2:ncol(CD14)){
++   CD14[[names(CD14)[k]]] = round(CD14[[names(CD14)[k]]], 7)
++ }
+> 
+> setwd("~/research/Deconvolution/data")
+> 
+> write.table(CD14, file = "CD14T_E-GEOD-56047_methy_data.txt", append = FALSE, 
++             quote = FALSE, sep = "\t", row.names = FALSE, col.names = TRUE)
+> 
+> # ------------------------------------------------------------
+> # ------------------------------------------------------------
+> # mono_DC_MAC_E-GEOD-71837
+> # ------------------------------------------------------------
+> # ------------------------------------------------------------
+> 
+> setwd("~/research/Deconvolution/original_data/methy_450k")
+> 
+> sams = read.table("mono_DC_MAC_E-GEOD-71837/E-GEOD-71837.sdrf.txt", 
++                   header=TRUE, sep="\t", as.is=TRUE, quote="")
+> dim(sams)
+[1] 15 34
+> sams[1:2,]
+   Source.Name           Comment..Sample_description.
+1 GSM1846592 1 mMAC D3 iMAC treated with LPS for 24 h
+2 GSM1846591 1 mMAC D2 iMAC treated with LPS for 24 h
+    Comment..Sample_source_name. Comment..Sample_title.
+1 iMAC treated with LPS for 24 h           mMAC_donor 3
+2 iMAC treated with LPS for 24 h           mMAC_donor 2
+  Characteristics..cell.type. Characteristics..donor.id.
+1       activated/mature MACs                    donor 3
+2       activated/mature MACs                    donor 2
+  Characteristics..organism. Term.Source.REF
+1               Homo sapiens             EFO
+2               Homo sapiens             EFO
+                          Term.Accession.Number Characteristics..treated.with.
+1 http://purl.obolibrary.org/obo/NCBITaxon_9606                   LPS for 24 h
+2 http://purl.obolibrary.org/obo/NCBITaxon_9606                   LPS for 24 h
+  Protocol.REF Term.Source.REF.1         Extract.Name Material.Type
+1 P-GSE71837-2      ArrayExpress GSM1846592 extract 1   genomic DNA
+2 P-GSE71837-2      ArrayExpress GSM1846591 extract 1   genomic DNA
+  Protocol.REF.1 Term.Source.REF.2 Labeled.Extract.Name       Label
+1   P-GSE71837-3      ArrayExpress      GSM1846592 LE 1 Cy5 and Cy3
+2   P-GSE71837-3      ArrayExpress      GSM1846591 LE 1 Cy5 and Cy3
+  Protocol.REF.2 Term.Source.REF.3 Assay.Name Array.Design.REF
+1   P-GSE71837-4      ArrayExpress GSM1846592     A-GEOD-13534
+2   P-GSE71837-4      ArrayExpress GSM1846591     A-GEOD-13534
+  Term.Source.REF.4 Technology.Type Protocol.REF.3 Term.Source.REF.5
+1      ArrayExpress     array assay   P-GSE71837-1      ArrayExpress
+2      ArrayExpress     array assay   P-GSE71837-1      ArrayExpress
+  Protocol.REF.4 Term.Source.REF.6               Normalization.Name
+1   P-GSE71837-5      ArrayExpress GSM1846592_sample_table.txt norm
+2   P-GSE71837-5      ArrayExpress GSM1846591_sample_table.txt norm
+      Derived.Array.Data.File
+1 GSM1846592_sample_table.txt
+2 GSM1846591_sample_table.txt
+                                                                      Comment..Derived.ArrayExpress.FTP.file.
+1 ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/GEOD/E-GEOD-71837/E-GEOD-71837.processed.1.zip
+2 ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/GEOD/E-GEOD-71837/E-GEOD-71837.processed.1.zip
+  FactorValue..cell.type. FactorValue..donor.id. FactorValue..treated.with.
+1   activated/mature MACs                donor 3               LPS for 24 h
+2   activated/mature MACs                donor 2               LPS for 24 h
+> names(sams)
+ [1] "Source.Name"                            
+ [2] "Comment..Sample_description."           
+ [3] "Comment..Sample_source_name."           
+ [4] "Comment..Sample_title."                 
+ [5] "Characteristics..cell.type."            
+ [6] "Characteristics..donor.id."             
+ [7] "Characteristics..organism."             
+ [8] "Term.Source.REF"                        
+ [9] "Term.Accession.Number"                  
+[10] "Characteristics..treated.with."         
+[11] "Protocol.REF"                           
+[12] "Term.Source.REF.1"                      
+[13] "Extract.Name"                           
+[14] "Material.Type"                          
+[15] "Protocol.REF.1"                         
+[16] "Term.Source.REF.2"                      
+[17] "Labeled.Extract.Name"                   
+[18] "Label"                                  
+[19] "Protocol.REF.2"                         
+[20] "Term.Source.REF.3"                      
+[21] "Assay.Name"                             
+[22] "Array.Design.REF"                       
+[23] "Term.Source.REF.4"                      
+[24] "Technology.Type"                        
+[25] "Protocol.REF.3"                         
+[26] "Term.Source.REF.5"                      
+[27] "Protocol.REF.4"                         
+[28] "Term.Source.REF.6"                      
+[29] "Normalization.Name"                     
+[30] "Derived.Array.Data.File"                
+[31] "Comment..Derived.ArrayExpress.FTP.file."
+[32] "FactorValue..cell.type."                
+[33] "FactorValue..donor.id."                 
+[34] "FactorValue..treated.with."             
+> 
+> length(unique(sams$Source.Name))
+[1] 15
+> 
+> table(sams$Characteristics..cell.type., useNA="ifany")
+
+                             activated/mature DCs 
+                                                3 
+                            activated/mature MACs 
+                                                3 
+                                     immature DCs 
+                                                3 
+                                    immature MACs 
+                                                3 
+peripheral blood isolated CD14+ cells (monocytes) 
+                                                3 
+> table(sams$Characteristics..donor.id., useNA="ifany")
+
+donor 1 donor 2 donor 3 
+      5       5       5 
+> table(sams$Characteristics..treated.with., useNA="ifany")
+
+                          GM-CSF for 96 h IL4/ GM-CSF for 96 h 
+                   3                    3                    3 
+        LPS for 24 h 
+                   6 
+> table(sams$Material.Type, useNA="ifany")
+
+genomic DNA 
+         15 
+> 
+> table(sams$Characteristics..donor.id., sams$Characteristics..cell.type.)
+         
+          activated/mature DCs activated/mature MACs immature DCs immature MACs
+  donor 1                    1                     1            1             1
+  donor 2                    1                     1            1             1
+  donor 3                    1                     1            1             1
+         
+          peripheral blood isolated CD14+ cells (monocytes)
+  donor 1                                                 1
+  donor 2                                                 1
+  donor 3                                                 1
+> table(sams$Characteristics..donor.id., sams$Characteristics..treated.with.)
+         
+             GM-CSF for 96 h IL4/ GM-CSF for 96 h LPS for 24 h
+  donor 1  1               1                    1            2
+  donor 2  1               1                    1            2
+  donor 3  1               1                    1            2
+> table(sams$Characteristics..cell.type., sams$Characteristics..treated.with.)
+                                                   
+                                                       GM-CSF for 96 h
+  activated/mature DCs                               0               0
+  activated/mature MACs                              0               0
+  immature DCs                                       0               0
+  immature MACs                                      0               3
+  peripheral blood isolated CD14+ cells (monocytes)  3               0
+                                                   
+                                                    IL4/ GM-CSF for 96 h
+  activated/mature DCs                                                 0
+  activated/mature MACs                                                0
+  immature DCs                                                         3
+  immature MACs                                                        0
+  peripheral blood isolated CD14+ cells (monocytes)                    0
+                                                   
+                                                    LPS for 24 h
+  activated/mature DCs                                         3
+  activated/mature MACs                                        3
+  immature DCs                                                 0
+  immature MACs                                                0
+  peripheral blood isolated CD14+ cells (monocytes)            0
+> 
+> ## well, this is a small data set, 
+> ## we will only use monocyte, mature DCs, and mature macrophages (MACs)
+> 
+> cellTypes2use = "peripheral blood isolated CD14+ cells (monocytes)"
+> cellTypes2use = c(cellTypes2use, "activated/mature DCs", "activated/mature MACs")
+> 
+> sams = sams[which(sams$Characteristics..cell.type. %in% cellTypes2use),]
+> dim(sams)
+[1]  9 34
+> 
+> names(sams)
+ [1] "Source.Name"                            
+ [2] "Comment..Sample_description."           
+ [3] "Comment..Sample_source_name."           
+ [4] "Comment..Sample_title."                 
+ [5] "Characteristics..cell.type."            
+ [6] "Characteristics..donor.id."             
+ [7] "Characteristics..organism."             
+ [8] "Term.Source.REF"                        
+ [9] "Term.Accession.Number"                  
+[10] "Characteristics..treated.with."         
+[11] "Protocol.REF"                           
+[12] "Term.Source.REF.1"                      
+[13] "Extract.Name"                           
+[14] "Material.Type"                          
+[15] "Protocol.REF.1"                         
+[16] "Term.Source.REF.2"                      
+[17] "Labeled.Extract.Name"                   
+[18] "Label"                                  
+[19] "Protocol.REF.2"                         
+[20] "Term.Source.REF.3"                      
+[21] "Assay.Name"                             
+[22] "Array.Design.REF"                       
+[23] "Term.Source.REF.4"                      
+[24] "Technology.Type"                        
+[25] "Protocol.REF.3"                         
+[26] "Term.Source.REF.5"                      
+[27] "Protocol.REF.4"                         
+[28] "Term.Source.REF.6"                      
+[29] "Normalization.Name"                     
+[30] "Derived.Array.Data.File"                
+[31] "Comment..Derived.ArrayExpress.FTP.file."
+[32] "FactorValue..cell.type."                
+[33] "FactorValue..donor.id."                 
+[34] "FactorValue..treated.with."             
+> cols2kp = c(1, 3:6, 10, 14, 21, 30)
+> sams2kp = sams[,cols2kp]
+> dim(sams2kp)
+[1] 9 9
+> sams2kp[1:4,]
+   Source.Name   Comment..Sample_source_name. Comment..Sample_title.
+1 GSM1846592 1 iMAC treated with LPS for 24 h           mMAC_donor 3
+2 GSM1846591 1 iMAC treated with LPS for 24 h           mMAC_donor 2
+3 GSM1846590 1 iMAC treated with LPS for 24 h           mMAC_donor 1
+7 GSM1846586 1  iDC treated with LPS for 24 h            mDC_donor 3
+  Characteristics..cell.type. Characteristics..donor.id.
+1       activated/mature MACs                    donor 3
+2       activated/mature MACs                    donor 2
+3       activated/mature MACs                    donor 1
+7        activated/mature DCs                    donor 3
+  Characteristics..treated.with. Material.Type Assay.Name
+1                   LPS for 24 h   genomic DNA GSM1846592
+2                   LPS for 24 h   genomic DNA GSM1846591
+3                   LPS for 24 h   genomic DNA GSM1846590
+7                   LPS for 24 h   genomic DNA GSM1846586
+      Derived.Array.Data.File
+1 GSM1846592_sample_table.txt
+2 GSM1846591_sample_table.txt
+3 GSM1846590_sample_table.txt
+7 GSM1846586_sample_table.txt
+> 
+> ## some samples are repated because they list both chanel (Cy3 and Cy5)
+> sams2kp = unique(sams2kp)
+> dim(sams2kp)
+[1] 9 9
+> 
+> names(sams2kp) = gsub("Characteristics..", "", names(sams2kp), fixed=TRUE)
+> names(sams2kp) = gsub("Comment..", "", names(sams2kp), fixed=TRUE)
+> names(sams2kp) = gsub("\\.$", "", names(sams2kp), perl=TRUE)
+> names(sams2kp) = gsub(".", "_", names(sams2kp), fixed=TRUE)
+> 
+> dim(sams2kp)
+[1] 9 9
+> sams2kp[1:4,]
+   Source_Name             Sample_source_name Sample_title
+1 GSM1846592 1 iMAC treated with LPS for 24 h mMAC_donor 3
+2 GSM1846591 1 iMAC treated with LPS for 24 h mMAC_donor 2
+3 GSM1846590 1 iMAC treated with LPS for 24 h mMAC_donor 1
+7 GSM1846586 1  iDC treated with LPS for 24 h  mDC_donor 3
+              cell_type donor_id treated_with Material_Type Assay_Name
+1 activated/mature MACs  donor 3 LPS for 24 h   genomic DNA GSM1846592
+2 activated/mature MACs  donor 2 LPS for 24 h   genomic DNA GSM1846591
+3 activated/mature MACs  donor 1 LPS for 24 h   genomic DNA GSM1846590
+7  activated/mature DCs  donor 3 LPS for 24 h   genomic DNA GSM1846586
+      Derived_Array_Data_File
+1 GSM1846592_sample_table.txt
+2 GSM1846591_sample_table.txt
+3 GSM1846590_sample_table.txt
+7 GSM1846586_sample_table.txt
+> apply(sams2kp[,c(4:6)], 2, table)
+$cell_type
+
+                             activated/mature DCs 
+                                                3 
+                            activated/mature MACs 
+                                                3 
+peripheral blood isolated CD14+ cells (monocytes) 
+                                                3 
+
+$donor_id
+
+donor 1 donor 2 donor 3 
+      3       3       3 
+
+$treated_with
+
+             LPS for 24 h 
+           3            6 
+
+> 
+> setwd("~/research/Deconvolution/data")
+> 
+> write.table(sams2kp, file = "mono_DC_MAC_E-GEOD-71837_methy_sample.txt", 
++             append = FALSE, quote = FALSE, sep = "\t", row.names = FALSE,
++             col.names = TRUE)
+> 
+> # ------------------------------------------------------------
+> # read in methylation data
+> # ------------------------------------------------------------
+> 
+> setwd("~/research/Deconvolution/original_data/methy_450k/mono_DC_MAC_E-GEOD-71837")
+> fls = list.files(pattern="_sample_table.txt", recursive=TRUE)
+> length(fls)
+[1] 15
+> 
+> mDat = NULL
+> 
+> for(i in 1:nrow(sams2kp)){
++   cat(i, date(), "\n")
++   fnm   = sams2kp$Derived_Array_Data_File[i]
++   fpath = fls[grep(fnm, fls)]
++   
++   if(length(fpath) != 1){
++     stop("unexpected file path\n")
++   }
++   
++   dati = read.table(fpath, header=TRUE, sep="\t", as.is=TRUE, na.string="null")
++   dim(dati)
++   dati[1:2,]
++   
++   summary(dati$Detection.Pval)
++   table(dati$Detection.Pval > 0.01)
++   
++   if(i==1){
++     probes = dati$Reporter.Identifier
++   }else{
++     if(length(probes) != nrow(dati)){
++       stop("probe number are differnt\n")
++     }else if(any(probes != dati$Reporter.Identifier)){
++       stop("probes are differnt\n")
++     }
++   }
++   
++   mDat = cbind(mDat, dati$VALUE) 
++ }
+1 Tue Feb 14 15:21:00 2017 
+2 Tue Feb 14 15:21:02 2017 
+3 Tue Feb 14 15:21:05 2017 
+4 Tue Feb 14 15:21:07 2017 
+5 Tue Feb 14 15:21:09 2017 
+6 Tue Feb 14 15:21:11 2017 
+7 Tue Feb 14 15:21:14 2017 
+8 Tue Feb 14 15:21:16 2017 
+9 Tue Feb 14 15:21:19 2017 
+> 
+> dim(mDat)
+[1] 485577      9
+> rownames(mDat) = probes
+> colnames(mDat) = sams2kp$Assay_Name
+> 
+> table(probes %in% info$ID)
+
+ FALSE   TRUE 
+ 92176 393401 
+> table(info$ID %in% probes)
+
+  TRUE 
+393401 
+> 
+> w2kp = which(probes %in% info$ID)
+> mDat = mDat[w2kp,]
+> 
+> dim(mDat)
+[1] 393401      9
+> mDat[1:2,1:5]
+           GSM1846592 GSM1846591 GSM1846590 GSM1846586 GSM1846585
+cg00000029  0.7423225  0.6915279  0.7677006  0.7079468  0.7657933
+cg00000165  0.6678801  0.5308191  0.6252498  0.5737686  0.5772528
+> 
+> mDat = data.frame(id=rownames(mDat), mDat)
+> dim(mDat)
+[1] 393401     10
+> mDat[1:2,1:5]
+                   id GSM1846592 GSM1846591 GSM1846590 GSM1846586
+cg00000029 cg00000029  0.7423225  0.6915279  0.7677006  0.7079468
+cg00000165 cg00000165  0.6678801  0.5308191  0.6252498  0.5737686
+> 
+> setwd("~/research/Deconvolution/data")
+> 
+> write.table(mDat, file = "mono_DC_MAC_E-GEOD-71837_methy_data.txt", 
++             append = FALSE, quote = FALSE, sep = "\t", row.names = FALSE,
++             col.names = TRUE)
+> 
+> # ------------------------------------------------------------
+> # ------------------------------------------------------------
+> # neut_E-GEOD-65097
+> # ------------------------------------------------------------
+> # ------------------------------------------------------------
+> 
+> setwd("~/research/Deconvolution/original_data/methy_450k")
+> 
+> sams = read.table("neut_E-GEOD-65097/E-GEOD-65097.sdrf.txt", 
++                   header=TRUE, sep="\t", as.is=TRUE, quote="")
+> dim(sams)
+[1] 38 45
+> sams[1:2,]
+   Source.Name Comment..Sample_description. Comment..Sample_source_name.
+1 GSM1587293 1        Neutrophil_Control_15                  neutrophils
+2 GSM1587292 1        Neutrophil_Control_12                  neutrophils
+                Comment..Sample_title. Characteristics..Sex. Term.Source.REF
+1 neutrophils isolated from control 15                female             EFO
+2 neutrophils isolated from control 12                female             EFO
+  Term.Accession.Number Characteristics..age. Characteristics..cell.type.
+1           EFO_0001265                    47          normal neutrophils
+2           EFO_0001265                    46          normal neutrophils
+  Characteristics..disease.state. Term.Source.REF.1 Term.Accession.Number.1
+1                         control               EFO             EFO_0001461
+2                         control               EFO             EFO_0001461
+  Characteristics..organism. Term.Source.REF.2
+1               Homo sapiens               EFO
+2               Homo sapiens               EFO
+                        Term.Accession.Number.2  Protocol.REF Term.Source.REF.3
+1 http://purl.obolibrary.org/obo/NCBITaxon_9606 P-GSE65097-40      ArrayExpress
+2 http://purl.obolibrary.org/obo/NCBITaxon_9606 P-GSE65097-40      ArrayExpress
+  Protocol.REF.1 Term.Source.REF.4 Protocol.REF.2 Term.Source.REF.5
+1  P-GSE65097-39      ArrayExpress  P-GSE65097-41      ArrayExpress
+2  P-GSE65097-39      ArrayExpress  P-GSE65097-41      ArrayExpress
+          Extract.Name Material.Type Protocol.REF.3 Term.Source.REF.6
+1 GSM1587293 extract 1   genomic DNA  P-GSE65097-42      ArrayExpress
+2 GSM1587292 extract 1   genomic DNA  P-GSE65097-42      ArrayExpress
+  Labeled.Extract.Name       Label Protocol.REF.4 Term.Source.REF.7 Assay.Name
+1      GSM1587293 LE 1 Cy3 and Cy5  P-GSE65097-43      ArrayExpress GSM1587293
+2      GSM1587292 LE 1 Cy3 and Cy5  P-GSE65097-43      ArrayExpress GSM1587292
+  Array.Design.REF Term.Source.REF.8 Technology.Type Protocol.REF.5
+1     A-GEOD-13534      ArrayExpress     array assay  P-GSE65097-44
+2     A-GEOD-13534      ArrayExpress     array assay  P-GSE65097-44
+  Term.Source.REF.9 Protocol.REF.6 Term.Source.REF.10
+1      ArrayExpress  P-GSE65097-38       ArrayExpress
+2      ArrayExpress  P-GSE65097-37       ArrayExpress
+                Normalization.Name     Derived.Array.Data.File
+1 GSM1587293_sample_table.txt norm GSM1587293_sample_table.txt
+2 GSM1587292_sample_table.txt norm GSM1587292_sample_table.txt
+                                                                      Comment..Derived.ArrayExpress.FTP.file.
+1 ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/GEOD/E-GEOD-65097/E-GEOD-65097.processed.1.zip
+2 ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/GEOD/E-GEOD-65097/E-GEOD-65097.processed.1.zip
+  FactorValue..age. FactorValue..cell.type. FactorValue..disease.state.
+1                47      normal neutrophils                     control
+2                46      normal neutrophils                     control
+  Term.Source.REF.11 Term.Accession.Number.3
+1                EFO             EFO_0001461
+2                EFO             EFO_0001461
+> names(sams)
+ [1] "Source.Name"                            
+ [2] "Comment..Sample_description."           
+ [3] "Comment..Sample_source_name."           
+ [4] "Comment..Sample_title."                 
+ [5] "Characteristics..Sex."                  
+ [6] "Term.Source.REF"                        
+ [7] "Term.Accession.Number"                  
+ [8] "Characteristics..age."                  
+ [9] "Characteristics..cell.type."            
+[10] "Characteristics..disease.state."        
+[11] "Term.Source.REF.1"                      
+[12] "Term.Accession.Number.1"                
+[13] "Characteristics..organism."             
+[14] "Term.Source.REF.2"                      
+[15] "Term.Accession.Number.2"                
+[16] "Protocol.REF"                           
+[17] "Term.Source.REF.3"                      
+[18] "Protocol.REF.1"                         
+[19] "Term.Source.REF.4"                      
+[20] "Protocol.REF.2"                         
+[21] "Term.Source.REF.5"                      
+[22] "Extract.Name"                           
+[23] "Material.Type"                          
+[24] "Protocol.REF.3"                         
+[25] "Term.Source.REF.6"                      
+[26] "Labeled.Extract.Name"                   
+[27] "Label"                                  
+[28] "Protocol.REF.4"                         
+[29] "Term.Source.REF.7"                      
+[30] "Assay.Name"                             
+[31] "Array.Design.REF"                       
+[32] "Term.Source.REF.8"                      
+[33] "Technology.Type"                        
+[34] "Protocol.REF.5"                         
+[35] "Term.Source.REF.9"                      
+[36] "Protocol.REF.6"                         
+[37] "Term.Source.REF.10"                     
+[38] "Normalization.Name"                     
+[39] "Derived.Array.Data.File"                
+[40] "Comment..Derived.ArrayExpress.FTP.file."
+[41] "FactorValue..age."                      
+[42] "FactorValue..cell.type."                
+[43] "FactorValue..disease.state."            
+[44] "Term.Source.REF.11"                     
+[45] "Term.Accession.Number.3"                
+> 
+> length(unique(sams$Source.Name))
+[1] 38
+> 
+> table(sams$Comment..Sample_source_name., useNA="ifany")
+
+low-density granulocytes              neutrophils 
+                       8                       30 
+> table(sams$Characteristics..cell.type., useNA="ifany")
+
+lupus low-density granulocytes              lupus neutrophils 
+                             8                             15 
+            normal neutrophils 
+                            15 
+> table(sams$Comment..Sample_source_name., sams$Characteristics..cell.type.)
+                          
+                           lupus low-density granulocytes lupus neutrophils
+  low-density granulocytes                              8                 0
+  neutrophils                                           0                15
+                          
+                           normal neutrophils
+  low-density granulocytes                  0
+  neutrophils                              15
+> 
+> table(sams$Characteristics..disease.state., useNA="ifany")
+
+      control Lupus patient 
+           17            21 
+> table(sams$Characteristics..disease.state., sams$Characteristics..cell.type.)
+               
+                lupus low-density granulocytes lupus neutrophils
+  control                                    0                 2
+  Lupus patient                              8                13
+               
+                normal neutrophils
+  control                       15
+  Lupus patient                  0
+> 
+> table(sams$Material.Type, useNA="ifany")
+
+genomic DNA 
+         38 
+> 
+> ## well, this is a small data set, 
+> ## we will only use monocyte, mature DCs, and mature macrophages (MACs)
+> 
+> cellTypes2use = "normal neutrophils"
+> sams = sams[which(sams$Characteristics..cell.type. %in% cellTypes2use),]
+> dim(sams)
+[1] 15 45
+> 
+> names(sams)
+ [1] "Source.Name"                            
+ [2] "Comment..Sample_description."           
+ [3] "Comment..Sample_source_name."           
+ [4] "Comment..Sample_title."                 
+ [5] "Characteristics..Sex."                  
+ [6] "Term.Source.REF"                        
+ [7] "Term.Accession.Number"                  
+ [8] "Characteristics..age."                  
+ [9] "Characteristics..cell.type."            
+[10] "Characteristics..disease.state."        
+[11] "Term.Source.REF.1"                      
+[12] "Term.Accession.Number.1"                
+[13] "Characteristics..organism."             
+[14] "Term.Source.REF.2"                      
+[15] "Term.Accession.Number.2"                
+[16] "Protocol.REF"                           
+[17] "Term.Source.REF.3"                      
+[18] "Protocol.REF.1"                         
+[19] "Term.Source.REF.4"                      
+[20] "Protocol.REF.2"                         
+[21] "Term.Source.REF.5"                      
+[22] "Extract.Name"                           
+[23] "Material.Type"                          
+[24] "Protocol.REF.3"                         
+[25] "Term.Source.REF.6"                      
+[26] "Labeled.Extract.Name"                   
+[27] "Label"                                  
+[28] "Protocol.REF.4"                         
+[29] "Term.Source.REF.7"                      
+[30] "Assay.Name"                             
+[31] "Array.Design.REF"                       
+[32] "Term.Source.REF.8"                      
+[33] "Technology.Type"                        
+[34] "Protocol.REF.5"                         
+[35] "Term.Source.REF.9"                      
+[36] "Protocol.REF.6"                         
+[37] "Term.Source.REF.10"                     
+[38] "Normalization.Name"                     
+[39] "Derived.Array.Data.File"                
+[40] "Comment..Derived.ArrayExpress.FTP.file."
+[41] "FactorValue..age."                      
+[42] "FactorValue..cell.type."                
+[43] "FactorValue..disease.state."            
+[44] "Term.Source.REF.11"                     
+[45] "Term.Accession.Number.3"                
+> cols2kp = c(1, 3:5, 8:10, 23, 30, 39)
+> sams2kp = sams[,cols2kp]
+> dim(sams2kp)
+[1] 15 10
+> sams2kp[1:4,]
+   Source.Name Comment..Sample_source_name.
+1 GSM1587293 1                  neutrophils
+2 GSM1587292 1                  neutrophils
+5 GSM1587289 1                  neutrophils
+6 GSM1587288 1                  neutrophils
+                Comment..Sample_title. Characteristics..Sex.
+1 neutrophils isolated from control 15                female
+2 neutrophils isolated from control 12                female
+5 neutrophils isolated from control 13                female
+6 neutrophils isolated from control 10                female
+  Characteristics..age. Characteristics..cell.type.
+1                    47          normal neutrophils
+2                    46          normal neutrophils
+5                    31          normal neutrophils
+6                    34          normal neutrophils
+  Characteristics..disease.state. Material.Type Assay.Name
+1                         control   genomic DNA GSM1587293
+2                         control   genomic DNA GSM1587292
+5                         control   genomic DNA GSM1587289
+6                         control   genomic DNA GSM1587288
+      Derived.Array.Data.File
+1 GSM1587293_sample_table.txt
+2 GSM1587292_sample_table.txt
+5 GSM1587289_sample_table.txt
+6 GSM1587288_sample_table.txt
+> 
+> ## some samples are repated because they list both chanel (Cy3 and Cy5)
+> sams2kp = unique(sams2kp)
+> dim(sams2kp)
+[1] 15 10
+> 
+> names(sams2kp) = gsub("Characteristics..", "", names(sams2kp), fixed=TRUE)
+> names(sams2kp) = gsub("Comment..", "", names(sams2kp), fixed=TRUE)
+> names(sams2kp) = gsub("\\.$", "", names(sams2kp), perl=TRUE)
+> names(sams2kp) = gsub(".", "_", names(sams2kp), fixed=TRUE)
+> 
+> dim(sams2kp)
+[1] 15 10
+> sams2kp[1:4,]
+   Source_Name Sample_source_name                         Sample_title    Sex
+1 GSM1587293 1        neutrophils neutrophils isolated from control 15 female
+2 GSM1587292 1        neutrophils neutrophils isolated from control 12 female
+5 GSM1587289 1        neutrophils neutrophils isolated from control 13 female
+6 GSM1587288 1        neutrophils neutrophils isolated from control 10 female
+  age          cell_type disease_state Material_Type Assay_Name
+1  47 normal neutrophils       control   genomic DNA GSM1587293
+2  46 normal neutrophils       control   genomic DNA GSM1587292
+5  31 normal neutrophils       control   genomic DNA GSM1587289
+6  34 normal neutrophils       control   genomic DNA GSM1587288
+      Derived_Array_Data_File
+1 GSM1587293_sample_table.txt
+2 GSM1587292_sample_table.txt
+5 GSM1587289_sample_table.txt
+6 GSM1587288_sample_table.txt
+> apply(sams2kp[,c(2,4:8)], 2, table)
+$Sample_source_name
+
+neutrophils 
+         15 
+
+$Sex
+
+female 
+    15 
+
+$age
+
+22 24 31 34 36 41 42 43 45 46 47 60 
+ 1  1  1  3  1  1  2  1  1  1  1  1 
+
+$cell_type
+
+normal neutrophils 
+                15 
+
+$disease_state
+
+control 
+     15 
+
+$Material_Type
+
+genomic DNA 
+         15 
+
+> 
+> setwd("~/research/Deconvolution/data")
+> 
+> write.table(sams2kp, file = "neut_E-GEOD-65097_methy_sample.txt", 
++             append = FALSE, quote = FALSE, sep = "\t", row.names = FALSE,
++             col.names = TRUE)
+> 
+> # ------------------------------------------------------------
+> # read in methylation data
+> # ------------------------------------------------------------
+> 
+> setwd("~/research/Deconvolution/original_data/methy_450k/neut_E-GEOD-65097")
+> fls = list.files(pattern="_sample_table.txt", recursive=TRUE)
+> length(fls)
+[1] 38
+> 
+> mDat = NULL
+> 
+> for(i in 1:nrow(sams2kp)){
++   cat(i, date(), "\n")
++   fnm   = sams2kp$Derived_Array_Data_File[i]
++   fpath = fls[grep(fnm, fls)]
++   
++   if(length(fpath) != 1){
++     stop("unexpected file path\n")
++   }
++   
++   dati = read.table(fpath, header=TRUE, sep="\t", as.is=TRUE, na.string="null")
++   dim(dati)
++   dati[1:2,]
++   
++   summary(dati$Detection.Pval)
++   table(dati$Detection.Pval > 0.01)
++   
++   if(i==1){
++     probes = dati$Reporter.Identifier
++   }else{
++     if(length(probes) != nrow(dati)){
++       stop("probe number are differnt\n")
++     }else if(any(probes != dati$Reporter.Identifier)){
++       stop("probes are differnt\n")
++     }
++   }
++   
++   mDat = cbind(mDat, dati$VALUE) 
++ }
+1 Tue Feb 14 15:21:28 2017 
+2 Tue Feb 14 15:21:36 2017 
+3 Tue Feb 14 15:21:43 2017 
+4 Tue Feb 14 15:21:49 2017 
+5 Tue Feb 14 15:21:54 2017 
+6 Tue Feb 14 15:22:00 2017 
+7 Tue Feb 14 15:22:06 2017 
+8 Tue Feb 14 15:22:12 2017 
+9 Tue Feb 14 15:22:22 2017 
+10 Tue Feb 14 15:22:27 2017 
+11 Tue Feb 14 15:22:32 2017 
+12 Tue Feb 14 15:22:38 2017 
+13 Tue Feb 14 15:22:43 2017 
+14 Tue Feb 14 15:22:49 2017 
+15 Tue Feb 14 15:22:56 2017 
+> 
+> dim(mDat)
+[1] 485577     15
+> rownames(mDat) = probes
+> colnames(mDat) = sams2kp$Assay_Name
+> 
+> table(probes %in% info$ID)
+
+ FALSE   TRUE 
+ 92176 393401 
+> table(info$ID %in% probes)
+
+  TRUE 
+393401 
+> 
+> w2kp = which(probes %in% info$ID)
+> mDat = mDat[w2kp,]
+> 
+> dim(mDat)
+[1] 393401     15
+> mDat[1:2,1:5]
+           GSM1587293 GSM1587292 GSM1587289 GSM1587288 GSM1587284
+cg00000029  0.4619165  0.4832633  0.3962995  0.3925624  0.4667704
+cg00000165  0.1576691  0.1497034  0.1347503  0.1365024  0.1835381
+> 
+> mDat = data.frame(id=rownames(mDat), mDat)
+> dim(mDat)
+[1] 393401     16
+> mDat[1:2,1:5]
+                   id GSM1587293 GSM1587292 GSM1587289 GSM1587288
+cg00000029 cg00000029  0.4619165  0.4832633  0.3962995  0.3925624
+cg00000165 cg00000165  0.1576691  0.1497034  0.1347503  0.1365024
+> 
+> setwd("~/research/Deconvolution/data")
+> 
+> write.table(mDat, file = "neut_E-GEOD-65097_methy_data.txt", append = FALSE, 
++             quote = FALSE, sep = "\t", row.names = FALSE, col.names = TRUE)
+> 
+> # ------------------------------------------------------------
+> # ------------------------------------------------------------
+> # NK_E-GEOD-66562
+> # ------------------------------------------------------------
+> # ------------------------------------------------------------
+> 
+> setwd("~/research/Deconvolution/original_data/methy_450k")
+> 
+> sams = read.table("NK_E-GEOD-66562/E-GEOD-66562.sdrf.txt", 
++                   header=TRUE, sep="\t", as.is=TRUE, quote="")
+> dim(sams)
+[1] 46 38
+> sams[1:2,]
+   Source.Name   Comment..Sample_description.
+1 GSM1625015 1 Healthy blood donor SAMPLE_112
+2 GSM1625015 1 Healthy blood donor SAMPLE_112
+        Comment..Sample_source_name.
+1 CD3+CD8+CD45RA+CD57- naive T cells
+2 CD3+CD8+CD45RA+CD57- naive T cells
+                                       Comment..Sample_title.
+1 genomic DNA from Donor 4 CD3+CD8+CD45RA+CD57- naive T cells
+2 genomic DNA from Donor 4 CD3+CD8+CD45RA+CD57- naive T cells
+         Characteristics..cell.type. Characteristics..donor.id.
+1 CD3+CD8+CD45RA+CD57- naive T cells                    donor 4
+2 CD3+CD8+CD45RA+CD57- naive T cells                    donor 4
+  Characteristics..donor.status. Characteristics..organism. Term.Source.REF
+1         CMV seropositive donor               Homo sapiens             EFO
+2         CMV seropositive donor               Homo sapiens             EFO
+                          Term.Accession.Number Characteristics..organism.part.
+1 http://purl.obolibrary.org/obo/NCBITaxon_9606                Peripheral Blood
+2 http://purl.obolibrary.org/obo/NCBITaxon_9606                Peripheral Blood
+  Protocol.REF Term.Source.REF.1 Protocol.REF.1 Term.Source.REF.2
+1 P-GSE66562-2      ArrayExpress   P-GSE66562-3      ArrayExpress
+2 P-GSE66562-2      ArrayExpress   P-GSE66562-3      ArrayExpress
+          Extract.Name Material.Type Protocol.REF.2 Term.Source.REF.3
+1 GSM1625015 extract 1   genomic DNA   P-GSE66562-4      ArrayExpress
+2 GSM1625015 extract 1   genomic DNA   P-GSE66562-4      ArrayExpress
+  Labeled.Extract.Name       Label Protocol.REF.3 Term.Source.REF.4 Assay.Name
+1      GSM1625015 LE 1 Cy5 and Cy3   P-GSE66562-5      ArrayExpress GSM1625015
+2      GSM1625015 LE 1 Cy5 and Cy3   P-GSE66562-5      ArrayExpress GSM1625015
+  Array.Design.REF Term.Source.REF.5 Technology.Type Protocol.REF.4
+1     A-GEOD-13534      ArrayExpress     array assay   P-GSE66562-6
+2     A-GEOD-13534      ArrayExpress     array assay   P-GSE66562-6
+  Term.Source.REF.6                       Array.Data.File
+1      ArrayExpress GSM1625015_8221932158_R06C02_Red.idat
+2      ArrayExpress GSM1625015_8221932158_R06C02_Grn.idat
+                                                                        Comment..ArrayExpress.FTP.file.
+1 ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/GEOD/E-GEOD-66562/E-GEOD-66562.raw.1.zip
+2 ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/GEOD/E-GEOD-66562/E-GEOD-66562.raw.1.zip
+  Protocol.REF.5 Term.Source.REF.7               Normalization.Name
+1   P-GSE66562-1      ArrayExpress GSM1625015_sample_table.txt norm
+2   P-GSE66562-1      ArrayExpress GSM1625015_sample_table.txt norm
+      Derived.Array.Data.File
+1 GSM1625015_sample_table.txt
+2 GSM1625015_sample_table.txt
+                                                                      Comment..Derived.ArrayExpress.FTP.file.
+1 ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/GEOD/E-GEOD-66562/E-GEOD-66562.processed.1.zip
+2 ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/GEOD/E-GEOD-66562/E-GEOD-66562.processed.1.zip
+             FactorValue..cell.type. FactorValue..donor.id.
+1 CD3+CD8+CD45RA+CD57- naive T cells                donor 4
+2 CD3+CD8+CD45RA+CD57- naive T cells                donor 4
+> names(sams)
+ [1] "Source.Name"                            
+ [2] "Comment..Sample_description."           
+ [3] "Comment..Sample_source_name."           
+ [4] "Comment..Sample_title."                 
+ [5] "Characteristics..cell.type."            
+ [6] "Characteristics..donor.id."             
+ [7] "Characteristics..donor.status."         
+ [8] "Characteristics..organism."             
+ [9] "Term.Source.REF"                        
+[10] "Term.Accession.Number"                  
+[11] "Characteristics..organism.part."        
+[12] "Protocol.REF"                           
+[13] "Term.Source.REF.1"                      
+[14] "Protocol.REF.1"                         
+[15] "Term.Source.REF.2"                      
+[16] "Extract.Name"                           
+[17] "Material.Type"                          
+[18] "Protocol.REF.2"                         
+[19] "Term.Source.REF.3"                      
+[20] "Labeled.Extract.Name"                   
+[21] "Label"                                  
+[22] "Protocol.REF.3"                         
+[23] "Term.Source.REF.4"                      
+[24] "Assay.Name"                             
+[25] "Array.Design.REF"                       
+[26] "Term.Source.REF.5"                      
+[27] "Technology.Type"                        
+[28] "Protocol.REF.4"                         
+[29] "Term.Source.REF.6"                      
+[30] "Array.Data.File"                        
+[31] "Comment..ArrayExpress.FTP.file."        
+[32] "Protocol.REF.5"                         
+[33] "Term.Source.REF.7"                      
+[34] "Normalization.Name"                     
+[35] "Derived.Array.Data.File"                
+[36] "Comment..Derived.ArrayExpress.FTP.file."
+[37] "FactorValue..cell.type."                
+[38] "FactorValue..donor.id."                 
+> 
+> length(unique(sams$Source.Name))
+[1] 23
+> 
+> table(sams$Comment..Sample_source_name., useNA="ifany")
+
+       CD3-CD56+CD57- canonical NK cells 
+                                       8 
+  CD3-CD56+CD57+EAT-2- adaptive NK cells 
+                                       8 
+ CD3-CD56+CD57+EAT-2+ canonical NK cells 
+                                       6 
+CD3-CD56+CD57+EAT-2int adaptive NK cells 
+                                       2 
+     CD3-CD56+CD57dim canonical NK cells 
+                                       6 
+        CD3+CD8+CD45RA+ effector T cells 
+                                       2 
+      CD3+CD8+CD45RA+CD57- naive T cells 
+                                       8 
+   CD3+CD8+CD45RA+CD57+ effector T cells 
+                                       6 
+> table(sams$Characteristics..cell.type., useNA="ifany")
+
+       CD3-CD56+CD57- canonical NK cells 
+                                       8 
+  CD3-CD56+CD57+EAT-2- adaptive NK cells 
+                                       8 
+ CD3-CD56+CD57+EAT-2+ canonical NK cells 
+                                       6 
+CD3-CD56+CD57+EAT-2int adaptive NK cells 
+                                       2 
+     CD3-CD56+CD57dim canonical NK cells 
+                                       6 
+        CD3+CD8+CD45RA+ effector T cells 
+                                       2 
+      CD3+CD8+CD45RA+CD57- naive T cells 
+                                       8 
+   CD3+CD8+CD45RA+CD57+ effector T cells 
+                                       6 
+> table(sams$Comment..Sample_source_name. == sams$Characteristics..cell.type.)
+
+TRUE 
+  46 
+> 
+> table(sams$Characteristics..donor.status., useNA="ifany")
+
+CMV seropositive donor 
+                    46 
+> table(sams$Material.Type, useNA="ifany")
+
+genomic DNA 
+         46 
+> 
+> ## well, this is not ideal since all are CMV donor
+> ## we will all types of NK cells
+> 
+> sams = sams[grep("NK cells", sams$Characteristics..cell.type),]
+> dim(sams)
+[1] 30 38
+> 
+> names(sams)
+ [1] "Source.Name"                            
+ [2] "Comment..Sample_description."           
+ [3] "Comment..Sample_source_name."           
+ [4] "Comment..Sample_title."                 
+ [5] "Characteristics..cell.type."            
+ [6] "Characteristics..donor.id."             
+ [7] "Characteristics..donor.status."         
+ [8] "Characteristics..organism."             
+ [9] "Term.Source.REF"                        
+[10] "Term.Accession.Number"                  
+[11] "Characteristics..organism.part."        
+[12] "Protocol.REF"                           
+[13] "Term.Source.REF.1"                      
+[14] "Protocol.REF.1"                         
+[15] "Term.Source.REF.2"                      
+[16] "Extract.Name"                           
+[17] "Material.Type"                          
+[18] "Protocol.REF.2"                         
+[19] "Term.Source.REF.3"                      
+[20] "Labeled.Extract.Name"                   
+[21] "Label"                                  
+[22] "Protocol.REF.3"                         
+[23] "Term.Source.REF.4"                      
+[24] "Assay.Name"                             
+[25] "Array.Design.REF"                       
+[26] "Term.Source.REF.5"                      
+[27] "Technology.Type"                        
+[28] "Protocol.REF.4"                         
+[29] "Term.Source.REF.6"                      
+[30] "Array.Data.File"                        
+[31] "Comment..ArrayExpress.FTP.file."        
+[32] "Protocol.REF.5"                         
+[33] "Term.Source.REF.7"                      
+[34] "Normalization.Name"                     
+[35] "Derived.Array.Data.File"                
+[36] "Comment..Derived.ArrayExpress.FTP.file."
+[37] "FactorValue..cell.type."                
+[38] "FactorValue..donor.id."                 
+> cols2kp = c(1, 3:7, 11, 17, 24:25, 35)
+> sams2kp = sams[,cols2kp]
+> dim(sams2kp)
+[1] 30 11
+> sams2kp[1:4,]
+   Source.Name           Comment..Sample_source_name.
+3 GSM1625014 1      CD3-CD56+CD57- canonical NK cells
+4 GSM1625014 1      CD3-CD56+CD57- canonical NK cells
+5 GSM1625013 1 CD3-CD56+CD57+EAT-2- adaptive NK cells
+6 GSM1625013 1 CD3-CD56+CD57+EAT-2- adaptive NK cells
+                                           Comment..Sample_title.
+3      genomic DNA from Donor 4 CD3-CD56+CD57- canonical NK cells
+4      genomic DNA from Donor 4 CD3-CD56+CD57- canonical NK cells
+5 genomic DNA from Donor 4 CD3-CD56+CD57+EAT-2- adaptive NK cells
+6 genomic DNA from Donor 4 CD3-CD56+CD57+EAT-2- adaptive NK cells
+             Characteristics..cell.type. Characteristics..donor.id.
+3      CD3-CD56+CD57- canonical NK cells                    donor 4
+4      CD3-CD56+CD57- canonical NK cells                    donor 4
+5 CD3-CD56+CD57+EAT-2- adaptive NK cells                    donor 4
+6 CD3-CD56+CD57+EAT-2- adaptive NK cells                    donor 4
+  Characteristics..donor.status. Characteristics..organism.part. Material.Type
+3         CMV seropositive donor                Peripheral Blood   genomic DNA
+4         CMV seropositive donor                Peripheral Blood   genomic DNA
+5         CMV seropositive donor                Peripheral Blood   genomic DNA
+6         CMV seropositive donor                Peripheral Blood   genomic DNA
+  Assay.Name Array.Design.REF     Derived.Array.Data.File
+3 GSM1625014     A-GEOD-13534 GSM1625014_sample_table.txt
+4 GSM1625014     A-GEOD-13534 GSM1625014_sample_table.txt
+5 GSM1625013     A-GEOD-13534 GSM1625013_sample_table.txt
+6 GSM1625013     A-GEOD-13534 GSM1625013_sample_table.txt
+> 
+> ## some samples are repated because they list both chanel (Cy3 and Cy5)
+> sams2kp = unique(sams2kp)
+> dim(sams2kp)
+[1] 15 11
+> 
+> names(sams2kp) = gsub("Characteristics..", "", names(sams2kp), fixed=TRUE)
+> names(sams2kp) = gsub("Comment..", "", names(sams2kp), fixed=TRUE)
+> names(sams2kp) = gsub("\\.$", "", names(sams2kp), perl=TRUE)
+> names(sams2kp) = gsub(".", "_", names(sams2kp), fixed=TRUE)
+> 
+> dim(sams2kp)
+[1] 15 11
+> sams2kp[1:4,]
+    Source_Name                       Sample_source_name
+3  GSM1625014 1        CD3-CD56+CD57- canonical NK cells
+5  GSM1625013 1   CD3-CD56+CD57+EAT-2- adaptive NK cells
+7  GSM1625012 1      CD3-CD56+CD57dim canonical NK cells
+11 GSM1625010 1 CD3-CD56+CD57+EAT-2int adaptive NK cells
+                                                        Sample_title
+3         genomic DNA from Donor 4 CD3-CD56+CD57- canonical NK cells
+5    genomic DNA from Donor 4 CD3-CD56+CD57+EAT-2- adaptive NK cells
+7       genomic DNA from Donor 4 CD3-CD56+CD57dim canonical NK cells
+11 genomic DNA from Donor 3 CD3-CD56+CD57+EAT-2int adaptive NK cells
+                                  cell_type donor_id           donor_status
+3         CD3-CD56+CD57- canonical NK cells  donor 4 CMV seropositive donor
+5    CD3-CD56+CD57+EAT-2- adaptive NK cells  donor 4 CMV seropositive donor
+7       CD3-CD56+CD57dim canonical NK cells  donor 4 CMV seropositive donor
+11 CD3-CD56+CD57+EAT-2int adaptive NK cells  donor 3 CMV seropositive donor
+      organism_part Material_Type Assay_Name Array_Design_REF
+3  Peripheral Blood   genomic DNA GSM1625014     A-GEOD-13534
+5  Peripheral Blood   genomic DNA GSM1625013     A-GEOD-13534
+7  Peripheral Blood   genomic DNA GSM1625012     A-GEOD-13534
+11 Peripheral Blood   genomic DNA GSM1625010     A-GEOD-13534
+       Derived_Array_Data_File
+3  GSM1625014_sample_table.txt
+5  GSM1625013_sample_table.txt
+7  GSM1625012_sample_table.txt
+11 GSM1625010_sample_table.txt
+> apply(sams2kp[,c(4:8,10)], 2, table)
+$cell_type
+
+       CD3-CD56+CD57- canonical NK cells 
+                                       4 
+  CD3-CD56+CD57+EAT-2- adaptive NK cells 
+                                       4 
+ CD3-CD56+CD57+EAT-2+ canonical NK cells 
+                                       3 
+CD3-CD56+CD57+EAT-2int adaptive NK cells 
+                                       1 
+     CD3-CD56+CD57dim canonical NK cells 
+                                       3 
+
+$donor_id
+
+donor 1 donor 2 donor 3 donor 4 
+      4       4       4       3 
+
+$donor_status
+
+CMV seropositive donor 
+                    15 
+
+$organism_part
+
+Peripheral Blood 
+              15 
+
+$Material_Type
+
+genomic DNA 
+         15 
+
+$Array_Design_REF
+
+A-GEOD-13534 
+          15 
+
+> 
+> table(sams2kp$cell_type, sams2kp$donor_id)
+                                          
+                                           donor 1 donor 2 donor 3 donor 4
+  CD3-CD56+CD57- canonical NK cells              1       1       1       1
+  CD3-CD56+CD57+EAT-2- adaptive NK cells         1       1       1       1
+  CD3-CD56+CD57+EAT-2+ canonical NK cells        1       1       1       0
+  CD3-CD56+CD57+EAT-2int adaptive NK cells       0       0       1       0
+  CD3-CD56+CD57dim canonical NK cells            1       1       0       1
+> 
+> setwd("~/research/Deconvolution/data")
+> 
+> write.table(sams2kp, file = "NK_E-GEOD-66562_methy_sample.txt", 
++             append = FALSE, quote = FALSE, sep = "\t", row.names = FALSE,
++             col.names = TRUE)
+> 
+> # ------------------------------------------------------------
+> # read in methylation data
+> # ------------------------------------------------------------
+> 
+> setwd("~/research/Deconvolution/original_data/methy_450k/NK_E-GEOD-66562")
+> fls = list.files(pattern="_sample_table.txt", recursive=TRUE)
+> length(fls)
+[1] 23
+> 
+> mDat = NULL
+> 
+> for(i in 1:nrow(sams2kp)){
++   cat(i, date(), "\n")
++   fnm   = sams2kp$Derived_Array_Data_File[i]
++   fpath = fls[grep(fnm, fls)]
++   
++   if(length(fpath) != 1){
++     stop("unexpected file path\n")
++   }
++   
++   dati = read.table(fpath, header=TRUE, sep="\t", as.is=TRUE, na.string="null")
++   dim(dati)
++   dati[1:2,]
++   
++   summary(dati$Detection.Pval)
++   table(dati$Detection.Pval > 0.01)
++   
++   if(i==1){
++     probes = dati$Reporter.Identifier
++   }else{
++     if(length(probes) != nrow(dati)){
++       stop("probe number are differnt\n")
++     }else if(any(probes != dati$Reporter.Identifier)){
++       stop("probes are differnt\n")
++     }
++   }
++   
++   mDat = cbind(mDat, dati$VALUE) 
++ }
+1 Tue Feb 14 15:23:11 2017 
+2 Tue Feb 14 15:23:16 2017 
+3 Tue Feb 14 15:23:18 2017 
+4 Tue Feb 14 15:23:20 2017 
+5 Tue Feb 14 15:23:23 2017 
+6 Tue Feb 14 15:23:25 2017 
+7 Tue Feb 14 15:23:27 2017 
+8 Tue Feb 14 15:23:29 2017 
+9 Tue Feb 14 15:23:32 2017 
+10 Tue Feb 14 15:23:34 2017 
+11 Tue Feb 14 15:23:38 2017 
+12 Tue Feb 14 15:23:40 2017 
+13 Tue Feb 14 15:23:44 2017 
+14 Tue Feb 14 15:23:49 2017 
+15 Tue Feb 14 15:23:51 2017 
+> 
+> dim(mDat)
+[1] 436444     15
+> rownames(mDat) = probes
+> colnames(mDat) = sams2kp$Assay_Name
+> 
+> table(probes %in% info$ID)
+
+ FALSE   TRUE 
+ 80639 355805 
+> table(info$ID %in% probes)
+
+ FALSE   TRUE 
+ 37596 355805 
+> 
+> w2kp = which(probes %in% info$ID)
+> mDat = mDat[w2kp,]
+> 
+> dim(mDat)
+[1] 355805     15
+> mDat[1:2,1:5]
+           GSM1625014 GSM1625013 GSM1625012 GSM1625010 GSM1625009
+cg00000029  0.6532010  0.8814443  0.6962613  0.7888444  0.8027084
+cg00000165  0.1370417  0.4798787  0.1126518  0.1240616  0.1011248
+> 
+> mDat = data.frame(id=rownames(mDat), mDat)
+> dim(mDat)
+[1] 355805     16
+> mDat[1:2,1:5]
+                   id GSM1625014 GSM1625013 GSM1625012 GSM1625010
+cg00000029 cg00000029  0.6532010  0.8814443  0.6962613  0.7888444
+cg00000165 cg00000165  0.1370417  0.4798787  0.1126518  0.1240616
+> 
+> setwd("~/research/Deconvolution/data")
+> 
+> write.table(mDat, file = "NK_E-GEOD-66562_methy_data.txt", append = FALSE, 
++             quote = FALSE, sep = "\t", row.names = FALSE, col.names = TRUE)
+> 
+> # ------------------------------------------------------------
+> # ------------------------------------------------------------
+> # NK_E-GEOD-66562
+> # ------------------------------------------------------------
+> # ------------------------------------------------------------
+> 
+> setwd("~/research/Deconvolution/original_data/methy_450k")
+> 
+> sams = read.table("Treg_CD4T_E-GEOD-49667/E-GEOD-49667.sdrf.txt", 
++                   header=TRUE, sep="\t", as.is=TRUE, quote="")
+> dim(sams)
+[1] 10 42
+> sams[1:2,]
+   Source.Name Comment..Sample_description. Comment..Sample_source_name.
+1 GSM1204714 1   Sample name: M30_act_rTreg                    act_rTreg
+2 GSM1204713 1   Sample name: M30_act_naive                    act_naive
+  Comment..Sample_title. Characteristics..cell.type.
+1         act_rTreg_rep2                   act_rTreg
+2         act_naive_rep3                   act_naive
+  Characteristics..disease.state. Term.Source.REF Term.Accession.Number
+1                          normal             EFO           EFO_0000761
+2                          normal             EFO           EFO_0000761
+  Characteristics..donor.id. Characteristics..organism. Term.Source.REF.1
+1                        M30               Homo sapiens               EFO
+2                        M30               Homo sapiens               EFO
+                        Term.Accession.Number.1 Characteristics..sex.
+1 http://purl.obolibrary.org/obo/NCBITaxon_9606                  male
+2 http://purl.obolibrary.org/obo/NCBITaxon_9606                  male
+  Term.Source.REF.2 Term.Accession.Number.2 Protocol.REF Term.Source.REF.3
+1               EFO             EFO_0001266 P-GSE49667-2      ArrayExpress
+2               EFO             EFO_0001266 P-GSE49667-2      ArrayExpress
+  Protocol.REF.1 Term.Source.REF.4 Protocol.REF.2 Term.Source.REF.5
+1   P-GSE49667-3      ArrayExpress   P-GSE49667-4      ArrayExpress
+2   P-GSE49667-3      ArrayExpress   P-GSE49667-4      ArrayExpress
+          Extract.Name Material.Type Protocol.REF.3 Term.Source.REF.6
+1 GSM1204714 extract 1   genomic DNA   P-GSE49667-5      ArrayExpress
+2 GSM1204713 extract 1   genomic DNA   P-GSE49667-5      ArrayExpress
+  Labeled.Extract.Name       Label Protocol.REF.4 Term.Source.REF.7 Assay.Name
+1      GSM1204714 LE 1 Cy5 and Cy3   P-GSE49667-6      ArrayExpress GSM1204714
+2      GSM1204713 LE 1 Cy5 and Cy3   P-GSE49667-6      ArrayExpress GSM1204713
+  Array.Design.REF Term.Source.REF.8 Technology.Type Protocol.REF.5
+1     A-GEOD-13534      ArrayExpress     array assay   P-GSE49667-1
+2     A-GEOD-13534      ArrayExpress     array assay   P-GSE49667-1
+  Term.Source.REF.9 Protocol.REF.6 Term.Source.REF.10
+1      ArrayExpress   P-GSE49667-7       ArrayExpress
+2      ArrayExpress   P-GSE49667-7       ArrayExpress
+                Normalization.Name     Derived.Array.Data.File
+1 GSM1204714_sample_table.txt norm GSM1204714_sample_table.txt
+2 GSM1204713_sample_table.txt norm GSM1204713_sample_table.txt
+                                                                      Comment..Derived.ArrayExpress.FTP.file.
+1 ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/GEOD/E-GEOD-49667/E-GEOD-49667.processed.1.zip
+2 ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/GEOD/E-GEOD-49667/E-GEOD-49667.processed.1.zip
+  FactorValue..CELL.TYPE. FactorValue..DONOR.ID.
+1               act_rTreg                    M30
+2               act_naive                    M30
+> names(sams)
+ [1] "Source.Name"                            
+ [2] "Comment..Sample_description."           
+ [3] "Comment..Sample_source_name."           
+ [4] "Comment..Sample_title."                 
+ [5] "Characteristics..cell.type."            
+ [6] "Characteristics..disease.state."        
+ [7] "Term.Source.REF"                        
+ [8] "Term.Accession.Number"                  
+ [9] "Characteristics..donor.id."             
+[10] "Characteristics..organism."             
+[11] "Term.Source.REF.1"                      
+[12] "Term.Accession.Number.1"                
+[13] "Characteristics..sex."                  
+[14] "Term.Source.REF.2"                      
+[15] "Term.Accession.Number.2"                
+[16] "Protocol.REF"                           
+[17] "Term.Source.REF.3"                      
+[18] "Protocol.REF.1"                         
+[19] "Term.Source.REF.4"                      
+[20] "Protocol.REF.2"                         
+[21] "Term.Source.REF.5"                      
+[22] "Extract.Name"                           
+[23] "Material.Type"                          
+[24] "Protocol.REF.3"                         
+[25] "Term.Source.REF.6"                      
+[26] "Labeled.Extract.Name"                   
+[27] "Label"                                  
+[28] "Protocol.REF.4"                         
+[29] "Term.Source.REF.7"                      
+[30] "Assay.Name"                             
+[31] "Array.Design.REF"                       
+[32] "Term.Source.REF.8"                      
+[33] "Technology.Type"                        
+[34] "Protocol.REF.5"                         
+[35] "Term.Source.REF.9"                      
+[36] "Protocol.REF.6"                         
+[37] "Term.Source.REF.10"                     
+[38] "Normalization.Name"                     
+[39] "Derived.Array.Data.File"                
+[40] "Comment..Derived.ArrayExpress.FTP.file."
+[41] "FactorValue..CELL.TYPE."                
+[42] "FactorValue..DONOR.ID."                 
+> 
+> length(unique(sams$Source.Name))
+[1] 10
+> 
+> table(sams$Comment..Sample_source_name., useNA="ifany")
+
+act_naive act_rTreg     naive     rTreg 
+        3         2         3         2 
+> table(sams$Characteristics..cell.type., useNA="ifany")
+
+act_naive act_rTreg     naive     rTreg 
+        3         2         3         2 
+> table(sams$Comment..Sample_source_name. == sams$Characteristics..cell.type.)
+
+TRUE 
+  10 
+> 
+> table(sams$Characteristics..disease.state., useNA="ifany")
+
+normal 
+    10 
+> table(sams$Material.Type, useNA="ifany")
+
+genomic DNA 
+         10 
+> table(sams$Characteristics..sex., useNA="ifany")
+
+male 
+  10 
+> table(sams$Characteristics..donor.id., useNA="ifany")
+
+M28 M29 M30 
+  3   3   4 
+> 
+> table(sams$Characteristics..donor.id., sams$Characteristics..cell.type.)
+     
+      act_naive act_rTreg naive rTreg
+  M28         1         0     1     1
+  M29         1         1     1     0
+  M30         1         1     1     1
+> 
+> sams = sams[grep("rTreg", sams$Characteristics..cell.type),]
+> dim(sams)
+[1]  4 42
+> 
+> names(sams)
+ [1] "Source.Name"                            
+ [2] "Comment..Sample_description."           
+ [3] "Comment..Sample_source_name."           
+ [4] "Comment..Sample_title."                 
+ [5] "Characteristics..cell.type."            
+ [6] "Characteristics..disease.state."        
+ [7] "Term.Source.REF"                        
+ [8] "Term.Accession.Number"                  
+ [9] "Characteristics..donor.id."             
+[10] "Characteristics..organism."             
+[11] "Term.Source.REF.1"                      
+[12] "Term.Accession.Number.1"                
+[13] "Characteristics..sex."                  
+[14] "Term.Source.REF.2"                      
+[15] "Term.Accession.Number.2"                
+[16] "Protocol.REF"                           
+[17] "Term.Source.REF.3"                      
+[18] "Protocol.REF.1"                         
+[19] "Term.Source.REF.4"                      
+[20] "Protocol.REF.2"                         
+[21] "Term.Source.REF.5"                      
+[22] "Extract.Name"                           
+[23] "Material.Type"                          
+[24] "Protocol.REF.3"                         
+[25] "Term.Source.REF.6"                      
+[26] "Labeled.Extract.Name"                   
+[27] "Label"                                  
+[28] "Protocol.REF.4"                         
+[29] "Term.Source.REF.7"                      
+[30] "Assay.Name"                             
+[31] "Array.Design.REF"                       
+[32] "Term.Source.REF.8"                      
+[33] "Technology.Type"                        
+[34] "Protocol.REF.5"                         
+[35] "Term.Source.REF.9"                      
+[36] "Protocol.REF.6"                         
+[37] "Term.Source.REF.10"                     
+[38] "Normalization.Name"                     
+[39] "Derived.Array.Data.File"                
+[40] "Comment..Derived.ArrayExpress.FTP.file."
+[41] "FactorValue..CELL.TYPE."                
+[42] "FactorValue..DONOR.ID."                 
+> cols2kp = c(1, 3:6, 9, 13, 23, 30,39)
+> sams2kp = sams[,cols2kp]
+> dim(sams2kp)
+[1]  4 10
+> sams2kp
+   Source.Name Comment..Sample_source_name. Comment..Sample_title.
+1 GSM1204714 1                    act_rTreg         act_rTreg_rep2
+3 GSM1204712 1                        rTreg             rTreg_rep2
+5 GSM1204710 1                    act_rTreg         act_rTreg_rep1
+9 GSM1204706 1                        rTreg             rTreg_rep1
+  Characteristics..cell.type. Characteristics..disease.state.
+1                   act_rTreg                          normal
+3                       rTreg                          normal
+5                   act_rTreg                          normal
+9                       rTreg                          normal
+  Characteristics..donor.id. Characteristics..sex. Material.Type Assay.Name
+1                        M30                  male   genomic DNA GSM1204714
+3                        M30                  male   genomic DNA GSM1204712
+5                        M29                  male   genomic DNA GSM1204710
+9                        M28                  male   genomic DNA GSM1204706
+      Derived.Array.Data.File
+1 GSM1204714_sample_table.txt
+3 GSM1204712_sample_table.txt
+5 GSM1204710_sample_table.txt
+9 GSM1204706_sample_table.txt
+> 
+> ## some samples are repated because they list both chanel (Cy3 and Cy5)
+> sams2kp = unique(sams2kp)
+> dim(sams2kp)
+[1]  4 10
+> 
+> names(sams2kp) = gsub("Characteristics..", "", names(sams2kp), fixed=TRUE)
+> names(sams2kp) = gsub("Comment..", "", names(sams2kp), fixed=TRUE)
+> names(sams2kp) = gsub("\\.$", "", names(sams2kp), perl=TRUE)
+> names(sams2kp) = gsub(".", "_", names(sams2kp), fixed=TRUE)
+> 
+> dim(sams2kp)
+[1]  4 10
+> sams2kp
+   Source_Name Sample_source_name   Sample_title cell_type disease_state
+1 GSM1204714 1          act_rTreg act_rTreg_rep2 act_rTreg        normal
+3 GSM1204712 1              rTreg     rTreg_rep2     rTreg        normal
+5 GSM1204710 1          act_rTreg act_rTreg_rep1 act_rTreg        normal
+9 GSM1204706 1              rTreg     rTreg_rep1     rTreg        normal
+  donor_id  sex Material_Type Assay_Name     Derived_Array_Data_File
+1      M30 male   genomic DNA GSM1204714 GSM1204714_sample_table.txt
+3      M30 male   genomic DNA GSM1204712 GSM1204712_sample_table.txt
+5      M29 male   genomic DNA GSM1204710 GSM1204710_sample_table.txt
+9      M28 male   genomic DNA GSM1204706 GSM1204706_sample_table.txt
+> 
+> table(sams2kp$cell_type, sams2kp$donor_id)
+           
+            M28 M29 M30
+  act_rTreg   0   1   1
+  rTreg       1   0   1
+> 
+> setwd("~/research/Deconvolution/data")
+> 
+> write.table(sams2kp, file = "Treg_E-GEOD-49667_methy_sample.txt", 
++             append = FALSE, quote = FALSE, sep = "\t", row.names = FALSE,
++             col.names = TRUE)
+> 
+> # ------------------------------------------------------------
+> # read in methylation data
+> # ------------------------------------------------------------
+> 
+> setwd("~/research/Deconvolution/original_data/methy_450k/Treg_CD4T_E-GEOD-49667")
+> fls = list.files(pattern="_sample_table.txt", recursive=TRUE)
+> length(fls)
+[1] 10
+> 
+> mDat = NULL
+> 
+> for(i in 1:nrow(sams2kp)){
++   cat(i, date(), "\n")
++   fnm   = sams2kp$Derived_Array_Data_File[i]
++   fpath = fls[grep(fnm, fls)]
++   
++   if(length(fpath) != 1){
++     stop("unexpected file path\n")
++   }
++   
++   dati = read.table(fpath, header=TRUE, sep="\t", as.is=TRUE, na.string="null")
++   dim(dati)
++   dati[1:2,]
++   
++   summary(dati$Detection.Pval)
++   table(dati$Detection.Pval > 0.01)
++   
++   if(i==1){
++     probes = dati$Reporter.Identifier
++   }else{
++     if(length(probes) != nrow(dati)){
++       stop("probe number are differnt\n")
++     }else if(any(probes != dati$Reporter.Identifier)){
++       stop("probes are differnt\n")
++     }
++   }
++   
++   mDat = cbind(mDat, dati$VALUE) 
++ }
+1 Tue Feb 14 15:24:02 2017 
+2 Tue Feb 14 15:24:04 2017 
+3 Tue Feb 14 15:24:06 2017 
+4 Tue Feb 14 15:24:08 2017 
+> 
+> dim(mDat)
+[1] 481473      4
+> rownames(mDat) = probes
+> colnames(mDat) = sams2kp$Assay_Name
+> 
+> table(probes %in% info$ID)
+
+ FALSE   TRUE 
+ 88467 393006 
+> table(info$ID %in% probes)
+
+ FALSE   TRUE 
+   395 393006 
+> 
+> w2kp = which(probes %in% info$ID)
+> mDat = mDat[w2kp,]
+> 
+> dim(mDat)
+[1] 393006      4
+> mDat[1:2,]
+           GSM1204714 GSM1204712 GSM1204710 GSM1204706
+cg00000029  0.7383157  0.8045520  0.8089875  0.8235851
+cg00000165  0.2168212  0.1522879  0.2314524  0.1442613
+> 
+> mDat = data.frame(id=rownames(mDat), mDat)
+> dim(mDat)
+[1] 393006      5
+> mDat[1:2,1:5]
+                   id GSM1204714 GSM1204712 GSM1204710 GSM1204706
+cg00000029 cg00000029  0.7383157  0.8045520  0.8089875  0.8235851
+cg00000165 cg00000165  0.2168212  0.1522879  0.2314524  0.1442613
+> 
+> setwd("~/research/Deconvolution/data")
+> 
+> write.table(mDat, file = "Treg_E-GEOD-49667_methy_data.txt", append = FALSE, 
++             quote = FALSE, sep = "\t", row.names = FALSE, col.names = TRUE)
+> 
+> 
+> quit(save="no")
+> proc.time()
+    user   system  elapsed 
+1216.591   62.082 1335.200 
