@@ -1,0 +1,10 @@
+Source_Name	Sample_source_name	Sample_title	cell_type	donor_id	treated_with	Material_Type	Assay_Name	Derived_Array_Data_File
+GSM1846592 1	iMAC treated with LPS for 24 h	mMAC_donor 3	activated/mature MACs	donor 3	LPS for 24 h	genomic DNA	GSM1846592	GSM1846592_sample_table.txt
+GSM1846591 1	iMAC treated with LPS for 24 h	mMAC_donor 2	activated/mature MACs	donor 2	LPS for 24 h	genomic DNA	GSM1846591	GSM1846591_sample_table.txt
+GSM1846590 1	iMAC treated with LPS for 24 h	mMAC_donor 1	activated/mature MACs	donor 1	LPS for 24 h	genomic DNA	GSM1846590	GSM1846590_sample_table.txt
+GSM1846586 1	iDC treated with LPS for 24 h	mDC_donor 3	activated/mature DCs	donor 3	LPS for 24 h	genomic DNA	GSM1846586	GSM1846586_sample_table.txt
+GSM1846585 1	iDC treated with LPS for 24 h	mDC_donor 2	activated/mature DCs	donor 2	LPS for 24 h	genomic DNA	GSM1846585	GSM1846585_sample_table.txt
+GSM1846584 1	iDC treated with LPS for 24 h	mDC_donor 1	activated/mature DCs	donor 1	LPS for 24 h	genomic DNA	GSM1846584	GSM1846584_sample_table.txt
+GSM1846580 1	peripheral blood isolated CD14+ cells (monocytes)	CD14_monocyte_donor 3	peripheral blood isolated CD14+ cells (monocytes)	donor 3	  	genomic DNA	GSM1846580	GSM1846580_sample_table.txt
+GSM1846579 1	peripheral blood isolated CD14+ cells (monocytes)	CD14_monocyte_donor 2	peripheral blood isolated CD14+ cells (monocytes)	donor 2	  	genomic DNA	GSM1846579	GSM1846579_sample_table.txt
+GSM1846578 1	peripheral blood isolated CD14+ cells (monocytes)	CD14_monocyte_donor 1	peripheral blood isolated CD14+ cells (monocytes)	donor 1	  	genomic DNA	GSM1846578	GSM1846578_sample_table.txt

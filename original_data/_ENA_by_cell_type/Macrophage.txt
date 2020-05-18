@@ -1,0 +1,964 @@
+accession	secondary_sample_accession	bio_material	cell_line	cell_type	collected_by	collection_date	country	culture_collection	description	dev_stage	first_public	sex	tissue_lib	tissue_type	tax_id	scientific_name	sample_alias	protocol_label	project_name	host	host_tax_id	host_status	host_sex	submitted_host_sex	host_body_site	sample_collection	sequencing_method
+SAMD00005017	DRS008215			macrophage					11313-117C8	46 years old adult	2014-04-27	male		blood	9606	Homo sapiens	SAMD00005017										
+SAMD00005152	DRS008216			macrophage					11389-118C3	57 years old adult	2014-04-27	female		blood	9606	Homo sapiens	SAMD00005152										
+SAMD00005865	DRS008214			macrophage					11232-116C8	65 years old adult	2014-04-27	male		blood	9606	Homo sapiens	SAMD00005865										
+SAMD00021441	DRS017521			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t1	9606	Homo sapiens	DRS017521										
+SAMD00021442	DRS017522			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t2	9606	Homo sapiens	DRS017522										
+SAMD00021443	DRS017523			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t3	9606	Homo sapiens	DRS017523										
+SAMD00021444	DRS017524			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t4	9606	Homo sapiens	DRS017524										
+SAMD00021445	DRS017525			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t5	9606	Homo sapiens	DRS017525										
+SAMD00021446	DRS017526			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t6	9606	Homo sapiens	DRS017526										
+SAMD00021447	DRS017527			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t7	9606	Homo sapiens	DRS017527										
+SAMD00021448	DRS017528			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t8	9606	Homo sapiens	DRS017528										
+SAMD00021449	DRS017529			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t9	9606	Homo sapiens	DRS017529										
+SAMD00021450	DRS017530			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t10	9606	Homo sapiens	DRS017530										
+SAMD00021451	DRS017531			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t11	9606	Homo sapiens	DRS017531										
+SAMD00021452	DRS017532			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t12	9606	Homo sapiens	DRS017532										
+SAMD00021453	DRS017533			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t13	9606	Homo sapiens	DRS017533										
+SAMD00021454	DRS017534			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t14	9606	Homo sapiens	DRS017534										
+SAMD00021455	DRS017535			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t15	9606	Homo sapiens	DRS017535										
+SAMD00021456	DRS017536			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t16	9606	Homo sapiens	DRS017536										
+SAMD00021457	DRS017537			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t17	9606	Homo sapiens	DRS017537										
+SAMD00021458	DRS017538			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t18	9606	Homo sapiens	DRS017538										
+SAMD00021459	DRS017539			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t19	9606	Homo sapiens	DRS017539										
+SAMD00021460	DRS017540			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t20	9606	Homo sapiens	DRS017540										
+SAMD00021461	DRS017541			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t21	9606	Homo sapiens	DRS017541										
+SAMD00021462	DRS017542			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t22	9606	Homo sapiens	DRS017542										
+SAMD00021463	DRS017543			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t23	9606	Homo sapiens	DRS017543										
+SAMD00021464	DRS017544			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t24	9606	Homo sapiens	DRS017544										
+SAMD00021465	DRS017545			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t25	9606	Homo sapiens	DRS017545										
+SAMD00021466	DRS017546			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t26	9606	Homo sapiens	DRS017546										
+SAMD00021516	DRS017596			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t1	9606	Homo sapiens	DRS017596										
+SAMD00021517	DRS017597			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t2	9606	Homo sapiens	DRS017597										
+SAMD00021518	DRS017598			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t3	9606	Homo sapiens	DRS017598										
+SAMD00021519	DRS017599			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t4	9606	Homo sapiens	DRS017599										
+SAMD00021520	DRS017600			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t5	9606	Homo sapiens	DRS017600										
+SAMD00021521	DRS017601			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t6	9606	Homo sapiens	DRS017601										
+SAMD00021522	DRS017602			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t7	9606	Homo sapiens	DRS017602										
+SAMD00021523	DRS017603			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t8	9606	Homo sapiens	DRS017603										
+SAMD00021524	DRS017604			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t9	9606	Homo sapiens	DRS017604										
+SAMD00021525	DRS017605			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t10	9606	Homo sapiens	DRS017605										
+SAMD00021526	DRS017606			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t11	9606	Homo sapiens	DRS017606										
+SAMD00021527	DRS017607			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t12	9606	Homo sapiens	DRS017607										
+SAMD00021528	DRS017608			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t13	9606	Homo sapiens	DRS017608										
+SAMD00021529	DRS017609			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t14	9606	Homo sapiens	DRS017609										
+SAMD00021530	DRS017610			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t15	9606	Homo sapiens	DRS017610										
+SAMD00021531	DRS017611			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t16	9606	Homo sapiens	DRS017611										
+SAMD00021532	DRS017612			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t17	9606	Homo sapiens	DRS017612										
+SAMD00021533	DRS017613			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t18	9606	Homo sapiens	DRS017613										
+SAMD00021534	DRS017614			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t19	9606	Homo sapiens	DRS017614										
+SAMD00021535	DRS017615			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t20	9606	Homo sapiens	DRS017615										
+SAMD00021536	DRS017616			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t21	9606	Homo sapiens	DRS017616										
+SAMD00021537	DRS017617			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t22	9606	Homo sapiens	DRS017617										
+SAMD00021538	DRS017618			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t23	9606	Homo sapiens	DRS017618										
+SAMD00021539	DRS017619			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t24	9606	Homo sapiens	DRS017619										
+SAMD00021540	DRS017620			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t25	9606	Homo sapiens	DRS017620										
+SAMD00021541	DRS017621			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t26	9606	Homo sapiens	DRS017621										
+SAMD00021593	DRS017673			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t1	9606	Homo sapiens	DRS017673										
+SAMD00021594	DRS017674			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t2	9606	Homo sapiens	DRS017674										
+SAMD00021595	DRS017675			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t3	9606	Homo sapiens	DRS017675										
+SAMD00021596	DRS017676			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t4	9606	Homo sapiens	DRS017676										
+SAMD00021597	DRS017677			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t5	9606	Homo sapiens	DRS017677										
+SAMD00021598	DRS017678			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t6	9606	Homo sapiens	DRS017678										
+SAMD00021599	DRS017679			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t7	9606	Homo sapiens	DRS017679										
+SAMD00021600	DRS017680			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t8	9606	Homo sapiens	DRS017680										
+SAMD00021601	DRS017681			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t9	9606	Homo sapiens	DRS017681										
+SAMD00021602	DRS017682			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t10	9606	Homo sapiens	DRS017682										
+SAMD00021603	DRS017683			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t11	9606	Homo sapiens	DRS017683										
+SAMD00021604	DRS017684			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t12	9606	Homo sapiens	DRS017684										
+SAMD00021605	DRS017685			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t13	9606	Homo sapiens	DRS017685										
+SAMD00021606	DRS017686			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t14	9606	Homo sapiens	DRS017686										
+SAMD00021607	DRS017687			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t15	9606	Homo sapiens	DRS017687										
+SAMD00021608	DRS017688			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t16	9606	Homo sapiens	DRS017688										
+SAMD00021609	DRS017689			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t17	9606	Homo sapiens	DRS017689										
+SAMD00021610	DRS017690			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t18	9606	Homo sapiens	DRS017690										
+SAMD00021611	DRS017691			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t19	9606	Homo sapiens	DRS017691										
+SAMD00021612	DRS017692			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t20	9606	Homo sapiens	DRS017692										
+SAMD00021613	DRS017693			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t21	9606	Homo sapiens	DRS017693										
+SAMD00021614	DRS017694			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t22	9606	Homo sapiens	DRS017694										
+SAMD00021615	DRS017695			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t23	9606	Homo sapiens	DRS017695										
+SAMD00021616	DRS017696			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t24	9606	Homo sapiens	DRS017696										
+SAMD00021617	DRS017697			macrophage					This sample has been submitted by RIKEN_OSC on 2015-02-13; Homo sapiens		2015-02-14			t25	9606	Homo sapiens	DRS017697										
+SAMEA2395796	ERS419967		HL-60/S4	macrophage					TPA_IP		2015-12-31				9606	Homo sapiens	E-MTAB-2360:TPA_IP										
+SAMEA2395799	ERS419970		HL-60/S4	macrophage					TPA_input		2015-12-31				9606	Homo sapiens	E-MTAB-2360:TPA_input										
+SAMEA2724886	ERS533675			macrophage					This sample has been submitted by The Wellcome Trust Sanger Institute on 2014-08-27; Homo sapiens		2015-02-17				9606	Homo sapiens	Bobsc3_d30_37_control_1_hIPSC_derived_macrophages-sc-2114645										
+SAMEA2724887	ERS533676			macrophage					This sample has been submitted by The Wellcome Trust Sanger Institute on 2014-08-27; Homo sapiens		2015-02-17				9606	Homo sapiens	Bobsc_3_d30_37_control_2_hIPSC_derived_macrophages-sc-2114646										
+SAMEA2724888	ERS533677			macrophage					This sample has been submitted by The Wellcome Trust Sanger Institute on 2014-08-27; Homo sapiens		2015-02-17				9606	Homo sapiens	Bobsc3__d30_37_infected_1_hIPSC_derived_macrophages-sc-2114647										
+SAMEA3139808	ERS611772			macrophage					TA069		2015-12-31				9606	Homo sapiens	E-MTAB-3113:TA069										
+SAMEA3139809	ERS611773			macrophage					TA070		2015-12-31				9606	Homo sapiens	E-MTAB-3113:TA070										
+SAMEA3139810	ERS611774			macrophage					TA068		2015-12-31				9606	Homo sapiens	E-MTAB-3113:TA068										
+SAMEA3139811	ERS611775			macrophage					ST000		2015-12-01				9606	Homo sapiens	E-MTAB-3114:ST000										
+SAMEA3139812	ERS611776			macrophage					ST001		2015-12-01				9606	Homo sapiens	E-MTAB-3114:ST001										
+SAMEA3139813	ERS611777			macrophage					TA065		2015-12-01				9606	Homo sapiens	E-MTAB-3114:TA065										
+SAMEA3139814	ERS611778			macrophage					TA067		2015-12-01				9606	Homo sapiens	E-MTAB-3114:TA067										
+SAMEA3139815	ERS611779			macrophage					ST002		2015-12-01				9606	Homo sapiens	E-MTAB-3114:ST002										
+SAMEA3139816	ERS611780			macrophage					TA066		2015-12-01				9606	Homo sapiens	E-MTAB-3114:TA066										
+SAMN01974913	SRS400660			macrophage					GSM1094365: M_MAC_Donor1		2013-05-05				9606	Homo sapiens	GSM1094365										
+SAMN01974915	SRS400661			macrophage					GSM1094366: M_MAC_Donor2		2013-05-05				9606	Homo sapiens	GSM1094366										
+SAMN01974917	SRS400662			macrophage					GSM1094367: I_MAC_Donor1		2013-05-05				9606	Homo sapiens	GSM1094367										
+SAMN01974919	SRS400663			macrophage					GSM1094368: I_MAC_Donor2		2013-05-05				9606	Homo sapiens	GSM1094368										
+SAMN02641256	SRS557374			Macrophage					FAIRE_seq_Macrophage-oxLDL_278		2015-04-10	female			9606	Homo sapiens	GSM1327355										
+SAMN02641257	SRS557371			Macrophage					FAIRE-seq_Macrophage-control_280		2015-04-10	female			9606	Homo sapiens	GSM1327352										
+SAMN02641258	SRS557375			Macrophage					FAIRE_seq_Macrophage-oxLDL_205		2015-04-10	male			9606	Homo sapiens	GSM1327356										
+SAMN02641259	SRS557370			Macrophage					FAIRE-seq_Macrophage-control_279		2015-04-10	male			9606	Homo sapiens	GSM1327351										
+SAMN02641260	SRS557373			Macrophage					FAIRE_seq_Macrophage-oxLDL_277		2015-04-10	male			9606	Homo sapiens	GSM1327354										
+SAMN02641261	SRS557372			Macrophage					FAIRE-seq_Macrophage-control_207		2015-04-10	male			9606	Homo sapiens	GSM1327353										
+SAMN02641262	SRS557377			Macrophage					H3K27ac_Macrophage-control_252		2015-04-10	male			9606	Homo sapiens	GSM1327358										
+SAMN02641263	SRS557378			Macrophage					H3K27ac_Macrophage-oxLDL_249		2015-04-10	male			9606	Homo sapiens	GSM1327359										
+SAMN02641264	SRS557376			Macrophage					H3K27ac_Macrophage-control_250		2015-04-10	male			9606	Homo sapiens	GSM1327357										
+SAMN02641265	SRS557380			Macrophage					Input_control_DNA_macrophage		2015-04-10	male			9606	Homo sapiens	GSM1327361										
+SAMN02641270	SRS557379			Macrophage					H3K27ac_Macrophage-oxLDL_251		2015-04-10	male			9606	Homo sapiens	GSM1327360										
+SAMN03249355	SRS777551			macrophage					STS 6h		2015-10-17				9606	Homo sapiens	GSM1557606										
+SAMN03249356	SRS777553			macrophage					Control		2015-10-16				9606	Homo sapiens	GSM1557608										
+SAMN03249357	SRS777552			macrophage					STS 4h		2015-10-16				9606	Homo sapiens	GSM1557607										
+SAMN03366090	SRS852816			Macrophage					C/EBP beta_Macrophage-control_201		2015-04-10				9606	Homo sapiens	GSM1616709										
+SAMN03366091	SRS852815			Macrophage					C/EBP beta_Macrophage-control_204		2015-04-10				9606	Homo sapiens	GSM1616712										
+SAMN03366092	SRS852812			Macrophage					C/EBP beta_Macrophage-oxLDL_205		2015-04-10				9606	Homo sapiens	GSM1616713										
+SAMN03366093	SRS852813			Macrophage					C/EBP beta_Macrophage-control_203		2015-04-10				9606	Homo sapiens	GSM1616711										
+SAMN03366094	SRS852814			Macrophage					C/EBP beta_Macrophage-control_202		2015-04-10				9606	Homo sapiens	GSM1616710										
+SAMN03366096	SRS852809			Macrophage					C/EBP beta_Macrophage-oxLDL_207		2015-04-10				9606	Homo sapiens	GSM1616715										
+SAMN03366097	SRS852810			Macrophage					C/EBP beta_Macrophage-oxLDL_208		2015-04-10				9606	Homo sapiens	GSM1616716										
+SAMN03366098	SRS852811			Macrophage					C/EBP beta_Macrophage-oxLDL_206		2015-04-10				9606	Homo sapiens	GSM1616714										
+SAMN03754534	SRS950527			macrophage					CTRL_1		2015-10-16				9606	Homo sapiens	GSM1701295										
+SAMN03754535	SRS950526			macrophage					CTRL_2		2015-10-16				9606	Homo sapiens	GSM1701296										
+SAMN03754536	SRS950525			macrophage					STS_4h_1		2015-10-16				9606	Homo sapiens	GSM1701297										
+SAMN03754537	SRS950524			macrophage					STS_4h_2		2015-10-16				9606	Homo sapiens	GSM1701298										
+SAMN03754538	SRS950523			macrophage					STS_6h_1		2015-10-16				9606	Homo sapiens	GSM1701299										
+SAMN03754539	SRS950522			macrophage					STS_6h_2		2015-10-16				9606	Homo sapiens	GSM1701300										
+SAMN03976119	SRS1027505			macrophage					HPGL0365		2016-02-03	male		macrophage	9606	Homo sapiens	HPGL0365										
+SAMN03976120	SRS1027506			macrophage					HPGL0366		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0366										
+SAMN03976121	SRS1027507			macrophage					HPGL0367		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0367										
+SAMN03976122	SRS1027508			macrophage					HPGL0368		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0368										
+SAMN03976123	SRS1027509			macrophage					HPGL0369		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0369										
+SAMN03976124	SRS1027565			macrophage					HPGL0370		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0370										
+SAMN03976125	SRS1027566			macrophage					HPGL0371		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0371										
+SAMN03976126	SRS1027568			macrophage					HPGL0372		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0372										
+SAMN03976127	SRS1027581			macrophage					HPGL0375		2016-02-02	female		macrophage	9606	Homo sapiens	HPGL0375										
+SAMN03976128	SRS1027587			macrophage					HPGL0376		2016-02-02	female		macrophage	9606	Homo sapiens	HPGL0376										
+SAMN03976129	SRS1027625			macrophage					HPGL0377		2016-02-02	female		macrophage	9606	Homo sapiens	HPGL0377										
+SAMN03976130	SRS1027631			macrophage					HPGL0378		2016-02-02	female		macrophage	9606	Homo sapiens	HPGL0378										
+SAMN03976131	SRS1027634			macrophage					HPGL0379		2016-02-02	female		macrophage	9606	Homo sapiens	HPGL0379										
+SAMN03976132	SRS1027683			macrophage					HPGL0380		2016-02-02	female		macrophage	9606	Homo sapiens	HPGL0380										
+SAMN03976133	SRS1027922			macrophage					HPGL0381		2016-02-02	female		macrophage	9606	Homo sapiens	HPGL0381										
+SAMN03976134	SRS1027963			macrophage					HPGL0382		2016-02-02	female		macrophage	9606	Homo sapiens	HPGL0382										
+SAMN03976135	SRS1027964			macrophage					HPGL0398		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0398										
+SAMN03976136	SRS1027965			macrophage					HPGL0399		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0399										
+SAMN03976137	SRS1029373			macrophage					HPGL0400		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0400										
+SAMN03976138	SRS1029380			macrophage					HPGL0401		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0401										
+SAMN03976139	SRS1029381			macrophage					HPGL0402		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0402										
+SAMN03976140	SRS1029382			macrophage					HPGL0403		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0403										
+SAMN03976141	SRS1029383			macrophage					HPGL0404		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0404										
+SAMN03976142	SRS1029384			macrophage					HPGL0405		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0405										
+SAMN03976143	SRS1029536			macrophage					HPGL0436		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0436										
+SAMN03976144	SRS1029537			macrophage					HPGL0437		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0437										
+SAMN03976145	SRS1029539			macrophage					HPGL0438		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0438										
+SAMN03976146	SRS1029540			macrophage					HPGL0439		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0439										
+SAMN03976147	SRS1029541			macrophage					HPGL0440		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0440										
+SAMN03976148	SRS1029877			macrophage					HPGL0441		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0441										
+SAMN03976149	SRS1029878			macrophage					HPGL0442		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0442										
+SAMN03976150	SRS1029879			macrophage					HPGL0443		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0443										
+SAMN03976151	SRS1029880			macrophage					HPGL0444		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0444										
+SAMN03976152	SRS1029881			macrophage					HPGL0445		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0445										
+SAMN03976153	SRS1029882			macrophage					HPGL0446		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0446										
+SAMN03976154	SRS1029884			macrophage					HPGL0452		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0452										
+SAMN03976155	SRS1029885			macrophage					HPGL0457		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0457										
+SAMN03976156	SRS1034391			macrophage					HPGL0458		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0458										
+SAMN03976157	SRS1034393			macrophage					HPGL0459		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0459										
+SAMN03976158	SRS1034394			macrophage					HPGL0460		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0460										
+SAMN03976159	SRS1034395			macrophage					HPGL0461		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0461										
+SAMN03976160	SRS1034406			macrophage					HPGL0462		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0462										
+SAMN03976161	SRS1034400			macrophage					HPGL0463		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0463										
+SAMN03976162	SRS1034419			macrophage					HPGL0464		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0464										
+SAMN03976163	SRS1034420			macrophage					HPGL0465		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0465										
+SAMN03976164	SRS1034428			macrophage					HPGL0466		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0466										
+SAMN03976165	SRS1034429			macrophage					HPGL0467		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0467										
+SAMN03976166	SRS1034430			macrophage					HPGL0468		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0468										
+SAMN03976167	SRS1034431			macrophage					HPGL0469		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0469										
+SAMN03976168	SRS1034433			macrophage					HPGL0470		2016-02-02	male		macrophage	9606	Homo sapiens	HPGL0470										
+SAMN03976169	SRS1034436			macrophage					HPGL0495		2016-02-02	female		macrophage	9606	Homo sapiens	HPGL0495										
+SAMN03976170	SRS1034437			macrophage					HPGL0496		2016-02-02	female		macrophage	9606	Homo sapiens	HPGL0496										
+SAMN03976171	SRS1034438			macrophage					HPGL0497		2016-02-02	female		macrophage	9606	Homo sapiens	HPGL0497										
+SAMN03976172	SRS1034439			macrophage					HPGL0498		2016-02-02	female		macrophage	9606	Homo sapiens	HPGL0498										
+SAMN03976173	SRS1034440			macrophage					HPGL0499		2016-02-02	female		macrophage	9606	Homo sapiens	HPGL0499										
+SAMN03976174	SRS1034441			macrophage					HPGL0500		2016-02-02	female		macrophage	9606	Homo sapiens	HPGL0500										
+SAMN03976175	SRS1034443			macrophage					HPGL0501		2016-02-02	female		macrophage	9606	Homo sapiens	HPGL0501										
+SAMN03976176	SRS1034444			macrophage					HPGL0502		2016-02-02	female		macrophage	9606	Homo sapiens	HPGL0502										
+SAMN03976177	SRS1034446			macrophage					HPGL0503		2016-02-02	female		macrophage	9606	Homo sapiens	HPGL0503										
+SAMN03976178	SRS1034447			macrophage					HPGL0504		2016-02-02	female		macrophage	9606	Homo sapiens	HPGL0504										
+SAMN03976179	SRS1034448			macrophage					HPGL0505		2016-02-02	female		macrophage	9606	Homo sapiens	HPGL0505										
+SAMN03976180	SRS1034449			macrophage					HPGL0506		2016-02-02	female		macrophage	9606	Homo sapiens	HPGL0506										
+SAMN03976181	SRS1034450			macrophage					HPGL0507		2016-02-02	female		macrophage	9606	Homo sapiens	HPGL0507										
+SAMN03976182	SRS1034530			macrophage					HPGL0508		2016-02-02	female		macrophage	9606	Homo sapiens	HPGL0508										
+SAMN03976183	SRS1034558			macrophage					HPGL0509		2016-02-02	female		macrophage	9606	Homo sapiens	HPGL0509										
+SAMN03976184	SRS1034557			macrophage					HPGL0510		2016-02-02	female		macrophage	9606	Homo sapiens	HPGL0510										
+SAMN04115732	SRS1091399			macrophage					EU66_NI24 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895479										
+SAMN04115733	SRS1091394			macrophage					EU52_S2 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895484										
+SAMN04115734	SRS1091405			macrophage					EU28_NI24 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895474										
+SAMN04115735	SRS1091409			macrophage					EU306_NI2 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895470										
+SAMN04115736	SRS1091417			macrophage					EU28_L24 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895462										
+SAMN04115737	SRS1091403			macrophage					EU302_NI24 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895475										
+SAMN04115738	SRS1091407			macrophage					EU34_NI2 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895471										
+SAMN04115739	SRS1091400			macrophage					EU28_S2 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895480										
+SAMN04115740	SRS1091416			macrophage					EU302_L24 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895463										
+SAMN04115741	SRS1091395			macrophage					EU66_S2 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895485										
+SAMN04115742	SRS1091404			macrophage					EU306_NI24 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895476										
+SAMN04115743	SRS1091398			macrophage					EU302_S2 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895481										
+SAMN04115744	SRS1091391			macrophage					EU306_S24 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895488										
+SAMN04115745	SRS1091415			macrophage					EU306_L24 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895464										
+SAMN04115746	SRS1091408			macrophage					EU52_NI2 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895472										
+SAMN04115747	SRS1091402			macrophage					EU34_NI24 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895477										
+SAMN04115748	SRS1091397			macrophage					EU306_S2 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895482										
+SAMN04115749	SRS1091388			macrophage					EU34_S24 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895489										
+SAMN04115750	SRS1091414			macrophage					EU34_L24 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895465										
+SAMN04115751	SRS1091406			macrophage					EU66_NI2 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895473										
+SAMN04115752	SRS1091393			macrophage					EU28_S24 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895486										
+SAMN04115753	SRS1091413			macrophage					EU52_L24 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895466										
+SAMN04115754	SRS1091390			macrophage					EU52_S24 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895490										
+SAMN04115755	SRS1091401			macrophage					EU52_NI24 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895478										
+SAMN04115756	SRS1091392			macrophage					EU302_S24 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895487										
+SAMN04115757	SRS1091396			macrophage					EU34_S2 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895483										
+SAMN04115758	SRS1091389			macrophage					EU66_S24 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895491										
+SAMN04115759	SRS1091412			macrophage					EU66_L24 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895467										
+SAMN04115760	SRS1091411			macrophage					EU28_NI2 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895468										
+SAMN04115761	SRS1091410			macrophage					EU302_NI2 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895469										
+SAMN04115762	SRS1091423			macrophage					EU28_L2 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895456										
+SAMN04115763	SRS1091422			macrophage					EU302_L2 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895457										
+SAMN04115764	SRS1091421			macrophage					EU306_L2 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895458										
+SAMN04115765	SRS1091420			macrophage					EU34_L2 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895459										
+SAMN04115766	SRS1091419			macrophage					EU52_L2 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895460										
+SAMN04115767	SRS1091418			macrophage					EU66_L2 (miRNA)		2016-09-08				9606	Homo sapiens	GSM1895461										
+SAMN04147231	SRS1101682			macrophage					AF37_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896111										
+SAMN04147232	SRS1101681			macrophage					AF37_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896112										
+SAMN04147233	SRS1101680			macrophage					AF37_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896113										
+SAMN04147234	SRS1101679			macrophage					AF39_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896114										
+SAMN04147235	SRS1101678			macrophage					AF39_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896115										
+SAMN04147236	SRS1101199			macrophage					AF39_S2 (mRNA)		2015-10-24				9606	Homo sapiens	GSM1896116										
+SAMN04147237	SRS1101676			macrophage					AF41_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896117										
+SAMN04147238	SRS1101674			macrophage					AF41_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896118										
+SAMN04147239	SRS1101685			macrophage					AF35_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896109										
+SAMN04147240	SRS1101689			macrophage					AF35_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896110										
+SAMN04147241	SRS1101677			macrophage					AF41_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896119										
+SAMN04147242	SRS1101675			macrophage					AF43_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896120										
+SAMN04147243	SRS1101672			macrophage					AF43_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896121										
+SAMN04147244	SRS1101671			macrophage					AF43_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896122										
+SAMN04147245	SRS1101673			macrophage					AF45_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896123										
+SAMN04147246	SRS1101670			macrophage					AF45_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896124										
+SAMN04147247	SRS1101667			macrophage					AF45_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896125										
+SAMN04147248	SRS1101666			macrophage					AF47_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896126										
+SAMN04147249	SRS1101668			macrophage					AF47_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896127										
+SAMN04147250	SRS1101665			macrophage					AF47_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896128										
+SAMN04147251	SRS1101662			macrophage					AF49_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896129										
+SAMN04147252	SRS1101663			macrophage					AF49_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896130										
+SAMN04147253	SRS1101664			macrophage					AF49_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896131										
+SAMN04147254	SRS1101661			macrophage					AF53_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896132										
+SAMN04147255	SRS1101669			macrophage					AF53_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896133										
+SAMN04147256	SRS1101658			macrophage					AF53_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896134										
+SAMN04147257	SRS1101660			macrophage					AF57_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896135										
+SAMN04147258	SRS1101659			macrophage					AF57_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896136										
+SAMN04147259	SRS1101656			macrophage					AF57_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896137										
+SAMN04147260	SRS1101657			macrophage					AF59_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896138										
+SAMN04147261	SRS1101623			macrophage					EU186_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896175										
+SAMN04147262	SRS1101618			macrophage					EU186_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896176										
+SAMN04147263	SRS1101617			macrophage					EU20_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896177										
+SAMN04147264	SRS1101616			macrophage					EU20_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896178										
+SAMN04147265	SRS1101614			macrophage					EU20_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896179										
+SAMN04147266	SRS1101615			macrophage					EU22_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896180										
+SAMN04147267	SRS1101613			macrophage					EU22_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896181										
+SAMN04147268	SRS1101612			macrophage					EU22_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896182										
+SAMN04147269	SRS1101610			macrophage					EU24_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896183										
+SAMN04147270	SRS1101611			macrophage					EU24_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896184										
+SAMN04147271	SRS1101608			macrophage					EU24_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896185										
+SAMN04147272	SRS1101609			macrophage					EU26_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896186										
+SAMN04147273	SRS1101606			macrophage					EU26_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896187										
+SAMN04147274	SRS1101607			macrophage					EU26_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896188										
+SAMN04147275	SRS1101620			macrophage					EU16_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896173										
+SAMN04147276	SRS1101619			macrophage					EU186_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896174										
+SAMN04147277	SRS1101575			macrophage					EU52_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896219										
+SAMN04147278	SRS1101573			macrophage					EU52_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896220										
+SAMN04147279	SRS1101574			macrophage					EU52_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896221										
+SAMN04147280	SRS1101571			macrophage					EU54_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896222										
+SAMN04147281	SRS1101572			macrophage					EU54_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896223										
+SAMN04147282	SRS1101568			macrophage					EU54_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896224										
+SAMN04147283	SRS1101569			macrophage					EU58_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896225										
+SAMN04147284	SRS1101570			macrophage					EU58_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896226										
+SAMN04147285	SRS1101567			macrophage					EU58_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896227										
+SAMN04147286	SRS1101566			macrophage					EU60_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896228										
+SAMN04147287	SRS1101564			macrophage					EU60_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896229										
+SAMN04147288	SRS1101565			macrophage					EU60_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896230										
+SAMN04147289	SRS1101563			macrophage					EU62_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896231										
+SAMN04147290	SRS1101559			macrophage					EU62_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896232										
+SAMN04147291	SRS1101560			macrophage					EU62_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896233										
+SAMN04147292	SRS1101561			macrophage					EU64_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896234										
+SAMN04147293	SRS1101562			macrophage					EU64_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896235										
+SAMN04147294	SRS1101558			macrophage					EU64_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896236										
+SAMN04147295	SRS1101556			macrophage					EU66_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896237										
+SAMN04147296	SRS1101554			macrophage					EU66_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896238										
+SAMN04147297	SRS1101555			macrophage					EU66_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896239										
+SAMN04147298	SRS1101548			macrophage					EU72_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896246										
+SAMN04147299	SRS1101547			macrophage					EU72_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896247										
+SAMN04147300	SRS1101546			macrophage					EU72_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896248										
+SAMN04147301	SRS1101557			macrophage					EU68_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896240										
+SAMN04147302	SRS1101552			macrophage					EU68_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896241										
+SAMN04147303	SRS1101553			macrophage					EU68_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896242										
+SAMN04147304	SRS1101550			macrophage					EU70_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896243										
+SAMN04147305	SRS1101551			macrophage					EU70_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896244										
+SAMN04147306	SRS1101549			macrophage					EU70_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896245										
+SAMN04147307	SRS1101544			macrophage					EU74_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896249										
+SAMN04147308	SRS1101543			macrophage					EU74_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896250										
+SAMN04147309	SRS1101542			macrophage					EU74_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896251										
+SAMN04147310	SRS1101541			macrophage					EU76_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896252										
+SAMN04147311	SRS1101540			macrophage					EU76_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896253										
+SAMN04147312	SRS1101539			macrophage					EU76_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896254										
+SAMN04147313	SRS1101538			macrophage					EU78_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896255										
+SAMN04147314	SRS1101537			macrophage					EU78_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896256										
+SAMN04147315	SRS1101536			macrophage					EU78_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896257										
+SAMN04147316	SRS1101535			macrophage					EU80_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896258										
+SAMN04147317	SRS1101534			macrophage					EU80_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896259										
+SAMN04147318	SRS1101533			macrophage					EU80_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896260										
+SAMN04147319	SRS1101532			macrophage					EU28_S24 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896261										
+SAMN04147320	SRS1101531			macrophage					EU302_S24 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896262										
+SAMN04147321	SRS1101530			macrophage					EU306_S24 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896263										
+SAMN04147322	SRS1101529			macrophage					EU34_S24 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896264										
+SAMN04147323	SRS1101528			macrophage					EU52_S24 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896265										
+SAMN04147324	SRS1101527			macrophage					EU66_S24 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896266										
+SAMN04147325	SRS1101526			macrophage					EU28_NI24 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896267										
+SAMN04147326	SRS1101525			macrophage					EU302_NI24 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896268										
+SAMN04147327	SRS1101524			macrophage					EU306_NI24 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896269										
+SAMN04147328	SRS1101523			macrophage					EU34_NI24 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896270										
+SAMN04147329	SRS1101522			macrophage					EU52_NI24 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896271										
+SAMN04147330	SRS1101521			macrophage					EU66_NI24 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896272										
+SAMN04147331	SRS1101520			macrophage					EU28_L24 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896273										
+SAMN04147332	SRS1101519			macrophage					EU302_L24 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896274										
+SAMN04147333	SRS1101518			macrophage					EU306_L24 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896275										
+SAMN04147334	SRS1101517			macrophage					EU34_L24 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896276										
+SAMN04147335	SRS1101516			macrophage					EU52_L24 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896277										
+SAMN04147336	SRS1101515			macrophage					EU66_L24 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896278										
+SAMN04147337	SRS1101605			macrophage					EU28_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896189										
+SAMN04147338	SRS1101604			macrophage					EU28_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896190										
+SAMN04147339	SRS1101603			macrophage					EU28_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896191										
+SAMN04147340	SRS1101602			macrophage					EU30_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896192										
+SAMN04147341	SRS1101601			macrophage					EU30_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896193										
+SAMN04147342	SRS1101600			macrophage					EU30_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896194										
+SAMN04147343	SRS1101599			macrophage					EU302_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896195										
+SAMN04147344	SRS1101597			macrophage					EU302_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896196										
+SAMN04147345	SRS1101598			macrophage					EU302_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896197										
+SAMN04147346	SRS1101596			macrophage					EU306_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896198										
+SAMN04147347	SRS1101594			macrophage					EU306_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896199										
+SAMN04147348	SRS1101595			macrophage					EU306_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896200										
+SAMN04147349	SRS1101593			macrophage					EU34_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896201										
+SAMN04147350	SRS1101589			macrophage					EU34_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896202										
+SAMN04147351	SRS1101590			macrophage					EU34_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896203										
+SAMN04147352	SRS1101592			macrophage					EU36_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896204										
+SAMN04147353	SRS1101591			macrophage					EU36_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896205										
+SAMN04147354	SRS1101586			macrophage					EU36_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896206										
+SAMN04147355	SRS1101587			macrophage					EU42_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896207										
+SAMN04147356	SRS1101588			macrophage					EU42_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896208										
+SAMN04147357	SRS1101584			macrophage					EU42_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896209										
+SAMN04147358	SRS1101585			macrophage					EU46_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896210										
+SAMN04147359	SRS1101582			macrophage					EU46_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896211										
+SAMN04147360	SRS1101581			macrophage					EU46_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896212										
+SAMN04147361	SRS1101583			macrophage					EU48_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896213										
+SAMN04147362	SRS1101580			macrophage					EU48_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896214										
+SAMN04147363	SRS1101576			macrophage					EU48_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896215										
+SAMN04147364	SRS1101577			macrophage					EU50_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896216										
+SAMN04147365	SRS1101578			macrophage					EU50_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896217										
+SAMN04147366	SRS1101579			macrophage					EU50_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896218										
+SAMN04147367	SRS1101655			macrophage					AF59_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896139										
+SAMN04147368	SRS1101654			macrophage					AF59_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896140										
+SAMN04147369	SRS1101653			macrophage					AF61_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896141										
+SAMN04147370	SRS1101652			macrophage					AF61_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896142										
+SAMN04147371	SRS1101651			macrophage					AF61_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896143										
+SAMN04147372	SRS1101650			macrophage					AF63_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896144										
+SAMN04147373	SRS1101649			macrophage					AF63_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896145										
+SAMN04147374	SRS1101648			macrophage					AF63_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896146										
+SAMN04147375	SRS1101647			macrophage					AF65_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896147										
+SAMN04147376	SRS1101646			macrophage					AF65_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896148										
+SAMN04147377	SRS1101645			macrophage					AF65_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896149										
+SAMN04147378	SRS1101644			macrophage					AF67_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896150										
+SAMN04147379	SRS1101643			macrophage					AF67_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896151										
+SAMN04147380	SRS1101642			macrophage					AF67_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896152										
+SAMN04147381	SRS1101641			macrophage					AF69_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896154										
+SAMN04147382	SRS1101637			macrophage					AF69_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896155										
+SAMN04147383	SRS1101636			macrophage					AF71_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896156										
+SAMN04147384	SRS1101638			macrophage					AF71_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896157										
+SAMN04147385	SRS1101635			macrophage					AF71_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896158										
+SAMN04147386	SRS1101639			macrophage					AF77_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896159										
+SAMN04147387	SRS1101634			macrophage					AF77_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896160										
+SAMN04147388	SRS1101631			macrophage					AF77_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896161										
+SAMN04147389	SRS1101640			macrophage					AF69_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896153										
+SAMN04147390	SRS1101624			macrophage					EU14_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896170										
+SAMN04147391	SRS1101622			macrophage					EU14_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896169										
+SAMN04147392	SRS1101632			macrophage					AF79_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896162										
+SAMN04147393	SRS1101630			macrophage					AF79_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896163										
+SAMN04147394	SRS1101627			macrophage					AF79_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896164										
+SAMN04147395	SRS1101628			macrophage					EU06_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896165										
+SAMN04147396	SRS1101629			macrophage					EU06_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896166										
+SAMN04147397	SRS1101633			macrophage					EU06_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896167										
+SAMN04147398	SRS1101626			macrophage					EU14_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896168										
+SAMN04147399	SRS1101625			macrophage					EU16_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896171										
+SAMN04147400	SRS1101621			macrophage					EU16_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896172										
+SAMN04147401	SRS1101513			macrophage					AF11_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896081										
+SAMN04147402	SRS1101514			macrophage					AF11_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896082										
+SAMN04147403	SRS1101512			macrophage					AF11_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896083										
+SAMN04147404	SRS1101707			macrophage					AF17_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896084										
+SAMN04147405	SRS1101704			macrophage					AF17_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896085										
+SAMN04147406	SRS1101705			macrophage					AF17_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896086										
+SAMN04147407	SRS1101709			macrophage					AF19_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896087										
+SAMN04147408	SRS1101708			macrophage					AF19_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896088										
+SAMN04147409	SRS1101703			macrophage					AF19_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896089										
+SAMN04147410	SRS1101702			macrophage					AF21_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896090										
+SAMN04147411	SRS1101699			macrophage					AF21_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896091										
+SAMN04147412	SRS1101706			macrophage					AF21_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896092										
+SAMN04147413	SRS1101698			macrophage					AF23_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896093										
+SAMN04147414	SRS1101701			macrophage					AF23_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896094										
+SAMN04147415	SRS1101700			macrophage					AF23_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896095										
+SAMN04147416	SRS1101696			macrophage					AF25_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896096										
+SAMN04147417	SRS1101695			macrophage					AF25_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896097										
+SAMN04147418	SRS1101694			macrophage					AF25_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896098										
+SAMN04147419	SRS1101697			macrophage					AF27_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896099										
+SAMN04147420	SRS1101693			macrophage					AF27_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896100										
+SAMN04147421	SRS1101692			macrophage					AF27_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896101										
+SAMN04147422	SRS1101691			macrophage					AF29_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896102										
+SAMN04147423	SRS1101690			macrophage					AF29_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896103										
+SAMN04147424	SRS1101688			macrophage					AF29_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896104										
+SAMN04147425	SRS1101687			macrophage					AF31_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896105										
+SAMN04147426	SRS1101686			macrophage					AF31_NI2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896106										
+SAMN04147427	SRS1101684			macrophage					AF31_S2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896107										
+SAMN04147428	SRS1101683			macrophage					AF35_L2 (mRNA)		2016-09-08				9606	Homo sapiens	GSM1896108										
+SAMN04227025	SRS1153380		Monocyte derived macrophage	Macrophage					HIV-1 Integration untransfected MDM cells		2016-02-11			blood	9606	Homo sapiens	22 Integration sites from HIV-GFP-infected untransfected monocyte derived macrophage cells										
+SAMN04227026	SRS1153381		Monocyte derived macrophage	Macrophage					HIV-1 Integration siNON MDM cells		2016-02-11			blood	9606	Homo sapiens	23 Integration sites from HIV-GFP-infected monocyte derived macrophage siNON cells										
+SAMN04227027	SRS1153417		Monocyte derived macrophage	Macrophage					HIV-1 Integration siL3 MDM cells		2016-02-11			blood	9606	Homo sapiens	24 Integration sites from HIV-GFP-infected monocyte derived macrophage siLEDGF L3 cells										
+SAMN04227028	SRS1153423		Monocyte derived macrophage	Macrophage					HIV-1 Integration siC11 MDM cells		2016-02-11			blood	9606	Homo sapiens	25 Integration sites from HIV-GFP-infected monocyte derived macrophage siCPSF6 C11 cells										
+SAMN04441056	SRS1264976			macrophage					WAS-B Y4-4N rep1		2016-04-01				9606	Homo sapiens	GSM2046678										
+SAMN04441057	SRS1264975			macrophage					WAS-B Y4-4N C18 neo6 rep1		2016-04-01				9606	Homo sapiens	GSM2046679										
+SAMN04441058	SRS1264974			macrophage					WAS-B Y4-4N C18 neo6 rep2		2016-04-01				9606	Homo sapiens	GSM2046680										
+SAMN04441059	SRS1264973			macrophage					WAS-B Y4-4N C18 neo6 rep3		2016-04-01				9606	Homo sapiens	GSM2046681										
+SAMN04441060	SRS1264972			macrophage					cSC9N rep1		2016-04-01				9606	Homo sapiens	GSM2046682										
+SAMN04441061	SRS1264971			macrophage					cSC9N rep2		2016-04-01				9606	Homo sapiens	GSM2046683										
+SAMN04441062	SRS1264970			macrophage					CB MNC		2016-04-01				9606	Homo sapiens	GSM2046684										
+SAMN04932751	SRS1419394			macrophage					AF139_L2		2016-09-08				9606	Homo sapiens	GSM2141444										
+SAMN04932752	SRS1419393			macrophage					AF139_NI2		2016-09-08				9606	Homo sapiens	GSM2141445										
+SAMN04932753	SRS1419397			macrophage					AF141_NI2		2016-09-08				9606	Homo sapiens	GSM2141448										
+SAMN04932754	SRS1419398			macrophage					AF141_S2		2016-09-08				9606	Homo sapiens	GSM2141449										
+SAMN04932755	SRS1419399			macrophage					AF143_L2		2016-09-08				9606	Homo sapiens	GSM2141450										
+SAMN04932756	SRS1419400			macrophage					AF143_NI2		2016-09-08				9606	Homo sapiens	GSM2141451										
+SAMN04932757	SRS1419401			macrophage					AF143_S2		2016-09-08				9606	Homo sapiens	GSM2141452										
+SAMN04932758	SRS1419405			macrophage					AF145_L2		2016-09-08				9606	Homo sapiens	GSM2141453										
+SAMN04932759	SRS1419395			macrophage					AF139_S2		2016-09-08				9606	Homo sapiens	GSM2141446										
+SAMN04932760	SRS1419396			macrophage					AF141_L2		2016-09-08				9606	Homo sapiens	GSM2141447										
+SAMN04932761	SRS1419403			macrophage					AF145_NI2		2016-09-08				9606	Homo sapiens	GSM2141454										
+SAMN04932762	SRS1419404			macrophage					AF145_S2		2016-09-08				9606	Homo sapiens	GSM2141455										
+SAMN04932763	SRS1419402			macrophage					AF147_L2		2016-09-08				9606	Homo sapiens	GSM2141456										
+SAMN04932764	SRS1419407			macrophage					AF147_NI2		2016-09-08				9606	Homo sapiens	GSM2141457										
+SAMN04932765	SRS1419406			macrophage					AF147_S2		2016-09-08				9606	Homo sapiens	GSM2141458										
+SAMN04932766	SRS1419408			macrophage					AF149_L2		2016-09-08				9606	Homo sapiens	GSM2141459										
+SAMN04932767	SRS1419410			macrophage					AF149_NI2		2016-09-08				9606	Homo sapiens	GSM2141460										
+SAMN04932768	SRS1419409			macrophage					AF149_S2		2016-09-08				9606	Homo sapiens	GSM2141461										
+SAMN04932769	SRS1419412			macrophage					AF151_L2		2016-09-08				9606	Homo sapiens	GSM2141462										
+SAMN04932770	SRS1419411			macrophage					AF151_NI2		2016-09-08				9606	Homo sapiens	GSM2141463										
+SAMN04932771	SRS1419414			macrophage					AF151_S2		2016-09-08				9606	Homo sapiens	GSM2141464										
+SAMN04932772	SRS1419413			macrophage					AF153_L2		2016-09-08				9606	Homo sapiens	GSM2141465										
+SAMN04932773	SRS1419415			macrophage					AF153_NI2		2016-09-08				9606	Homo sapiens	GSM2141466										
+SAMN04932774	SRS1419416			macrophage					AF153_S2		2016-09-08				9606	Homo sapiens	GSM2141467										
+SAMN04932775	SRS1419418			macrophage					AF155_L2		2016-09-08				9606	Homo sapiens	GSM2141468										
+SAMN04932776	SRS1419417			macrophage					AF155_NI2		2016-09-08				9606	Homo sapiens	GSM2141469										
+SAMN04932777	SRS1419419			macrophage					AF155_S2		2016-09-08				9606	Homo sapiens	GSM2141470										
+SAMN04932778	SRS1419420			macrophage					AF157_L2		2016-09-08				9606	Homo sapiens	GSM2141471										
+SAMN04932779	SRS1419421			macrophage					AF157_NI2		2016-09-08				9606	Homo sapiens	GSM2141472										
+SAMN04932780	SRS1419422			macrophage					AF157_S2		2016-09-08				9606	Homo sapiens	GSM2141473										
+SAMN04932781	SRS1419453			macrophage					AF179_L2		2016-09-08				9606	Homo sapiens	GSM2141504										
+SAMN04932782	SRS1419454			macrophage					AF179_NI2		2016-09-08				9606	Homo sapiens	GSM2141505										
+SAMN04932783	SRS1419455			macrophage					AF179_S2		2016-09-08				9606	Homo sapiens	GSM2141506										
+SAMN04932784	SRS1419457			macrophage					AF181_L2		2016-09-08				9606	Homo sapiens	GSM2141507										
+SAMN04932785	SRS1419456			macrophage					AF181_NI2		2016-09-08				9606	Homo sapiens	GSM2141508										
+SAMN04932786	SRS1419458			macrophage					AF181_S2		2016-09-08				9606	Homo sapiens	GSM2141509										
+SAMN04932787	SRS1419460			macrophage					AF183_L2		2016-09-08				9606	Homo sapiens	GSM2141510										
+SAMN04932788	SRS1419459			macrophage					AF183_NI2		2016-09-08				9606	Homo sapiens	GSM2141511										
+SAMN04932789	SRS1419461			macrophage					AF183_S2		2016-09-08				9606	Homo sapiens	GSM2141512										
+SAMN04932790	SRS1419463			macrophage					AF185_L2		2016-09-08				9606	Homo sapiens	GSM2141513										
+SAMN04932791	SRS1419462			macrophage					AF185_NI2		2016-09-08				9606	Homo sapiens	GSM2141514										
+SAMN04932792	SRS1419464			macrophage					AF185_S2		2016-09-08				9606	Homo sapiens	GSM2141515										
+SAMN04932793	SRS1419465			macrophage					AF187_L2		2016-09-08				9606	Homo sapiens	GSM2141516										
+SAMN04932794	SRS1419466			macrophage					AF187_NI2		2016-09-08				9606	Homo sapiens	GSM2141517										
+SAMN04932795	SRS1419467			macrophage					AF187_S2		2016-09-08				9606	Homo sapiens	GSM2141518										
+SAMN04932796	SRS1419468			macrophage					AF189_L2		2016-09-08				9606	Homo sapiens	GSM2141519										
+SAMN04932797	SRS1419469			macrophage					AF189_NI2		2016-09-08				9606	Homo sapiens	GSM2141520										
+SAMN04932798	SRS1419470			macrophage					AF189_S2		2016-09-08				9606	Homo sapiens	GSM2141521										
+SAMN04932799	SRS1419472			macrophage					AF191_L2		2016-09-08				9606	Homo sapiens	GSM2141522										
+SAMN04932800	SRS1419471			macrophage					AF191_NI2		2016-09-08				9606	Homo sapiens	GSM2141523										
+SAMN04932801	SRS1419473			macrophage					AF191_S2		2016-09-08				9606	Homo sapiens	GSM2141524										
+SAMN04932802	SRS1419474			macrophage					AF193_L2		2016-09-08				9606	Homo sapiens	GSM2141525										
+SAMN04932803	SRS1419477			macrophage					AF193_NI2		2016-09-08				9606	Homo sapiens	GSM2141526										
+SAMN04932804	SRS1419476			macrophage					AF193_S2		2016-09-08				9606	Homo sapiens	GSM2141527										
+SAMN04932805	SRS1419475			macrophage					AF195_L2		2016-09-08				9606	Homo sapiens	GSM2141528										
+SAMN04932806	SRS1419478			macrophage					AF195_NI2		2016-09-08				9606	Homo sapiens	GSM2141529										
+SAMN04932807	SRS1419479			macrophage					AF195_S2		2016-09-08				9606	Homo sapiens	GSM2141530										
+SAMN04932808	SRS1419480			macrophage					AF55_L2		2016-09-08				9606	Homo sapiens	GSM2141531										
+SAMN04932809	SRS1419481			macrophage					AF55_S2		2016-09-08				9606	Homo sapiens	GSM2141532										
+SAMN04932810	SRS1419487			macrophage					AF93_L2		2016-09-08				9606	Homo sapiens	GSM2141538										
+SAMN04932811	SRS1419244			macrophage					AF63_S2		2016-09-08				9606	Homo sapiens	GSM2141295										
+SAMN04932812	SRS1419252			macrophage					AF69_NI2		2016-09-08				9606	Homo sapiens	GSM2141303										
+SAMN04932813	SRS1419253			macrophage					AF69_S2		2016-09-08				9606	Homo sapiens	GSM2141304										
+SAMN04932814	SRS1419254			macrophage					AF71_L2		2016-09-08				9606	Homo sapiens	GSM2141305										
+SAMN04932815	SRS1419255			macrophage					AF71_NI2		2016-09-08				9606	Homo sapiens	GSM2141306										
+SAMN04932816	SRS1419256			macrophage					AF71_S2		2016-09-08				9606	Homo sapiens	GSM2141307										
+SAMN04932817	SRS1419257			macrophage					AF77_L2		2016-09-08				9606	Homo sapiens	GSM2141308										
+SAMN04932818	SRS1419258			macrophage					AF77_NI2		2016-09-08				9606	Homo sapiens	GSM2141309										
+SAMN04932819	SRS1419259			macrophage					AF77_S2		2016-09-08				9606	Homo sapiens	GSM2141310										
+SAMN04932820	SRS1419260			macrophage					AF79_L2		2016-09-08				9606	Homo sapiens	GSM2141311										
+SAMN04932821	SRS1419261			macrophage					AF79_NI2		2016-09-08				9606	Homo sapiens	GSM2141312										
+SAMN04932822	SRS1419262			macrophage					AF79_S2		2016-09-08				9606	Homo sapiens	GSM2141313										
+SAMN04932823	SRS1419263			macrophage					EU06_L2		2016-09-08				9606	Homo sapiens	GSM2141314										
+SAMN04932824	SRS1419264			macrophage					EU06_NI2		2016-09-08				9606	Homo sapiens	GSM2141315										
+SAMN04932825	SRS1419265			macrophage					EU06_S2		2016-09-08				9606	Homo sapiens	GSM2141316										
+SAMN04932826	SRS1419266			macrophage					EU14_L2		2016-09-08				9606	Homo sapiens	GSM2141317										
+SAMN04932827	SRS1419267			macrophage					EU14_NI2		2016-09-08				9606	Homo sapiens	GSM2141318										
+SAMN04932828	SRS1419268			macrophage					EU14_S2		2016-09-08				9606	Homo sapiens	GSM2141319										
+SAMN04932829	SRS1419269			macrophage					EU16_L2		2016-09-08				9606	Homo sapiens	GSM2141320										
+SAMN04932830	SRS1419270			macrophage					EU16_NI2		2016-09-08				9606	Homo sapiens	GSM2141321										
+SAMN04932831	SRS1419271			macrophage					EU16_S2		2016-09-08				9606	Homo sapiens	GSM2141322										
+SAMN04932832	SRS1419272			macrophage					EU20_NI2		2016-09-08				9606	Homo sapiens	GSM2141323										
+SAMN04932833	SRS1419273			macrophage					EU20_S2		2016-09-08				9606	Homo sapiens	GSM2141324										
+SAMN04932834	SRS1419274			macrophage					EU22_L2		2016-09-08				9606	Homo sapiens	GSM2141325										
+SAMN04932835	SRS1419275			macrophage					EU22_NI2		2016-09-08				9606	Homo sapiens	GSM2141326										
+SAMN04932836	SRS1419277			macrophage					EU24_L2		2016-09-08				9606	Homo sapiens	GSM2141328										
+SAMN04932837	SRS1419278			macrophage					EU24_NI2		2016-09-08				9606	Homo sapiens	GSM2141329										
+SAMN04932838	SRS1419279			macrophage					EU24_S2		2016-09-08				9606	Homo sapiens	GSM2141330										
+SAMN04932839	SRS1419280			macrophage					EU26_L2		2016-09-08				9606	Homo sapiens	GSM2141331										
+SAMN04932840	SRS1419281			macrophage					EU26_NI2		2016-09-08				9606	Homo sapiens	GSM2141332										
+SAMN04932841	SRS1419301			macrophage					EU48_L2		2016-09-08				9606	Homo sapiens	GSM2141352										
+SAMN04932842	SRS1419302			macrophage					EU48_NI2		2016-09-08				9606	Homo sapiens	GSM2141353										
+SAMN04932843	SRS1419303			macrophage					EU48_S2		2016-09-08				9606	Homo sapiens	GSM2141354										
+SAMN04932844	SRS1419304			macrophage					EU50_L2		2016-09-08				9606	Homo sapiens	GSM2141355										
+SAMN04932845	SRS1419305			macrophage					EU50_NI2		2016-09-08				9606	Homo sapiens	GSM2141356										
+SAMN04932846	SRS1419306			macrophage					EU50_S2		2016-09-08				9606	Homo sapiens	GSM2141357										
+SAMN04932847	SRS1419309			macrophage					EU52_S2		2016-09-08				9606	Homo sapiens	GSM2141360										
+SAMN04932848	SRS1419310			macrophage					EU54_L2		2016-09-08				9606	Homo sapiens	GSM2141361										
+SAMN04932849	SRS1419311			macrophage					EU54_NI2		2016-09-08				9606	Homo sapiens	GSM2141362										
+SAMN04932850	SRS1419313			macrophage					EU54_S2		2016-09-08				9606	Homo sapiens	GSM2141363										
+SAMN04932851	SRS1419312			macrophage					EU58_L2		2016-09-08				9606	Homo sapiens	GSM2141364										
+SAMN04932852	SRS1419314			macrophage					EU58_NI2		2016-09-08				9606	Homo sapiens	GSM2141365										
+SAMN04932853	SRS1419315			macrophage					EU58_S2		2016-09-08				9606	Homo sapiens	GSM2141366										
+SAMN04932854	SRS1419316			macrophage					EU60_L2		2016-09-08				9606	Homo sapiens	GSM2141367										
+SAMN04932855	SRS1419317			macrophage					EU60_NI2		2016-09-08				9606	Homo sapiens	GSM2141368										
+SAMN04932856	SRS1419319			macrophage					EU60_S2		2016-09-08				9606	Homo sapiens	GSM2141369										
+SAMN04932857	SRS1419318			macrophage					EU62_L2		2016-09-08				9606	Homo sapiens	GSM2141370										
+SAMN04932858	SRS1419320			macrophage					EU62_NI2		2016-09-08				9606	Homo sapiens	GSM2141371										
+SAMN04932859	SRS1419321			macrophage					EU62_S2		2016-09-08				9606	Homo sapiens	GSM2141372										
+SAMN04932860	SRS1419322			macrophage					EU64_L2		2016-09-08				9606	Homo sapiens	GSM2141373										
+SAMN04932861	SRS1419323			macrophage					EU64_NI2		2016-09-08				9606	Homo sapiens	GSM2141374										
+SAMN04932862	SRS1419324			macrophage					EU64_S2		2016-09-08				9606	Homo sapiens	GSM2141375										
+SAMN04932863	SRS1419325			macrophage					EU66_L2		2016-09-08				9606	Homo sapiens	GSM2141376										
+SAMN04932864	SRS1419327			macrophage					EU66_NI2		2016-09-08				9606	Homo sapiens	GSM2141377										
+SAMN04932865	SRS1419328			macrophage					EU66_S2		2016-09-08				9606	Homo sapiens	GSM2141378										
+SAMN04932866	SRS1419326			macrophage					EU68_L2		2016-09-08				9606	Homo sapiens	GSM2141379										
+SAMN04932867	SRS1419329			macrophage					EU68_NI2		2016-09-08				9606	Homo sapiens	GSM2141380										
+SAMN04932868	SRS1419330			macrophage					EU68_S2		2016-09-08				9606	Homo sapiens	GSM2141381										
+SAMN04932869	SRS1419331			macrophage					EU70_L2		2016-09-08				9606	Homo sapiens	GSM2141382										
+SAMN04932870	SRS1419334			macrophage					EU70_NI2		2016-09-08				9606	Homo sapiens	GSM2141383										
+SAMN04932871	SRS1419423			macrophage					AF159_L2		2016-09-08				9606	Homo sapiens	GSM2141474										
+SAMN04932872	SRS1419424			macrophage					AF159_NI2		2016-09-08				9606	Homo sapiens	GSM2141475										
+SAMN04932873	SRS1419425			macrophage					AF159_S2		2016-09-08				9606	Homo sapiens	GSM2141476										
+SAMN04932874	SRS1419426			macrophage					AF161_L2		2016-09-08				9606	Homo sapiens	GSM2141477										
+SAMN04932875	SRS1419427			macrophage					AF161_NI2		2016-09-08				9606	Homo sapiens	GSM2141478										
+SAMN04932876	SRS1419428			macrophage					AF161_S2		2016-09-08				9606	Homo sapiens	GSM2141479										
+SAMN04932877	SRS1419429			macrophage					AF163_L2		2016-09-08				9606	Homo sapiens	GSM2141480										
+SAMN04932878	SRS1419430			macrophage					AF163_NI2		2016-09-08				9606	Homo sapiens	GSM2141481										
+SAMN04932879	SRS1419432			macrophage					AF163_S2		2016-09-08				9606	Homo sapiens	GSM2141482										
+SAMN04932880	SRS1419431			macrophage					AF165_L2		2016-09-08				9606	Homo sapiens	GSM2141483										
+SAMN04932881	SRS1419433			macrophage					AF165_NI2		2016-09-08				9606	Homo sapiens	GSM2141484										
+SAMN04932882	SRS1419435			macrophage					AF165_S2		2016-09-08				9606	Homo sapiens	GSM2141485										
+SAMN04932883	SRS1419434			macrophage					AF167_L2		2016-09-08				9606	Homo sapiens	GSM2141486										
+SAMN04932884	SRS1419436			macrophage					AF167_NI2		2016-09-08				9606	Homo sapiens	GSM2141487										
+SAMN04932885	SRS1419437			macrophage					AF167_S2		2016-09-08				9606	Homo sapiens	GSM2141488										
+SAMN04932886	SRS1419439			macrophage					AF169_L2		2016-09-08				9606	Homo sapiens	GSM2141489										
+SAMN04932887	SRS1419440			macrophage					AF169_NI2		2016-09-08				9606	Homo sapiens	GSM2141490										
+SAMN04932888	SRS1419438			macrophage					AF169_S2		2016-09-08				9606	Homo sapiens	GSM2141491										
+SAMN04932889	SRS1419441			macrophage					AF171_L2		2016-09-08				9606	Homo sapiens	GSM2141492										
+SAMN04932890	SRS1419442			macrophage					AF171_NI2		2016-09-08				9606	Homo sapiens	GSM2141493										
+SAMN04932891	SRS1419444			macrophage					AF171_S2		2016-09-08				9606	Homo sapiens	GSM2141494										
+SAMN04932892	SRS1419443			macrophage					AF173_L2		2016-09-08				9606	Homo sapiens	GSM2141495										
+SAMN04932893	SRS1419445			macrophage					AF173_NI2		2016-09-08				9606	Homo sapiens	GSM2141496										
+SAMN04932894	SRS1419446			macrophage					AF173_S2		2016-09-08				9606	Homo sapiens	GSM2141497										
+SAMN04932895	SRS1419447			macrophage					AF175_L2		2016-09-08				9606	Homo sapiens	GSM2141498										
+SAMN04932896	SRS1419448			macrophage					AF175_NI2		2016-09-08				9606	Homo sapiens	GSM2141499										
+SAMN04932897	SRS1419449			macrophage					AF175_S2		2016-09-08				9606	Homo sapiens	GSM2141500										
+SAMN04932898	SRS1419450			macrophage					AF177_L2		2016-09-08				9606	Homo sapiens	GSM2141501										
+SAMN04932899	SRS1419451			macrophage					AF177_NI2		2016-09-08				9606	Homo sapiens	GSM2141502										
+SAMN04932900	SRS1419452			macrophage					AF177_S2		2016-09-08				9606	Homo sapiens	GSM2141503										
+SAMN04932901	SRS1419221			macrophage					AF41_L2		2016-09-08				9606	Homo sapiens	GSM2141272										
+SAMN04932902	SRS1419222			macrophage					AF41_NI2		2016-09-08				9606	Homo sapiens	GSM2141273										
+SAMN04932903	SRS1419223			macrophage					AF41_S2		2016-09-08				9606	Homo sapiens	GSM2141274										
+SAMN04932904	SRS1419224			macrophage					AF43_L2		2016-09-08				9606	Homo sapiens	GSM2141275										
+SAMN04932905	SRS1419225			macrophage					AF43_NI2		2016-09-08				9606	Homo sapiens	GSM2141276										
+SAMN04932906	SRS1419226			macrophage					AF43_S2		2016-09-08				9606	Homo sapiens	GSM2141277										
+SAMN04932907	SRS1419227			macrophage					AF47_L2		2016-09-08				9606	Homo sapiens	GSM2141278										
+SAMN04932908	SRS1419228			macrophage					AF47_NI2		2016-09-08				9606	Homo sapiens	GSM2141279										
+SAMN04932909	SRS1419229			macrophage					AF47_S2		2016-09-08				9606	Homo sapiens	GSM2141280										
+SAMN04932910	SRS1419230			macrophage					AF53_L2		2016-09-08				9606	Homo sapiens	GSM2141281										
+SAMN04932911	SRS1419231			macrophage					AF53_NI2		2016-09-08				9606	Homo sapiens	GSM2141282										
+SAMN04932912	SRS1419232			macrophage					AF53_S2		2016-09-08				9606	Homo sapiens	GSM2141283										
+SAMN04932913	SRS1419233			macrophage					AF57_L2		2016-09-08				9606	Homo sapiens	GSM2141284										
+SAMN04932914	SRS1419234			macrophage					AF57_NI2		2016-09-08				9606	Homo sapiens	GSM2141285										
+SAMN04932915	SRS1419235			macrophage					AF57_S2		2016-09-08				9606	Homo sapiens	GSM2141286										
+SAMN04932916	SRS1419236			macrophage					AF59_L2		2016-09-08				9606	Homo sapiens	GSM2141287										
+SAMN04932917	SRS1419237			macrophage					AF59_NI2		2016-09-08				9606	Homo sapiens	GSM2141288										
+SAMN04932918	SRS1419238			macrophage					AF59_S2		2016-09-08				9606	Homo sapiens	GSM2141289										
+SAMN04932919	SRS1419239			macrophage					AF61_L2		2016-09-08				9606	Homo sapiens	GSM2141290										
+SAMN04932920	SRS1419240			macrophage					AF61_NI2		2016-09-08				9606	Homo sapiens	GSM2141291										
+SAMN04932921	SRS1419241			macrophage					AF61_S2		2016-09-08				9606	Homo sapiens	GSM2141292										
+SAMN04932922	SRS1419242			macrophage					AF63_L2		2016-09-08				9606	Homo sapiens	GSM2141293										
+SAMN04932923	SRS1419243			macrophage					AF63_NI2		2016-09-08				9606	Homo sapiens	GSM2141294										
+SAMN04932924	SRS1419247			macrophage					AF65_S2		2016-09-08				9606	Homo sapiens	GSM2141298										
+SAMN04932925	SRS1419248			macrophage					AF67_L2		2016-09-08				9606	Homo sapiens	GSM2141299										
+SAMN04932926	SRS1419249			macrophage					AF67_NI2		2016-09-08				9606	Homo sapiens	GSM2141300										
+SAMN04932927	SRS1419250			macrophage					AF67_S2		2016-09-08				9606	Homo sapiens	GSM2141301										
+SAMN04932928	SRS1419251			macrophage					AF69_L2		2016-09-08				9606	Homo sapiens	GSM2141302										
+SAMN04932929	SRS1419245			macrophage					AF65_L2		2016-09-08				9606	Homo sapiens	GSM2141296										
+SAMN04932930	SRS1419246			macrophage					AF65_NI2		2016-09-08				9606	Homo sapiens	GSM2141297										
+SAMN04932931	SRS1419282			macrophage					EU26_S2		2016-09-08				9606	Homo sapiens	GSM2141333										
+SAMN04932932	SRS1419283			macrophage					EU28_L2		2016-09-08				9606	Homo sapiens	GSM2141334										
+SAMN04932933	SRS1419284			macrophage					EU28_NI2		2016-09-08				9606	Homo sapiens	GSM2141335										
+SAMN04932934	SRS1419276			macrophage					EU22_S2		2016-09-08				9606	Homo sapiens	GSM2141327										
+SAMN04932935	SRS1419285			macrophage					EU28_S2		2016-09-08				9606	Homo sapiens	GSM2141336										
+SAMN04932936	SRS1419286			macrophage					EU30_L2		2016-09-08				9606	Homo sapiens	GSM2141337										
+SAMN04932937	SRS1419288			macrophage					EU30_NI2		2016-09-08				9606	Homo sapiens	GSM2141338										
+SAMN04932938	SRS1419287			macrophage					EU30_S2		2016-09-08				9606	Homo sapiens	GSM2141339										
+SAMN04932939	SRS1419289			macrophage					EU34_L2		2016-09-08				9606	Homo sapiens	GSM2141340										
+SAMN04932940	SRS1419297			macrophage					EU34_NI2		2016-09-08				9606	Homo sapiens	GSM2141341										
+SAMN04932941	SRS1419290			macrophage					EU34_S2		2016-09-08				9606	Homo sapiens	GSM2141342										
+SAMN04932942	SRS1419291			macrophage					EU36_L2		2016-09-08				9606	Homo sapiens	GSM2141343										
+SAMN04932943	SRS1419292			macrophage					EU36_NI2		2016-09-08				9606	Homo sapiens	GSM2141344										
+SAMN04932944	SRS1419293			macrophage					EU36_S2		2016-09-08				9606	Homo sapiens	GSM2141345										
+SAMN04932945	SRS1419294			macrophage					EU42_L2		2016-09-08				9606	Homo sapiens	GSM2141346										
+SAMN04932946	SRS1419295			macrophage					EU42_NI2		2016-09-08				9606	Homo sapiens	GSM2141347										
+SAMN04932947	SRS1419296			macrophage					EU42_S2		2016-09-08				9606	Homo sapiens	GSM2141348										
+SAMN04932948	SRS1419298			macrophage					EU46_L2		2016-09-08				9606	Homo sapiens	GSM2141349										
+SAMN04932949	SRS1419300			macrophage					EU46_NI2		2016-09-08				9606	Homo sapiens	GSM2141350										
+SAMN04932950	SRS1419299			macrophage					EU46_S2		2016-09-08				9606	Homo sapiens	GSM2141351										
+SAMN04932951	SRS1419307			macrophage					EU52_L2		2016-09-08				9606	Homo sapiens	GSM2141358										
+SAMN04932952	SRS1419308			macrophage					EU52_NI2		2016-09-08				9606	Homo sapiens	GSM2141359										
+SAMN04932953	SRS1419214			macrophage					AF35_S2		2016-09-08				9606	Homo sapiens	GSM2141265										
+SAMN04932954	SRS1419215			macrophage					AF37_L2		2016-09-08				9606	Homo sapiens	GSM2141266										
+SAMN04932955	SRS1419216			macrophage					AF37_NI2		2016-09-08				9606	Homo sapiens	GSM2141267										
+SAMN04932956	SRS1419217			macrophage					AF37_S2		2016-09-08				9606	Homo sapiens	GSM2141268										
+SAMN04932957	SRS1419218			macrophage					AF39_L2		2016-09-08				9606	Homo sapiens	GSM2141269										
+SAMN04932958	SRS1419219			macrophage					AF39_NI2		2016-09-08				9606	Homo sapiens	GSM2141270										
+SAMN04932959	SRS1419220			macrophage					AF39_S2		2016-09-08				9606	Homo sapiens	GSM2141271										
+SAMN04932960	SRS1419189			macrophage					AF11_L2		2016-09-08				9606	Homo sapiens	GSM2141236										
+SAMN04932961	SRS1419190			macrophage					AF11_NI2		2016-09-08				9606	Homo sapiens	GSM2141237										
+SAMN04932962	SRS1419191			macrophage					AF11_S2		2016-09-08				9606	Homo sapiens	GSM2141238										
+SAMN04932963	SRS1419192			macrophage					AF17_L2		2016-09-08				9606	Homo sapiens	GSM2141239										
+SAMN04932964	SRS1419193			macrophage					AF17_NI2		2016-09-08				9606	Homo sapiens	GSM2141240										
+SAMN04932965	SRS1419194			macrophage					AF17_S2		2016-09-08				9606	Homo sapiens	GSM2141241										
+SAMN04932966	SRS1419195			macrophage					AF19_L2		2016-09-08				9606	Homo sapiens	GSM2141242										
+SAMN04932967	SRS1419199			macrophage					AF23_L2		2016-09-08				9606	Homo sapiens	GSM2141248										
+SAMN04932968	SRS1419200			macrophage					AF23_NI2		2016-09-08				9606	Homo sapiens	GSM2141249										
+SAMN04932969	SRS1419201			macrophage					AF23_S2		2016-09-08				9606	Homo sapiens	GSM2141250										
+SAMN04932970	SRS1419202			macrophage					AF25_NI2		2016-09-08				9606	Homo sapiens	GSM2141252										
+SAMN04932971	SRS1419206			macrophage					AF29_L2		2016-09-08				9606	Homo sapiens	GSM2141257										
+SAMN04932973	SRS1419196			macrophage					AF19_S2		2016-09-08				9606	Homo sapiens	GSM2141244										
+SAMN04932974	SRS1419197			macrophage					AF21_NI2		2016-09-08				9606	Homo sapiens	GSM2141246										
+SAMN04932975	SRS1419198			macrophage					AF21_S2		2016-09-08				9606	Homo sapiens	GSM2141247										
+SAMN04932976	SRS1419203			macrophage					AF27_L2		2016-09-08				9606	Homo sapiens	GSM2141254										
+SAMN04932977	SRS1419204			macrophage					AF27_NI2		2016-09-08				9606	Homo sapiens	GSM2141255										
+SAMN04932978	SRS1419205			macrophage					AF27_S2		2016-09-08				9606	Homo sapiens	GSM2141256										
+SAMN04932979	SRS1419207			macrophage					AF29_NI2		2016-09-08				9606	Homo sapiens	GSM2141258										
+SAMN04932980	SRS1419208			macrophage					AF29_S2		2016-09-08				9606	Homo sapiens	GSM2141259										
+SAMN04932981	SRS1419209			macrophage					AF31_L2		2016-09-08				9606	Homo sapiens	GSM2141260										
+SAMN04932982	SRS1419210			macrophage					AF31_NI2		2016-09-08				9606	Homo sapiens	GSM2141261										
+SAMN04932983	SRS1419211			macrophage					AF31_S2		2016-09-08				9606	Homo sapiens	GSM2141262										
+SAMN04932984	SRS1419212			macrophage					AF35_L2		2016-09-08				9606	Homo sapiens	GSM2141263										
+SAMN04932985	SRS1419213			macrophage					AF35_NI2		2016-09-08				9606	Homo sapiens	GSM2141264										
+SAMN04932986	SRS1419664			macrophage					EU294_S2		2016-09-08				9606	Homo sapiens	GSM2141714										
+SAMN04932987	SRS1419663			macrophage					EU296_L2		2016-09-08				9606	Homo sapiens	GSM2141715										
+SAMN04932988	SRS1419665			macrophage					EU296_NI2		2016-09-08				9606	Homo sapiens	GSM2141716										
+SAMN04932989	SRS1419666			macrophage					EU296_S2		2016-09-08				9606	Homo sapiens	GSM2141717										
+SAMN04932990	SRS1419667			macrophage					EU298_L2		2016-09-08				9606	Homo sapiens	GSM2141718										
+SAMN04932991	SRS1419669			macrophage					EU298_NI2		2016-09-08				9606	Homo sapiens	GSM2141719										
+SAMN04932992	SRS1419668			macrophage					EU298_S2		2016-09-08				9606	Homo sapiens	GSM2141720										
+SAMN04932993	SRS1419670			macrophage					EU300_L2		2016-09-08				9606	Homo sapiens	GSM2141721										
+SAMN04932994	SRS1419677			macrophage					EU300_NI2		2016-09-08				9606	Homo sapiens	GSM2141722										
+SAMN04932995	SRS1419671			macrophage					EU300_S2		2016-09-08				9606	Homo sapiens	GSM2141723										
+SAMN04932996	SRS1419672			macrophage					EU302_L2		2016-09-08				9606	Homo sapiens	GSM2141724										
+SAMN04932997	SRS1419674			macrophage					EU302_NI2		2016-09-08				9606	Homo sapiens	GSM2141725										
+SAMN04932998	SRS1419673			macrophage					EU302_S2		2016-09-08				9606	Homo sapiens	GSM2141726										
+SAMN04932999	SRS1419675			macrophage					EU306_L2		2016-09-08				9606	Homo sapiens	GSM2141727										
+SAMN04933000	SRS1419676			macrophage					EU306_NI2		2016-09-08				9606	Homo sapiens	GSM2141728										
+SAMN04933001	SRS1419678			macrophage					EU306_S2		2016-09-08				9606	Homo sapiens	GSM2141729										
+SAMN04933002	SRS1419679			macrophage					EU40_L2		2016-09-08				9606	Homo sapiens	GSM2141730										
+SAMN04933003	SRS1419681			macrophage					EU40_NI2		2016-09-08				9606	Homo sapiens	GSM2141731										
+SAMN04933004	SRS1419680			macrophage					EU40_S2		2016-09-08				9606	Homo sapiens	GSM2141732										
+SAMN04933005	SRS1419683			macrophage					EU56_L2		2016-09-08				9606	Homo sapiens	GSM2141733										
+SAMN04933006	SRS1419682			macrophage					EU56_NI2		2016-09-08				9606	Homo sapiens	GSM2141734										
+SAMN04933007	SRS1419686			macrophage					EU56_S2		2016-09-08				9606	Homo sapiens	GSM2141735										
+SAMN04933008	SRS1419684			macrophage					EU96_L2		2016-09-08				9606	Homo sapiens	GSM2141736										
+SAMN04933009	SRS1419685			macrophage					EU96_NI2		2016-09-08				9606	Homo sapiens	GSM2141737										
+SAMN04933010	SRS1419687			macrophage					EU96_S2		2016-09-08				9606	Homo sapiens	GSM2141738										
+SAMN04933011	SRS1419368			macrophage					AF115_L2		2016-09-08				9606	Homo sapiens	GSM2141418										
+SAMN04933012	SRS1419367			macrophage					AF115_NI2		2016-09-08				9606	Homo sapiens	GSM2141419										
+SAMN04933013	SRS1419369			macrophage					AF115_S2		2016-09-08				9606	Homo sapiens	GSM2141420										
+SAMN04933014	SRS1419370			macrophage					AF117_NI2		2016-09-08				9606	Homo sapiens	GSM2141421										
+SAMN04933015	SRS1419371			macrophage					AF117_S2		2016-09-08				9606	Homo sapiens	GSM2141422										
+SAMN04933016	SRS1419363			macrophage					AF111_S2		2016-09-08				9606	Homo sapiens	GSM2141414										
+SAMN04933017	SRS1419366			macrophage					AF113_L2		2016-09-08				9606	Homo sapiens	GSM2141415										
+SAMN04933018	SRS1419364			macrophage					AF113_NI2		2016-09-08				9606	Homo sapiens	GSM2141416										
+SAMN04933019	SRS1419365			macrophage					AF113_S2		2016-09-08				9606	Homo sapiens	GSM2141417										
+SAMN04933020	SRS1419372			macrophage					AF119_L2		2016-09-08				9606	Homo sapiens	GSM2141423										
+SAMN04933021	SRS1419373			macrophage					AF119_NI2		2016-09-08				9606	Homo sapiens	GSM2141424										
+SAMN04933022	SRS1419380			macrophage					AF119_S2		2016-09-08				9606	Homo sapiens	GSM2141425										
+SAMN04933023	SRS1419375			macrophage					AF125_L2		2016-09-08				9606	Homo sapiens	GSM2141426										
+SAMN04933024	SRS1419374			macrophage					AF125_NI2		2016-09-08				9606	Homo sapiens	GSM2141427										
+SAMN04933025	SRS1419376			macrophage					AF125_S2		2016-09-08				9606	Homo sapiens	GSM2141428										
+SAMN04933026	SRS1419378			macrophage					AF127_L2		2016-09-08				9606	Homo sapiens	GSM2141429										
+SAMN04933027	SRS1419377			macrophage					AF127_NI2		2016-09-08				9606	Homo sapiens	GSM2141430										
+SAMN04933028	SRS1419379			macrophage					AF127_S2		2016-09-08				9606	Homo sapiens	GSM2141431										
+SAMN04933029	SRS1419381			macrophage					AF129_L2		2016-09-08				9606	Homo sapiens	GSM2141432										
+SAMN04933030	SRS1419384			macrophage					AF129_NI2		2016-09-08				9606	Homo sapiens	GSM2141433										
+SAMN04933031	SRS1419383			macrophage					AF129_S2		2016-09-08				9606	Homo sapiens	GSM2141434										
+SAMN04933032	SRS1419382			macrophage					AF131_L2		2016-09-08				9606	Homo sapiens	GSM2141435										
+SAMN04933033	SRS1419385			macrophage					AF131_NI2		2016-09-08				9606	Homo sapiens	GSM2141436										
+SAMN04933034	SRS1419386			macrophage					AF131_S2		2016-09-08				9606	Homo sapiens	GSM2141437										
+SAMN04933035	SRS1419387			macrophage					AF133_L2		2016-09-08				9606	Homo sapiens	GSM2141438										
+SAMN04933036	SRS1419388			macrophage					AF133_NI2		2016-09-08				9606	Homo sapiens	GSM2141439										
+SAMN04933037	SRS1419389			macrophage					AF133_S2		2016-09-08				9606	Homo sapiens	GSM2141440										
+SAMN04933038	SRS1419390			macrophage					AF137_L2		2016-09-08				9606	Homo sapiens	GSM2141441										
+SAMN04933039	SRS1419391			macrophage					AF137_NI2		2016-09-08				9606	Homo sapiens	GSM2141442										
+SAMN04933040	SRS1419392			macrophage					AF137_S2		2016-09-08				9606	Homo sapiens	GSM2141443										
+SAMN04933041	SRS1419332			macrophage					EU70_S2		2016-09-08				9606	Homo sapiens	GSM2141384										
+SAMN04933042	SRS1419333			macrophage					EU72_L2		2016-09-08				9606	Homo sapiens	GSM2141385										
+SAMN04933043	SRS1419335			macrophage					EU72_NI2		2016-09-08				9606	Homo sapiens	GSM2141386										
+SAMN04933044	SRS1419336			macrophage					EU72_S2		2016-09-08				9606	Homo sapiens	GSM2141387										
+SAMN04933045	SRS1419337			macrophage					EU74_L2		2016-09-08				9606	Homo sapiens	GSM2141388										
+SAMN04933046	SRS1419339			macrophage					EU74_NI2		2016-09-08				9606	Homo sapiens	GSM2141389										
+SAMN04933047	SRS1419338			macrophage					EU74_S2		2016-09-08				9606	Homo sapiens	GSM2141390										
+SAMN04933048	SRS1419340			macrophage					EU76_L2		2016-09-08				9606	Homo sapiens	GSM2141391										
+SAMN04933049	SRS1419343			macrophage					EU76_NI2		2016-09-08				9606	Homo sapiens	GSM2141392										
+SAMN04933050	SRS1419341			macrophage					EU76_S2		2016-09-08				9606	Homo sapiens	GSM2141393										
+SAMN04933051	SRS1419342			macrophage					EU78_L2		2016-09-08				9606	Homo sapiens	GSM2141394										
+SAMN04933052	SRS1419344			macrophage					EU78_NI2		2016-09-08				9606	Homo sapiens	GSM2141395										
+SAMN04933053	SRS1419345			macrophage					EU78_S2		2016-09-08				9606	Homo sapiens	GSM2141396										
+SAMN04933054	SRS1419346			macrophage					EU80_L2		2016-09-08				9606	Homo sapiens	GSM2141397										
+SAMN04933055	SRS1419347			macrophage					EU80_NI2		2016-09-08				9606	Homo sapiens	GSM2141398										
+SAMN04933056	SRS1419348			macrophage					EU80_S2		2016-09-08				9606	Homo sapiens	GSM2141399										
+SAMN04933057	SRS1419350			macrophage					AF101_L2		2016-09-08				9606	Homo sapiens	GSM2141400										
+SAMN04933058	SRS1419349			macrophage					AF101_NI2		2016-09-08				9606	Homo sapiens	GSM2141401										
+SAMN04933059	SRS1419351			macrophage					AF101_S2		2016-09-08				9606	Homo sapiens	GSM2141402										
+SAMN04933060	SRS1419353			macrophage					AF105_L2		2016-09-08				9606	Homo sapiens	GSM2141403										
+SAMN04933061	SRS1419352			macrophage					AF105_NI2		2016-09-08				9606	Homo sapiens	GSM2141404										
+SAMN04933062	SRS1419354			macrophage					AF105_S2		2016-09-08				9606	Homo sapiens	GSM2141405										
+SAMN04933063	SRS1419358			macrophage					AF107_L2		2016-09-08				9606	Homo sapiens	GSM2141406										
+SAMN04933064	SRS1419355			macrophage					AF107_NI2		2016-09-08				9606	Homo sapiens	GSM2141407										
+SAMN04933065	SRS1419357			macrophage					AF107_S2		2016-09-08				9606	Homo sapiens	GSM2141408										
+SAMN04933066	SRS1419356			macrophage					AF109_L2		2016-09-08				9606	Homo sapiens	GSM2141409										
+SAMN04933067	SRS1419360			macrophage					AF109_NI2		2016-09-08				9606	Homo sapiens	GSM2141410										
+SAMN04933068	SRS1419361			macrophage					AF109_S2		2016-09-08				9606	Homo sapiens	GSM2141411										
+SAMN04933069	SRS1419359			macrophage					AF111_L2		2016-09-08				9606	Homo sapiens	GSM2141412										
+SAMN04933070	SRS1419362			macrophage					AF111_NI2		2016-09-08				9606	Homo sapiens	GSM2141413										
+SAMN04933071	SRS1419488			macrophage					AF93_NI2		2016-09-08				9606	Homo sapiens	GSM2141539										
+SAMN04933072	SRS1419489			macrophage					AF93_S2		2016-09-08				9606	Homo sapiens	GSM2141540										
+SAMN04933073	SRS1419482			macrophage					AF75_L2		2016-09-08				9606	Homo sapiens	GSM2141533										
+SAMN04933074	SRS1419483			macrophage					AF75_NI2		2016-09-08				9606	Homo sapiens	GSM2141534										
+SAMN04933075	SRS1419484			macrophage					AF75_S2		2016-09-08				9606	Homo sapiens	GSM2141535										
+SAMN04933076	SRS1419485			macrophage					AF89_S2		2016-09-08				9606	Homo sapiens	GSM2141536										
+SAMN04933077	SRS1419486			macrophage					AF91_S2		2016-09-08				9606	Homo sapiens	GSM2141537										
+SAMN04933078	SRS1419490			macrophage					AF95_L2		2016-09-08				9606	Homo sapiens	GSM2141541										
+SAMN04933079	SRS1419491			macrophage					AF95_NI2		2016-09-08				9606	Homo sapiens	GSM2141542										
+SAMN04933080	SRS1419492			macrophage					AF95_S2		2016-09-08				9606	Homo sapiens	GSM2141543										
+SAMN04933081	SRS1419493			macrophage					AF97_L2		2016-09-08				9606	Homo sapiens	GSM2141544										
+SAMN04933082	SRS1419495			macrophage					AF97_NI2		2016-09-08				9606	Homo sapiens	GSM2141545										
+SAMN04933083	SRS1419494			macrophage					AF97_S2		2016-09-08				9606	Homo sapiens	GSM2141546										
+SAMN04933084	SRS1419497			macrophage					EU104_L2		2016-09-08				9606	Homo sapiens	GSM2141547										
+SAMN04933085	SRS1419496			macrophage					EU104_NI2		2016-09-08				9606	Homo sapiens	GSM2141548										
+SAMN04933086	SRS1419498			macrophage					EU104_S2		2016-09-08				9606	Homo sapiens	GSM2141549										
+SAMN04933087	SRS1419499			macrophage					EU110_L2		2016-09-08				9606	Homo sapiens	GSM2141550										
+SAMN04933088	SRS1419500			macrophage					EU110_NI2		2016-09-08				9606	Homo sapiens	GSM2141551										
+SAMN04933089	SRS1419501			macrophage					EU110_S2		2016-09-08				9606	Homo sapiens	GSM2141552										
+SAMN04933090	SRS1419502			macrophage					EU118_L2		2016-09-08				9606	Homo sapiens	GSM2141553										
+SAMN04933091	SRS1419504			macrophage					EU118_NI2		2016-09-08				9606	Homo sapiens	GSM2141554										
+SAMN04933092	SRS1419503			macrophage					EU118_S2		2016-09-08				9606	Homo sapiens	GSM2141555										
+SAMN04933093	SRS1419505			macrophage					EU120_L2		2016-09-08				9606	Homo sapiens	GSM2141556										
+SAMN04933094	SRS1419506			macrophage					EU120_NI2		2016-09-08				9606	Homo sapiens	GSM2141557										
+SAMN04933095	SRS1419507			macrophage					EU120_S2		2016-09-08				9606	Homo sapiens	GSM2141558										
+SAMN04933096	SRS1419508			macrophage					EU122_L2		2016-09-08				9606	Homo sapiens	GSM2141559										
+SAMN04933097	SRS1419509			macrophage					EU122_NI2		2016-09-08				9606	Homo sapiens	GSM2141560										
+SAMN04933098	SRS1419511			macrophage					EU122_S2		2016-09-08				9606	Homo sapiens	GSM2141561										
+SAMN04933099	SRS1419510			macrophage					EU126_L2		2016-09-08				9606	Homo sapiens	GSM2141562										
+SAMN04933100	SRS1419513			macrophage					EU126_NI2		2016-09-08				9606	Homo sapiens	GSM2141563										
+SAMN04933101	SRS1419632			macrophage					EU272_S2		2016-09-08				9606	Homo sapiens	GSM2141684										
+SAMN04933102	SRS1419634			macrophage					EU274_L2		2016-09-08				9606	Homo sapiens	GSM2141685										
+SAMN04933103	SRS1419635			macrophage					EU274_NI2		2016-09-08				9606	Homo sapiens	GSM2141686										
+SAMN04933104	SRS1419636			macrophage					EU274_S2		2016-09-08				9606	Homo sapiens	GSM2141687										
+SAMN04933105	SRS1419637			macrophage					EU276_L2		2016-09-08				9606	Homo sapiens	GSM2141688										
+SAMN04933106	SRS1419638			macrophage					EU276_NI2		2016-09-08				9606	Homo sapiens	GSM2141689										
+SAMN04933107	SRS1419640			macrophage					EU276_S2		2016-09-08				9606	Homo sapiens	GSM2141690										
+SAMN04933108	SRS1419639			macrophage					EU278_L2		2016-09-08				9606	Homo sapiens	GSM2141691										
+SAMN04933109	SRS1419641			macrophage					EU278_NI2		2016-09-08				9606	Homo sapiens	GSM2141692										
+SAMN04933110	SRS1419642			macrophage					EU278_S2		2016-09-08				9606	Homo sapiens	GSM2141693										
+SAMN04933111	SRS1419643			macrophage					EU280_L2		2016-09-08				9606	Homo sapiens	GSM2141694										
+SAMN04933112	SRS1419646			macrophage					EU280_NI2		2016-09-08				9606	Homo sapiens	GSM2141695										
+SAMN04933113	SRS1419644			macrophage					EU280_S2		2016-09-08				9606	Homo sapiens	GSM2141696										
+SAMN04933114	SRS1419647			macrophage					EU282_L2		2016-09-08				9606	Homo sapiens	GSM2141697										
+SAMN04933115	SRS1419645			macrophage					EU282_NI2		2016-09-08				9606	Homo sapiens	GSM2141698										
+SAMN04933116	SRS1419648			macrophage					EU282_S2		2016-09-08				9606	Homo sapiens	GSM2141699										
+SAMN04933117	SRS1419650			macrophage					EU284_L2		2016-09-08				9606	Homo sapiens	GSM2141700										
+SAMN04933118	SRS1419649			macrophage					EU284_NI2		2016-09-08				9606	Homo sapiens	GSM2141701										
+SAMN04933119	SRS1419651			macrophage					EU284_S2		2016-09-08				9606	Homo sapiens	GSM2141702										
+SAMN04933120	SRS1419660			macrophage					EU286_L2		2016-09-08				9606	Homo sapiens	GSM2141703										
+SAMN04933121	SRS1419654			macrophage					EU286_NI2		2016-09-08				9606	Homo sapiens	GSM2141704										
+SAMN04933122	SRS1419652			macrophage					EU286_S2		2016-09-08				9606	Homo sapiens	GSM2141705										
+SAMN04933123	SRS1419653			macrophage					EU288_L2		2016-09-08				9606	Homo sapiens	GSM2141706										
+SAMN04933124	SRS1419655			macrophage					EU288_NI2		2016-09-08				9606	Homo sapiens	GSM2141707										
+SAMN04933125	SRS1419656			macrophage					EU288_S2		2016-09-08				9606	Homo sapiens	GSM2141708										
+SAMN04933126	SRS1419659			macrophage					EU290_L2		2016-09-08				9606	Homo sapiens	GSM2141709										
+SAMN04933127	SRS1419658			macrophage					EU290_NI2		2016-09-08				9606	Homo sapiens	GSM2141710										
+SAMN04933128	SRS1419657			macrophage					EU290_S2		2016-09-08				9606	Homo sapiens	GSM2141711										
+SAMN04933129	SRS1419661			macrophage					EU294_L2		2016-09-08				9606	Homo sapiens	GSM2141712										
+SAMN04933130	SRS1419662			macrophage					EU294_NI2		2016-09-08				9606	Homo sapiens	GSM2141713										
+SAMN04933131	SRS1419543			macrophage					EU156_S2		2016-09-08				9606	Homo sapiens	GSM2141594										
+SAMN04933132	SRS1419545			macrophage					EU162_L2		2016-09-08				9606	Homo sapiens	GSM2141595										
+SAMN04933133	SRS1419544			macrophage					EU162_NI2		2016-09-08				9606	Homo sapiens	GSM2141596										
+SAMN04933134	SRS1419546			macrophage					EU162_S2		2016-09-08				9606	Homo sapiens	GSM2141597										
+SAMN04933135	SRS1419547			macrophage					EU164_L2		2016-09-08				9606	Homo sapiens	GSM2141598										
+SAMN04933136	SRS1419548			macrophage					EU164_NI2		2016-09-08				9606	Homo sapiens	GSM2141599										
+SAMN04933137	SRS1419549			macrophage					EU164_S2		2016-09-08				9606	Homo sapiens	GSM2141600										
+SAMN04933138	SRS1419550			macrophage					EU168_L2		2016-09-08				9606	Homo sapiens	GSM2141601										
+SAMN04933139	SRS1419551			macrophage					EU168_NI2		2016-09-08				9606	Homo sapiens	GSM2141602										
+SAMN04933140	SRS1419553			macrophage					EU168_S2		2016-09-08				9606	Homo sapiens	GSM2141603										
+SAMN04933141	SRS1419552			macrophage					EU170_L2		2016-09-08				9606	Homo sapiens	GSM2141604										
+SAMN04933142	SRS1419554			macrophage					EU170_NI2		2016-09-08				9606	Homo sapiens	GSM2141605										
+SAMN04933143	SRS1419556			macrophage					EU170_S2		2016-09-08				9606	Homo sapiens	GSM2141606										
+SAMN04933144	SRS1419557			macrophage					EU184_L2		2016-09-08				9606	Homo sapiens	GSM2141607										
+SAMN04933145	SRS1419555			macrophage					EU184_NI2		2016-09-08				9606	Homo sapiens	GSM2141608										
+SAMN04933146	SRS1419558			macrophage					EU184_S2		2016-09-08				9606	Homo sapiens	GSM2141609										
+SAMN04933147	SRS1419559			macrophage					EU186_L2		2016-09-08				9606	Homo sapiens	GSM2141610										
+SAMN04933148	SRS1419560			macrophage					EU186_NI2		2016-09-08				9606	Homo sapiens	GSM2141611										
+SAMN04933149	SRS1419561			macrophage					EU186_S2		2016-09-08				9606	Homo sapiens	GSM2141612										
+SAMN04933150	SRS1419563			macrophage					EU190_L2		2016-09-08				9606	Homo sapiens	GSM2141613										
+SAMN04933151	SRS1419562			macrophage					EU190_NI2		2016-09-08				9606	Homo sapiens	GSM2141614										
+SAMN04933152	SRS1419565			macrophage					EU190_S2		2016-09-08				9606	Homo sapiens	GSM2141615										
+SAMN04933153	SRS1419564			macrophage					EU200_L2		2016-09-08				9606	Homo sapiens	GSM2141616										
+SAMN04933154	SRS1419566			macrophage					EU200_NI2		2016-09-08				9606	Homo sapiens	GSM2141617										
+SAMN04933155	SRS1419567			macrophage					EU200_S2		2016-09-08				9606	Homo sapiens	GSM2141618										
+SAMN04933156	SRS1419568			macrophage					EU202_L2		2016-09-08				9606	Homo sapiens	GSM2141619										
+SAMN04933157	SRS1419569			macrophage					EU202_NI2		2016-09-08				9606	Homo sapiens	GSM2141620										
+SAMN04933158	SRS1419570			macrophage					EU202_S2		2016-09-08				9606	Homo sapiens	GSM2141621										
+SAMN04933159	SRS1419572			macrophage					EU210_L2		2016-09-08				9606	Homo sapiens	GSM2141622										
+SAMN04933160	SRS1419571			macrophage					EU210_NI2		2016-09-08				9606	Homo sapiens	GSM2141623										
+SAMN04933161	SRS1419574			macrophage					EU210_S2		2016-09-08				9606	Homo sapiens	GSM2141624										
+SAMN04933162	SRS1419573			macrophage					EU212_L2		2016-09-08				9606	Homo sapiens	GSM2141625										
+SAMN04933163	SRS1419577			macrophage					EU212_NI2		2016-09-08				9606	Homo sapiens	GSM2141626										
+SAMN04933164	SRS1419575			macrophage					EU212_S2		2016-09-08				9606	Homo sapiens	GSM2141627										
+SAMN04933165	SRS1419576			macrophage					EU214_L2		2016-09-08				9606	Homo sapiens	GSM2141628										
+SAMN04933166	SRS1419579			macrophage					EU214_NI2		2016-09-08				9606	Homo sapiens	GSM2141629										
+SAMN04933167	SRS1419578			macrophage					EU214_S2		2016-09-08				9606	Homo sapiens	GSM2141630										
+SAMN04933168	SRS1419580			macrophage					EU216_L2		2016-09-08				9606	Homo sapiens	GSM2141631										
+SAMN04933169	SRS1419581			macrophage					EU216_NI2		2016-09-08				9606	Homo sapiens	GSM2141632										
+SAMN04933170	SRS1419583			macrophage					EU216_S2		2016-09-08				9606	Homo sapiens	GSM2141633										
+SAMN04933171	SRS1419584			macrophage					EU224_L2		2016-09-08				9606	Homo sapiens	GSM2141634										
+SAMN04933172	SRS1419582			macrophage					EU224_NI2		2016-09-08				9606	Homo sapiens	GSM2141635										
+SAMN04933173	SRS1419585			macrophage					EU224_S2		2016-09-08				9606	Homo sapiens	GSM2141636										
+SAMN04933174	SRS1419586			macrophage					EU230_L2		2016-09-08				9606	Homo sapiens	GSM2141637										
+SAMN04933175	SRS1419587			macrophage					EU230_NI2		2016-09-08				9606	Homo sapiens	GSM2141638										
+SAMN04933176	SRS1419588			macrophage					EU230_S2		2016-09-08				9606	Homo sapiens	GSM2141639										
+SAMN04933177	SRS1419589			macrophage					EU232_L2		2016-09-08				9606	Homo sapiens	GSM2141640										
+SAMN04933178	SRS1419590			macrophage					EU232_NI2		2016-09-08				9606	Homo sapiens	GSM2141641										
+SAMN04933179	SRS1419591			macrophage					EU232_S2		2016-09-08				9606	Homo sapiens	GSM2141642										
+SAMN04933180	SRS1419594			macrophage					EU238_L2		2016-09-08				9606	Homo sapiens	GSM2141643										
+SAMN04933181	SRS1419592			macrophage					EU238_NI2		2016-09-08				9606	Homo sapiens	GSM2141644										
+SAMN04933182	SRS1419593			macrophage					EU238_S2		2016-09-08				9606	Homo sapiens	GSM2141645										
+SAMN04933183	SRS1419595			macrophage					EU240_L2		2016-09-08				9606	Homo sapiens	GSM2141646										
+SAMN04933184	SRS1419597			macrophage					EU240_S2		2016-09-08				9606	Homo sapiens	GSM2141647										
+SAMN04933185	SRS1419596			macrophage					EU242_L2		2016-09-08				9606	Homo sapiens	GSM2141648										
+SAMN04933186	SRS1419598			macrophage					EU242_NI2		2016-09-08				9606	Homo sapiens	GSM2141649										
+SAMN04933187	SRS1419599			macrophage					EU242_S2		2016-09-08				9606	Homo sapiens	GSM2141650										
+SAMN04933188	SRS1419607			macrophage					EU254_L2		2016-09-08				9606	Homo sapiens	GSM2141658										
+SAMN04933189	SRS1419600			macrophage					EU246_L2		2016-09-08				9606	Homo sapiens	GSM2141651										
+SAMN04933190	SRS1419601			macrophage					EU246_S2		2016-09-08				9606	Homo sapiens	GSM2141652										
+SAMN04933191	SRS1419512			macrophage					EU126_S2		2016-09-08				9606	Homo sapiens	GSM2141564										
+SAMN04933192	SRS1419514			macrophage					EU128_L2		2016-09-08				9606	Homo sapiens	GSM2141565										
+SAMN04933193	SRS1419515			macrophage					EU128_NI2		2016-09-08				9606	Homo sapiens	GSM2141566										
+SAMN04933194	SRS1419517			macrophage					EU128_S2		2016-09-08				9606	Homo sapiens	GSM2141567										
+SAMN04933195	SRS1419518			macrophage					EU130_L2		2016-09-08				9606	Homo sapiens	GSM2141568										
+SAMN04933196	SRS1419516			macrophage					EU130_NI2		2016-09-08				9606	Homo sapiens	GSM2141569										
+SAMN04933197	SRS1419520			macrophage					EU130_S2		2016-09-08				9606	Homo sapiens	GSM2141570										
+SAMN04933198	SRS1419519			macrophage					EU134_L2		2016-09-08				9606	Homo sapiens	GSM2141571										
+SAMN04933199	SRS1419521			macrophage					EU134_NI2		2016-09-08				9606	Homo sapiens	GSM2141572										
+SAMN04933200	SRS1419522			macrophage					EU134_S2		2016-09-08				9606	Homo sapiens	GSM2141573										
+SAMN04933201	SRS1419523			macrophage					EU136_L2		2016-09-08				9606	Homo sapiens	GSM2141574										
+SAMN04933202	SRS1419525			macrophage					EU136_NI2		2016-09-08				9606	Homo sapiens	GSM2141575										
+SAMN04933203	SRS1419524			macrophage					EU136_S2		2016-09-08				9606	Homo sapiens	GSM2141576										
+SAMN04933204	SRS1419526			macrophage					EU138_L2		2016-09-08				9606	Homo sapiens	GSM2141577										
+SAMN04933205	SRS1419527			macrophage					EU138_NI2		2016-09-08				9606	Homo sapiens	GSM2141578										
+SAMN04933206	SRS1419528			macrophage					EU138_S2		2016-09-08				9606	Homo sapiens	GSM2141579										
+SAMN04933207	SRS1419529			macrophage					EU140_L2		2016-09-08				9606	Homo sapiens	GSM2141580										
+SAMN04933208	SRS1419530			macrophage					EU140_NI2		2016-09-08				9606	Homo sapiens	GSM2141581										
+SAMN04933209	SRS1419531			macrophage					EU140_S2		2016-09-08				9606	Homo sapiens	GSM2141582										
+SAMN04933210	SRS1419532			macrophage					EU144_L2		2016-09-08				9606	Homo sapiens	GSM2141583										
+SAMN04933211	SRS1419533			macrophage					EU144_NI2		2016-09-08				9606	Homo sapiens	GSM2141584										
+SAMN04933212	SRS1419535			macrophage					EU144_S2		2016-09-08				9606	Homo sapiens	GSM2141585										
+SAMN04933213	SRS1419534			macrophage					EU148_L2		2016-09-08				9606	Homo sapiens	GSM2141586										
+SAMN04933214	SRS1419536			macrophage					EU148_NI2		2016-09-08				9606	Homo sapiens	GSM2141587										
+SAMN04933215	SRS1419539			macrophage					EU148_S2		2016-09-08				9606	Homo sapiens	GSM2141588										
+SAMN04933216	SRS1419537			macrophage					EU152_L2		2016-09-08				9606	Homo sapiens	GSM2141589										
+SAMN04933217	SRS1419538			macrophage					EU152_NI2		2016-09-08				9606	Homo sapiens	GSM2141590										
+SAMN04933218	SRS1419541			macrophage					EU152_S2		2016-09-08				9606	Homo sapiens	GSM2141591										
+SAMN04933219	SRS1419540			macrophage					EU156_L2		2016-09-08				9606	Homo sapiens	GSM2141592										
+SAMN04933220	SRS1419542			macrophage					EU156_NI2		2016-09-08				9606	Homo sapiens	GSM2141593										
+SAMN04933221	SRS1419602			macrophage					EU248_L2		2016-09-08				9606	Homo sapiens	GSM2141653										
+SAMN04933222	SRS1419604			macrophage					EU248_NI2		2016-09-08				9606	Homo sapiens	GSM2141654										
+SAMN04933223	SRS1419603			macrophage					EU248_S2		2016-09-08				9606	Homo sapiens	GSM2141655										
+SAMN04933224	SRS1419606			macrophage					EU252_NI2		2016-09-08				9606	Homo sapiens	GSM2141656										
+SAMN04933225	SRS1419605			macrophage					EU252_S2		2016-09-08				9606	Homo sapiens	GSM2141657										
+SAMN04933226	SRS1419608			macrophage					EU254_NI2		2016-09-08				9606	Homo sapiens	GSM2141659										
+SAMN04933227	SRS1419610			macrophage					EU254_S2		2016-09-08				9606	Homo sapiens	GSM2141660										
+SAMN04933228	SRS1419611			macrophage					EU258_L2		2016-09-08				9606	Homo sapiens	GSM2141661										
+SAMN04933229	SRS1419609			macrophage					EU258_NI2		2016-09-08				9606	Homo sapiens	GSM2141662										
+SAMN04933230	SRS1419612			macrophage					EU258_S2		2016-09-08				9606	Homo sapiens	GSM2141663										
+SAMN04933231	SRS1419613			macrophage					EU260_L2		2016-09-08				9606	Homo sapiens	GSM2141664										
+SAMN04933232	SRS1419614			macrophage					EU260_NI2		2016-09-08				9606	Homo sapiens	GSM2141665										
+SAMN04933233	SRS1419615			macrophage					EU260_S2		2016-09-08				9606	Homo sapiens	GSM2141666										
+SAMN04933234	SRS1419616			macrophage					EU262_L2		2016-09-08				9606	Homo sapiens	GSM2141667										
+SAMN04933235	SRS1419617			macrophage					EU262_NI2		2016-09-08				9606	Homo sapiens	GSM2141668										
+SAMN04933236	SRS1419619			macrophage					EU262_S2		2016-09-08				9606	Homo sapiens	GSM2141669										
+SAMN04933237	SRS1419618			macrophage					EU264_L2		2016-09-08				9606	Homo sapiens	GSM2141670										
+SAMN04933238	SRS1419620			macrophage					EU264_NI2		2016-09-08				9606	Homo sapiens	GSM2141671										
+SAMN04933239	SRS1419621			macrophage					EU264_S2		2016-09-08				9606	Homo sapiens	GSM2141672										
+SAMN04933240	SRS1419622			macrophage					EU266_L2		2016-09-08				9606	Homo sapiens	GSM2141673										
+SAMN04933241	SRS1419624			macrophage					EU266_NI2		2016-09-08				9606	Homo sapiens	GSM2141674										
+SAMN04933242	SRS1419623			macrophage					EU266_S2		2016-09-08				9606	Homo sapiens	GSM2141675										
+SAMN04933243	SRS1419625			macrophage					EU268_L2		2016-09-08				9606	Homo sapiens	GSM2141676										
+SAMN04933244	SRS1419626			macrophage					EU268_NI2		2016-09-08				9606	Homo sapiens	GSM2141677										
+SAMN04933245	SRS1419628			macrophage					EU268_S2		2016-09-08				9606	Homo sapiens	GSM2141678										
+SAMN04933246	SRS1419627			macrophage					EU270_L2		2016-09-08				9606	Homo sapiens	GSM2141679										
+SAMN04933247	SRS1419629			macrophage					EU270_NI2		2016-09-08				9606	Homo sapiens	GSM2141680										
+SAMN04933248	SRS1419630			macrophage					EU270_S2		2016-09-08				9606	Homo sapiens	GSM2141681										
+SAMN04933249	SRS1419631			macrophage					EU272_L2		2016-09-08				9606	Homo sapiens	GSM2141682										
+SAMN04933250	SRS1419633			macrophage					EU272_NI2		2016-09-08				9606	Homo sapiens	GSM2141683										
+SAMN04939503	SRS1421852			macrophage					AF19_NI2		2016-09-08				9606	Homo sapiens	GSM2141243										
+SAMN04939504	SRS1421853			macrophage					AF21_L2		2016-09-08				9606	Homo sapiens	GSM2141245										
+SAMN04939505	SRS1421854			macrophage					AF25_L2		2016-09-08				9606	Homo sapiens	GSM2141251										
+SAMN04939506	SRS1421855			macrophage					AF25_S2		2016-09-08				9606	Homo sapiens	GSM2141253										
+SAMN04956440	SRS1422812		MV4;11	macrophage					DMSO Rep 1		2016-06-22			peripheral blood	9606	Homo sapiens	GSM2143659										
+SAMN04956441	SRS1422810		MV4;11	macrophage					DMSO Rep 2		2016-06-22			peripheral blood	9606	Homo sapiens	GSM2143660										
+SAMN04956442	SRS1422811		MV4;11	macrophage					I-BET treated Rep 1		2016-06-22			peripheral blood	9606	Homo sapiens	GSM2143661										
+SAMN04956443	SRS1422813		MV4;11	macrophage					I-BET treated Rep 2		2016-06-22			peripheral blood	9606	Homo sapiens	GSM2143662										
+SAMN04956444	SRS1422814		MV4;11	macrophage					SGC0946 treated Rep 1		2016-06-22			peripheral blood	9606	Homo sapiens	GSM2143663										
+SAMN04956445	SRS1422815		MV4;11	macrophage					SGC0946 treated Rep 2		2016-06-22			peripheral blood	9606	Homo sapiens	GSM2143664										
+SAMN04956446	SRS1422817		MV4;11	macrophage					I-BET + SGC0946 Rep 1		2016-06-22			peripheral blood	9606	Homo sapiens	GSM2143665										
+SAMN04956447	SRS1422816		MV4;11	macrophage					I-BET + SGC0946 Rep 2		2016-06-22			peripheral blood	9606	Homo sapiens	GSM2143666										
+SAMN04956448	SRS1422829		MV4;11	macrophage					DMSO shBRD4 Rep 1		2016-06-22			peripheral blood	9606	Homo sapiens	GSM2143667										
+SAMN04956449	SRS1422828		MV4;11	macrophage					DMSO shBRD4 Rep 2		2016-06-22			peripheral blood	9606	Homo sapiens	GSM2143668										
+SAMN04956450	SRS1422830		MV4;11	macrophage					DMSO shBRD4 Rep 3		2016-06-22			peripheral blood	9606	Homo sapiens	GSM2143669										
+SAMN04956451	SRS1422831		MV4;11	macrophage					DMSO shSCRAM Rep 1		2016-06-22			peripheral blood	9606	Homo sapiens	GSM2143670										
+SAMN04956452	SRS1422832		MV4;11	macrophage					DMSO shSCRAM Rep 2		2016-06-22			peripheral blood	9606	Homo sapiens	GSM2143671										
+SAMN04956453	SRS1422834		MV4;11	macrophage					DMSO shSCRAM Rep 3		2016-06-22			peripheral blood	9606	Homo sapiens	GSM2143672										
+SAMN04956454	SRS1422833		MV4;11	macrophage					SGC shBRD4 Rep 1		2016-06-22			peripheral blood	9606	Homo sapiens	GSM2143673										
+SAMN04956455	SRS1422835		MV4;11	macrophage					SGC shBRD4 Rep 2		2016-06-22			peripheral blood	9606	Homo sapiens	GSM2143674										
+SAMN04956456	SRS1422836		MV4;11	macrophage					SGC shBRD4 Rep 3		2016-06-22			peripheral blood	9606	Homo sapiens	GSM2143675										
+SAMN04956457	SRS1422838		MV4;11	macrophage					SGC shSCRAM Rep 1		2016-06-22			peripheral blood	9606	Homo sapiens	GSM2143676										
+SAMN04956458	SRS1422837		MV4;11	macrophage					SGC shSCRAM Rep 2		2016-06-22			peripheral blood	9606	Homo sapiens	GSM2143677										
+SAMN04956459	SRS1422839		MV4;11	macrophage					SGC shSCRAM Rep 3		2016-06-22			peripheral blood	9606	Homo sapiens	GSM2143678										
+SAMN06270078	SRS1939426			Macrophage					hESC (H9 (WA09))-derived macrophages		2017-01-26	female		'not applicable	9606	Homo sapiens	hescMacro-mock										
+SAMN06270079	SRS1939425			Macrophage					hiPSC (iPS-DF19-9-11T.H)-derived macrophages		2017-01-26	male		'not applicable	9606	Homo sapiens	ipscMacro-mock										
+SAMN06270080	SRS1939424			Macrophage					Primary human monocyte-derived macrophages		2017-01-27			'not applicable	9606	Homo sapiens	primMacro-mock										

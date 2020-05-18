@@ -1,0 +1,54 @@
+accession	secondary_sample_accession	bio_material	cell_line	cell_type	collected_by	collection_date	country	culture_collection	description	dev_stage	first_public	sex	tissue_lib	tissue_type	tax_id	scientific_name	sample_alias	protocol_label	project_name	host	host_tax_id	host_status	host_sex	submitted_host_sex	host_body_site	sample_collection	sequencing_method
+SAMN03785017	SRS967600			Dendritic cell					Donor 97 pDC		2015-12-25			Blood	9606	Homo sapiens	GSM1717151										
+SAMN03785018	SRS967599			Dendritic cell					Donor 97 CD1c+ mDC		2015-12-25			Blood	9606	Homo sapiens	GSM1717152										
+SAMN03785019	SRS967598			Dendritic cell					Donor 97 SLAN DC		2015-12-25			Blood	9606	Homo sapiens	GSM1717153										
+SAMN03785021	SRS967595			Dendritic cell					Donor 28 pDC		2015-12-25			Blood	9606	Homo sapiens	GSM1717155										
+SAMN03785022	SRS967596			Dendritic cell					Donor 28 CD1c+ mDC		2015-12-25			Blood	9606	Homo sapiens	GSM1717156										
+SAMN03785023	SRS967594			Dendritic cell					Donor 28 SLAN DC		2015-12-25			Blood	9606	Homo sapiens	GSM1717157										
+SAMN03785025	SRS967593			Dendritic cell					Donor 36 pDC		2015-12-25			Blood	9606	Homo sapiens	GSM1717159										
+SAMN03785026	SRS967591			Dendritic cell					Donor 36 CD1c+ mDC		2015-12-25			Blood	9606	Homo sapiens	GSM1717160										
+SAMN03785027	SRS967590			Dendritic cell					Donor 36 SLAN DC		2015-12-25			Blood	9606	Homo sapiens	GSM1717161										
+SAMN06273121	SRS1945430			dendritic cell					ENCODE biosample ENCBS004CRM		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS004CRM										
+SAMN06273122	SRS1945437			dendritic cell					ENCODE biosample ENCBS026AWG		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS026AWG										
+SAMN06273123	SRS1945409			dendritic cell					ENCODE biosample ENCBS026BUD		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS026BUD										
+SAMN06273124	SRS1945408			dendritic cell					ENCODE biosample ENCBS048UHR		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS048UHR										
+SAMN06273125	SRS1945447			dendritic cell					ENCODE biosample ENCBS064ORL		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS064ORL										
+SAMN06273126	SRS1945444			dendritic cell					ENCODE biosample ENCBS090FYD		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS090FYD										
+SAMN06273127	SRS1945415			dendritic cell					ENCODE biosample ENCBS091OOD		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS091OOD										
+SAMN06273128	SRS1945436			dendritic cell					ENCODE biosample ENCBS144RZK		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS144RZK										
+SAMN06273129	SRS1945427			dendritic cell					ENCODE biosample ENCBS214CSU		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS214CSU										
+SAMN06273130	SRS1945410			dendritic cell					ENCODE biosample ENCBS268SOT		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS268SOT										
+SAMN06273131	SRS1945403			dendritic cell					ENCODE biosample ENCBS271EMZ		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS271EMZ										
+SAMN06273132	SRS1945414			dendritic cell					ENCODE biosample ENCBS289TMG		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS289TMG										
+SAMN06273133	SRS1945440			dendritic cell					ENCODE biosample ENCBS293BSG		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS293BSG										
+SAMN06273134	SRS1945431			dendritic cell					ENCODE biosample ENCBS301RHJ		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS301RHJ										
+SAMN06273135	SRS1945445			dendritic cell					ENCODE biosample ENCBS303XVD		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS303XVD										
+SAMN06273136	SRS1945419			dendritic cell					ENCODE biosample ENCBS307KOL		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS307KOL										
+SAMN06273137	SRS1945407			dendritic cell					ENCODE biosample ENCBS360WKF		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS360WKF										
+SAMN06273138	SRS1945417			dendritic cell					ENCODE biosample ENCBS387MRC		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS387MRC										
+SAMN06273139	SRS1945446			dendritic cell					ENCODE biosample ENCBS398DZA		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS398DZA										
+SAMN06273140	SRS1945412			dendritic cell					ENCODE biosample ENCBS408IRE		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS408IRE										
+SAMN06273141	SRS1945435			dendritic cell					ENCODE biosample ENCBS419IFI		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS419IFI										
+SAMN06273142	SRS1945394			dendritic cell					ENCODE biosample ENCBS426AOO		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS426AOO										
+SAMN06273143	SRS1945421			dendritic cell					ENCODE biosample ENCBS445XAO		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS445XAO										
+SAMN06273144	SRS1945443			dendritic cell					ENCODE biosample ENCBS466HYD		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS466HYD										
+SAMN06273145	SRS1945411			dendritic cell					ENCODE biosample ENCBS549OUK		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS549OUK										
+SAMN06273146	SRS1945393			dendritic cell					ENCODE biosample ENCBS550GVG		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS550GVG										
+SAMN06273147	SRS1945413			dendritic cell					ENCODE biosample ENCBS580DMI		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS580DMI										
+SAMN06273148	SRS1945448			dendritic cell					ENCODE biosample ENCBS609PNX		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS609PNX										
+SAMN06273149	SRS1945434			dendritic cell					ENCODE biosample ENCBS610TYE		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS610TYE										
+SAMN06273150	SRS1945402			dendritic cell					ENCODE biosample ENCBS647HIX		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS647HIX										
+SAMN06273151	SRS1945424			dendritic cell					ENCODE biosample ENCBS670ABO		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS670ABO										
+SAMN06273152	SRS1945400			dendritic cell					ENCODE biosample ENCBS679AZN		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS679AZN										
+SAMN06273153	SRS1945429			dendritic cell					ENCODE biosample ENCBS693UNQ		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS693UNQ										
+SAMN06273154	SRS1945416			dendritic cell					ENCODE biosample ENCBS694UTH		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS694UTH										
+SAMN06273155	SRS1945401			dendritic cell					ENCODE biosample ENCBS725FYS		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS725FYS										
+SAMN06273156	SRS1945418			dendritic cell					ENCODE biosample ENCBS737RZU		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS737RZU										
+SAMN06273157	SRS1945420			dendritic cell					ENCODE biosample ENCBS770SDC		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS770SDC										
+SAMN06273158	SRS1945428			dendritic cell					ENCODE biosample ENCBS784GSL		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS784GSL										
+SAMN06273159	SRS1945432			dendritic cell					ENCODE biosample ENCBS874KRV		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS874KRV										
+SAMN06273160	SRS1945406			dendritic cell					ENCODE biosample ENCBS903EGN		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS903EGN										
+SAMN06273161	SRS1945395			dendritic cell					ENCODE biosample ENCBS913SBA		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS913SBA										
+SAMN06273162	SRS1945422			dendritic cell					ENCODE biosample ENCBS920LQC		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS920LQC										
+SAMN06273163	SRS1945423			dendritic cell					ENCODE biosample ENCBS935MDW		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS935MDW										
+SAMN06273164	SRS1945433			dendritic cell					ENCODE biosample ENCBS987IYA		2017-01-29				9606	Homo sapiens	ENCODE biosample ENCBS987IYA										

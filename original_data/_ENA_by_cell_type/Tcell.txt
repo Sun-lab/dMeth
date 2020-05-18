@@ -1,0 +1,125 @@
+accession	secondary_sample_accession	bio_material	cell_line	cell_type	collected_by	collection_date	country	culture_collection	description	dev_stage	first_public	sex	tissue_lib	tissue_type	tax_id	scientific_name	sample_alias	center_name	protocol_label	project_name	host	host_tax_id	host_status	host_sex	submitted_host_sex	host_body_site	sample_collection	sequencing_method
+SAMD00003164	DRS011459			T cell					11918-125H1		2014-05-29	male		blood	9606	Homo sapiens	SAMD00003164	BioSample										
+SAMD00003165	DRS011457			T cell					11919-125H2		2014-05-29	male		blood	9606	Homo sapiens	SAMD00003165	BioSample										
+SAMD00003166	DRS011458			T cell					11914-125G6		2014-05-29	male		blood	9606	Homo sapiens	SAMD00003166	BioSample										
+SAMD00003167	DRS011456			T cell					11915-125G7		2014-05-29	male		blood	9606	Homo sapiens	SAMD00003167	BioSample										
+SAMD00004701	DRS008083			T cell					11784-124B2		2014-04-27	male		blood	9606	Homo sapiens	SAMD00004701	BIOSAMPLE										
+SAMD00004706	DRS008072			T cell					11793-124C2		2014-04-27	male		blood	9606	Homo sapiens	SAMD00004706	BioSample										
+SAMD00004757	DRS007695		Jurkat	t cell					10464-106H5		2014-04-27	male		blood	9606	Homo sapiens	SAMD00004757	BioSample										
+SAMD00004761	DRS008076			T cell					11920-125H3		2014-04-27	male		blood	9606	Homo sapiens	SAMD00004761	BioSample										
+SAMD00004816	DRS007956			T cell					11798-124C7		2014-04-27	male		blood	9606	Homo sapiens	SAMD00004816	BioSample										
+SAMD00004886	DRS008087			T cell					11909-125G1		2014-04-27	male		blood	9606	Homo sapiens	SAMD00004886	BIOSAMPLE										
+SAMD00004924	DRS008086			T cell					11792-124C1		2014-04-27	male		blood	9606	Homo sapiens	SAMD00004924	BioSample										
+SAMD00005031	DRS008077			T cell					11782-124A9		2014-04-27	male		blood	9606	Homo sapiens	SAMD00005031	BioSample										
+SAMD00005098	DRS007719		ATN-1	t cell					10421-106C7	47 year old adult	2014-04-27	male		blood	9606	Homo sapiens	SAMD00005098	BIOSAMPLE										
+SAMD00005102	DRS007954			T cell					11796-124C5		2014-04-27	male		blood	9606	Homo sapiens	SAMD00005102	BIOSAMPLE										
+SAMD00005127	DRS008079			T cell					11908-125F9		2014-04-27	male		blood	9606	Homo sapiens	SAMD00005127	BIOSAMPLE										
+SAMD00005314	DRS008073			T cell					11907-125F8		2014-04-27	male		blood	9606	Homo sapiens	SAMD00005314	BIOSAMPLE										
+SAMD00005355	DRS008078			T cell					11797-124C6		2014-04-27	male		blood	9606	Homo sapiens	SAMD00005355	BIOSAMPLE										
+SAMD00005369	DRS007955			T cell					11786-124B4		2014-04-27	male		blood	9606	Homo sapiens	SAMD00005369	BIOSAMPLE										
+SAMD00005387	DRS008075			T cell					11916-125G8		2014-04-27	male		blood	9606	Homo sapiens	SAMD00005387	BioSample										
+SAMD00005426	DRS007953			T cell					11780-124A7		2014-04-27	male		blood	9606	Homo sapiens	SAMD00005426	BioSample										
+SAMD00005479	DRS008080			T cell					11791-124B9		2014-04-27	male		blood	9606	Homo sapiens	SAMD00005479	BioSample										
+SAMD00005585	DRS008084			T cell					11795-124C4		2014-04-27	male		blood	9606	Homo sapiens	SAMD00005585	BioSample										
+SAMD00005591	DRS007694		HPB-ALL	t cell					10429-106D6		2014-04-27	male		blood	9606	Homo sapiens	SAMD00005591	BioSample										
+SAMD00005636	DRS008074			T cell					11794-124C3		2014-04-27	male		blood	9606	Homo sapiens	SAMD00005636	BioSample										
+SAMD00005705	DRS008082			T cell					11917-125G9		2014-04-27	male		blood	9606	Homo sapiens	SAMD00005705	BioSample										
+SAMD00005729	DRS007849		HuT 102 TIB-162	t cell					10744-110C6		2014-04-27	male		blood	9606	Homo sapiens	SAMD00005729	BioSample										
+SAMD00005773	DRS008081			T cell					11913-125G5		2014-04-27	male		blood	9606	Homo sapiens	SAMD00005773	BIOSAMPLE										
+SAMD00005907	DRS008085			T cell					11906-125F7		2014-04-27	male		blood	9606	Homo sapiens	SAMD00005907	BioSample										
+SAMD00005930	DRS007796		Mo	t cell					10712-109I1		2014-04-27	male		blood	9606	Homo sapiens	SAMD00005930	BioSample										
+SAMD00006003	DRS007747		SKW-3	t cell					10416-106C2	27 year old adult	2014-04-27	male		blood	9606	Homo sapiens	SAMD00006003	BioSample										
+SAMD00043216	DRS023615		ED cells	T cell		2015-03-10			This sample has been submitted by IRCMS on 2016-02-22; Homo sapiens		2016-02-24				9606	Homo sapiens	DRS023615	IRCMS										
+SAMD00043217	DRS023616		ED cells	T cell		2015-03-18			This sample has been submitted by IRCMS on 2016-02-22; Homo sapiens		2016-02-23				9606	Homo sapiens	DRS023616	IRCMS										
+SAMD00043218	DRS023617		ED cells	T cell		2015-03-10			This sample has been submitted by IRCMS on 2016-02-22; Homo sapiens		2016-02-23				9606	Homo sapiens	DRS023617	IRCMS										
+SAMD00043219	DRS023618		ED cells	T cell		2015-03-18			This sample has been submitted by IRCMS on 2016-02-22; Homo sapiens		2016-02-23				9606	Homo sapiens	DRS023618	IRCMS										
+SAMD00043220	DRS023619		ED cells	T cell		2015-03-10			This sample has been submitted by IRCMS on 2016-02-22; Homo sapiens		2016-02-23				9606	Homo sapiens	DRS023619	IRCMS										
+SAMD00043221	DRS023620		ED cells	T cell		2015-03-18			This sample has been submitted by IRCMS on 2016-02-22; Homo sapiens		2016-02-23				9606	Homo sapiens	DRS023620	IRCMS										
+SAMD00043222	DRS023621		ED cells	T cell		2015-03-10			This sample has been submitted by IRCMS on 2016-02-22; Homo sapiens		2016-02-23				9606	Homo sapiens	DRS023621	IRCMS										
+SAMD00043223	DRS023622		ED cells	T cell		2015-03-18			This sample has been submitted by IRCMS on 2016-02-22; Homo sapiens		2016-02-23				9606	Homo sapiens	DRS023622	IRCMS										
+SAMD00043224	DRS023623		ED cells	T cell		2015-03-10			This sample has been submitted by IRCMS on 2016-02-22; Homo sapiens		2016-02-23				9606	Homo sapiens	DRS023623	IRCMS										
+SAMD00043225	DRS023624		ED cells	T cell		2015-03-18			This sample has been submitted by IRCMS on 2016-02-22; Homo sapiens		2016-02-23				9606	Homo sapiens	DRS023624	IRCMS										
+SAMD00043226	DRS023625		ED cells	T cell		2015-03-10			This sample has been submitted by IRCMS on 2016-02-22; Homo sapiens		2016-02-23				9606	Homo sapiens	DRS023625	IRCMS										
+SAMD00043227	DRS023626		ED cells	T cell		2015-03-18			This sample has been submitted by IRCMS on 2016-02-22; Homo sapiens		2016-02-23				9606	Homo sapiens	DRS023626	IRCMS										
+SAMEA2646253	ERS506232		CEM-SS	T cell					iCLIP_T7-A3G_CEM-SS_HIV_Producer_Cell_Hs_NNNGGCGNN_20110921_LUe40_3		2014-12-17				9606	Homo sapiens	E-MTAB-2700:iCLIP_T7-A3G_CEM-SS_HIV_Producer_Cell_Hs_NNNGGCGNN_20110921_LUe40_3	European Bioinformatics Institute										
+SAMEA2646255	ERS506234		CEM-SS	T cell					iCLIP_T7-3F_CEM-SS_HIV_Producer_Cell_Hs_NNNGGTCNN_20110921_LUe39_4		2014-12-17				9606	Homo sapiens	E-MTAB-2700:iCLIP_T7-3F_CEM-SS_HIV_Producer_Cell_Hs_NNNGGTCNN_20110921_LUe39_4	European Bioinformatics Institute										
+SAMEA2646256	ERS506235		CEM-SS	T cell					iCLIP_GFP-A3F_CEM-SS_HIV_Producer_Cell_Hs_NNNTTAANN_20110921_LUe39_7		2014-12-17				9606	Homo sapiens	E-MTAB-2700:iCLIP_GFP-A3F_CEM-SS_HIV_Producer_Cell_Hs_NNNTTAANN_20110921_LUe39_7	European Bioinformatics Institute										
+SAMEA2646258	ERS506237		CEM-SS	T cell					iCLIP_T7-A3G_CEM-SS_HIV_Producer_Cell_Hs_NNNGGCGNN_20110921_LUe39_3		2014-12-17				9606	Homo sapiens	E-MTAB-2700:iCLIP_T7-A3G_CEM-SS_HIV_Producer_Cell_Hs_NNNGGCGNN_20110921_LUe39_3	European Bioinformatics Institute										
+SAMEA2646261	ERS506240		CEM-SS	T cell					iCLIP_T7-GFP_CEM-SS_HIV_Producer_Cell_Hs_NNNTTGTNN_20110921_LUe40_2		2014-12-17				9606	Homo sapiens	E-MTAB-2700:iCLIP_T7-GFP_CEM-SS_HIV_Producer_Cell_Hs_NNNTTGTNN_20110921_LUe40_2	European Bioinformatics Institute										
+SAMEA2646266	ERS506245		CEM-SS	T cell					iCLIP_GFP-A3G_CEM-SS_HIV_Producer_Cell_Hs_NNNTGGCNN_20110921_LUe40_6		2014-12-17				9606	Homo sapiens	E-MTAB-2700:iCLIP_GFP-A3G_CEM-SS_HIV_Producer_Cell_Hs_NNNTGGCNN_20110921_LUe40_6	European Bioinformatics Institute										
+SAMEA2646267	ERS506246		CEM-SS	T cell					iCLIP_GFP_CEM-SS_HIV_Producer_Cell_Hs_NNNCAATNN_20110921_LUe40_5		2014-12-17				9606	Homo sapiens	E-MTAB-2700:iCLIP_GFP_CEM-SS_HIV_Producer_Cell_Hs_NNNCAATNN_20110921_LUe40_5	European Bioinformatics Institute										
+SAMEA2646268	ERS506247		CEM-SS	T cell					iCLIP_GFP_CEM-SS_HIV_Producer_Cell_Hs_NNNTTGTNN_20110921_LUe39_5		2014-12-17				9606	Homo sapiens	E-MTAB-2700:iCLIP_GFP_CEM-SS_HIV_Producer_Cell_Hs_NNNTTGTNN_20110921_LUe39_5	European Bioinformatics Institute										
+SAMEA2646269	ERS506248		CEM-SS	T cell					iCLIP_T7-3F_CEM-SS_HIV_Producer_Cell_Hs_NNNGGTCNN_20110921_LUe40_4		2014-12-17				9606	Homo sapiens	E-MTAB-2700:iCLIP_T7-3F_CEM-SS_HIV_Producer_Cell_Hs_NNNGGTCNN_20110921_LUe40_4	European Bioinformatics Institute										
+SAMEA2646271	ERS506250		CEM-SS	T cell					iCLIP_T7-GFP_CEM-SS_HIV_Producer_Cell_Hs_NNNCAATNN_20110921_LUe39_2		2014-12-17				9606	Homo sapiens	E-MTAB-2700:iCLIP_T7-GFP_CEM-SS_HIV_Producer_Cell_Hs_NNNCAATNN_20110921_LUe39_2	European Bioinformatics Institute										
+SAMEA2646272	ERS506251		CEM-SS	T cell					iCLIP_GFP-A3G_CEM-SS_HIV_Producer_Cell_Hs_NNNAATANN_20110921_LUe39_6		2014-12-17				9606	Homo sapiens	E-MTAB-2700:iCLIP_GFP-A3G_CEM-SS_HIV_Producer_Cell_Hs_NNNAATANN_20110921_LUe39_6	European Bioinformatics Institute										
+SAMEA2646274	ERS506253		CEM-SS	T cell					iCLIP_GFP-A3F_CEM-SS_HIV_Producer_Cell_Hs_NNNCCACNN_20110921_LUe40_7		2014-12-17				9606	Homo sapiens	E-MTAB-2700:iCLIP_GFP-A3F_CEM-SS_HIV_Producer_Cell_Hs_NNNCCACNN_20110921_LUe40_7	European Bioinformatics Institute										
+SAMEA4469669	ERS1368848			T cell					Activated 1		2016-11-27				9606	Homo sapiens	Activated 1	EMBL EUROPEAN BIOINFORMATICS INSTITUTE										
+SAMEA4469670	ERS1368849			T cell					Activated 2		2016-11-27				9606	Homo sapiens	Activated 2	EMBL EUROPEAN BIOINFORMATICS INSTITUTE										
+SAMEA4469671	ERS1368850			T cell					Activated 3		2016-11-27				9606	Homo sapiens	Activated 3	EMBL EUROPEAN BIOINFORMATICS INSTITUTE										
+SAMEA4469672	ERS1368851			T cell					Activated 4		2016-11-27				9606	Homo sapiens	Activated 4	EMBL EUROPEAN BIOINFORMATICS INSTITUTE										
+SAMEA4469673	ERS1368852			T cell					Resting 1		2016-11-27				9606	Homo sapiens	Resting 1	EMBL EUROPEAN BIOINFORMATICS INSTITUTE										
+SAMEA4469674	ERS1368853			T cell					Resting 2		2016-11-27				9606	Homo sapiens	Resting 2	EMBL EUROPEAN BIOINFORMATICS INSTITUTE										
+SAMEA4469675	ERS1368854			T cell					Resting 3		2016-11-27				9606	Homo sapiens	Resting 3	EMBL EUROPEAN BIOINFORMATICS INSTITUTE										
+SAMEA4469676	ERS1368855			T cell					Resting 4		2016-11-27				9606	Homo sapiens	Resting 4	EMBL EUROPEAN BIOINFORMATICS INSTITUTE										
+SAMN00210550	SRS172158			T cell					STAT1_control_ChIPSeq (human)		2011-04-25				9606	Homo sapiens	GSM671395	Gene Expression Omnibus										
+SAMN00210551	SRS172159			T cell					STAT1_IFNg_ChIPSeq (human)		2011-04-25				9606	Homo sapiens	GSM671396	Gene Expression Omnibus										
+SAMN00210552	SRS172160			T cell					STAT4_control_ChIPSeq (human)		2011-04-25				9606	Homo sapiens	GSM671397	Gene Expression Omnibus										
+SAMN00210553	SRS172161			T cell					STAT4_IL12_ChIPSeq (human)		2011-04-25				9606	Homo sapiens	GSM671398	Gene Expression Omnibus										
+SAMN00210554	SRS172162			T cell					STAT5A_control_ChIPSeq (human)		2011-04-25				9606	Homo sapiens	GSM671399	Gene Expression Omnibus										
+SAMN00210555	SRS172163			T cell					STAT5A_IL2_ChIPSeq (human)		2011-04-25				9606	Homo sapiens	GSM671400	Gene Expression Omnibus										
+SAMN00210556	SRS172164			T cell					STAT5B_control_ChIPSeq (human)		2011-04-25				9606	Homo sapiens	GSM671401	Gene Expression Omnibus										
+SAMN00210557	SRS172165			T cell					STAT5B_IL2_ChIPSeq (human)		2011-04-25				9606	Homo sapiens	GSM671402	Gene Expression Omnibus										
+SAMN02689635	SRS576798			T Cell					PBMC_MAIT_AS_1		2014-06-03			blood	9606	Homo sapiens	AS_1	SINGAPORE IMMUNOLOGY NETWORK										
+SAMN02689636	SRS576799			T Cell					PBMC_MAIT_CJ_1		2014-06-03			blood	9606	Homo sapiens	CJ_1	SINGAPORE IMMUNOLOGY NETWORK										
+SAMN02689637	SRS576800			T Cell					PBMC_MAIT_CJ_2		2014-06-03			blood	9606	Homo sapiens	CJ_2	SINGAPORE IMMUNOLOGY NETWORK										
+SAMN02689638	SRS576801			T Cell					PBMC_MAIT_FM_1		2014-06-03			blood	9606	Homo sapiens	FM_1	SINGAPORE IMMUNOLOGY NETWORK										
+SAMN02689639	SRS576802			T Cell					PBMC_MAIT_FM_2		2014-06-03			blood	9606	Homo sapiens	FM_2	SINGAPORE IMMUNOLOGY NETWORK										
+SAMN02689640	SRS576803			T Cell					PBMC_MAIT_AS_1		2014-06-03			blood	9606	Homo sapiens	SED_1	SINGAPORE IMMUNOLOGY NETWORK										
+SAMN02689641	SRS576804			T Cell					LIVER_MAIT_GE240811		2014-06-03			liver	9606	Homo sapiens	GE240811	SINGAPORE IMMUNOLOGY NETWORK										
+SAMN02689642	SRS576805			T Cell					LIVER_MAIT_GE070911		2014-06-03			liver	9606	Homo sapiens	GE070911	SINGAPORE IMMUNOLOGY NETWORK										
+SAMN02800746	SRS622811			T cell					Human sample from Homo sapiens		2014-06-05			Blood	9606	Homo sapiens	D1	SINGAPORE IMMUNOLOGY NETWORK										
+SAMN02800747	SRS622809			T cell					Human sample from Homo sapiens		2014-06-05			Blood	9606	Homo sapiens	D2	SINGAPORE IMMUNOLOGY NETWORK										
+SAMN03764517	SRS958870		Jurkat	T cell					This sample has been submitted by pda|lynchlab on 2015-06-11; Homo sapiens		2015-06-13	male		Lymphoid	9606	Homo sapiens	unstimulated_wt_1	pda|lynchlab										
+SAMN03764518	SRS958877		Jurkat	T cell					This sample has been submitted by pda|lynchlab on 2015-06-11; Homo sapiens		2015-06-12	male		Lymphoid	9606	Homo sapiens	unstimulated_wt_2	pda|lynchlab										
+SAMN03764519	SRS960570		Jurkat	T cell					This sample has been submitted by pda|lynchlab on 2015-06-12; Homo sapiens		2015-06-13	male		Lymphoid	9606	Homo sapiens	unstimulated_kd_1	pda|lynchlab										
+SAMN03764520	SRS960571		Jurkat	T cell					This sample has been submitted by pda|lynchlab on 2015-06-12; Homo sapiens		2015-06-13	male		Lymphoid	9606	Homo sapiens	unstimulated_kd_2	pda|lynchlab										
+SAMN03764521	SRS959480		Jurkat	T cell					This sample has been submitted by pda|lynchlab on 2015-06-12; Homo sapiens		2015-06-13	male		Lymphoid	9606	Homo sapiens	stimulated_wt_1	pda|lynchlab										
+SAMN03764522	SRS959483		Jurkat	T cell					This sample has been submitted by pda|lynchlab on 2015-06-12; Homo sapiens		2015-06-13	male		Lymphoid	9606	Homo sapiens	stimulated_wt_2	pda|lynchlab										
+SAMN03764523	SRS960572		Jurkat	T cell					This sample has been submitted by pda|lynchlab on 2015-06-12; Homo sapiens		2015-06-13	male		Lymphoid	9606	Homo sapiens	stimulated_kd_1	pda|lynchlab										
+SAMN03764524	SRS960573		Jurkat	T cell					This sample has been submitted by pda|lynchlab on 2015-06-12; Homo sapiens		2015-06-13	male		Lymphoid	9606	Homo sapiens	stimulated_kd_2	pda|lynchlab										
+SAMN03764540	SRS956308		Jurkat	T cell					This sample has been submitted by pda|lynchlab on 2015-06-08; Homo sapiens		2015-06-09	male		Lymphoid	9606	Homo sapiens	unstimulated_1.1	pda|lynchlab										
+SAMN03764541	SRS956749		Jurkat	T cell					This sample has been submitted by pda|lynchlab on 2015-06-09; Homo sapiens		2015-06-10	male		Lymphoid	9606	Homo sapiens	unstimulated_1.2	pda|lynchlab										
+SAMN03764542	SRS957213		Jurkat	T cell					This sample has been submitted by pda|lynchlab on 2015-06-09; Homo sapiens		2015-06-10	male		Lymphoid	9606	Homo sapiens	unstimulated_1.3	pda|lynchlab										
+SAMN03764543	SRS957214		Jurkat	T cell					This sample has been submitted by pda|lynchlab on 2015-06-09; Homo sapiens		2015-06-10	male		Lymphoid	9606	Homo sapiens	unstimulated_2.1	pda|lynchlab										
+SAMN03764544	SRS957215		Jurkat	T cell					This sample has been submitted by pda|lynchlab on 2015-06-09; Homo sapiens		2015-06-10	male		Lymphoid	9606	Homo sapiens	unstimulated_2.2	pda|lynchlab										
+SAMN03764545	SRS957222		Jurkat	T cell					This sample has been submitted by pda|lynchlab on 2015-06-09; Homo sapiens		2015-06-10	male		Lymphoid	9606	Homo sapiens	unstimulated_2.3	pda|lynchlab										
+SAMN03764546	SRS957233		Jurkat	T cell					This sample has been submitted by pda|lynchlab on 2015-06-09; Homo sapiens		2015-06-10	male		Lymphoid	9606	Homo sapiens	unstimulated_3.1	pda|lynchlab										
+SAMN03764547	SRS957234		Jurkat	T cell					This sample has been submitted by pda|lynchlab on 2015-06-09; Homo sapiens		2015-06-10	male		Lymphoid	9606	Homo sapiens	unstimulated_3.2	pda|lynchlab										
+SAMN03764548	SRS957235		Jurkat	T cell					This sample has been submitted by pda|lynchlab on 2015-06-09; Homo sapiens		2015-06-10	male		Lymphoid	9606	Homo sapiens	unstimulated_3.3	pda|lynchlab										
+SAMN03764549	SRS957238		Jurkat	T cell					This sample has been submitted by pda|lynchlab on 2015-06-09; Homo sapiens		2015-06-10	male		Lymphoid	9606	Homo sapiens	stimulated_1.1	pda|lynchlab										
+SAMN03764550	SRS957241		Jurkat	T cell					This sample has been submitted by pda|lynchlab on 2015-06-09; Homo sapiens		2015-06-10	male		Lymphoid	9606	Homo sapiens	stimulated_1.2	pda|lynchlab										
+SAMN03764551	SRS957245		Jurkat	T cell					This sample has been submitted by pda|lynchlab on 2015-06-09; Homo sapiens		2015-06-10	male		Lymphoid	9606	Homo sapiens	stimulated_1.3	pda|lynchlab										
+SAMN03764552	SRS957246		Jurkat	T cell					This sample has been submitted by pda|lynchlab on 2015-06-09; Homo sapiens		2015-06-10	male		Lymphoid	9606	Homo sapiens	stimulated_2.1	pda|lynchlab										
+SAMN03764553	SRS957248		Jurkat	T cell					This sample has been submitted by pda|lynchlab on 2015-06-09; Homo sapiens		2015-06-10	male		Lymphoid	9606	Homo sapiens	stimulated_2.2	pda|lynchlab										
+SAMN03764554	SRS957249		Jurkat	T cell					This sample has been submitted by pda|lynchlab on 2015-06-09; Homo sapiens		2015-06-10	male		Lymphoid	9606	Homo sapiens	stimulated_2.3	pda|lynchlab										
+SAMN03764555	SRS957250		Jurkat	T cell					This sample has been submitted by pda|lynchlab on 2015-06-09; Homo sapiens		2015-06-10	male		Lymphoid	9606	Homo sapiens	stimulated_3.1	pda|lynchlab										
+SAMN03764556	SRS957251		Jurkat	T cell					This sample has been submitted by pda|lynchlab on 2015-06-09; Homo sapiens		2015-06-10	male		Lymphoid	9606	Homo sapiens	stimulated_3.2	pda|lynchlab										
+SAMN03764557	SRS957252		Jurkat	T cell					This sample has been submitted by pda|lynchlab on 2015-06-09; Homo sapiens		2015-06-10	male		Lymphoid	9606	Homo sapiens	stimulated_3.3	pda|lynchlab										
+SAMN04007101	SRS1056253			T cell					N048		2016-02-19	female		Blood	9606	Homo sapiens	N048	pda|bradley@brandeis.edu										
+SAMN04007102	SRS1056307			T cell					N068		2016-02-19	female		Blood	9606	Homo sapiens	N068	pda|bradley@brandeis.edu										
+SAMN04007103	SRS1056308			T cell					N090		2016-02-19	female		Blood	9606	Homo sapiens	N090	pda|bradley@brandeis.edu										
+SAMN04007104	SRS1056309			T cell					N098		2016-02-19	female		Blood	9606	Homo sapiens	N098	pda|bradley@brandeis.edu										
+SAMN04007105	SRS1056310			T cell					L005		2016-02-19	female		Blood	9606	Homo sapiens	L005	pda|bradley@brandeis.edu										
+SAMN04007106	SRS1056311			T cell					L137		2016-02-19	female		Blood	9606	Homo sapiens	L137	pda|bradley@brandeis.edu										
+SAMN04007107	SRS1056312			T cell					L101		2016-02-19	female		Blood	9606	Homo sapiens	L101	pda|bradley@brandeis.edu										
+SAMN04007108	SRS1056313			T cell					L062		2016-02-19	female		Blood	9606	Homo sapiens	L062	pda|bradley@brandeis.edu										
+SAMN04007109	SRS1056314			T cell					L149		2016-02-19	male		Blood	9606	Homo sapiens	L149	pda|bradley@brandeis.edu										
+SAMN04007110	SRS1056315			T cell					L140		2016-02-19	male		Blood	9606	Homo sapiens	L140	pda|bradley@brandeis.edu										
+SAMN04007111	SRS1056316			T cell					L031		2016-02-19	female		Blood	9606	Homo sapiens	L031	pda|bradley@brandeis.edu										
+SAMN04007112	SRS1056318			T cell					L072		2016-02-19	female		Blood	9606	Homo sapiens	L072	pda|bradley@brandeis.edu										
+SAMN04007113	SRS1056319			T cell					L133		2016-02-19	female		Blood	9606	Homo sapiens	L133	pda|bradley@brandeis.edu										
+SAMN04007114	SRS1056320			T cell					L074		2016-02-19	female		Blood	9606	Homo sapiens	L074	pda|bradley@brandeis.edu										
+SAMN04007115	SRS1056321			T cell					L078		2016-02-19	female		Blood	9606	Homo sapiens	L078	pda|bradley@brandeis.edu										
+SAMN04007116	SRS1056322			T cell					L102		2016-02-19	female		Blood	9606	Homo sapiens	L102	pda|bradley@brandeis.edu										
+SAMN04007117	SRS1056323			T cell					L115		2016-02-19	female		Blood	9606	Homo sapiens	L115	pda|bradley@brandeis.edu										
+SAMN04007118	SRS1056324			T cell					L027		2016-02-19	female		Blood	9606	Homo sapiens	L027	pda|bradley@brandeis.edu										

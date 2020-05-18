@@ -1,0 +1,40 @@
+accession	secondary_sample_accession	bio_material	cell_line	cell_type	collected_by	collection_date	country	culture_collection	description	dev_stage	first_public	sex	tissue_lib	tissue_type	tax_id	scientific_name	sample_alias	center_name	protocol_label	project_name	host	host_tax_id	host_status	host_sex	submitted_host_sex	host_body_site	sample_collection	sequencing_method
+SAMN00759042	SRS271084			neutrophils					neutrophils		2012-02-13			blood	9606	Homo sapiens	GSM835233	Gene Expression Omnibus										
+SAMN02990199	SRS684339			Neutrophils					lib342		2015-03-22	female			9606	Homo sapiens	GSM1479553	Gene Expression Omnibus										
+SAMN02990206	SRS684347			Neutrophils					lib349		2015-03-22				9606	Homo sapiens	GSM1479560	Gene Expression Omnibus										
+SAMN02990233	SRS684314			Neutrophils					lib316		2015-03-22				9606	Homo sapiens	GSM1479527	Gene Expression Omnibus										
+SAMN02990243	SRS684321			Neutrophils					lib323		2015-03-22	male			9606	Homo sapiens	GSM1479534	Gene Expression Omnibus										
+SAMN02990246	SRS684326			Neutrophils					lib329		2015-03-22	female			9606	Homo sapiens	GSM1479540	Gene Expression Omnibus										
+SAMN02990253	SRS684334			Neutrophils					lib336		2015-03-22	female			9606	Homo sapiens	GSM1479547	Gene Expression Omnibus										
+SAMN02990258	SRS684279			Neutrophils					lib280		2015-03-22	female			9606	Homo sapiens	GSM1479492	Gene Expression Omnibus										
+SAMN02990265	SRS684286			Neutrophils					lib288		2015-03-22	female			9606	Homo sapiens	GSM1479499	Gene Expression Omnibus										
+SAMN02990275	SRS684293			Neutrophils					lib295		2015-03-22	female			9606	Homo sapiens	GSM1479506	Gene Expression Omnibus										
+SAMN02990279	SRS684300			Neutrophils					lib302		2015-03-22				9606	Homo sapiens	GSM1479513	Gene Expression Omnibus										
+SAMN02990286	SRS684307			Neutrophils					lib309		2015-03-22	female			9606	Homo sapiens	GSM1479520	Gene Expression Omnibus										
+SAMN02990291	SRS684252			Neutrophils					lib253		2015-03-22	male			9606	Homo sapiens	GSM1479465	Gene Expression Omnibus										
+SAMN02990299	SRS684264			Neutrophils					lib266		2015-03-22	female			9606	Homo sapiens	GSM1479478	Gene Expression Omnibus										
+SAMN02990302	SRS684262			Neutrophils					lib260		2015-03-22	female			9606	Homo sapiens	GSM1479472	Gene Expression Omnibus										
+SAMN02990311	SRS684273			Neutrophils					lib273		2015-03-22	female			9606	Homo sapiens	GSM1479485	Gene Expression Omnibus										
+SAMN02990322	SRS684224			Neutrophils					lib226		2015-03-22	female			9606	Homo sapiens	GSM1479438	Gene Expression Omnibus										
+SAMN02990328	SRS684236			Neutrophils					lib237		2015-03-22	female			9606	Homo sapiens	GSM1479449	Gene Expression Omnibus										
+SAMN02990333	SRS684231			Neutrophils					lib232		2015-03-22	female			9606	Homo sapiens	GSM1479444	Gene Expression Omnibus										
+SAMN02990338	SRS684241			Neutrophils					lib242		2015-03-22	female			9606	Homo sapiens	GSM1479454	Gene Expression Omnibus										
+SAMN02990344	SRS684247			Neutrophils					lib248		2015-03-22	female			9606	Homo sapiens	GSM1479460	Gene Expression Omnibus										
+SAMN03783349	SRS966864			Neutrophils					Healthy Control PMN from Donor 1 isolated by negative selection, untreated		2015-09-25				9606	Homo sapiens	GSM1716663											
+SAMN03783350	SRS966866			Neutrophils					Healthy Control PMN from Donor 1 isolated by Polymorphprep, untreated		2015-09-25				9606	Homo sapiens	GSM1716664											
+SAMN03783351	SRS966865			Neutrophils					Healthy Control PMN from Donor 1 isolated by negative selection, GM-CSF treated		2015-09-25				9606	Homo sapiens	GSM1716665											
+SAMN03783352	SRS966863			Neutrophils					Healthy Control PMN from Donor 1 isolated by Polymorphprep, GM-CSF treated		2015-09-25				9606	Homo sapiens	GSM1716666											
+SAMN03783353	SRS966862			Neutrophils					Healthy Control PMN from Donor 1 isolated by negative selection, TNF-alpha treated		2015-09-25				9606	Homo sapiens	GSM1716667											
+SAMN03783354	SRS966861			Neutrophils					Healthy Control PMN from Donor 1 isolated by Polymorphprep, TNF-alpha treated		2015-09-25				9606	Homo sapiens	GSM1716668											
+SAMN03783355	SRS966860			Neutrophils					Healthy Control PMN from Donor 2 isolated by negative selection, untreated		2015-09-25				9606	Homo sapiens	GSM1716669											
+SAMN03783356	SRS966859			Neutrophils					Healthy Control PMN from Donor 2 isolated by Polymorphprep, untreated		2015-09-25				9606	Homo sapiens	GSM1716670											
+SAMN03783357	SRS966858			Neutrophils					Healthy Control PMN from Donor 2 isolated by negative selection, GM-CSF treated		2015-09-25				9606	Homo sapiens	GSM1716671											
+SAMN03783358	SRS966856			Neutrophils					Healthy Control PMN from Donor 2 isolated by Polymorphprep, GM-CSF treated		2015-09-25				9606	Homo sapiens	GSM1716672											
+SAMN03783359	SRS966857			Neutrophils					Healthy Control PMN from Donor 2 isolated by negative selection, TNF-alpha treated		2015-09-25				9606	Homo sapiens	GSM1716673											
+SAMN03783360	SRS966855			Neutrophils					Healthy Control PMN from Donor 2 isolated by Polymorphprep, TNF-alpha treated		2015-09-25				9606	Homo sapiens	GSM1716674											
+SAMN04099719	SRS1076002			neutrophils					MethylDNA binding protein-Seq 1		2015-09-23				9606	Homo sapiens	GSM1888994											
+SAMN04099720	SRS1076001			neutrophils					MethylDNA binding protein-Seq 2		2015-09-23				9606	Homo sapiens	GSM1888995											
+SAMN04099721	SRS1076000			neutrophils					MethylDNA binding protein-Seq 3		2015-09-23				9606	Homo sapiens	GSM1888996											
+SAMN04099722	SRS1075999			neutrophils					MethylDNA binding protein-Seq 4		2015-09-23				9606	Homo sapiens	GSM1888997											
+SAMN04099723	SRS1075998			neutrophils					MethylDNA binding protein-Seq 5		2015-09-23				9606	Homo sapiens	GSM1888998											
+SAMN04099724	SRS1075997			neutrophils					MethylDNA binding protein-Seq 6		2015-09-24				9606	Homo sapiens	GSM1888999											

@@ -1,0 +1,165 @@
+accession	secondary_sample_accession	bio_material	cell_line	cell_type	collected_by	collection_date	country	culture_collection	description	dev_stage	first_public	sex	tissue_lib	tissue_type	tax_id	scientific_name	sample_alias	protocol_label	project_name	host	host_tax_id	host_status	host_sex	submitted_host_sex	host_body_site	sample_collection	sequencing_method
+SAMD00004741	DRS007673		GM12878	b cell					10823-111C4		2014-04-27	female		blood	9606	Homo sapiens	SAMD00004741										
+SAMD00004750	DRS007950			b cell					12214-129D9		2014-04-27			blood	9606	Homo sapiens	SAMD00004750										
+SAMD00004763	DRS007674		DAUDI	b cell					10422-106C8	16 year old adolescent	2014-04-27	male		blood	9606	Homo sapiens	SAMD00004763										
+SAMD00004771	DRS007851		PCM6	b cell					10474-106I6		2014-04-27	female		blood	9606	Homo sapiens	SAMD00004771										
+SAMD00004774	DRS007692		BALL-1	b cell					10455-106G5		2014-04-27			blood	9606	Homo sapiens	SAMD00004774										
+SAMD00004926	DRS008065			b cell					11705-123B4		2014-04-27			blood	9606	Homo sapiens	SAMD00004926										
+SAMD00005039	DRS007726		RPMI1788	b cell					10427-106D4	33 year old adult	2014-04-27	male		blood	9606	Homo sapiens	SAMD00005039										
+SAMD00005068	DRS007762		CTB-1	b cell					10631-108I1		2014-04-27	male		blood	9606	Homo sapiens	SAMD00005068										
+SAMD00005140	DRS007803		WIL2-NS	b cell					10808-111A7		2014-04-27	male		blood	9606	Homo sapiens	SAMD00005140										
+SAMD00005168	DRS007906		SLVL	b cell					10424-106D1	70 year old adult	2014-04-27	female		blood	9606	Homo sapiens	SAMD00005168										
+SAMD00005213	DRS007948			b cell					12204-129C8		2014-04-27			blood	9606	Homo sapiens	SAMD00005213										
+SAMD00005328	DRS007671		GM12878	b cell					10821-111C2		2014-04-27	female		blood	9606	Homo sapiens	SAMD00005328										
+SAMD00005397	DRS008063			b cell					11544-120B5		2014-04-27			blood	9606	Homo sapiens	SAMD00005397										
+SAMD00005415	DRS007819		MLMA	b cell					10775-110G1		2014-04-27	female		blood	9606	Homo sapiens	SAMD00005415										
+SAMD00005465	DRS007946			b cell					12151-128F9		2014-04-27	male		blood	9606	Homo sapiens	SAMD00005465										
+SAMD00005602	DRS008064			b cell					11624-122B4		2014-04-27			blood	9606	Homo sapiens	SAMD00005602										
+SAMD00005657	DRS007672		GM12878	b cell					10822-111C3		2014-04-27	female		blood	9606	Homo sapiens	SAMD00005657										
+SAMD00005661	DRS007943			b cell					12189-129B2		2014-04-27			blood	9606	Homo sapiens	SAMD00005661										
+SAMD00005684	DRS007945			b cell					12199-129C3		2014-04-27			blood	9606	Homo sapiens	SAMD00005684										
+SAMD00005696	DRS007944			b cell					12194-129B7		2014-04-27			blood	9606	Homo sapiens	SAMD00005696										
+SAMD00005718	DRS007947			b cell					12174-128I5		2014-04-27	male		blood	9606	Homo sapiens	SAMD00005718										
+SAMD00005768	DRS007949			b cell					12209-129D4		2014-04-27			blood	9606	Homo sapiens	SAMD00005768										
+SAMD00005770	DRS007818		DS-1	b cell					10727-110A7		2014-04-27	female		blood	9606	Homo sapiens	SAMD00005770										
+SAMD00005827	DRS007675		RAJI	b cell					10476-106I8		2014-04-27	male		blood	9606	Homo sapiens	SAMD00005827										
+SAMD00005931	DRS007693		NALM-6	b cell					10534-107G3		2014-04-27			blood	9606	Homo sapiens	SAMD00005931										
+SAMD00005944	DRS007925		XPL 17	b cell					10563-108A5		2014-04-27			blood	9606	Homo sapiens	SAMD00005944										
+SAMD00013675	DRS012115			b cell					12209-129D4		2014-04-27			blood	9606	Homo sapiens	SAMD00013675										
+SAMD00013676	DRS012098			b cell					11624-122B4		2014-04-27			blood	9606	Homo sapiens	SAMD00013676										
+SAMD00013679	DRS012107			b cell					12189-129B2		2014-04-27			blood	9606	Homo sapiens	SAMD00013679										
+SAMD00013683	DRS012097			b cell					11544-120B5		2014-04-27			blood	9606	Homo sapiens	SAMD00013683										
+SAMD00013688	DRS012113			b cell					12204-129C8		2014-04-27			blood	9606	Homo sapiens	SAMD00013688										
+SAMD00013689	DRS012111			b cell					12199-129C3		2014-04-27			blood	9606	Homo sapiens	SAMD00013689										
+SAMD00013690	DRS012117			b cell					12214-129D9		2014-04-27			blood	9606	Homo sapiens	SAMD00013690										
+SAMD00013695	DRS012099			b cell					11705-123B4		2014-04-27			blood	9606	Homo sapiens	SAMD00013695										
+SAMD00013698	DRS012109			b cell					12194-129B7		2014-04-27			blood	9606	Homo sapiens	SAMD00013698										
+SAMEA2361901	ERS406927		GM12878	B cell					CHiC_GM12878_rep2_t2		2015-03-01				9606	Homo sapiens	E-MTAB-2323:CHiC_GM12878_rep2_t2										
+SAMEA2361903	ERS406929		GM12878	B cell					CHiC_GM12878_rep3_t1		2015-03-01				9606	Homo sapiens	E-MTAB-2323:CHiC_GM12878_rep3_t1										
+SAMEA2361904	ERS406930		GM12878	B cell					CHiC_GM12878_rep2_t1		2015-03-01				9606	Homo sapiens	E-MTAB-2323:CHiC_GM12878_rep2_t1										
+SAMEA2361905	ERS406931		GM12878	B cell					CHiC_GM12878_rep1		2015-03-01				9606	Homo sapiens	E-MTAB-2323:CHiC_GM12878_rep1										
+SAMEA2361906	ERS406932		GM12878	B cell					CHiC_GM12878_rep2_t3		2015-03-01				9606	Homo sapiens	E-MTAB-2323:CHiC_GM12878_rep2_t3										
+SAMEA2361908	ERS406934		GM12878	B cell					HiC_GM12878		2015-03-01				9606	Homo sapiens	E-MTAB-2323:HiC_GM12878										
+SAMEA2361910	ERS406936		GM12878	B cell					CHiC_GM12878_rep3_t2		2015-03-01				9606	Homo sapiens	E-MTAB-2323:CHiC_GM12878_rep3_t2										
+SAMN01174089	SRS362741		CD20+;mesoderm;	B cell					Broad_ChipSeq_CD20+_Control		2012-09-18				9606	Homo sapiens	GSM1003477										
+SAMN01731459	SRS365749		CD20+_RO01778;mesoderm;	B cell					UW_ChipSeq_CD20+_RO01778_Input		2012-10-02				9606	Homo sapiens	GSM945197										
+SAMN01731491	SRS365781		mesoderm;CD20+_RO01778;	B cell					UW_ChipSeq_CD20+_RO01778_H3K4me3		2012-10-02				9606	Homo sapiens	GSM945229										
+SAMN01780215	SRS372906		CD20+_RO01778;mesoderm;	B cell					UW_DnaseSeq_CD20+_RO01778Rep2		2012-10-29				9606	Homo sapiens	GSM1024766										
+SAMN04240435	SRS1147330			B Cell					Human sample		2015-11-06	male		Blood	9606	Homo sapiens	TIV-d0-i01										
+SAMN04240436	SRS1152269			B Cell					Human sample		2015-11-05	male		Blood	9606	Homo sapiens	TIV-d0-i02										
+SAMN04240437	SRS1152270			B Cell					Human sample		2015-11-05	male		Blood	9606	Homo sapiens	TIV-d0-i03										
+SAMN04240438	SRS1152271			B Cell					Human sample		2015-11-05	male		Blood	9606	Homo sapiens	TIV-d0-i04										
+SAMN04240439	SRS1152272			B Cell					Human sample		2015-11-05	male		Blood	9606	Homo sapiens	TIV-d0-i05										
+SAMN04240440	SRS1152297			B Cell					Human sample		2015-11-05	male		Blood	9606	Homo sapiens	TIV-d0-i06										
+SAMN04240441	SRS1152307			B Cell					Human sample		2015-11-05	male		Blood	9606	Homo sapiens	TIV-d7-i01										
+SAMN04240442	SRS1152309			B Cell					Human sample		2015-11-05	male		Blood	9606	Homo sapiens	TIV-d7-i02										
+SAMN04240443	SRS1152310			B Cell					Human sample		2015-11-05	male		Blood	9606	Homo sapiens	TIV-d7-i03										
+SAMN04240444	SRS1152318			B Cell					Human sample		2015-11-05	male		Blood	9606	Homo sapiens	TIV-d7-i04										
+SAMN04240445	SRS1152322			B Cell					Human sample		2015-11-05	male		Blood	9606	Homo sapiens	TIV-d7-i05										
+SAMN04240446	SRS1152383			B Cell					Human sample		2015-11-05	male		Blood	9606	Homo sapiens	TIV-d7-i06										
+SAMN04240447	SRS1152405			B Cell					Human sample		2015-11-05	male		Blood	9606	Homo sapiens	MIV-d0-i01										
+SAMN04240448	SRS1152407			B Cell					Human sample		2015-11-05	male		Blood	9606	Homo sapiens	MIV-d0-i02										
+SAMN04240449	SRS1152408			B Cell					Human sample		2015-11-05	male		Blood	9606	Homo sapiens	MIV-d0-i04										
+SAMN04240450	SRS1152409			B Cell					Human sample		2015-11-05	male		Blood	9606	Homo sapiens	MIV-d0-i05										
+SAMN04240451	SRS1152410			B Cell					Human sample		2015-11-05	male		Blood	9606	Homo sapiens	MIV-d0-i06										
+SAMN04240452	SRS1152459			B Cell					Human sample		2015-11-05	male		Blood	9606	Homo sapiens	MIV-d0-i07										
+SAMN04240453	SRS1152474			B Cell					Human sample		2015-11-05	male		Blood	9606	Homo sapiens	MIV-d0-i08										
+SAMN04240454	SRS1152479			B Cell					Human sample		2015-11-05	male		Blood	9606	Homo sapiens	MIV-d0-i09										
+SAMN04240455	SRS1152480			B Cell					Human sample		2015-11-05	male		Blood	9606	Homo sapiens	MIV-d0-i10										
+SAMN04240456	SRS1152484			B Cell					Human sample		2015-11-05	male		Blood	9606	Homo sapiens	MIV-d0-i11										
+SAMN04240457	SRS1152513			B Cell					Human sample		2015-11-05	male		Blood	9606	Homo sapiens	MIV-d0-i12										
+SAMN04240458	SRS1152539			B Cell					Human sample		2015-11-05	male		Blood	9606	Homo sapiens	MIV-d0-i13										
+SAMN04240459	SRS1152545			B Cell					Human sample		2015-11-05	male		Blood	9606	Homo sapiens	MIV-d7-i01										
+SAMN04240460	SRS1152547			B Cell					Human sample		2015-11-05	male		Blood	9606	Homo sapiens	MIV-d7-i02										
+SAMN04240461	SRS1152548			B Cell					Human sample		2015-11-05	male		Blood	9606	Homo sapiens	MIV-d7-i04										
+SAMN04240462	SRS1152549			B Cell					Human sample		2015-11-05	male		Blood	9606	Homo sapiens	MIV-d7-i05										
+SAMN04240463	SRS1152550			B Cell					Human sample		2015-11-05	male		Blood	9606	Homo sapiens	MIV-d7-i06										
+SAMN04240464	SRS1152551			B Cell					Human sample		2015-11-05	male		Blood	9606	Homo sapiens	MIV-d7-i07										
+SAMN04240465	SRS1152552			B Cell					Human sample		2015-11-05	male		Blood	9606	Homo sapiens	MIV-d7-i08										
+SAMN04240466	SRS1152553			B Cell					Human sample		2015-11-05	male		Blood	9606	Homo sapiens	MIV-d7-i09										
+SAMN04240467	SRS1152554			B Cell					Human sample		2015-11-05	male		Blood	9606	Homo sapiens	MIV-d7-i10										
+SAMN04240468	SRS1152555			B Cell					Human sample		2015-11-05	male		Blood	9606	Homo sapiens	MIV-d7-i11										
+SAMN04240469	SRS1152556			B Cell					Human sample		2015-11-05	male		Blood	9606	Homo sapiens	MIV-d7-i12										
+SAMN04240470	SRS1152557			B Cell					Human sample		2015-11-05	male		Blood	9606	Homo sapiens	MIV-d7-i13										
+SAMN04240471	SRS1153688			B Cell					Human sample		2015-11-06	male		Blood	9606	Homo sapiens	TIV1415-d0-i02										
+SAMN04240472	SRS1153689			B Cell					Human sample		2015-11-06	male		Blood	9606	Homo sapiens	TIV1415-d0-i04										
+SAMN04240473	SRS1153732			B Cell					Human sample		2015-11-06	male		Blood	9606	Homo sapiens	TIV1415-d0-i05										
+SAMN04240474	SRS1153733			B Cell					Human sample		2015-11-06	male		Blood	9606	Homo sapiens	TIV1415-d0-i06										
+SAMN04240475	SRS1153734			B Cell					Human sample		2015-11-06	male		Blood	9606	Homo sapiens	TIV1415-d7-i02										
+SAMN04240476	SRS1153735			B Cell					Human sample		2015-11-06	male		Blood	9606	Homo sapiens	TIV1415-d7-i04										
+SAMN04240477	SRS1153738			B Cell					Human sample		2015-11-06	male		Blood	9606	Homo sapiens	TIV1415-d7-i06										
+SAMN04240478	SRS1153737			B Cell					Human sample		2015-11-06	male		Blood	9606	Homo sapiens	TIV1415-d7-i05										
+SAMN04277236	SRS1168800			B Cell					This sample has been submitted by pda|andres_aguilar on 2015-11-20; Homo sapiens		2015-11-20	male		Blood	9606	Homo sapiens	den_A_i08										
+SAMN04277237	SRS1168801			B Cell					This sample has been submitted by pda|andres_aguilar on 2015-11-19; Homo sapiens		2015-11-19	male		Blood	9606	Homo sapiens	den_PC_i08										
+SAMN04277238	SRS1168803			B Cell					This sample has been submitted by pda|andres_aguilar on 2015-11-19; Homo sapiens		2015-11-19	female		Blood	9606	Homo sapiens	den_A_i10										
+SAMN04277239	SRS1168805			B Cell					This sample has been submitted by pda|andres_aguilar on 2015-11-19; Homo sapiens		2015-11-19	female		Blood	9606	Homo sapiens	den_PC_i10										
+SAMN04277240	SRS1168806			B Cell					This sample has been submitted by pda|andres_aguilar on 2015-11-19; Homo sapiens		2015-11-19	male		Blood	9606	Homo sapiens	den_A_i04										
+SAMN04277241	SRS1168808			B Cell					This sample has been submitted by pda|andres_aguilar on 2015-11-19; Homo sapiens		2015-11-19	female		Blood	9606	Homo sapiens	den_A_i05										
+SAMN04277242	SRS1168809			B Cell					This sample has been submitted by pda|andres_aguilar on 2015-11-19; Homo sapiens		2015-11-19	female		Blood	9606	Homo sapiens	den_A_i07										
+SAMN04277243	SRS1168817			B Cell					This sample has been submitted by pda|andres_aguilar on 2015-11-19; Homo sapiens		2015-11-19	female		Blood	9606	Homo sapiens	den_PC_i07										
+SAMN04277244	SRS1168816			B Cell					This sample has been submitted by pda|andres_aguilar on 2015-11-19; Homo sapiens		2015-11-19	male		Blood	9606	Homo sapiens	den_A_i17										
+SAMN04277245	SRS1168820			B Cell					This sample has been submitted by pda|andres_aguilar on 2015-11-19; Homo sapiens		2015-11-19	male		Blood	9606	Homo sapiens	den_PC_i17										
+SAMN04277246	SRS1168826			B Cell					This sample has been submitted by pda|andres_aguilar on 2015-11-19; Homo sapiens		2015-11-19	female		Blood	9606	Homo sapiens	den_A_i18										
+SAMN04277247	SRS1168827			B Cell					This sample has been submitted by pda|andres_aguilar on 2015-11-19; Homo sapiens		2015-11-19	female		Blood	9606	Homo sapiens	den_PC_i18										
+SAMN04277248	SRS1168835			B Cell					This sample has been submitted by pda|andres_aguilar on 2015-11-19; Homo sapiens		2015-11-19	female		Blood	9606	Homo sapiens	den_A_i25										
+SAMN04277249	SRS1168846			B Cell					This sample has been submitted by pda|andres_aguilar on 2015-11-19; Homo sapiens		2015-11-19	female		Blood	9606	Homo sapiens	den_PC_i25										
+SAMN04277250	SRS1168847			B Cell					This sample has been submitted by pda|andres_aguilar on 2015-11-19; Homo sapiens		2015-11-19	female		Blood	9606	Homo sapiens	den_A_i27										
+SAMN04277251	SRS1168848			B Cell					This sample has been submitted by pda|andres_aguilar on 2015-11-19; Homo sapiens		2015-11-19	female		Blood	9606	Homo sapiens	den_PC_i27										
+SAMN04277252	SRS1168849			B Cell					This sample has been submitted by pda|andres_aguilar on 2015-11-19; Homo sapiens		2015-11-19	female		Blood	9606	Homo sapiens	den_A-i01										
+SAMN04277253	SRS1168850			B Cell					This sample has been submitted by pda|andres_aguilar on 2015-11-19; Homo sapiens		2015-11-19	male		Blood	9606	Homo sapiens	den_A-i21										
+SAMN04277254	SRS1168851			B Cell					This sample has been submitted by pda|andres_aguilar on 2015-11-19; Homo sapiens		2015-11-19	female		Blood	9606	Homo sapiens	den_A-i22										
+SAMN04277255	SRS1168852			B Cell					This sample has been submitted by pda|andres_aguilar on 2015-11-19; Homo sapiens		2015-11-19	male		Blood	9606	Homo sapiens	den_A-i23										
+SAMN04277256	SRS1168853			B Cell					This sample has been submitted by pda|andres_aguilar on 2015-11-19; Homo sapiens		2015-11-19	female		Blood	9606	Homo sapiens	den_PC-i01										
+SAMN04277257	SRS1168854			B Cell					This sample has been submitted by pda|andres_aguilar on 2015-11-19; Homo sapiens		2015-11-19	male		Blood	9606	Homo sapiens	den_PC-i20										
+SAMN04277258	SRS1168855			B Cell					This sample has been submitted by pda|andres_aguilar on 2015-11-19; Homo sapiens		2015-11-19	male		Blood	9606	Homo sapiens	den_A-i20										
+SAMN04277259	SRS1168856			B Cell					This sample has been submitted by pda|andres_aguilar on 2015-11-19; Homo sapiens		2015-11-19	male		Blood	9606	Homo sapiens	den_A-i29										
+SAMN04277260	SRS1168857			B Cell					This sample has been submitted by pda|andres_aguilar on 2015-11-19; Homo sapiens		2015-11-19	female		Blood	9606	Homo sapiens	den_A-i03										
+SAMN04277261	SRS1169191			B Cell					This sample has been submitted by pda|andres_aguilar on 2015-11-20; Homo sapiens		2015-11-20	female		Blood	9606	Homo sapiens	den_PC-i03										
+SAMN04277262	SRS1169190			B Cell					This sample has been submitted by pda|andres_aguilar on 2015-11-20; Homo sapiens		2015-11-20	male		Blood	9606	Homo sapiens	den_A-i28										
+SAMN04277263	SRS1169193			B Cell					This sample has been submitted by pda|andres_aguilar on 2015-11-20; Homo sapiens		2015-11-20	male		Blood	9606	Homo sapiens	den_PC-i28										
+SAMN04277264	SRS1169192			B Cell					This sample has been submitted by pda|andres_aguilar on 2015-11-20; Homo sapiens		2015-11-20	female		Blood	9606	Homo sapiens	den_A-i13										
+SAMN04277265	SRS1169194			B Cell					This sample has been submitted by pda|andres_aguilar on 2015-11-20; Homo sapiens		2015-11-20	female		Blood	9606	Homo sapiens	den_A-i15										
+SAMN04283954	SRS1171389		BCBL1	B cell					This sample has been submitted by pda|crossetto@medicine.nevada.edu on 2015-11-21; Homo sapiens		2015-11-21			body cavity B cell lymphoma	9606	Homo sapiens	BCBL1										
+SAMN04413874	SRS1248394		GM12878	B cell					input DNA		2016-03-05				9606	Homo sapiens	GSM2039168										
+SAMN04413875	SRS1248393		GM12878	B cell					IgG control ChIP-seq		2016-03-05				9606	Homo sapiens	GSM2039169										
+SAMN04413876	SRS1248392		GM12878	B cell					EBNA2 ChIP-seq		2016-03-05				9606	Homo sapiens	GSM2039170										
+SAMN04482158	SRS1282731			B cell					rN.HC.1		2016-05-23				9606	Homo sapiens	GSM2058522										
+SAMN04482159	SRS1282730			B cell					rN.HC.2		2016-05-23				9606	Homo sapiens	GSM2058523										
+SAMN04482160	SRS1282728			B cell					rN.HC.3		2016-05-23				9606	Homo sapiens	GSM2058524										
+SAMN04482161	SRS1282727			B cell					rN.HC.4		2016-05-23				9606	Homo sapiens	GSM2058525										
+SAMN04482162	SRS1282729			B cell					rN.SLE.1		2016-05-23				9606	Homo sapiens	GSM2058526										
+SAMN04482163	SRS1282726			B cell					rN.SLE.2		2016-05-23				9606	Homo sapiens	GSM2058527										
+SAMN04482164	SRS1282725			B cell					rN.SLE.3		2016-05-23				9606	Homo sapiens	GSM2058528										
+SAMN04482165	SRS1282724			B cell					rN.SLE.4		2016-05-23				9606	Homo sapiens	GSM2058529										
+SAMN05570585	SRS1614000			B cell					HD07_U		2017-02-02	male		Peripheral blood	9606	Homo sapiens	HD07_U										
+SAMN05570586	SRS1614001			B cell					HD07_M		2017-02-02	male		Peripheral blood	9606	Homo sapiens	HD07_M										
+SAMN05570587	SRS1614013			B cell					HD07_N		2017-02-02	male		Peripheral blood	9606	Homo sapiens	HD07_N										
+SAMN05570589	SRS1614034			B cell					HD09_M		2017-02-02	male		Peripheral blood	9606	Homo sapiens	HD09_M										
+SAMN05570592	SRS1614037			B cell					HD09_N		2017-02-02	male		Peripheral blood	9606	Homo sapiens	HD09_N										
+SAMN05570593	SRS1614038			B cell					HD09_U		2017-02-02	male		Peripheral blood	9606	Homo sapiens	HD09_U										
+SAMN05570595	SRS1614002			B cell					HD10_N		2017-02-02	male		Peripheral blood	9606	Homo sapiens	HD10_N										
+SAMN05570596	SRS1614003			B cell					HD10_M		2017-02-02	male		Peripheral blood	9606	Homo sapiens	HD10_M										
+SAMN05570598	SRS1614005			B cell					HD10_U		2017-02-02	male		Peripheral blood	9606	Homo sapiens	HD10_U										
+SAMN05570601	SRS1614008			B cell					HD13_N		2017-02-02	female		Peripheral blood	9606	Homo sapiens	HD13_N										
+SAMN05570602	SRS1614009			B cell					HD13_U		2017-02-02	female		Peripheral blood	9606	Homo sapiens	HD13_U										
+SAMN05570604	SRS1614010			B cell					HD13_M		2017-02-02	female		Peripheral blood	9606	Homo sapiens	HD13_M										
+SAMN05570607	SRS1614015			B cell					MK08_N		2017-02-02	female		Peripheral blood	9606	Homo sapiens	MK08_N										
+SAMN05570608	SRS1614016			B cell					MK08_M		2017-02-02	female		Peripheral blood	9606	Homo sapiens	MK08_M										
+SAMN05570609	SRS1614017			B cell					MK02_N		2017-02-02	female		Peripheral blood	9606	Homo sapiens	MK02_N										
+SAMN05570610	SRS1614018			B cell					MK02_M		2017-02-02	female		Peripheral blood	9606	Homo sapiens	MK02_M										
+SAMN05570611	SRS1614019			B cell					MK03_M		2017-02-02	male		Peripheral blood	9606	Homo sapiens	MK03_M										
+SAMN05570612	SRS1614020			B cell					MK03_N		2017-02-02	male		Peripheral blood	9606	Homo sapiens	MK03_N										
+SAMN05570613	SRS1614021			B cell					AR03_M		2017-02-02	male		Peripheral blood	9606	Homo sapiens	AR03_M										
+SAMN05570614	SRS1614022			B cell					AR03_N		2017-02-02	male		Peripheral blood	9606	Homo sapiens	AR03_N										
+SAMN05570615	SRS1614024			B cell					AR04_N		2017-02-02	female		Peripheral blood	9606	Homo sapiens	AR04_N										
+SAMN05570616	SRS1614025			B cell					AR04_M		2017-02-02	female		Peripheral blood	9606	Homo sapiens	AR04_M										
+SAMN05570617	SRS1614026			B cell					AR02_N		2017-02-02	male		Peripheral blood	9606	Homo sapiens	AR02_N										
+SAMN05570618	SRS1614027			B cell					AR02_M		2017-02-02	male		Peripheral blood	9606	Homo sapiens	AR02_M										
+SAMN05570619	SRS1614028			B cell					AR05_M		2017-02-02	male		Peripheral blood	9606	Homo sapiens	AR05_M										
+SAMN05570620	SRS1614029			B cell					AR05_N		2017-02-02	male		Peripheral blood	9606	Homo sapiens	AR05_N										
+SAMN05570621	SRS1614030			B cell					MK04_M		2017-02-02	female		Peripheral blood	9606	Homo sapiens	MK04_M										
+SAMN05570622	SRS1614031			B cell					MK04_N		2017-02-02	female		Peripheral blood	9606	Homo sapiens	MK04_N										
+SAMN05570623	SRS1614032			B cell					MK05_M		2017-02-02	female		Peripheral blood	9606	Homo sapiens	MK05_M										
+SAMN05570624	SRS1614033			B cell					MK05_N		2017-02-02	female		Peripheral blood	9606	Homo sapiens	MK05_N										
+SAMN06044617	SRS1816014			B cell					ENCODE biosample  ENCBS483ENC: CD20+ B cells, caucasian, draw number 1	adult	2016-11-25	female			9606	Homo sapiens	ENCBS483ENC										
+SAMN06044618	SRS1816015			B cell					ENCODE biosample  ENCBS484ENC: CD20+ B cells, African American, draw number 1	adult	2016-11-24	female			9606	Homo sapiens	ENCBS484ENC										

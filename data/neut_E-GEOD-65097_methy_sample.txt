@@ -1,0 +1,16 @@
+Source_Name	Sample_source_name	Sample_title	Sex	age	cell_type	disease_state	Material_Type	Assay_Name	Derived_Array_Data_File
+GSM1587293 1	neutrophils	neutrophils isolated from control 15	female	47	normal neutrophils	control	genomic DNA	GSM1587293	GSM1587293_sample_table.txt
+GSM1587292 1	neutrophils	neutrophils isolated from control 12	female	46	normal neutrophils	control	genomic DNA	GSM1587292	GSM1587292_sample_table.txt
+GSM1587289 1	neutrophils	neutrophils isolated from control 13	female	31	normal neutrophils	control	genomic DNA	GSM1587289	GSM1587289_sample_table.txt
+GSM1587288 1	neutrophils	neutrophils isolated from control 10	female	34	normal neutrophils	control	genomic DNA	GSM1587288	GSM1587288_sample_table.txt
+GSM1587284 1	neutrophils	neutrophils isolated from control 14	female	42	normal neutrophils	control	genomic DNA	GSM1587284	GSM1587284_sample_table.txt
+GSM1587283 1	neutrophils	neutrophils isolated from control 9	female	45	normal neutrophils	control	genomic DNA	GSM1587283	GSM1587283_sample_table.txt
+GSM1587280 1	neutrophils	neutrophils isolated from control 11	female	22	normal neutrophils	control	genomic DNA	GSM1587280	GSM1587280_sample_table.txt
+GSM1587279 1	neutrophils	neutrophils isolated from control 7	female	60	normal neutrophils	control	genomic DNA	GSM1587279	GSM1587279_sample_table.txt
+GSM1587278 1	neutrophils	neutrophils isolated from control 6	female	24	normal neutrophils	control	genomic DNA	GSM1587278	GSM1587278_sample_table.txt
+GSM1587273 1	neutrophils	neutrophils isolated from control 8	female	41	normal neutrophils	control	genomic DNA	GSM1587273	GSM1587273_sample_table.txt
+GSM1587272 1	neutrophils	neutrophils isolated from control 5	female	42	normal neutrophils	control	genomic DNA	GSM1587272	GSM1587272_sample_table.txt
+GSM1587267 1	neutrophils	neutrophils isolated from control 4	female	34	normal neutrophils	control	genomic DNA	GSM1587267	GSM1587267_sample_table.txt
+GSM1587266 1	neutrophils	neutrophils isolated from control 2	female	36	normal neutrophils	control	genomic DNA	GSM1587266	GSM1587266_sample_table.txt
+GSM1587261 1	neutrophils	neutrophils isolated from control 3	female	34	normal neutrophils	control	genomic DNA	GSM1587261	GSM1587261_sample_table.txt
+GSM1587260 1	neutrophils	neutrophils isolated from control 1	female	43	normal neutrophils	control	genomic DNA	GSM1587260	GSM1587260_sample_table.txt

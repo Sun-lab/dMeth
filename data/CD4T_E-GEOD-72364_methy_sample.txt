@@ -1,0 +1,7 @@
+Source_Name	Sample_source_name	Sample_title	cell_type	disease_state	sex	Material_Type	Assay_Name	Array_Design_REF	Derived_Array_Data_File
+GSM1861062 1	CD4+ T cells, healthy subject	Genomic DNA from CD4 T cells of Healthy Subject 6	CD4+ T cells	normal	male	genomic DNA	GSM1861062	A-GEOD-13534	GSM1861062_sample_table.txt
+GSM1861061 1	CD4+ T cells, healthy subject	Genomic DNA from CD4 T cells of Healthy Subject 5	CD4+ T cells	normal	male	genomic DNA	GSM1861061	A-GEOD-13534	GSM1861061_sample_table.txt
+GSM1861060 1	CD4+ T cells, healthy subject	Genomic DNA from CD4 T cells of Healthy Subject 4	CD4+ T cells	normal	female	genomic DNA	GSM1861060	A-GEOD-13534	GSM1861060_sample_table.txt
+GSM1861059 1	CD4+ T cells, healthy subject	Genomic DNA from CD4 T cells of Healthy Subject 3	CD4+ T cells	normal	male	genomic DNA	GSM1861059	A-GEOD-13534	GSM1861059_sample_table.txt
+GSM1861058 1	CD4+ T cells, healthy subject	Genomic DNA from CD4 T cells of Healthy Subject 2	CD4+ T cells	normal	male	genomic DNA	GSM1861058	A-GEOD-13534	GSM1861058_sample_table.txt
+GSM1861057 1	CD4+ T cells, healthy subject	Genomic DNA from CD4 T cells of Healthy Subject 1	CD4+ T cells	normal	male	genomic DNA	GSM1861057	A-GEOD-13534	GSM1861057_sample_table.txt

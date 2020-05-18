@@ -1,0 +1,5 @@
+Source_Name	Sample_source_name	Sample_title	cell_type	disease_state	donor_id	sex	Material_Type	Assay_Name	Derived_Array_Data_File
+GSM1204714 1	act_rTreg	act_rTreg_rep2	act_rTreg	normal	M30	male	genomic DNA	GSM1204714	GSM1204714_sample_table.txt
+GSM1204712 1	rTreg	rTreg_rep2	rTreg	normal	M30	male	genomic DNA	GSM1204712	GSM1204712_sample_table.txt
+GSM1204710 1	act_rTreg	act_rTreg_rep1	act_rTreg	normal	M29	male	genomic DNA	GSM1204710	GSM1204710_sample_table.txt
+GSM1204706 1	rTreg	rTreg_rep1	rTreg	normal	M28	male	genomic DNA	GSM1204706	GSM1204706_sample_table.txt

@@ -1,0 +1,19 @@
+Source_Name	Sample_source_name	Sample_title	age	cell_type	diagonsis1	organism_part	sex	Material_Type	Assay_Name	Array_Design_REF	Derived_Array_Data_File
+GSM1848167 1	Total RNA, CD8, healthy control	RNA_CD8_Control_rep8	54	CD8 T cells	Healthy	blood	female	total RNA	GSM1848167	A-GEOD-10558	GSM1848167_sample_table.txt
+GSM1848166 1	Total RNA, CD8, healthy control	RNA_CD8_Control_rep7	54	CD8 T cells	Healthy	blood	female	total RNA	GSM1848166	A-GEOD-10558	GSM1848166_sample_table.txt
+GSM1848165 1	Total RNA, CD8, healthy control	RNA_CD8_Control_rep6	36	CD8 T cells	Healthy	blood	female	total RNA	GSM1848165	A-GEOD-10558	GSM1848165_sample_table.txt
+GSM1848164 1	Total RNA, CD8, healthy control	RNA_CD8_Control_rep5	52	CD8 T cells	Healthy	blood	female	total RNA	GSM1848164	A-GEOD-10558	GSM1848164_sample_table.txt
+GSM1848163 1	Total RNA, CD8, healthy control	RNA_CD8_Control_rep4	59	CD8 T cells	Healthy	blood	female	total RNA	GSM1848163	A-GEOD-10558	GSM1848163_sample_table.txt
+GSM1848162 1	Total RNA, CD8, healthy control	RNA_CD8_Control_rep3	52	CD8 T cells	Healthy	blood	female	total RNA	GSM1848162	A-GEOD-10558	GSM1848162_sample_table.txt
+GSM1848161 1	Total RNA, CD8, healthy control	RNA_CD8_Control_rep2	51	CD8 T cells	Healthy	blood	female	total RNA	GSM1848161	A-GEOD-10558	GSM1848161_sample_table.txt
+GSM1848160 1	Total RNA, CD8, healthy control	RNA_CD8_Control_rep1	37	CD8 T cells	Healthy	blood	female	total RNA	GSM1848160	A-GEOD-10558	GSM1848160_sample_table.txt
+GSM1848144 1	Total RNA, CD4, healthy control	RNA_CD4_Control_rep10	63	CD4 T cells	Healthy	blood	female	total RNA	GSM1848144	A-GEOD-10558	GSM1848144_sample_table.txt
+GSM1848143 1	Total RNA, CD4, healthy control	RNA_CD4_Control_rep9	54	CD4 T cells	Healthy	blood	female	total RNA	GSM1848143	A-GEOD-10558	GSM1848143_sample_table.txt
+GSM1848142 1	Total RNA, CD4, healthy control	RNA_CD4_Control_rep8	36	CD4 T cells	Healthy	blood	female	total RNA	GSM1848142	A-GEOD-10558	GSM1848142_sample_table.txt
+GSM1848141 1	Total RNA, CD4, healthy control	RNA_CD4_Control_rep7	52	CD4 T cells	Healthy	blood	female	total RNA	GSM1848141	A-GEOD-10558	GSM1848141_sample_table.txt
+GSM1848140 1	Total RNA, CD4, healthy control	RNA_CD4_Control_rep6	59	CD4 T cells	Healthy	blood	female	total RNA	GSM1848140	A-GEOD-10558	GSM1848140_sample_table.txt
+GSM1848139 1	Total RNA, CD4, healthy control	RNA_CD4_Control_rep5	52	CD4 T cells	Healthy	blood	female	total RNA	GSM1848139	A-GEOD-10558	GSM1848139_sample_table.txt
+GSM1848138 1	Total RNA, CD4, healthy control	RNA_CD4_Control_rep4	54	CD4 T cells	Healthy	blood	female	total RNA	GSM1848138	A-GEOD-10558	GSM1848138_sample_table.txt
+GSM1848137 1	Total RNA, CD4, healthy control	RNA_CD4_Control_rep3	50	CD4 T cells	Healthy	blood	female	total RNA	GSM1848137	A-GEOD-10558	GSM1848137_sample_table.txt
+GSM1848136 1	Total RNA, CD4, healthy control	RNA_CD4_Control_rep2	51	CD4 T cells	Healthy	blood	female	total RNA	GSM1848136	A-GEOD-10558	GSM1848136_sample_table.txt
+GSM1848135 1	Total RNA, CD4, healthy control	RNA_CD4_Control_rep1	50	CD4 T cells	Healthy	blood	female	total RNA	GSM1848135	A-GEOD-10558	GSM1848135_sample_table.txt

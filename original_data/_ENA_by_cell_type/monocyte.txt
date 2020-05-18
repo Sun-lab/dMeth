@@ -1,0 +1,521 @@
+accession	secondary_sample_accession	bio_material	cell_line	cell_type	collected_by	collection_date	country	culture_collection	description	dev_stage	first_public	tissue_lib	tissue_type	tax_id	scientific_name	sample_alias	protocol_label	project_name	host	host_tax_id	host_status	host_sex	submitted_host_sex	host_body_site	sample_collection	sequencing_method
+SAMD00004679	DRS008059			monocyte					11799-124C8		2014-04-27		blood	9606	Homo sapiens	SAMD00004679										
+SAMD00004743	DRS008032			monocyte					11870-125B7		2014-04-27			9606	Homo sapiens	SAMD00004743										
+SAMD00004744	DRS008049			monocyte					11862-125A8		2014-04-27			9606	Homo sapiens	SAMD00004744										
+SAMD00004822	DRS008027			monocyte					11883-125D2		2014-04-27			9606	Homo sapiens	SAMD00004822										
+SAMD00004834	DRS008038			monocyte					11877-125C5		2014-04-27			9606	Homo sapiens	SAMD00004834										
+SAMD00004841	DRS008029			monocyte					11879-125C7		2014-04-27			9606	Homo sapiens	SAMD00004841										
+SAMD00004844	DRS008060			monocyte					11910-125G2		2014-04-27		blood	9606	Homo sapiens	SAMD00004844										
+SAMD00004857	DRS008047			monocyte					11876-125C4		2014-04-27			9606	Homo sapiens	SAMD00004857										
+SAMD00004883	DRS008042			monocyte					11884-125D3		2014-04-27			9606	Homo sapiens	SAMD00004883										
+SAMD00004927	DRS008052			monocyte					11865-125B2		2014-04-27			9606	Homo sapiens	SAMD00004927										
+SAMD00004938	DRS008031			monocyte					11860-125A6		2014-04-27			9606	Homo sapiens	SAMD00004938										
+SAMD00004949	DRS008025			monocyte					11863-125A9		2014-04-27			9606	Homo sapiens	SAMD00004949										
+SAMD00004980	DRS008054			monocyte					11885-125D4		2014-04-27			9606	Homo sapiens	SAMD00004980										
+SAMD00005007	DRS008045			monocyte					11881-125C9		2014-04-27			9606	Homo sapiens	SAMD00005007										
+SAMD00005047	DRS008044			monocyte					11871-125B8		2014-04-27			9606	Homo sapiens	SAMD00005047										
+SAMD00005081	DRS008033			monocyte					11880-125C8		2014-04-27			9606	Homo sapiens	SAMD00005081										
+SAMD00005082	DRS008035			monocyte					11878-125C6		2014-04-27			9606	Homo sapiens	SAMD00005082										
+SAMD00005092	DRS008057			monocyte					11912-125G4		2014-04-27		blood	9606	Homo sapiens	SAMD00005092										
+SAMD00005146	DRS008036			monocyte					11888-125D7		2014-04-27			9606	Homo sapiens	SAMD00005146										
+SAMD00005156	DRS008030			monocyte					11889-125D8		2014-04-27			9606	Homo sapiens	SAMD00005156										
+SAMD00005226	DRS007942			monocyte					11790-124B8		2014-04-27		blood	9606	Homo sapiens	SAMD00005226										
+SAMD00005251	DRS008037			monocyte					11867-125B4		2014-04-27			9606	Homo sapiens	SAMD00005251										
+SAMD00005380	DRS008041			monocyte					11874-125C2		2014-04-27			9606	Homo sapiens	SAMD00005380										
+SAMD00005394	DRS008020			monocyte					11305-117B9	57 years old adult	2014-04-27		blood	9606	Homo sapiens	SAMD00005394										
+SAMD00005512	DRS008019			monocyte					11224-116B9	47 years old adult	2014-04-27		blood	9606	Homo sapiens	SAMD00005512										
+SAMD00005516	DRS008058			monocyte					11788-124B6		2014-04-27		blood	9606	Homo sapiens	SAMD00005516										
+SAMD00005535	DRS008062			monocyte					11911-125G3		2014-04-27		blood	9606	Homo sapiens	SAMD00005535										
+SAMD00005539	DRS008021			monocyte					11381-118B4	53 years old adult	2014-04-27		blood	9606	Homo sapiens	SAMD00005539										
+SAMD00005543	DRS008055			monocyte					11789-124B7		2014-04-27		blood	9606	Homo sapiens	SAMD00005543										
+SAMD00005560	DRS008046			monocyte					11866-125B3		2014-04-27			9606	Homo sapiens	SAMD00005560										
+SAMD00005678	DRS008056			monocyte					11801-124D1		2014-04-27		blood	9606	Homo sapiens	SAMD00005678										
+SAMD00005739	DRS008043			monocyte					11861-125A7		2014-04-27			9606	Homo sapiens	SAMD00005739										
+SAMD00005767	DRS008026			monocyte					11873-125C1		2014-04-27			9606	Homo sapiens	SAMD00005767										
+SAMD00005810	DRS008051			monocyte					11882-125D1		2014-04-27			9606	Homo sapiens	SAMD00005810										
+SAMD00005837	DRS008061			monocyte					11800-124C9		2014-04-27		blood	9606	Homo sapiens	SAMD00005837										
+SAMD00005846	DRS008028			monocyte					11869-125B6		2014-04-27			9606	Homo sapiens	SAMD00005846										
+SAMD00005942	DRS008034			monocyte					11868-125B5		2014-04-27			9606	Homo sapiens	SAMD00005942										
+SAMD00005948	DRS008048			monocyte					11886-125D5		2014-04-27			9606	Homo sapiens	SAMD00005948										
+SAMD00005955	DRS008040			monocyte					11864-125B1		2014-04-27			9606	Homo sapiens	SAMD00005955										
+SAMD00005981	DRS008050			monocyte					11872-125B9		2014-04-27			9606	Homo sapiens	SAMD00005981										
+SAMD00005991	DRS008039			monocyte					11887-125D6		2014-04-27			9606	Homo sapiens	SAMD00005991										
+SAMD00006012	DRS008053			monocyte					11875-125C3		2014-04-27			9606	Homo sapiens	SAMD00006012										
+SAMD00009790	DRS000309		THP-1	monocyte					Negative control knockdown	1 year old	2010-09-02		peripheral blood	9606	Homo sapiens	SAMD00009790										
+SAMD00009791	DRS000308		THP-1	monocyte					MYB knockdown	1 year old	2010-09-02		peripheral blood	9606	Homo sapiens	SAMD00009791										
+SAMD00009792	DRS000306		THP-1	monocyte					SP1 knockdown	1 year old	2010-09-02		peripheral blood	9606	Homo sapiens	SAMD00009792										
+SAMD00009793	DRS000305		THP-1	monocyte					PU.1 knockdown	1 year old	2010-09-02		peripheral blood	9606	Homo sapiens	SAMD00009793										
+SAMD00009795	DRS000307		THP-1	monocyte					IRF8 knockdown	1 year old	2010-09-02		peripheral blood	9606	Homo sapiens	SAMD00009795										
+SAMD00013977	DRS012087		TIB-202 THP-1	monocyte					2855-61D3	1 years infant	2014-04-27		peripheral blood	9606	Homo sapiens	SAMD00013977										
+SAMEA2224109	ERS360458			monocyte					SAMPLE5_M2c MACROPHAGES		2013-11-01			9606	Homo sapiens	E-MTAB-1969:SAMPLE5_M2c MACROPHAGES										
+SAMEA2224110	ERS360459			monocyte					SAMPLE3_M1 MACROPHAGES		2013-11-01			9606	Homo sapiens	E-MTAB-1969:SAMPLE3_M1 MACROPHAGES										
+SAMEA2224111	ERS360460			monocyte					SAMPLE1_MONOCYTES		2013-11-01			9606	Homo sapiens	E-MTAB-1969:SAMPLE1_MONOCYTES										
+SAMEA2224112	ERS360461			monocyte					SAMPLE4_M2a MACROPHAGES		2013-11-01			9606	Homo sapiens	E-MTAB-1969:SAMPLE4_M2a MACROPHAGES										
+SAMEA2224113	ERS360462			monocyte					SAMPLE2_MACROPHAGES		2013-11-01			9606	Homo sapiens	E-MTAB-1969:SAMPLE2_MACROPHAGES										
+SAMEA2401040	ERS422904			monocyte					primary_monocyte_6		2014-04-25			9606	Homo sapiens	E-MTAB-2399:primary_monocyte_6										
+SAMEA2401041	ERS422905			monocyte					primary_monocyte_1		2014-04-25			9606	Homo sapiens	E-MTAB-2399:primary_monocyte_1										
+SAMEA2401042	ERS422906			monocyte					primary_monocyte_3		2014-04-25			9606	Homo sapiens	E-MTAB-2399:primary_monocyte_3										
+SAMEA2401043	ERS422907			monocyte					primary_monocyte_5		2014-04-25			9606	Homo sapiens	E-MTAB-2399:primary_monocyte_5										
+SAMEA2401044	ERS422908			monocyte					primary_monocyte_2		2014-04-25			9606	Homo sapiens	E-MTAB-2399:primary_monocyte_2										
+SAMEA2401045	ERS422909			monocyte					primary_monocyte_8		2014-04-25			9606	Homo sapiens	E-MTAB-2399:primary_monocyte_8										
+SAMEA2401046	ERS422910			monocyte					primary_monocyte_4		2014-04-25			9606	Homo sapiens	E-MTAB-2399:primary_monocyte_4										
+SAMEA2401047	ERS422911			monocyte					primary_monocyte_7		2014-04-25			9606	Homo sapiens	E-MTAB-2399:primary_monocyte_7										
+SAMEA4522056	ERS1421235		THP-1	monocyte					THP1 BR1 CTR+LPS_RNA		2016-10-21			9606	Homo sapiens	E-MTAB-5191:THP1 BR1 CTR+LPS_RNA										
+SAMEA4522057	ERS1421236		THP-1	monocyte					THP1 BR1 CTR_RNA		2016-10-21			9606	Homo sapiens	E-MTAB-5191:THP1 BR1 CTR_RNA										
+SAMEA4522058	ERS1421237		THP-1	monocyte					THP1 BR1 PMA+LPS_RNA		2016-10-21			9606	Homo sapiens	E-MTAB-5191:THP1 BR1 PMA+LPS_RNA										
+SAMEA4522059	ERS1421238		THP-1	monocyte					THP1 BR1 PMA_RNA		2016-10-21			9606	Homo sapiens	E-MTAB-5191:THP1 BR1 PMA_RNA										
+SAMEA4522060	ERS1421239		THP-1	monocyte					THP1 BR1 VD3+LPS_RNA		2016-10-21			9606	Homo sapiens	E-MTAB-5191:THP1 BR1 VD3+LPS_RNA										
+SAMEA4522061	ERS1421240		THP-1	monocyte					THP1 BR1 VD3_RNA		2016-10-21			9606	Homo sapiens	E-MTAB-5191:THP1 BR1 VD3_RNA										
+SAMEA4522062	ERS1421241		THP-1	monocyte					THP1 BR2 CTR+LPS_RNA		2016-10-21			9606	Homo sapiens	E-MTAB-5191:THP1 BR2 CTR+LPS_RNA										
+SAMEA4522063	ERS1421242		THP-1	monocyte					THP1 BR2 CTR_RNA		2016-10-21			9606	Homo sapiens	E-MTAB-5191:THP1 BR2 CTR_RNA										
+SAMEA4522064	ERS1421243		THP-1	monocyte					THP1 BR2 PMA+LPS_RNA		2016-10-21			9606	Homo sapiens	E-MTAB-5191:THP1 BR2 PMA+LPS_RNA										
+SAMEA4522065	ERS1421244		THP-1	monocyte					THP1 BR2 PMA_RNA		2016-10-21			9606	Homo sapiens	E-MTAB-5191:THP1 BR2 PMA_RNA										
+SAMEA4522066	ERS1421245		THP-1	monocyte					THP1 BR2 VD3+LPS_RNA		2016-10-21			9606	Homo sapiens	E-MTAB-5191:THP1 BR2 VD3+LPS_RNA										
+SAMEA4522067	ERS1421246		THP-1	monocyte					THP1 BR2 VD3_RNA		2016-10-21			9606	Homo sapiens	E-MTAB-5191:THP1 BR2 VD3_RNA										
+SAMN02047453	SRS414092			monocyte					THP1_mRNA-seq		2013-11-11			9606	Homo sapiens	GSM1125253										
+SAMN02910176	SRS659309			monocyte					MNC491_H3K4me1		2014-11-11			9606	Homo sapiens	GSM1435532										
+SAMN02910177	SRS659310			monocyte					MNC491_H3K4me3		2014-11-11			9606	Homo sapiens	GSM1435533										
+SAMN02910178	SRS659311			monocyte					MNC492_H3K4me1		2014-11-11			9606	Homo sapiens	GSM1435534										
+SAMN02910179	SRS659312			monocyte					MNC492_H3K4me3		2014-11-11			9606	Homo sapiens	GSM1435535										
+SAMN02910180	SRS659273			monocyte					MNC775_RNAseq		2014-11-11			9606	Homo sapiens	GSM1435495										
+SAMN02910181	SRS659274			monocyte					MNC758_RNAseq		2014-11-11			9606	Homo sapiens	GSM1435496										
+SAMN02910182	SRS659275			monocyte					MNC761_RNAseq		2014-11-11			9606	Homo sapiens	GSM1435497										
+SAMN02910183	SRS659276			monocyte					MNC764_RNAseq		2014-11-11			9606	Homo sapiens	GSM1435498										
+SAMN02910184	SRS659277			monocyte					MNC770_RNAseq		2014-11-11			9606	Homo sapiens	GSM1435499										
+SAMN02910185	SRS659278			monocyte					MNC771_RNAseq		2014-11-11			9606	Homo sapiens	GSM1435500										
+SAMN02910186	SRS659279			monocyte					MNC772_RNAseq		2014-11-11			9606	Homo sapiens	GSM1435501										
+SAMN02910187	SRS659280			monocyte					MNC773_RNAseq		2014-11-11			9606	Homo sapiens	GSM1435502										
+SAMN02978884	SRS676665			monocyte					Lm_Neonate1_6hr		2015-03-21			9606	Homo sapiens	GSM1467812										
+SAMN02978885	SRS676666			monocyte					Lm_Neonate2_0hr		2015-03-21			9606	Homo sapiens	GSM1467813										
+SAMN02978886	SRS676667			monocyte					Lm_Neonate2_2hr		2015-03-21			9606	Homo sapiens	GSM1467814										
+SAMN02978887	SRS676669			monocyte					Lm_Neonate2_6hr		2015-03-21			9606	Homo sapiens	GSM1467815										
+SAMN02978888	SRS676670			monocyte					Lm_Neonate3_0hr		2015-03-21			9606	Homo sapiens	GSM1467816										
+SAMN02978889	SRS676668			monocyte					Lm_Neonate3_2hr		2015-03-21			9606	Homo sapiens	GSM1467817										
+SAMN02978890	SRS676671			monocyte					Lm_Neonate3_6hr		2015-03-21			9606	Homo sapiens	GSM1467818										
+SAMN02978891	SRS676672			monocyte					Lm_Adult1_0hr		2015-03-21			9606	Homo sapiens	GSM1467819										
+SAMN02978892	SRS676673			monocyte					Lm_Adult1_2hr		2015-03-21			9606	Homo sapiens	GSM1467820										
+SAMN02978893	SRS676674			monocyte					Lm_Adult1_6hr		2015-03-21			9606	Homo sapiens	GSM1467821										
+SAMN02978894	SRS676675			monocyte					Lm_Adult2_0hr		2015-03-21			9606	Homo sapiens	GSM1467822										
+SAMN02978895	SRS676676			monocyte					Lm_Adult2_2hr		2015-03-21			9606	Homo sapiens	GSM1467823										
+SAMN02978896	SRS676677			monocyte					Lm_Adult2_6hr		2015-03-21			9606	Homo sapiens	GSM1467824										
+SAMN02978897	SRS676678			monocyte					Lm_Adult3_0hr		2015-03-21			9606	Homo sapiens	GSM1467825										
+SAMN02978898	SRS676680			monocyte					Lm_Adult3_2hr		2015-03-21			9606	Homo sapiens	GSM1467826										
+SAMN02978899	SRS676679			monocyte					Lm_Adult3_6hr		2015-03-21			9606	Homo sapiens	GSM1467827										
+SAMN02978900	SRS676682			monocyte					Lm_OlderAdult1_0hr		2015-03-21			9606	Homo sapiens	GSM1467828										
+SAMN02978901	SRS676681			monocyte					Lm_OlderAdult1_2hr		2015-03-21			9606	Homo sapiens	GSM1467829										
+SAMN02978902	SRS676683			monocyte					Lm_OlderAdult1_6hr		2015-03-21			9606	Homo sapiens	GSM1467830										
+SAMN02978903	SRS676684			monocyte					Lm_OlderAdult2_0hr		2015-03-21			9606	Homo sapiens	GSM1467831										
+SAMN02978904	SRS676685			monocyte					Lm_OlderAdult2_2hr		2015-03-21			9606	Homo sapiens	GSM1467832										
+SAMN02978905	SRS676686			monocyte					Lm_OlderAdult2_6hr		2015-03-21			9606	Homo sapiens	GSM1467833										
+SAMN02978906	SRS676687			monocyte					Lm_OlderAdult3_0hr		2015-03-21			9606	Homo sapiens	GSM1467834										
+SAMN02978907	SRS676689			monocyte					Lm_OlderAdult3_2hr		2015-03-21			9606	Homo sapiens	GSM1467835										
+SAMN02978908	SRS676688			monocyte					Lm_OlderAdult3_6hr		2015-03-21			9606	Homo sapiens	GSM1467836										
+SAMN02978909	SRS676636			monocyte					LPS_Neonate1_0hr		2015-03-21			9606	Homo sapiens	GSM1467783										
+SAMN02978910	SRS676637			monocyte					LPS_Neonate1_1hr		2015-03-21			9606	Homo sapiens	GSM1467784										
+SAMN02978911	SRS676640			monocyte					LPS_Neonate1_6hr		2015-03-21			9606	Homo sapiens	GSM1467785										
+SAMN02978912	SRS676639			monocyte					LPS_Neonate2_0hr		2015-03-21			9606	Homo sapiens	GSM1467786										
+SAMN02978913	SRS676638			monocyte					LPS_Neonate2_1hr		2015-03-21			9606	Homo sapiens	GSM1467787										
+SAMN02978914	SRS676641			monocyte					LPS_Neonate2_6hr		2015-03-21			9606	Homo sapiens	GSM1467788										
+SAMN02978915	SRS676643			monocyte					LPS_Neonate3_0hr		2015-03-21			9606	Homo sapiens	GSM1467789										
+SAMN02978916	SRS676642			monocyte					LPS_Neonate3_1hr		2015-03-21			9606	Homo sapiens	GSM1467790										
+SAMN02978917	SRS676644			monocyte					LPS_Neonate3_6hr		2015-03-21			9606	Homo sapiens	GSM1467791										
+SAMN02978918	SRS676645			monocyte					LPS_Adult1_0hr		2015-03-21			9606	Homo sapiens	GSM1467792										
+SAMN02978919	SRS676646			monocyte					LPS_Adult1_1hr		2015-03-21			9606	Homo sapiens	GSM1467793										
+SAMN02978920	SRS676647			monocyte					LPS_Adult1_6hr		2015-03-21			9606	Homo sapiens	GSM1467794										
+SAMN02978921	SRS676649			monocyte					LPS_Adult2_0hr		2015-03-21			9606	Homo sapiens	GSM1467795										
+SAMN02978922	SRS676648			monocyte					LPS_Adult2_1hr		2015-03-21			9606	Homo sapiens	GSM1467796										
+SAMN02978923	SRS676650			monocyte					LPS_Adult2_6hr		2015-03-21			9606	Homo sapiens	GSM1467797										
+SAMN02978924	SRS676653			monocyte					LPS_Adult3_0hr		2015-03-21			9606	Homo sapiens	GSM1467798										
+SAMN02978925	SRS676651			monocyte					LPS_Adult3_1hr		2015-03-21			9606	Homo sapiens	GSM1467799										
+SAMN02978926	SRS676652			monocyte					LPS_Adult3_6hr		2015-03-21			9606	Homo sapiens	GSM1467800										
+SAMN02978927	SRS676654			monocyte					LPS_OlderAdult1_0hr		2015-03-21			9606	Homo sapiens	GSM1467801										
+SAMN02978928	SRS676656			monocyte					LPS_OlderAdult1_1hr		2015-03-21			9606	Homo sapiens	GSM1467802										
+SAMN02978929	SRS676655			monocyte					LPS_OlderAdult1_6hr		2015-03-21			9606	Homo sapiens	GSM1467803										
+SAMN02978930	SRS676657			monocyte					LPS_OlderAdult2_0hr		2015-03-21			9606	Homo sapiens	GSM1467804										
+SAMN02978931	SRS676658			monocyte					LPS_OlderAdult2_1hr		2015-03-21			9606	Homo sapiens	GSM1467805										
+SAMN02978932	SRS676660			monocyte					LPS_OlderAdult2_6hr		2015-03-21			9606	Homo sapiens	GSM1467806										
+SAMN02978933	SRS676659			monocyte					LPS_OlderAdult3_0hr		2015-03-21			9606	Homo sapiens	GSM1467807										
+SAMN02978934	SRS676662			monocyte					LPS_OlderAdult3_1hr		2015-03-21			9606	Homo sapiens	GSM1467808										
+SAMN02978935	SRS676661			monocyte					LPS_OlderAdult3_6hr		2015-03-21			9606	Homo sapiens	GSM1467809										
+SAMN02978936	SRS676663			monocyte					Lm_Neonate1_0hr		2015-03-21			9606	Homo sapiens	GSM1467810										
+SAMN02978937	SRS676664			monocyte					Lm_Neonate1_2hr		2015-03-21			9606	Homo sapiens	GSM1467811										
+SAMN03009359	SRS693275		THP1	Monocyte					THP1 Cells from Homo sapiens		2015-09-16		peripheral-blood	9606	Homo sapiens	Hum-THP1-Cox										
+SAMN03785020	SRS967597			Monocyte					Donor 97 CD14+ mono		2015-12-25		Blood	9606	Homo sapiens	GSM1717154										
+SAMN03785024	SRS967592			Monocyte					Donor 28 CD14+ Mono		2015-12-25		Blood	9606	Homo sapiens	GSM1717158										
+SAMN03785028	SRS967589			Monocyte					Donor 36 CD14+ mono		2015-12-25		Blood	9606	Homo sapiens	GSM1717162										
+SAMN03853036	SRS986424		THP-1	monocyte					This sample has been submitted by pda|jpfeuffer on 2015-07-10; Homo sapiens		2016-07-17		peripheral blood	9606	Homo sapiens	THP-1_NM300k_0h										
+SAMN03853037	SRS985921		THP-1	monocyte					This sample has been submitted by pda|jpfeuffer on 2015-07-10; Homo sapiens		2016-07-17		peripheral blood	9606	Homo sapiens	THP-1_NM300k_6h										
+SAMN03853038	SRS985922		THP-1	monocyte					This sample has been submitted by pda|jpfeuffer on 2015-07-10; Homo sapiens		2016-07-17		peripheral blood	9606	Homo sapiens	THP-1_NM300k_12h										
+SAMN03853039	SRS985923		THP-1	monocyte					This sample has been submitted by pda|jpfeuffer on 2015-07-10; Homo sapiens		2016-07-17		peripheral blood	9606	Homo sapiens	THP-1_NM300k_24h										
+SAMN03853040	SRS986426		THP-1	monocyte					This sample has been submitted by pda|jpfeuffer on 2015-07-10; Homo sapiens		2016-07-17		peripheral blood	9606	Homo sapiens	THP-1_Control_0h										
+SAMN03853041	SRS985928		THP-1	monocyte					This sample has been submitted by pda|jpfeuffer on 2015-07-10; Homo sapiens		2016-07-17		peripheral blood	9606	Homo sapiens	THP-1_Control_6h										
+SAMN03853042	SRS985929		THP-1	monocyte					This sample has been submitted by pda|jpfeuffer on 2015-07-10; Homo sapiens		2016-07-17		peripheral blood	9606	Homo sapiens	THP-1_Control_12h										
+SAMN03853043	SRS986422		THP-1	monocyte					This sample has been submitted by pda|jpfeuffer on 2015-07-10; Homo sapiens		2016-07-17		peripheral blood	9606	Homo sapiens	THP-1_Control_24h										
+SAMN03853044	SRS985926		THP-1	monocyte					This sample has been submitted by pda|jpfeuffer on 2015-07-10; Homo sapiens		2016-07-17		peripheral blood	9606	Homo sapiens	THP-1_NM104_0h										
+SAMN03853045	SRS985927		THP-1	monocyte					This sample has been submitted by pda|jpfeuffer on 2015-07-10; Homo sapiens		2016-07-17		peripheral blood	9606	Homo sapiens	THP-1_NM104_6h										
+SAMN03853046	SRS986419		THP-1	monocyte					This sample has been submitted by pda|jpfeuffer on 2015-07-10; Homo sapiens		2016-07-17		peripheral blood	9606	Homo sapiens	THP-1_NM104_12h										
+SAMN03853047	SRS986428		THP-1	monocyte					This sample has been submitted by pda|jpfeuffer on 2015-07-10; Homo sapiens		2016-07-17		peripheral blood	9606	Homo sapiens	THP-1_NM104_24h										
+SAMN03853048	SRS986423		THP-1	monocyte					This sample has been submitted by pda|jpfeuffer on 2015-07-10; Homo sapiens		2016-07-17		peripheral blood	9606	Homo sapiens	THP-1_NM401_0h										
+SAMN03853049	SRS985925		THP-1	monocyte					This sample has been submitted by pda|jpfeuffer on 2015-07-10; Homo sapiens		2016-07-17		peripheral blood	9606	Homo sapiens	THP-1_NM401_6h										
+SAMN03853050	SRS985924		THP-1	monocyte					This sample has been submitted by pda|jpfeuffer on 2015-07-10; Homo sapiens		2016-07-17		peripheral blood	9606	Homo sapiens	THP-1_NM401_12h										
+SAMN03853051	SRS986427		THP-1	monocyte					This sample has been submitted by pda|jpfeuffer on 2015-07-10; Homo sapiens		2016-07-17		peripheral blood	9606	Homo sapiens	THP-1_NM401_24h										
+SAMN04145912	SRS1099278		THP-1	monocyte					THP1_JMJD1C _ChIP seq		2015-11-03			9606	Homo sapiens	GSM1901549										
+SAMN04145913	SRS1099277		THP-1	monocyte					THP1_LYL1_ChIP seq		2015-11-03			9606	Homo sapiens	GSM1901550										
+SAMN04166602	SRS1114465			monocyte					Hum_1_M		2015-12-04			9606	Homo sapiens	GSM1908387										
+SAMN04166606	SRS1114461			monocyte					Hum_3_M		2015-12-04			9606	Homo sapiens	GSM1908393										
+SAMN04166609	SRS1114457			monocyte					Hum_4_M		2015-12-04			9606	Homo sapiens	GSM1908396										
+SAMN04166610	SRS1114462			monocyte					Hum_2_M		2015-12-04			9606	Homo sapiens	GSM1908390										
+SAMN04271151	SRS1164427			Monocyte					Monocyte_donor I		2016-08-05		Blood	9606	Homo sapiens	GSM1941368										
+SAMN04271152	SRS1164425			Monocyte					Monocyte_donor II		2016-08-05		Blood	9606	Homo sapiens	GSM1941369										
+SAMN04271153	SRS1164424			Monocyte					Monocyte_donor III		2016-08-05		Blood	9606	Homo sapiens	GSM1941370										
+SAMN04276593	SRS1167194			Monocyte					M1C		2015-11-20			9606	Homo sapiens	GSM1943688										
+SAMN04276594	SRS1167193			Monocyte					M1M		2015-11-20			9606	Homo sapiens	GSM1943689										
+SAMN04276595	SRS1167192			Monocyte					M1T		2015-11-20			9606	Homo sapiens	GSM1943690										
+SAMN04276596	SRS1167191			Monocyte					M2M		2015-11-20			9606	Homo sapiens	GSM1943691										
+SAMN04276597	SRS1167190			Monocyte					M3C		2015-11-20			9606	Homo sapiens	GSM1943692										
+SAMN04276598	SRS1167189			Monocyte					M3M		2015-11-20			9606	Homo sapiens	GSM1943693										
+SAMN04276599	SRS1167188			Monocyte					M3T		2015-11-20			9606	Homo sapiens	GSM1943694										
+SAMN05462721	SRS1592123			Monocyte					singles-PB1022-mono-160128-27		2016-07-31			9606	Homo sapiens	GSM2255224										
+SAMN05462722	SRS1592122			Monocyte					singles-PB1022-mono-160128-26		2016-07-31			9606	Homo sapiens	GSM2255223										
+SAMN05462723	SRS1592120			Monocyte					singles-PB1022-mono-160128-25		2016-07-31			9606	Homo sapiens	GSM2255222										
+SAMN05462724	SRS1592121			Monocyte					singles-PB1022-mono-160128-24		2016-07-31			9606	Homo sapiens	GSM2255221										
+SAMN05462725	SRS1592119			Monocyte					singles-PB1022-mono-160128-23		2016-07-31			9606	Homo sapiens	GSM2255220										
+SAMN05462726	SRS1592118			Monocyte					singles-PB1022-mono-160128-22		2016-07-31			9606	Homo sapiens	GSM2255219										
+SAMN05462727	SRS1592117			Monocyte					singles-PB1022-mono-160128-21		2016-07-31			9606	Homo sapiens	GSM2255218										
+SAMN05462728	SRS1592115			Monocyte					singles-PB1022-mono-160128-20		2016-07-31			9606	Homo sapiens	GSM2255217										
+SAMN05462729	SRS1592116			Monocyte					singles-PB1022-mono-160128-19		2016-07-31			9606	Homo sapiens	GSM2255216										
+SAMN05462730	SRS1592114			Monocyte					singles-PB1022-mono-160128-18		2016-07-31			9606	Homo sapiens	GSM2255215										
+SAMN05462731	SRS1592112			Monocyte					singles-PB1022-mono-160128-17		2016-07-31			9606	Homo sapiens	GSM2255214										
+SAMN05462732	SRS1592111			Monocyte					singles-PB1022-mono-160128-16		2016-07-31			9606	Homo sapiens	GSM2255213										
+SAMN05462733	SRS1592113			Monocyte					singles-PB1022-mono-160128-15		2016-07-31			9606	Homo sapiens	GSM2255212										
+SAMN05462734	SRS1592108			Monocyte					singles-PB1022-mono-160128-14		2016-07-31			9606	Homo sapiens	GSM2255211										
+SAMN05462735	SRS1592109			Monocyte					singles-PB1022-mono-160128-13		2016-07-31			9606	Homo sapiens	GSM2255210										
+SAMN05462736	SRS1592110			Monocyte					singles-PB1022-mono-160128-12		2016-07-31			9606	Homo sapiens	GSM2255209										
+SAMN05462737	SRS1592107			Monocyte					singles-PB1022-mono-160128-11		2016-07-31			9606	Homo sapiens	GSM2255208										
+SAMN05462738	SRS1592106			Monocyte					singles-PB1022-mono-160128-10		2016-07-31			9606	Homo sapiens	GSM2255207										
+SAMN05462739	SRS1592105			Monocyte					singles-PB1022-mono-160128-9		2016-07-31			9606	Homo sapiens	GSM2255206										
+SAMN05462740	SRS1592164			Monocyte					singles-PB1022-mono-160128-68		2016-07-31			9606	Homo sapiens	GSM2255265										
+SAMN05462741	SRS1592163			Monocyte					singles-PB1022-mono-160128-67		2016-07-31			9606	Homo sapiens	GSM2255264										
+SAMN05462742	SRS1592161			Monocyte					singles-PB1022-mono-160128-66		2016-07-31			9606	Homo sapiens	GSM2255263										
+SAMN05462743	SRS1592162			Monocyte					singles-PB1022-mono-160128-65		2016-07-31			9606	Homo sapiens	GSM2255262										
+SAMN05462744	SRS1592160			Monocyte					singles-PB1022-mono-160128-64		2016-07-31			9606	Homo sapiens	GSM2255261										
+SAMN05462745	SRS1592159			Monocyte					singles-PB1022-mono-160128-63		2016-07-31			9606	Homo sapiens	GSM2255260										
+SAMN05462746	SRS1592158			Monocyte					singles-PB1022-mono-160128-62		2016-07-31			9606	Homo sapiens	GSM2255259										
+SAMN05462747	SRS1592157			Monocyte					singles-PB1022-mono-160128-61		2016-07-31			9606	Homo sapiens	GSM2255258										
+SAMN05462748	SRS1592156			Monocyte					singles-PB1022-mono-160128-60		2016-07-31			9606	Homo sapiens	GSM2255257										
+SAMN05462749	SRS1592155			Monocyte					singles-PB1022-mono-160128-59		2016-07-31			9606	Homo sapiens	GSM2255256										
+SAMN05462750	SRS1592154			Monocyte					singles-PB1022-mono-160128-58		2016-07-31			9606	Homo sapiens	GSM2255255										
+SAMN05462751	SRS1592153			Monocyte					singles-PB1022-mono-160128-57		2016-07-31			9606	Homo sapiens	GSM2255254										
+SAMN05462752	SRS1592152			Monocyte					singles-PB1022-mono-160128-56		2016-07-31			9606	Homo sapiens	GSM2255253										
+SAMN05462753	SRS1592151			Monocyte					singles-PB1022-mono-160128-55		2016-07-31			9606	Homo sapiens	GSM2255252										
+SAMN05462754	SRS1592150			Monocyte					singles-PB1022-mono-160128-54		2016-07-31			9606	Homo sapiens	GSM2255251										
+SAMN05462755	SRS1592149			Monocyte					singles-PB1022-mono-160128-53		2016-07-31			9606	Homo sapiens	GSM2255250										
+SAMN05462756	SRS1592148			Monocyte					singles-PB1022-mono-160128-52		2016-07-31			9606	Homo sapiens	GSM2255249										
+SAMN05462757	SRS1592147			Monocyte					singles-PB1022-mono-160128-51		2016-07-31			9606	Homo sapiens	GSM2255248										
+SAMN05462758	SRS1592146			Monocyte					singles-PB1022-mono-160128-50		2016-07-31			9606	Homo sapiens	GSM2255247										
+SAMN05462759	SRS1592145			Monocyte					singles-PB1022-mono-160128-49		2016-07-31			9606	Homo sapiens	GSM2255246										
+SAMN05462760	SRS1592144			Monocyte					singles-PB1022-mono-160128-48		2016-07-31			9606	Homo sapiens	GSM2255245										
+SAMN05462761	SRS1592142			Monocyte					singles-PB1022-mono-160128-47		2016-07-31			9606	Homo sapiens	GSM2255244										
+SAMN05462762	SRS1592143			Monocyte					singles-PB1022-mono-160128-46		2016-07-31			9606	Homo sapiens	GSM2255243										
+SAMN05462763	SRS1592141			Monocyte					singles-PB1022-mono-160128-45		2016-07-31			9606	Homo sapiens	GSM2255242										
+SAMN05462764	SRS1592140			Monocyte					singles-PB1022-mono-160128-44		2016-07-31			9606	Homo sapiens	GSM2255241										
+SAMN05462765	SRS1592139			Monocyte					singles-PB1022-mono-160128-43		2016-07-31			9606	Homo sapiens	GSM2255240										
+SAMN05462766	SRS1592138			Monocyte					singles-PB1022-mono-160128-42		2016-07-31			9606	Homo sapiens	GSM2255239										
+SAMN05462767	SRS1592137			Monocyte					singles-PB1022-mono-160128-41		2016-07-31			9606	Homo sapiens	GSM2255238										
+SAMN05462768	SRS1592136			Monocyte					singles-PB1022-mono-160128-40		2016-07-31			9606	Homo sapiens	GSM2255237										
+SAMN05462769	SRS1592134			Monocyte					singles-PB1022-mono-160128-39		2016-07-31			9606	Homo sapiens	GSM2255236										
+SAMN05462770	SRS1592192			Monocyte					singles-PB1022-mono-160128-96		2016-07-31			9606	Homo sapiens	GSM2255293										
+SAMN05462771	SRS1592190			Monocyte					singles-PB1022-mono-160128-95		2016-07-31			9606	Homo sapiens	GSM2255292										
+SAMN05462772	SRS1592191			Monocyte					singles-PB1022-mono-160128-94		2016-07-31			9606	Homo sapiens	GSM2255291										
+SAMN05462773	SRS1592189			Monocyte					singles-PB1022-mono-160128-93		2016-07-31			9606	Homo sapiens	GSM2255290										
+SAMN05462774	SRS1592188			Monocyte					singles-PB1022-mono-160128-92		2016-07-31			9606	Homo sapiens	GSM2255289										
+SAMN05462775	SRS1592187			Monocyte					singles-PB1022-mono-160128-91		2016-07-31			9606	Homo sapiens	GSM2255288										
+SAMN05462776	SRS1592185			Monocyte					singles-PB1022-mono-160128-90		2016-07-31			9606	Homo sapiens	GSM2255287										
+SAMN05462777	SRS1592186			Monocyte					singles-PB1022-mono-160128-89		2016-07-31			9606	Homo sapiens	GSM2255286										
+SAMN05462778	SRS1592184			Monocyte					singles-PB1022-mono-160128-88		2016-07-31			9606	Homo sapiens	GSM2255285										
+SAMN05462779	SRS1592183			Monocyte					singles-PB1022-mono-160128-87		2016-07-31			9606	Homo sapiens	GSM2255284										
+SAMN05462780	SRS1592181			Monocyte					singles-PB1022-mono-160128-86		2016-07-31			9606	Homo sapiens	GSM2255283										
+SAMN05462781	SRS1592182			Monocyte					singles-PB1022-mono-160128-85		2016-07-31			9606	Homo sapiens	GSM2255282										
+SAMN05462782	SRS1592179			Monocyte					singles-PB1022-mono-160128-84		2016-07-31			9606	Homo sapiens	GSM2255281										
+SAMN05462783	SRS1592180			Monocyte					singles-PB1022-mono-160128-83		2016-07-31			9606	Homo sapiens	GSM2255280										
+SAMN05462784	SRS1592178			Monocyte					singles-PB1022-mono-160128-82		2016-07-31			9606	Homo sapiens	GSM2255279										
+SAMN05462785	SRS1592177			Monocyte					singles-PB1022-mono-160128-81		2016-07-31			9606	Homo sapiens	GSM2255278										
+SAMN05462786	SRS1592176			Monocyte					singles-PB1022-mono-160128-80		2016-07-31			9606	Homo sapiens	GSM2255277										
+SAMN05462787	SRS1592175			Monocyte					singles-PB1022-mono-160128-79		2016-07-31			9606	Homo sapiens	GSM2255276										
+SAMN05462788	SRS1592174			Monocyte					singles-PB1022-mono-160128-78		2016-07-31			9606	Homo sapiens	GSM2255275										
+SAMN05462789	SRS1592173			Monocyte					singles-PB1022-mono-160128-77		2016-07-31			9606	Homo sapiens	GSM2255274										
+SAMN05462790	SRS1592171			Monocyte					singles-PB1022-mono-160128-76		2016-07-31			9606	Homo sapiens	GSM2255273										
+SAMN05462791	SRS1592169			Monocyte					singles-PB1022-mono-160128-75		2016-07-31			9606	Homo sapiens	GSM2255272										
+SAMN05462792	SRS1592170			Monocyte					singles-PB1022-mono-160128-74		2016-07-31			9606	Homo sapiens	GSM2255271										
+SAMN05462793	SRS1592172			Monocyte					singles-PB1022-mono-160128-73		2016-07-31			9606	Homo sapiens	GSM2255270										
+SAMN05462794	SRS1592168			Monocyte					singles-PB1022-mono-160128-72		2016-07-31			9606	Homo sapiens	GSM2255269										
+SAMN05462795	SRS1592167			Monocyte					singles-PB1022-mono-160128-71		2016-07-31			9606	Homo sapiens	GSM2255268										
+SAMN05462796	SRS1592165			Monocyte					singles-PB1022-mono-160128-70		2016-07-31			9606	Homo sapiens	GSM2255267										
+SAMN05462797	SRS1592166			Monocyte					singles-PB1022-mono-160128-69		2016-07-31			9606	Homo sapiens	GSM2255266										
+SAMN05462989	SRS1592103			Monocyte					singles-PB1022-mono-160128-8		2016-07-31			9606	Homo sapiens	GSM2255205										
+SAMN05462990	SRS1592104			Monocyte					singles-PB1022-mono-160128-7		2016-07-31			9606	Homo sapiens	GSM2255204										
+SAMN05462991	SRS1592102			Monocyte					singles-PB1022-mono-160128-6		2016-07-31			9606	Homo sapiens	GSM2255203										
+SAMN05462992	SRS1592101			Monocyte					singles-PB1022-mono-160128-5		2016-07-31			9606	Homo sapiens	GSM2255202										
+SAMN05462993	SRS1592099			Monocyte					singles-PB1022-mono-160128-4		2016-07-31			9606	Homo sapiens	GSM2255201										
+SAMN05462994	SRS1592100			Monocyte					singles-PB1022-mono-160128-3		2016-07-31			9606	Homo sapiens	GSM2255200										
+SAMN05462995	SRS1592098			Monocyte					singles-PB1022-mono-160128-2		2016-07-31			9606	Homo sapiens	GSM2255199										
+SAMN05462996	SRS1592097			Monocyte					singles-PB1022-mono-160128-1		2016-07-31			9606	Homo sapiens	GSM2255198										
+SAMN05463019	SRS1592135			Monocyte					singles-PB1022-mono-160128-38		2016-07-31			9606	Homo sapiens	GSM2255235										
+SAMN05463020	SRS1592133			Monocyte					singles-PB1022-mono-160128-37		2016-07-31			9606	Homo sapiens	GSM2255234										
+SAMN05463021	SRS1592132			Monocyte					singles-PB1022-mono-160128-36		2016-07-31			9606	Homo sapiens	GSM2255233										
+SAMN05463022	SRS1592131			Monocyte					singles-PB1022-mono-160128-35		2016-07-31			9606	Homo sapiens	GSM2255232										
+SAMN05463023	SRS1592130			Monocyte					singles-PB1022-mono-160128-34		2016-07-31			9606	Homo sapiens	GSM2255231										
+SAMN05463024	SRS1592129			Monocyte					singles-PB1022-mono-160128-33		2016-07-31			9606	Homo sapiens	GSM2255230										
+SAMN05463025	SRS1592128			Monocyte					singles-PB1022-mono-160128-32		2016-07-31			9606	Homo sapiens	GSM2255229										
+SAMN05463026	SRS1592127			Monocyte					singles-PB1022-mono-160128-31		2016-07-31			9606	Homo sapiens	GSM2255228										
+SAMN05463027	SRS1592126			Monocyte					singles-PB1022-mono-160128-30		2016-07-31			9606	Homo sapiens	GSM2255227										
+SAMN05463028	SRS1592125			Monocyte					singles-PB1022-mono-160128-29		2016-07-31			9606	Homo sapiens	GSM2255226										
+SAMN05463029	SRS1592124			Monocyte					singles-PB1022-mono-160128-28		2016-07-31			9606	Homo sapiens	GSM2255225										
+SAMN05513907	SRS1603680			Monocyte					BG_d1_6717		2016-11-19			9606	Homo sapiens	GSM2262842										
+SAMN05513908	SRS1603679			Monocyte					BG_d1_6093		2016-11-19			9606	Homo sapiens	GSM2262841										
+SAMN05513911	SRS1603675			Monocyte					BG_1h_6711		2016-11-19			9606	Homo sapiens	GSM2262837										
+SAMN05513912	SRS1603676			Monocyte					BG_4h_6090		2016-11-19			9606	Homo sapiens	GSM2262838										
+SAMN05513913	SRS1603677			Monocyte					BG_4h_6714		2016-11-19			9606	Homo sapiens	GSM2262839										
+SAMN05513914	SRS1603678			Monocyte					BG_4h_don73_10836		2016-11-19			9606	Homo sapiens	GSM2262840										
+SAMN05513915	SRS1603682			Monocyte					BG_d6_6720		2016-11-19			9606	Homo sapiens	GSM2262844										
+SAMN05513916	SRS1603687			Monocyte					BG_d6_Restim_8755		2016-11-19			9606	Homo sapiens	GSM2262849										
+SAMN05513917	SRS1603728			Monocyte					Monocyte_d0_6085		2016-11-19			9606	Homo sapiens	GSM2262890										
+SAMN05513918	SRS1603727			Monocyte					LPSthenIBET_d6_Restim_don70_10832		2016-11-19			9606	Homo sapiens	GSM2262889										
+SAMN05513919	SRS1603726			Monocyte					LPSthenIBET_d6_don70_10831		2016-11-19			9606	Homo sapiens	GSM2262888										
+SAMN05513920	SRS1603725			Monocyte					LPS_d6_Restim_don70_10650		2016-11-19			9606	Homo sapiens	GSM2262887										
+SAMN05513921	SRS1603724			Monocyte					LPS_d6_don70_10649		2016-11-19			9606	Homo sapiens	GSM2262886										
+SAMN05513922	SRS1603723			Monocyte					LPS_d6_Restim_9247		2016-11-19			9606	Homo sapiens	GSM2262885										
+SAMN05513923	SRS1603722			Monocyte					LPS_d6_Restim_8750		2016-11-19			9606	Homo sapiens	GSM2262884										
+SAMN05513924	SRS1603721			Monocyte					LPS_d6_9244		2016-11-19			9606	Homo sapiens	GSM2262883										
+SAMN05513925	SRS1603720			Monocyte					LPS_d6_8747		2016-11-19			9606	Homo sapiens	GSM2262882										
+SAMN05513926	SRS1603718			Monocyte					LPS_d6_6719		2016-11-19			9606	Homo sapiens	GSM2262881										
+SAMN05513927	SRS1603719			Monocyte					LPS_d6_6097		2016-11-19			9606	Homo sapiens	GSM2262880										
+SAMN05513928	SRS1603717			Monocyte					LPS_d1_6716		2016-11-19			9606	Homo sapiens	GSM2262879										
+SAMN05513929	SRS1603716			Monocyte					LPS_d1_6094		2016-11-19			9606	Homo sapiens	GSM2262878										
+SAMN05513930	SRS1603714			Monocyte					LPS_4h_don73_10835		2016-11-19			9606	Homo sapiens	GSM2262877										
+SAMN05513931	SRS1603715			Monocyte					LPS_4h_6713		2016-11-19			9606	Homo sapiens	GSM2262876										
+SAMN05513932	SRS1603713			Monocyte					LPS_4h_6091		2016-11-19			9606	Homo sapiens	GSM2262875										
+SAMN05513933	SRS1603712			Monocyte					LPS_1h_6710		2016-11-19			9606	Homo sapiens	GSM2262874										
+SAMN05513934	SRS1603711			Monocyte					LPS_1h_6088		2016-11-19			9606	Homo sapiens	GSM2262873										
+SAMN05513935	SRS1603710			Monocyte					IBET_d6_RPMI_5uM_Restim_10528		2016-11-19			9606	Homo sapiens	GSM2262872										
+SAMN05513936	SRS1603709			Monocyte					IBET_d6_RPMI_5uM_9878		2016-11-19			9606	Homo sapiens	GSM2262871										
+SAMN05513937	SRS1603708			Monocyte					IBET_d6_RPMI_5uM_10526		2016-11-19			9606	Homo sapiens	GSM2262870										
+SAMN05513938	SRS1603707			Monocyte					IBET_d6_RPMI_1uM_9877		2016-11-19			9606	Homo sapiens	GSM2262869										
+SAMN05513939	SRS1603706			Monocyte					IBET_d6_RPMI_0uM_Restim_10527		2016-11-19			9606	Homo sapiens	GSM2262868										
+SAMN05513940	SRS1603705			Monocyte					IBET_d6_RPMI_0uM_9876		2016-11-19			9606	Homo sapiens	GSM2262867										
+SAMN05513941	SRS1603704			Monocyte					IBET_d6_RPMI_0uM_10525		2016-11-19			9606	Homo sapiens	GSM2262866										
+SAMN05513942	SRS1603703			Monocyte					IBET_d6_LPS_5uM_Restim_10652		2016-11-19			9606	Homo sapiens	GSM2262865										
+SAMN05513943	SRS1603701			Monocyte					IBET_d6_LPS_5uM_Restim_10532		2016-11-19			9606	Homo sapiens	GSM2262863										
+SAMN05513944	SRS1603702			Monocyte					IBET_d6_LPS_5uM_Restim_10644		2016-11-19			9606	Homo sapiens	GSM2262864										
+SAMN05513945	SRS1603697			Monocyte					IBET_d6_LPS_5uM_10530		2016-11-19			9606	Homo sapiens	GSM2262859										
+SAMN05513946	SRS1603700			Monocyte					IBET_d6_LPS_5uM_9881		2016-11-19			9606	Homo sapiens	GSM2262862										
+SAMN05513947	SRS1603752			Monocyte					Rescue_LPS_BGd2_d6_10653		2016-11-19			9606	Homo sapiens	GSM2262914										
+SAMN05513948	SRS1603750			Monocyte					Rescue_LPS_BGd2_d6_10645		2016-11-19			9606	Homo sapiens	GSM2262913										
+SAMN05513949	SRS1603751			Monocyte					Rescue_LPS_BGd2_Restim_10654		2016-11-19			9606	Homo sapiens	GSM2262912										
+SAMN05513950	SRS1603749			Monocyte					Rescue_LPS_BGd2_Restim_10646		2016-11-19			9606	Homo sapiens	GSM2262911										
+SAMN05513951	SRS1603748			Monocyte					RPMI_d6_Restim_don70_10648		2016-11-19			9606	Homo sapiens	GSM2262910										
+SAMN05513952	SRS1603747			Monocyte					RPMI_d6_don70_10647		2016-11-19			9606	Homo sapiens	GSM2262909										
+SAMN05513953	SRS1603746			Monocyte					RPMI_d6_Restim_9246		2016-11-19			9606	Homo sapiens	GSM2262908										
+SAMN05513954	SRS1603745			Monocyte					RPMI_d6_Restim_8754		2016-11-19			9606	Homo sapiens	GSM2262907										
+SAMN05513955	SRS1603744			Monocyte					RPMI_d6_Restim_8749		2016-11-19			9606	Homo sapiens	GSM2262906										
+SAMN05513956	SRS1603743			Monocyte					RPMI_d6_9243		2016-11-19			9606	Homo sapiens	GSM2262905										
+SAMN05513957	SRS1603741			Monocyte					RPMI_d6_8752		2016-11-19			9606	Homo sapiens	GSM2262904										
+SAMN05513958	SRS1603735			Monocyte					RPMI_4h_6712		2016-11-19			9606	Homo sapiens	GSM2262897										
+SAMN05513959	SRS1603740			Monocyte					RPMI_d6_8746		2016-11-19			9606	Homo sapiens	GSM2262903										
+SAMN05513960	SRS1603739			Monocyte					RPMI_d6_6718		2016-11-19			9606	Homo sapiens	GSM2262902										
+SAMN05513961	SRS1603742			Monocyte					RPMI_d6_6095		2016-11-19			9606	Homo sapiens	GSM2262901										
+SAMN05513962	SRS1603738			Monocyte					RPMI_d1_6715		2016-11-19			9606	Homo sapiens	GSM2262900										
+SAMN05513963	SRS1603737			Monocyte					RPMI_d1_6092		2016-11-19			9606	Homo sapiens	GSM2262899										
+SAMN05513964	SRS1603736			Monocyte					RPMI_4h_don73_10834		2016-11-19			9606	Homo sapiens	GSM2262898										
+SAMN05513965	SRS1603733			Monocyte					RPMI_1h_6709		2016-11-19			9606	Homo sapiens	GSM2262895										
+SAMN05513966	SRS1603731			Monocyte					RPMI_1h_6086		2016-11-19			9606	Homo sapiens	GSM2262894										
+SAMN05513967	SRS1603732			Monocyte					Monocyte_d0_don73_10833		2016-11-19			9606	Homo sapiens	GSM2262893										
+SAMN05513968	SRS1603730			Monocyte					Monocyte_d0_IBET_9885		2016-11-19			9606	Homo sapiens	GSM2262892										
+SAMN05513969	SRS1603729			Monocyte					Monocyte_d0_6708		2016-11-19			9606	Homo sapiens	GSM2262891										
+SAMN05513970	SRS1603734			Monocyte					RPMI_4h_6089		2016-11-19			9606	Homo sapiens	GSM2262896										
+SAMN05513971	SRS1603694			Monocyte					IBET_d6_LPS_0uM_9879		2016-11-19			9606	Homo sapiens	GSM2262856										
+SAMN05513972	SRS1603698			Monocyte					IBET_d6_LPS_5uM_10643		2016-11-19			9606	Homo sapiens	GSM2262860										
+SAMN05513973	SRS1603674			Monocyte					BG_1h_6087		2016-11-19			9606	Homo sapiens	GSM2262836										
+SAMN05513974	SRS1603686			Monocyte					BG_d6_Restim_8751		2016-11-19			9606	Homo sapiens	GSM2262848										
+SAMN05513975	SRS1603684			Monocyte					BG_d6_8753		2016-11-19			9606	Homo sapiens	GSM2262846										
+SAMN05513976	SRS1603685			Monocyte					BG_d6_9245		2016-11-19			9606	Homo sapiens	GSM2262847										
+SAMN05513977	SRS1603691			Monocyte					IBET_d6_BG_1uM_9883		2016-11-19			9606	Homo sapiens	GSM2262853										
+SAMN05513978	SRS1603690			Monocyte					IBET_d6_BG_0uM_9882		2016-11-19			9606	Homo sapiens	GSM2262852										
+SAMN05513979	SRS1603683			Monocyte					BG_d6_8748		2016-11-19			9606	Homo sapiens	GSM2262845										
+SAMN05513980	SRS1603689			Monocyte					IBET_4h_RPMI_don73_10837		2016-11-19			9606	Homo sapiens	GSM2262851										
+SAMN05513981	SRS1603688			Monocyte					BG_d6_Restim_9248		2016-11-19			9606	Homo sapiens	GSM2262850										
+SAMN05513982	SRS1603696			Monocyte					IBET_d6_LPS_1uM_9880		2016-11-19			9606	Homo sapiens	GSM2262858										
+SAMN05513983	SRS1603693			Monocyte					IBET_d6_LPS_0uM_10529		2016-11-19			9606	Homo sapiens	GSM2262855										
+SAMN05513984	SRS1603692			Monocyte					IBET_d6_BG_5uM_9884		2016-11-19			9606	Homo sapiens	GSM2262854										
+SAMN05513985	SRS1603695			Monocyte					IBET_d6_LPS_0uM_Restim_10531		2016-11-19			9606	Homo sapiens	GSM2262857										
+SAMN05513986	SRS1603699			Monocyte					IBET_d6_LPS_5uM_10651		2016-11-19			9606	Homo sapiens	GSM2262861										
+SAMN05513987	SRS1603681			Monocyte					BG_d6_6096		2016-11-19			9606	Homo sapiens	GSM2262843										
+SAMN05513995	SRS1603875			Monocyte					LPS_d6_H3K9me3		2016-11-19			9606	Homo sapiens	GSM2263041										
+SAMN05513996	SRS1603874			Monocyte					BG_d1_H3K9me3		2016-11-19			9606	Homo sapiens	GSM2263040										
+SAMN05513997	SRS1603888			Monocyte					BG_d6_rep2_H3K4me3		2016-11-19			9606	Homo sapiens	GSM2263054										
+SAMN05513998	SRS1603810			Monocyte					RPMI_4h_rep1_H3K4me3		2016-11-19			9606	Homo sapiens	GSM2262976										
+SAMN05513999	SRS1603809			Monocyte					BG_d1_H3K27me3		2016-11-19			9606	Homo sapiens	GSM2262975										
+SAMN05514000	SRS1603808			Monocyte					LPS_d1_H3K9me3		2016-11-19			9606	Homo sapiens	GSM2262974										
+SAMN05514001	SRS1603806			Monocyte					don74_LPS_d6_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2262972										
+SAMN05514002	SRS1603805			Monocyte					BG_4h_rep2_H3K4me3		2016-11-19			9606	Homo sapiens	GSM2262971										
+SAMN05514003	SRS1603804			Monocyte					RPMI_d1_rep1_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2262970										
+SAMN05514004	SRS1603803			Monocyte					don74_LPS_d6_24hr_BG_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2262969										
+SAMN05514005	SRS1603802			Monocyte					RPMI_d6_rep2_H3K27me3		2016-11-19			9606	Homo sapiens	GSM2262968										
+SAMN05514006	SRS1603801			Monocyte					LPS_4h_H3K9me3		2016-11-19			9606	Homo sapiens	GSM2262967										
+SAMN05514007	SRS1603800			Monocyte					BG_1h_rep2_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2262966										
+SAMN05514008	SRS1603799			Monocyte					d0_rep1_H3K4me3		2016-11-19			9606	Homo sapiens	GSM2262965										
+SAMN05514009	SRS1603798			Monocyte					LPS_d6_rep2_H3K27me3		2016-11-19			9606	Homo sapiens	GSM2262964										
+SAMN05514010	SRS1603797			Monocyte					RPMI_d6_rep2_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2262963										
+SAMN05514011	SRS1603796			Monocyte					LPS_4h_rep2_H3K4me3		2016-11-19			9606	Homo sapiens	GSM2262962										
+SAMN05514012	SRS1603795			Monocyte					BG_d6_rep2_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2262961										
+SAMN05514013	SRS1603793			Monocyte					RPMI_d6_rep1_H3K27me3		2016-11-19			9606	Homo sapiens	GSM2262960										
+SAMN05514014	SRS1603794			Monocyte					don74_RPMI_d6_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2262959										
+SAMN05514015	SRS1603792			Monocyte					LPS_R_rep2_H3K27me3		2016-11-19			9606	Homo sapiens	GSM2262958										
+SAMN05514016	SRS1603791			Monocyte					BG_d6_H3K9me3		2016-11-19			9606	Homo sapiens	GSM2262957										
+SAMN05514017	SRS1603790			Monocyte					LPS_d6_rep1_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2262956										
+SAMN05514018	SRS1603789			Monocyte					BG_1h_rep1_H3K4me3		2016-11-19			9606	Homo sapiens	GSM2262955										
+SAMN05514019	SRS1603788			Monocyte					don73_RPMI_d6_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2262954										
+SAMN05514020	SRS1603761			Monocyte					RPMI_1h_rep1_H3K4me3		2016-11-19			9606	Homo sapiens	GSM2262926										
+SAMN05514021	SRS1603757			Monocyte					BG_d7_rep1_H3K4me3		2016-11-19			9606	Homo sapiens	GSM2262925										
+SAMN05514022	SRS1603758			Monocyte					BG_1h_rep1_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2262924										
+SAMN05514023	SRS1603759			Monocyte					LPS_1h_rep1_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2262923										
+SAMN05514024	SRS1603787			Monocyte					LPS_d6_rep2_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2262953										
+SAMN05514025	SRS1603786			Monocyte					BG_1h_rep2_H3K4me3		2016-11-19			9606	Homo sapiens	GSM2262952										
+SAMN05514026	SRS1603785			Monocyte					RPMI_1h_rep2_H3K4me3		2016-11-19			9606	Homo sapiens	GSM2262951										
+SAMN05514027	SRS1603783			Monocyte					LPS_d1_rep1_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2262950										
+SAMN05514028	SRS1603784			Monocyte					don73_RPMI_d6_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2262949										
+SAMN05514029	SRS1603782			Monocyte					RPMI_4h_rep1_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2262948										
+SAMN05514030	SRS1603781			Monocyte					RPMI_d7_rep1_H3K4me3		2016-11-19			9606	Homo sapiens	GSM2262947										
+SAMN05514031	SRS1603779			Monocyte					don74_LPS_d6_co_iBET_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2262946										
+SAMN05514032	SRS1603780			Monocyte					LPS_d7_rep1_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2262945										
+SAMN05514033	SRS1603778			Monocyte					BG_4h_rep2_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2262944										
+SAMN05514034	SRS1603777			Monocyte					RPMI_1h_rep1_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2262943										
+SAMN05514035	SRS1603776			Monocyte					RPMI_R_H3K9me3		2016-11-19			9606	Homo sapiens	GSM2262942										
+SAMN05514036	SRS1603775			Monocyte					LPS_1h_rep1_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2262941										
+SAMN05514037	SRS1603773			Monocyte					RPMI_d6_rep1_H3K4me3		2016-11-19			9606	Homo sapiens	GSM2262940										
+SAMN05514038	SRS1603774			Monocyte					LPS_R_rep1_H3K27me3		2016-11-19			9606	Homo sapiens	GSM2262939										
+SAMN05514039	SRS1603772			Monocyte					BG_4h_rep1_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2262938										
+SAMN05514040	SRS1603770			Monocyte					BG_d1_rep2_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2262937										
+SAMN05514041	SRS1603769			Monocyte					d0_rep2_H3K4me3		2016-11-19			9606	Homo sapiens	GSM2262936										
+SAMN05514042	SRS1603771			Monocyte					LPS_d1_rep2_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2262935										
+SAMN05514043	SRS1603767			Monocyte					LPS_d1_rep1_H3K4me3		2016-11-19			9606	Homo sapiens	GSM2262934										
+SAMN05514044	SRS1603768			Monocyte					LPS_d1_rep1_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2262933										
+SAMN05514045	SRS1603766			Monocyte					BG_d6_rep1_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2262932										
+SAMN05514046	SRS1603765			Monocyte					LPS_d1_H3K27me3		2016-11-19			9606	Homo sapiens	GSM2262931										
+SAMN05514047	SRS1603763			Monocyte					BG_R_rep1_H3K27me3		2016-11-19			9606	Homo sapiens	GSM2262930										
+SAMN05514048	SRS1603764			Monocyte					don74_LPS_d6_co_iBET_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2262929										
+SAMN05514049	SRS1603847			Monocyte					BG_4h_rep2_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2263013										
+SAMN05514050	SRS1603846			Monocyte					RPMI_4h_H3K9me3		2016-11-19			9606	Homo sapiens	GSM2263012										
+SAMN05514051	SRS1603845			Monocyte					LPS_4h_rep1_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2263011										
+SAMN05514052	SRS1603844			Monocyte					BG_1h_rep1_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2263010										
+SAMN05514053	SRS1603843			Monocyte					BG_d7_rep1_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2263009										
+SAMN05514054	SRS1603842			Monocyte					BG_d7_rep1_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2263008										
+SAMN05514055	SRS1603841			Monocyte					RPMI_d6_rep2_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2263007										
+SAMN05514056	SRS1603840			Monocyte					d0_rep1_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2263006										
+SAMN05514057	SRS1603839			Monocyte					LPS_d6_rep1_H3K27me3		2016-11-19			9606	Homo sapiens	GSM2263005										
+SAMN05514058	SRS1603838			Monocyte					RPMI_R_rep2_H3K27me3		2016-11-19			9606	Homo sapiens	GSM2263004										
+SAMN05514059	SRS1603837			Monocyte					RPMI_d1_rep1_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2263003										
+SAMN05514060	SRS1603836			Monocyte					d0_rep2_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2263002										
+SAMN05514061	SRS1603835			Monocyte					d0_rep2_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2263001										
+SAMN05514062	SRS1603834			Monocyte					BG_d6_rep2_H3K27me3		2016-11-19			9606	Homo sapiens	GSM2263000										
+SAMN05514063	SRS1603833			Monocyte					LPS_4h_rep2_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2262999										
+SAMN05514064	SRS1603832			Monocyte					RPMI_4h_rep2_H3K4me3		2016-11-19			9606	Homo sapiens	GSM2262998										
+SAMN05514065	SRS1603831			Monocyte					LPS_d7_rep1_H3K4me3		2016-11-19			9606	Homo sapiens	GSM2262997										
+SAMN05514066	SRS1603830			Monocyte					LPS_d6_rep1_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2262996										
+SAMN05514067	SRS1603829			Monocyte					BG_R_rep2_H3K27me3		2016-11-19			9606	Homo sapiens	GSM2262995										
+SAMN05514068	SRS1603828			Monocyte					BG_d1_rep2_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2262994										
+SAMN05514069	SRS1603827			Monocyte					d0_H3K27me3		2016-11-19			9606	Homo sapiens	GSM2262993										
+SAMN05514070	SRS1603826			Monocyte					RPMI_d7_rep1_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2262992										
+SAMN05514071	SRS1603820			Monocyte					LPS_R_H3K9me3		2016-11-19			9606	Homo sapiens	GSM2262986										
+SAMN05514072	SRS1603825			Monocyte					BG_d1_rep1_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2262991										
+SAMN05514073	SRS1603824			Monocyte					RPMI_d1_rep2_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2262990										
+SAMN05514074	SRS1603823			Monocyte					RPMI_4h_H3K27me3		2016-11-19			9606	Homo sapiens	GSM2262989										
+SAMN05514075	SRS1603822			Monocyte					BG_d1_rep1_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2262988										
+SAMN05514076	SRS1603821			Monocyte					LPS_1h_rep1_H3K4me3		2016-11-19			9606	Homo sapiens	GSM2262987										
+SAMN05514077	SRS1603819			Monocyte					don74_LPS_d6_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2262985										
+SAMN05514078	SRS1603818			Monocyte					RPMI_1h_rep2_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2262984										
+SAMN05514079	SRS1603760			Monocyte					don73_LPS_d6_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2262928										
+SAMN05514080	SRS1603762			Monocyte					BG_4h_rep1_H3K4me3		2016-11-19			9606	Homo sapiens	GSM2262927										
+SAMN05514081	SRS1603873			Monocyte					BG_d1_rep2_H3K4me3		2016-11-19			9606	Homo sapiens	GSM2263039										
+SAMN05514082	SRS1603872			Monocyte					LPS_4h_rep1_H3K4me3		2016-11-19			9606	Homo sapiens	GSM2263038										
+SAMN05514083	SRS1603871			Monocyte					BG_d6_rep1_H3K27me3		2016-11-19			9606	Homo sapiens	GSM2263037										
+SAMN05514084	SRS1603870			Monocyte					d0_rep1_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2263036										
+SAMN05514085	SRS1603869			Monocyte					don73_LPS_d6_24hr_BG_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2263035										
+SAMN05514086	SRS1603868			Monocyte					BG_d6_rep2_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2263034										
+SAMN05514087	SRS1603867			Monocyte					RPMI_d6_rep1_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2263033										
+SAMN05514088	SRS1603866			Monocyte					don74_RPMI_d6_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2263032										
+SAMN05514089	SRS1603865			Monocyte					LPS_d6_rep1_H3K4me3		2016-11-19			9606	Homo sapiens	GSM2263031										
+SAMN05514090	SRS1603864			Monocyte					BG_d6_rep1_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2263030										
+SAMN05514091	SRS1603863			Monocyte					BG_1h_rep2_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2263029										
+SAMN05514092	SRS1603862			Monocyte					BG_4h_H3K9me3		2016-11-19			9606	Homo sapiens	GSM2263028										
+SAMN05514093	SRS1603861			Monocyte					RPMI_d6_rep1_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2263027										
+SAMN05514094	SRS1603860			Monocyte					RPMI_1h_rep1_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2263026										
+SAMN05514095	SRS1603859			Monocyte					RPMI_d1_rep2_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2263025										
+SAMN05514096	SRS1603858			Monocyte					Mo_d0_H3K9me3		2016-11-19			9606	Homo sapiens	GSM2263024										
+SAMN05514097	SRS1603857			Monocyte					RPMI_4h_rep2_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2263023										
+SAMN05514098	SRS1603856			Monocyte					RPMI_d1_H3K9me3		2016-11-19			9606	Homo sapiens	GSM2263022										
+SAMN05514099	SRS1603855			Monocyte					LPS_1h_rep2_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2263021										
+SAMN05514100	SRS1603854			Monocyte					LPS_d1_rep2_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2263020										
+SAMN05514101	SRS1603853			Monocyte					RPMI_4h_rep1_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2263019										
+SAMN05514102	SRS1603852			Monocyte					LPS_1h_rep2_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2263018										
+SAMN05514103	SRS1603851			Monocyte					BG_4h_H3K27me3		2016-11-19			9606	Homo sapiens	GSM2263017										
+SAMN05514104	SRS1603850			Monocyte					RPMI_d1_rep1_H3K4me3		2016-11-19			9606	Homo sapiens	GSM2263016										
+SAMN05514105	SRS1603849			Monocyte					RPMI_d6_rep2_H3K4me3		2016-11-19			9606	Homo sapiens	GSM2263015										
+SAMN05514106	SRS1603848			Monocyte					LPS_4h_H3K27me3		2016-11-19			9606	Homo sapiens	GSM2263014										
+SAMN05514107	SRS1603887			Monocyte					LPS_d6_rep2_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2263053										
+SAMN05514108	SRS1603886			Monocyte					LPS_4h_rep2_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2263052										
+SAMN05514109	SRS1603885			Monocyte					LPS_d1_rep2_H3K4me3		2016-11-19			9606	Homo sapiens	GSM2263051										
+SAMN05514110	SRS1603884			Monocyte					don73_LPS_d6_24hr_BG_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2263050										
+SAMN05514111	SRS1603883			Monocyte					LPS_4h_rep1_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2263049										
+SAMN05514112	SRS1603882			Monocyte					LPS_1h_rep2_H3K4me3		2016-11-19			9606	Homo sapiens	GSM2263048										
+SAMN05514113	SRS1603881			Monocyte					BG_R_H3K9me3		2016-11-19			9606	Homo sapiens	GSM2263047										
+SAMN05514114	SRS1603880			Monocyte					LPS_d6_rep2_H3K4me3		2016-11-19			9606	Homo sapiens	GSM2263046										
+SAMN05514115	SRS1603879			Monocyte					BG_4h_rep1_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2263045										
+SAMN05514116	SRS1603878			Monocyte					RPMI_1h_rep2_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2263044										
+SAMN05514117	SRS1603877			Monocyte					BG_d1_rep1_H3K4me3		2016-11-19			9606	Homo sapiens	GSM2263043										
+SAMN05514118	SRS1603876			Monocyte					RPMI_d6_H3K9me3		2016-11-19			9606	Homo sapiens	GSM2263042										
+SAMN05514129	SRS1603817			Monocyte					don74_LPS_d6_24hr_BG_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2262983										
+SAMN05514130	SRS1603816			Monocyte					LPS_d7_rep1_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2262982										
+SAMN05514131	SRS1603815			Monocyte					don73_LPS_d6_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2262981										
+SAMN05514132	SRS1603814			Monocyte					BG_d6_rep1_H3K4me3		2016-11-19			9606	Homo sapiens	GSM2262980										
+SAMN05514133	SRS1603813			Monocyte					RPMI_d7_rep1_H3K4me1		2016-11-19			9606	Homo sapiens	GSM2262979										
+SAMN05514134	SRS1603807			Monocyte					RPMI_d1_rep2_H3K4me3		2016-11-19			9606	Homo sapiens	GSM2262973										
+SAMN05514135	SRS1603812			Monocyte					RPMI_d1_H3K27me3		2016-11-19			9606	Homo sapiens	GSM2262978										
+SAMN05514136	SRS1603811			Monocyte					RPMI_4h_rep2_H3K27ac		2016-11-19			9606	Homo sapiens	GSM2262977										
+SAMN05772726	SRS1692028			Monocyte					H3K4me3_Fumarate_Mf		2016-11-02		Adult Human Peripheral Blood	9606	Homo sapiens	GSM2310587										
+SAMN05772727	SRS1692024			Monocyte					H3K27ac_BG_Mf		2016-11-02		Adult Human Peripheral Blood	9606	Homo sapiens	GSM2310583										
+SAMN05772728	SRS1692023			Monocyte					H3K27ac_RPMI_Mf		2016-11-02		Adult Human Peripheral Blood	9606	Homo sapiens	GSM2310582										
+SAMN05772729	SRS1692029			Monocyte					RPMI_Mf_RNA		2016-11-02		Adult Human Peripheral Blood	9606	Homo sapiens	GSM2310588										
+SAMN05772730	SRS1692031			Monocyte					Fumarate_Mf_RNA		2016-11-02		Adult Human Peripheral Blood	9606	Homo sapiens	GSM2310590										
+SAMN05772731	SRS1692030			Monocyte					BG_Mf_RNA		2016-11-02		Adult Human Peripheral Blood	9606	Homo sapiens	GSM2310589										
+SAMN05772732	SRS1692027			Monocyte					H3K4me3_BG_Mf		2016-11-02		Adult Human Peripheral Blood	9606	Homo sapiens	GSM2310586										
+SAMN05772733	SRS1692026			Monocyte					H3K4me3_RPMI_Mf		2016-11-02		Adult Human Peripheral Blood	9606	Homo sapiens	GSM2310585										
+SAMN05772734	SRS1692025			Monocyte					H3K27ac_Fumarate_Mf		2016-11-02		Adult Human Peripheral Blood	9606	Homo sapiens	GSM2310584										
+SAMN05804954	SRS1709022			Monocyte					D3_RPMI_restim_don73_10846		2016-11-19		Peripheral blood	9606	Homo sapiens	GSM2325669										
+SAMN05804955	SRS1709021			Monocyte					D3_RPMI_don73_10839		2016-11-19		Peripheral blood	9606	Homo sapiens	GSM2325668										
+SAMN05804956	SRS1709016			Monocyte					D3_LPS_restim_don73_10847		2016-11-19		Peripheral blood	9606	Homo sapiens	GSM2325667										
+SAMN05804957	SRS1709017			Monocyte					D3_LPS_don73_10840		2016-11-19		Peripheral blood	9606	Homo sapiens	GSM2325666										
+SAMN05804958	SRS1709015			Monocyte					D3_BG_restim_don73_10848		2016-11-19		Peripheral blood	9606	Homo sapiens	GSM2325665										
+SAMN05804959	SRS1709018			Monocyte					D3_BG_don73_10841		2016-11-19		Peripheral blood	9606	Homo sapiens	GSM2325664										
+SAMN05804960	SRS1709025			Monocyte					D3_coIBET_LPS_don73_10843		2016-11-19		Peripheral blood	9606	Homo sapiens	GSM2325674										
+SAMN05804961	SRS1709024			Monocyte					D3_Rescue_RPMI_BGd2_restim_don73_10851		2016-11-19		Peripheral blood	9606	Homo sapiens	GSM2325673										
+SAMN05804962	SRS1709026			Monocyte					D3_coIBET_LPS_restim_don73_10850		2016-11-19		Peripheral blood	9606	Homo sapiens	GSM2325675										
+SAMN05804963	SRS1709028			Monocyte					D3_coIBET_RPMI_don73_10842		2016-11-19		Peripheral blood	9606	Homo sapiens	GSM2325676										
+SAMN05804964	SRS1709029			Monocyte					IBET_4h_LPS_don73_10838		2016-11-19		Peripheral blood	9606	Homo sapiens	GSM2325678										
+SAMN05804965	SRS1709027			Monocyte					D3_coIBET_RPMI_restim_don73_10849		2016-11-19		Peripheral blood	9606	Homo sapiens	GSM2325677										
+SAMN05804966	SRS1709023			Monocyte					D3_Rescue_RPMI_BGd2_don73_10844		2016-11-19		Peripheral blood	9606	Homo sapiens	GSM2325672										
+SAMN05804967	SRS1709020			Monocyte					D3_Rescue_LPS_BGd2_restim_don73_10852		2016-11-19		Peripheral blood	9606	Homo sapiens	GSM2325671										
+SAMN05804968	SRS1709019			Monocyte					D3_Rescue_LPS_BGd2_don73_10845		2016-11-19		Peripheral blood	9606	Homo sapiens	GSM2325670										
+SAMN05804986	SRS1709044			Monocyte					ATAC_RPMI_4h_8448		2016-11-19		Peripheral blood	9606	Homo sapiens	GSM2325689										
+SAMN05804987	SRS1709043			Monocyte					ATAC_RPMI_1h_8445		2016-11-19		Peripheral blood	9606	Homo sapiens	GSM2325688										
+SAMN05804988	SRS1709042			Monocyte					ATAC_Mono_8444		2016-11-19		Peripheral blood	9606	Homo sapiens	GSM2325687										
+SAMN05804989	SRS1709041			Monocyte					ATAC_LPS_d6_8455		2016-11-19		Peripheral blood	9606	Homo sapiens	GSM2325686										
+SAMN05804990	SRS1709040			Monocyte					ATAC_LPS_d1_8452		2016-11-19		Peripheral blood	9606	Homo sapiens	GSM2325685										
+SAMN05804991	SRS1709039			Monocyte					ATAC_LPS_4h_8449		2016-11-19		Peripheral blood	9606	Homo sapiens	GSM2325684										
+SAMN05804992	SRS1709038			Monocyte					ATAC_LPS_1h_8446		2016-11-19		Peripheral blood	9606	Homo sapiens	GSM2325683										
+SAMN05804993	SRS1709037			Monocyte					ATAC_BG_d6_8456		2016-11-19		Peripheral blood	9606	Homo sapiens	GSM2325682										
+SAMN05804994	SRS1709036			Monocyte					ATAC_BG_d1_8453		2016-11-19		Peripheral blood	9606	Homo sapiens	GSM2325681										
+SAMN05804995	SRS1709035			Monocyte					ATAC_BG_4h_8450		2016-11-19		Peripheral blood	9606	Homo sapiens	GSM2325680										
+SAMN05804996	SRS1709034			Monocyte					ATAC_BG_1h_8447		2016-11-19		Peripheral blood	9606	Homo sapiens	GSM2325679										
+SAMN05804997	SRS1709045			Monocyte					ATAC_RPMI_d1_8451		2016-11-19		Peripheral blood	9606	Homo sapiens	GSM2325690										
+SAMN05804998	SRS1709046			Monocyte					ATAC_RPMI_d6_8454		2016-11-19		Peripheral blood	9606	Homo sapiens	GSM2325691										
