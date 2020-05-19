@@ -15,13 +15,13 @@ theme_set(theme_bw())
 # load results of deconvolution
 # ------------------------------------------------------------------------
 
-load("deconv_expr_COAD.RData")
+load("deconv_results/deconv_expr_COAD.RData")
 ls()
 
-load("deconv_methy_COAD.RData")
+load("deconv_results/deconv_methy_COAD.RData")
 ls()
 
-load("barcode/subsample_coad.RData")
+load("deconv_results/barcode/subsample_coad.RData")
 ls()
 
 dim(deconv_expr_COAD)
@@ -34,73 +34,72 @@ subsample.coad[1:2,]
 
 dimnames(rho_COAD)
 
-table(rownames(deconv_expr_COAD) %in% subsample.coad$patient_id)
-setequal(rownames(deconv_expr_COAD), subsample.coad$patient_id)
-
+table(rownames(deconv_expr_COAD) == subsample.coad$patient_id)
 cor(deconv_expr_COAD[,"B"], rho_COAD[,"B","EMeth"])
-plot(deconv_expr_COAD[,"B"], rho_COAD[,"B","EMeth"])
-
-mat1 = match(subsample.coad$patient_id, rownames(deconv_expr_COAD))
-
-cor(deconv_expr_COAD[mat1,"B"], rho_COAD[,"B","EMeth"])
-plot(deconv_expr_COAD[mat1,"B"], rho_COAD[,"B","EMeth"])
 
 # ------------------------------------------------------------------------
 # load results of clinical information
 # ------------------------------------------------------------------------
 
-sc = readRDS("data/COAD_somatic_clinic.rds")
+sc = readRDS("clinical_data/COAD_somatic_clinic.rds")
+dim(sc)
+names(sc)
+
+sc = sc[,-(23:32)]
 dim(sc)
 sc[1:2,]
 
-coad = read.table("data/patient_coad_short_table_nMut.txt", sep="\t",
-                  as.is=TRUE, header=TRUE)
-dim(coad)
-coad[1:2,]
-
-ff0    = "data/patient_coad_M_info_hyperMeth.txt"
+ff0    = "clinical_data/patient_coad_M_info_hyperMeth.txt"
 emInfo = read.table(ff0, sep = "\t", header = TRUE, as.is = TRUE)
 dim(emInfo)
 emInfo[1, ]
 
-table(emInfo$bcr_patient_barcode %in% coad$bcr_patient_barcode)
-mat1 = match(emInfo$bcr_patient_barcode, coad$bcr_patient_barcode)
-emInfo$nMut = coad$nMut[mat1]
-
 table(emInfo$bcr_patient_barcode %in% sc$barcode)
-emInfo$barcode = emInfo$bcr_patient_barcode
+names(emInfo)[which(names(emInfo)=="bcr_patient_barcode")] = "barcode"
+
 emInfo = merge(emInfo, sc, by="barcode")
-
-summary(emInfo$raw_MB_hg38_SNV)
-summary(emInfo$nMut)
-
-plot(log10(emInfo$raw_MB_hg38_SNV), log10(emInfo$nMut))
+dim(emInfo)
 
 table(emInfo$vital_status, emInfo$Delta)
 
 surv1 = pmax(emInfo$last_contact_days_to, emInfo$death_days_to, na.rm=TRUE)
-plot(log10(surv1), log10(emInfo$Time))
-abline(0,1)
+summary(surv1)
+
+summary(emInfo$Time)
+emInfo$Time = emInfo$Time - 0.01
+emInfo$Time[which(emInfo$Time == 0)] = 1
+
+# confirm the survival time are consistent between the two studies
+ggplot(emInfo, aes(x=surv1, y=emInfo$Time)) + geom_point() +
+  geom_abline(intercept=0, slope=1)
 
 # ------------------------------------------------------------------------
 # merage clinical information and cell type composition estimates
 # ------------------------------------------------------------------------
-
-# mat1 = match(rownames(deconv_expr_COAD), subsample.coad$patient_id)
-# subsample.coad = subsample.coad[mat1,]
 
 colnames(deconv_expr_COAD) = paste0(colnames(deconv_expr_COAD), ".E")
 ct = cbind(subsample.coad, deconv_expr_COAD, rho_COAD[,,"EMeth"])
 dim(ct)
 ct[1:2,]
 
-rownames(ct) = 1:nrow(ct)
+table(rownames(ct) == ct$patient_id)
 
-table(ct$barcode %in% sc$barcode)
+table(ct$barcode %in% emInfo$barcode)
 
-ct = merge(ct, sc, by="barcode")
+ct = merge(ct, emInfo, by="barcode")
 dim(ct)
 ct[1:2,]
+
+names(ct)
+
+purity.E = 1 - rowSums(ct[,4:10])
+purity.M = 1 - rowSums(ct[,11:17])
+
+cor(purity.E, purity.M)
+cor(ct$abs_purity, purity.M)
+
+ggplot(ct, aes(x=abs_purity, y=purity.M)) + geom_point() +
+  geom_abline(intercept=0, slope=1)
 
 ggplot(ct, aes(x=CD8T.E, y=CD8T)) + geom_point() +
   geom_abline(intercept=0, slope=1)
