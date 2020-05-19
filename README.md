@@ -1,1 +1,1 @@
-# Estiamte cell type composition using DNA methylation data. 
+# Deconvolute cell type composition using DNA methylation data. 
