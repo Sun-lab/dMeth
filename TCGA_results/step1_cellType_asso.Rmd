@@ -1,0 +1,144 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r}
+
+library(ggplot2)
+library(ggpubr)
+library(ggpointdensity)
+theme_set(theme_bw())
+
+# ------------------------------------------------------------------------
+# load results of deconvolution
+# ------------------------------------------------------------------------
+
+load("deconv_expr_COAD.RData")
+ls()
+
+load("deconv_methy_COAD.RData")
+ls()
+
+load("barcode/subsample_coad.RData")
+ls()
+
+dim(deconv_expr_COAD)
+dim(rho_COAD)
+dim(subsample.coad)
+
+deconv_expr_COAD[1:2,]
+rho_COAD[1,,]
+subsample.coad[1:2,]
+
+dimnames(rho_COAD)
+
+table(rownames(deconv_expr_COAD) %in% subsample.coad$patient_id)
+setequal(rownames(deconv_expr_COAD), subsample.coad$patient_id)
+
+cor(deconv_expr_COAD[,"B"], rho_COAD[,"B","EMeth"])
+plot(deconv_expr_COAD[,"B"], rho_COAD[,"B","EMeth"])
+
+mat1 = match(subsample.coad$patient_id, rownames(deconv_expr_COAD))
+
+cor(deconv_expr_COAD[mat1,"B"], rho_COAD[,"B","EMeth"])
+plot(deconv_expr_COAD[mat1,"B"], rho_COAD[,"B","EMeth"])
+
+# ------------------------------------------------------------------------
+# load results of clinical information
+# ------------------------------------------------------------------------
+
+sc = readRDS("data/COAD_somatic_clinic.rds")
+dim(sc)
+sc[1:2,]
+
+coad = read.table("data/patient_coad_short_table_nMut.txt", sep="\t",
+                  as.is=TRUE, header=TRUE)
+dim(coad)
+coad[1:2,]
+
+ff0    = "data/patient_coad_M_info_hyperMeth.txt"
+emInfo = read.table(ff0, sep = "\t", header = TRUE, as.is = TRUE)
+dim(emInfo)
+emInfo[1, ]
+
+table(emInfo$bcr_patient_barcode %in% coad$bcr_patient_barcode)
+mat1 = match(emInfo$bcr_patient_barcode, coad$bcr_patient_barcode)
+emInfo$nMut = coad$nMut[mat1]
+
+table(emInfo$bcr_patient_barcode %in% sc$barcode)
+emInfo$barcode = emInfo$bcr_patient_barcode
+emInfo = merge(emInfo, sc, by="barcode")
+
+summary(emInfo$raw_MB_hg38_SNV)
+summary(emInfo$nMut)
+
+plot(log10(emInfo$raw_MB_hg38_SNV), log10(emInfo$nMut))
+
+table(emInfo$vital_status, emInfo$Delta)
+
+surv1 = pmax(emInfo$last_contact_days_to, emInfo$death_days_to, na.rm=TRUE)
+plot(log10(surv1), log10(emInfo$Time))
+abline(0,1)
+
+# ------------------------------------------------------------------------
+# merage clinical information and cell type composition estimates
+# ------------------------------------------------------------------------
+
+# mat1 = match(rownames(deconv_expr_COAD), subsample.coad$patient_id)
+# subsample.coad = subsample.coad[mat1,]
+
+colnames(deconv_expr_COAD) = paste0(colnames(deconv_expr_COAD), ".E")
+ct = cbind(subsample.coad, deconv_expr_COAD, rho_COAD[,,"EMeth"])
+dim(ct)
+ct[1:2,]
+
+rownames(ct) = 1:nrow(ct)
+
+table(ct$barcode %in% sc$barcode)
+
+ct = merge(ct, sc, by="barcode")
+dim(ct)
+ct[1:2,]
+
+ggplot(ct, aes(x=CD8T.E, y=CD8T)) + geom_point() +
+  geom_abline(intercept=0, slope=1)
+
+ggplot(ct, aes(x=Monocyte.E, y=Monocyte)) + geom_point() +
+  geom_abline(intercept=0, slope=1)
+
+ggplot(ct, aes(x=log10(raw_MB_hg38_SNV)))+
+  geom_histogram(color="darkblue", fill="lightblue")  +
+  geom_vline(xintercept = log10(400))
+
+ct$hyper_mutation = ct[,"raw_MB_hg38_SNV"] > 400
+
+g1 = ggplot(ct, aes(x=hyper_mutation, y=B.E)) + 
+  geom_boxplot(outlier.shape = NA) + 
+  geom_jitter(shape=16, position=position_jitter(0.2))
+
+g2 = ggplot(ct, aes(x=hyper_mutation, y=B)) + 
+  geom_boxplot(outlier.shape = NA) + 
+  geom_jitter(shape=16, position=position_jitter(0.2))
+
+g3 = ggplot(ct, aes(x=hyper_mutation, y=CD8T.E)) + 
+  geom_boxplot(outlier.shape = NA) + 
+  geom_jitter(shape=16, position=position_jitter(0.2))
+
+g4 = ggplot(ct, aes(x=hyper_mutation, y=CD8T)) + 
+  geom_boxplot(outlier.shape = NA) + 
+  geom_jitter(shape=16, position=position_jitter(0.2))
+
+g5 = ggplot(ct, aes(x=hyper_mutation, y=Monocyte.E)) + 
+  geom_boxplot(outlier.shape = NA) + 
+  geom_jitter(shape=16, position=position_jitter(0.2))
+
+g6 = ggplot(ct, aes(x=hyper_mutation, y=Monocyte)) + 
+  geom_boxplot(outlier.shape = NA) + 
+  geom_jitter(shape=16, position=position_jitter(0.2))
+
+ggarrange(g1, g2, g3, g4, g5, g6, nrow = 3, ncol = 2)
+
+
+```
