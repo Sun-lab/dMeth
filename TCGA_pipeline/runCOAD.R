@@ -111,13 +111,30 @@ table(sam$label)
 cellTypes = unique(sam$label)
 
 # ------------------------------------------------------------
-# read DNA methylation sample information
+# read tumor purity 
 # ------------------------------------------------------------
 
-ff0    = "../TCGA_results/clinical_data/patient_coad_M_info_hyperMeth.txt"
-emInfo = read.table(ff0, sep = "\t", header = TRUE, as.is = TRUE)
+dir0 = "../TCGA_results/clinical_data/"
+
+emInfo = fread(paste0(dir0, "patient_coad_M_info_hyperMeth.txt"))
 dim(emInfo)
 emInfo[1, ]
+
+purity = fread(paste0(dir0, "TCGA_mastercalls.abs_tables_JSedit.fixed.txt"))
+dim(purity)
+purity[1, ]
+
+emInfo$array = substring(emInfo$methylation_barcode, 1, 15)
+table(emInfo$array %in% purity$array)
+table(purity$array %in% emInfo$array)
+
+emInfo = merge(emInfo, purity, by="array")
+dim(emInfo)
+emInfo[1, ]
+
+summary(emInfo$abs_purity)
+summary(emInfo$purity)
+cor(emInfo$abs_purity, emInfo$purity, use="pair")
 
 # ------------------------------------------------------------
 # extract methylation data from tumor samples
@@ -127,11 +144,20 @@ ys = datM[match(rownames(X), rownames(datM)),]
 dim(ys)
 ys[1:2,1:5]
 
+table(colnames(ys) %in% emInfo$patient_id)
+patient_id_2use = intersect(colnames(ys), emInfo$patient_id)
+
+ys = ys[,match(patient_id_2use,colnames(ys))]
+emInfo = emInfo[match(patient_id_2use,emInfo$patient_id),]
+
+dim(ys)
+dim(emInfo)
+
 stopifnot(all(colnames(ys) == emInfo$patient_id))
 emInfo$patient_id[1:5]
 
 ys_na      = which(apply(is.na(ys),2,any))
-eta_abs_na = which(is.na(emInfo$abs_purity))
+eta_abs_na = which(is.na(emInfo$purity))
 
 any.na = union(ys_na,eta_abs_na)
 any.na
@@ -144,6 +170,7 @@ ys[1:2,1:5]
 
 dim(emInfo)
 emInfo[1:2,]
+
 table(colnames(ys) == emInfo$patient_id)
 
 #-------------------------------------------------------------
@@ -168,7 +195,7 @@ for(ct in cellTypes){
 # samples with cell type estimation from expression and DNA methylation
 #----------------------------------------------------------------------
 
-fnm = '../TCGA_results/deconv_results/COAD_composition_cibersortx.txt'
+fnm = '_cibersortx_results/COAD_composition_cibersortx.txt'
 est_expr = fread(fnm)
 dim(est_expr)
 est_expr[1:2,]
@@ -228,9 +255,9 @@ deconv_expr[1:2,]
 # Compare results with different methods and with expression data
 #---------------------------------------------------------------------
 
-eta = emInfo$abs_purity
+eta = emInfo$purity
 summary(eta)
-eta[eta > 0.99] = 0.99
+eta[which(eta > 0.99)] = 0.99
 
 temp <- rownames(deconv_expr)
 deconv_expr <- diag(1-eta) %*% deconv_expr
@@ -289,13 +316,13 @@ for(j in 1:ncol(ys)){
 }
 
 print('LaplaceEM')
-hundrediter_laplace = cv.emeth(ys, eta, mu, aber = aber, V='c', init = 'default',
+hundrediter_laplace = cv.emeth(ys, eta, mu, aber = TRUE, V='c', init = 'default',
                                family = 'laplace', nu = penalty, folds = 5, 
                                maxiter = 50, verbose = TRUE)
 rho[,,'LaplaceEM'] = hundrediter_laplace[[1]]$rho
 
 print('OriEM')
-hundrediter = cv.emeth(ys, eta, mu, aber = aber, V='c', init = 'default',
+hundrediter = cv.emeth(ys, eta, mu, aber = TRUE, V='c', init = 'default',
                        family = 'normal', nu = penalty, folds = 5, 
                        maxiter = 50, verbose = TRUE)
 rho[,,'OriEM'] = hundrediter[[1]]$rho
@@ -313,8 +340,8 @@ deconv_expr[1:2,]
 
 rho_COAD = rho
 deconv_expr_COAD = deconv_expr
-save(rho_COAD, file = '_results/rho_inf_COAD.RData')
-save(deconv_expr_COAD, file = '_results/deconv_expr_COAD.RData')
+save(rho_COAD, file = '../TCGA_results/deconv_methy_COAD.RData')
+save(deconv_expr_COAD, file = '../TCGA_results/deconv_expr_COAD.RData')
 
 #---------------------------------------------------------------------
 # generate plots
@@ -336,7 +363,6 @@ rownames(err) <- utypes
 rss <- matrix(NA,nrow = length(utypes), ncol = length(methods))
 colnames(rss) <- methods
 rownames(rss) <- utypes
-
 
 for(i in 1:length(utypes)){
   cormat[i,] <- sapply(1:length(methods), FUN = function(j){

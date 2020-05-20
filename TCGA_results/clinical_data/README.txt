@@ -6,7 +6,6 @@ https://gdc.cancer.gov/about-data/publications/pancanatlas
 
 clinical_PANCAN_patient_with_followup.tsv
 TCGA-CDR-SupplementalTableS1.xlsx
-TCGA_mastercalls.abs_tables_JSedit.fixed.txt
 
 2. Our early work of pan cancer study of somatic mutations and intra-tumor heterogeneity
 

@@ -6,6 +6,7 @@ output:
 
 ```{r}
 
+library(data.table)
 library(ggplot2)
 library(ggpubr)
 library(ggpointdensity)
@@ -15,27 +16,22 @@ theme_set(theme_bw())
 # load results of deconvolution
 # ------------------------------------------------------------------------
 
-load("deconv_results/deconv_expr_COAD.RData")
+load("deconv_expr_COAD.RData")
 ls()
 
-load("deconv_results/deconv_methy_COAD.RData")
-ls()
-
-load("deconv_results/barcode/subsample_coad.RData")
+load("deconv_methy_COAD.RData")
 ls()
 
 dim(deconv_expr_COAD)
 dim(rho_COAD)
-dim(subsample.coad)
 
 deconv_expr_COAD[1:2,]
 rho_COAD[1,,]
-subsample.coad[1:2,]
 
 dimnames(rho_COAD)
 
-table(rownames(deconv_expr_COAD) == subsample.coad$patient_id)
-cor(deconv_expr_COAD[,"B"], rho_COAD[,"B","EMeth"])
+table(rownames(deconv_expr_COAD) == dimnames(rho_COAD)[[1]])
+cor(deconv_expr_COAD[,"B"], rho_COAD[,"B","OriEM"])
 
 # ------------------------------------------------------------------------
 # load results of clinical information
@@ -49,8 +45,7 @@ sc = sc[,-(23:32)]
 dim(sc)
 sc[1:2,]
 
-ff0    = "clinical_data/patient_coad_M_info_hyperMeth.txt"
-emInfo = read.table(ff0, sep = "\t", header = TRUE, as.is = TRUE)
+emInfo = fread("clinical_data/patient_coad_M_info_hyperMeth.txt")
 dim(emInfo)
 emInfo[1, ]
 
@@ -60,52 +55,35 @@ names(emInfo)[which(names(emInfo)=="bcr_patient_barcode")] = "barcode"
 emInfo = merge(emInfo, sc, by="barcode")
 dim(emInfo)
 
-table(emInfo$vital_status, emInfo$Delta)
-
-surv1 = pmax(emInfo$last_contact_days_to, emInfo$death_days_to, na.rm=TRUE)
-summary(surv1)
-
-summary(emInfo$Time)
-emInfo$Time = emInfo$Time - 0.01
-emInfo$Time[which(emInfo$Time == 0)] = 1
-
-# confirm the survival time are consistent between the two studies
-ggplot(emInfo, aes(x=surv1, y=emInfo$Time)) + geom_point() +
-  geom_abline(intercept=0, slope=1)
-
 # ------------------------------------------------------------------------
 # merage clinical information and cell type composition estimates
 # ------------------------------------------------------------------------
 
 colnames(deconv_expr_COAD) = paste0(colnames(deconv_expr_COAD), ".E")
-ct = cbind(subsample.coad, deconv_expr_COAD, rho_COAD[,,"EMeth"])
+
+ct = data.frame(deconv_expr_COAD, rho_COAD[,,"OriEM"])
 dim(ct)
 ct[1:2,]
 
-table(rownames(ct) == ct$patient_id)
+table(rownames(ct) %in% emInfo$patient_id)
 
-table(ct$barcode %in% emInfo$barcode)
-
-ct = merge(ct, emInfo, by="barcode")
+ct$patient_id = rownames(ct)
+ct = merge(ct, emInfo, by="patient_id")
 dim(ct)
 ct[1:2,]
 
 names(ct)
 
-purity.E = 1 - rowSums(ct[,4:10])
-purity.M = 1 - rowSums(ct[,11:17])
-
-cor(purity.E, purity.M)
-cor(ct$abs_purity, purity.M)
-
-ggplot(ct, aes(x=abs_purity, y=purity.M)) + geom_point() +
+g1 = ggplot(ct, aes(x=B.E, y=B)) + geom_point() +
   geom_abline(intercept=0, slope=1)
 
-ggplot(ct, aes(x=CD8T.E, y=CD8T)) + geom_point() +
+g2 = ggplot(ct, aes(x=CD8T.E, y=CD8T)) + geom_point() +
   geom_abline(intercept=0, slope=1)
 
-ggplot(ct, aes(x=Monocyte.E, y=Monocyte)) + geom_point() +
+g3 = ggplot(ct, aes(x=Monocyte.E, y=Monocyte)) + geom_point() +
   geom_abline(intercept=0, slope=1)
+
+ggarrange(g1, g2, g3, nrow = 1, ncol = 3)
 
 ggplot(ct, aes(x=log10(raw_MB_hg38_SNV)))+
   geom_histogram(color="darkblue", fill="lightblue")  +
@@ -139,5 +117,7 @@ g6 = ggplot(ct, aes(x=hyper_mutation, y=Monocyte)) +
 
 ggarrange(g1, g2, g3, g4, g5, g6, nrow = 3, ncol = 2)
 
+wilcox.test(ct$CD8T~ ct$hyper_mutation)
+wilcox.test(ct$CD8T.E~ ct$hyper_mutation)
 
 ```
