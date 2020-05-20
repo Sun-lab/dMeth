@@ -1,120 +1,275 @@
+
 library(data.table)
 library(scales)
 library(stringr)
-library(quadprog)
 library(e1071)
 library(ggplot2)
 library(MASS)
 library(gridExtra)
 library(quantreg)
-setwd("~/test/pipelines/TCGA")
-#source('ICeDT.R')
-#source('Expr_Methy_Data_COAD.R')
+library(quadprog)
+library(EMeth)
 
-use_abs_eta = TRUE
-purity_correction =  TRUE
-discard_high_purity = FALSE
-discard_mast_cells = FALSE 
-testalgorithm = FALSE
-printplot = FALSE
-aber = TRUE
+# the raw data of DNA metylation is too large to be kept in gitHub
+# here is the local path for DNA methylation data
+path.data = "~/research/TCGA/COAD/_data2"
 
-#-----------------------------------------------------------
-# Compare absolute purity and estiamted purity
-#-----------------------------------------------------------
-if(printplot){
-  print(cor(abs_purity$absolute_extract_purity,est_purity$AscatPurity))
-  pdf("~/Hutch-Research/figures/abs_vs_est_purity.pdf", width = 13.5, height = 6)
-  eta_plot = data.frame(cbind(abs_purity$absolute_extract_purity,est_purity$AscatPurity))
-  colnames(eta_plot) = c('abs_purity','inferred_purity')
-  etascatter <- ggplot(data = eta_plot, aes(x=abs_purity, y=inferred_purity)) + xlim(0,1) + ylim(0,1) +
-    geom_point() + geom_abline(intercept = 0,slope = 1)
-  print(etascatter)
-  dev.off()
+# ------------------------------------------------------------
+# read in pure cell type data
+# ------------------------------------------------------------
+
+path.ref = "../cell_type_specific_reference/data"
+
+info = fread(file.path(path.ref, "methylation_pure_ct_info.txt.gz"))
+dim(info)
+info[1:2,]
+
+dat = fread(file.path(path.ref, 
+                      "methylation_pure_ct_rmPC2_data_signif4.txt.gz"))
+dim(dat)
+dat[1:2,1:5]
+
+sam = fread(file.path(path.ref, "methylation_pure_ct_sample.txt"))
+dim(sam)
+sam[1:2,]
+
+table(names(dat) == sam$id)
+
+dat = data.matrix(dat)
+table(sam$label)
+rownames(dat) = info$ID
+
+# ------------------------------------------------------------
+# read DNA methylation data
+# ------------------------------------------------------------
+
+datM = fread(file.path(path.data, "methylation_betaValue.txt"))
+dim(datM)
+datM[1:2, 1:5]
+
+infoM = fread(file.path(path.ref, "methylation_info.txt"))
+dim(infoM)
+names(infoM)
+infoM[1:2, 1:5]
+table(infoM$CHR)
+
+table(datM$id == infoM$Name)
+
+datM = data.matrix(datM[,-1])
+rownames(datM) = infoM$Name
+dim(datM)
+datM[1:2, 1:5]
+
+# ------------------------------------------------------------
+# take intersection of CpG probes between purified data and 
+# bulk tumor samples
+# ------------------------------------------------------------
+
+table(info$ID == info$Name)
+cpgs = intersect(info$ID, infoM$Name)
+length(cpgs)
+
+mat1  = match(cpgs, infoM$Name)
+datM  = datM[mat1,]
+infoM = infoM[mat1,]
+
+dim(datM)
+datM[1:2, 1:5]
+
+dim(infoM)
+infoM[1:2, 1:5]
+
+mat2 = match(cpgs, info$ID)
+dat  = dat[mat2,]
+info = info[mat2,]
+
+dim(dat)
+dat[1:2, 1:5]
+
+dim(info)
+info[1:2, 1:5]
+
+# ------------------------------------------------------------
+# read in probes to be used
+# ------------------------------------------------------------
+
+load(file.path(path.ref, "ref_966probes.RData"))
+ls()
+length(probe2use)
+length(unique(probe2use))
+
+table(probe2use %in% rownames(datM))
+table(probe2use %in% rownames(dat))
+
+X  = dat[match(probe2use, rownames(dat)),]
+dim(X)
+X[1:2,1:5]
+
+dim(sam)
+table(sam$id == colnames(X))
+table(sam$label)
+cellTypes = unique(sam$label)
+
+# ------------------------------------------------------------
+# read DNA methylation sample information
+# ------------------------------------------------------------
+
+ff0    = "../TCGA_results/clinical_data/patient_coad_M_info_hyperMeth.txt"
+emInfo = read.table(ff0, sep = "\t", header = TRUE, as.is = TRUE)
+dim(emInfo)
+emInfo[1, ]
+
+# ------------------------------------------------------------
+# extract methylation data from tumor samples
+# ------------------------------------------------------------
+
+ys = datM[match(rownames(X), rownames(datM)),]
+dim(ys)
+ys[1:2,1:5]
+
+stopifnot(all(colnames(ys) == emInfo$patient_id))
+emInfo$patient_id[1:5]
+
+ys_na      = which(apply(is.na(ys),2,any))
+eta_abs_na = which(is.na(emInfo$abs_purity))
+
+any.na = union(ys_na,eta_abs_na)
+any.na
+
+ys = ys[,-any.na]
+emInfo = emInfo[-any.na,]
+
+dim(ys)
+ys[1:2,1:5]
+
+dim(emInfo)
+emInfo[1:2,]
+table(colnames(ys) == emInfo$patient_id)
+
+#-------------------------------------------------------------
+# Estimate Mean Matrix mu
+#-------------------------------------------------------------
+
+mu = matrix(NA, nrow = dim(X)[1], ncol = length(cellTypes))
+s2 = matrix(NA, nrow = dim(X)[1], ncol = length(cellTypes))
+
+row.names(mu) = row.names(s2) = rownames(X)
+colnames(mu)  = colnames(s2)  = cellTypes
+
+for(ct in cellTypes){
+  sam.ct = unlist(sam[which(sam[,2]==ct),1])
+  dat.ct = X[,sam.ct]
+  mu[,ct] = rowMeans(dat.ct,na.rm=TRUE)
+  s2[,ct] = apply(dat.ct,1,sd,na.rm = TRUE)^2
 }
 
-#-----------------------------------------------------------
+#----------------------------------------------------------------------
+# Read Estimation from Expression Data, take intersection of the 
+# samples with cell type estimation from expression and DNA methylation
+#----------------------------------------------------------------------
+
+fnm = '../TCGA_results/deconv_results/COAD_composition_cibersortx.txt'
+est_expr = fread(fnm)
+dim(est_expr)
+est_expr[1:2,]
+
+samname  = str_replace(est_expr$Mixture, "^X", "")
+length(samname)
+samname[1:5]
+
+est_expr = data.matrix(est_expr[,-1])
+rownames(est_expr) = samname
+dim(est_expr)
+est_expr[1:2,]
+
+com_sample = intersect(rownames(est_expr), colnames(ys))
+length(com_sample)
+
+est_expr = est_expr[match(com_sample,rownames(est_expr)),]
+dim(est_expr)
+est_expr[1:2,]
+
+ys     = ys[,match(com_sample,colnames(ys))]
+emInfo = emInfo[match(com_sample, emInfo$patient_id),]
+
+dim(ys)
+ys[1:2,1:4]
+
+dim(emInfo)
+emInfo[1:2,]
+
+table(colnames(ys) == emInfo$patient_id)
+table(colnames(ys) == rownames(est_expr))
+table(rownames(ys) == rownames(mu))
+
+#----------------------------------------------------------------------
+# collapse cell types from expression data into fewer cell types
+#----------------------------------------------------------------------
+
+deconv_expr = matrix(NA, nrow = nrow(est_expr),ncol = length(cellTypes))
+colnames(deconv_expr) = cellTypes 
+rownames(deconv_expr) = rownames(est_expr)
+colnames(est_expr)
+
+other = rowSums(est_expr[,c(10,19,20,21)])
+deconv_expr[,"B"]    = rowSums(est_expr[,1:3])/0.4
+deconv_expr[,"CD4T"] = rowSums(est_expr[,5:8])/0.4
+deconv_expr[,"CD8T"] = as.matrix(est_expr[,4])/0.4
+deconv_expr[,"Treg"] = as.matrix(est_expr[,9])/0.4
+deconv_expr[,"NK"] = rowSums(est_expr[,11:12])/0.42
+deconv_expr[,"Monocyte"] = rowSums(est_expr[,13:18])/1.40
+deconv_expr[,"Neutrophil"] = as.matrix(est_expr[,22])/0.15
+deconv_expr = deconv_expr / rowSums(deconv_expr)
+
+dim(deconv_expr)
+deconv_expr[1:2,]
+
+#---------------------------------------------------------------------
 # Compare results with different methods and with expression data
-#-----------------------------------------------------------
-#Y = 2^Y/(2^Y+1)
+#---------------------------------------------------------------------
 
-if(use_abs_eta){
-  print("Absolute Purity")
-  source("COAD.R")
-  eta = eta_abs[which(colnames(ys) %in% rownames(deconv_expr))]
-  Y   = ys[,intersect(colnames(ys),rownames(deconv_expr))]
-  ref = mu[rownames(Y),]
-  #printplot = FALSE
-  if(purity_correction){
-    temp <- rownames(deconv_expr)
-    deconv_expr <- diag(1-eta) %*% deconv_expr
-    rownames(deconv_expr) <- temp
-  }
-  ref[ref < 0.05] = 0.05
-  ref[ref > 0.95] = 0.95
-  mu = ref
-  penalty = dim(Y)[1]*(10^seq(-2,1,1)) 
-  #penalty  
-  pi_a_init = rep(0.5,ncol(Y))
-}
-
-if(discard_high_purity){
-  high = which(eta > 0.8)
-  Y = Y[,-high]
-  eta = eta[-high]
-  deconv_expr = deconv_expr[-high,]
-}
-
-if(testalgorithm){
-  print("test algorithm")
-  Y = ref %*% t(deconv_expr[,1:7]) + 
-    matrix(rnorm(nrow(Y)*ncol(Y),0,sd=0.05),nrow = nrow(Y), ncol = ncol(Y))
-  eta = rep(0.001,ncol(Y))
-}
-
-if(discard_mast_cells){
-  cat('dim of Y before discarding other cells', dim(Y))
-  print(summary(other))
-  high = which(other > quantile(other,0.3))
-  cat('30% quantile of other cell types', quantile(other,0.3))
-  cat('length of high: ', length(high))
-  Y = Y[,-high]
-  eta = eta[-high]
-  deconv_expr = deconv_expr[-high,]
-  print(dim(Y))
-}
-
+eta = emInfo$abs_purity
+summary(eta)
 eta[eta > 0.99] = 0.99
 
+temp <- rownames(deconv_expr)
+deconv_expr <- diag(1-eta) %*% deconv_expr
+rownames(deconv_expr) <- temp
 
-print(dim(ref))
+mu[mu < 0.05] = 0.05
+mu[mu > 0.95] = 0.95
+
+penalty = dim(ys)[1]*(10^seq(-2,1,1)) 
+
 methods = c("LaplaceEM","OriEM","svr","ls","rls","qp")
-rho     = array(data = NA, dim = c(ncol(Y),length(cellTypes),length(methods)),
-                dimnames = list(1:ncol(Y),cellTypes,methods))
-alpha = rep(1/length(cellTypes),length(cellTypes))
-simsize = ncol(Y)
+rho     = array(data = NA, dim = c(ncol(ys), length(cellTypes), length(methods)),
+                dimnames = list(colnames(ys), cellTypes, methods))
+
+alpha   = rep(1/length(cellTypes), length(cellTypes))
+simsize = ncol(ys)
+
 C = c(0.1,1/sqrt(10),1,sqrt(10),10)
 
-for(j in 1:ncol(Y)){
+for(j in 1:ncol(ys)){
   if(j %% 10 == 0){ cat(j, date(), "\n") }
-  y    = Y[,j]
+  y    = ys[,j]
   X    = as.data.frame(mu)
   Xmat = mu
   
   cv_svr = rep(0,5)
-  svrmodel1       = svm(y~., data = X,kernel = 'linear', cost = 0.1, cross= 5)
+  svrmodel1       = svm(y~., data = X, kernel='linear', cost=0.1, cross=5)
   cv_svr[1]       = mean(svrmodel1$MSE)
-  svrmodel2       = svm(y~., data = X,kernel = 'linear', cost = 1/sqrt(10), cross= 5)
+  svrmodel2       = svm(y~., data = X, kernel='linear', cost=1/sqrt(10), cross=5)
   cv_svr[2]       = mean(svrmodel2$MSE)
-  svrmodel3       = svm(y~., data = X,kernel = 'linear', cost = 1, cross= 5)
+  svrmodel3       = svm(y~., data = X, kernel='linear', cost=1, cross=5)
   cv_svr[3]       = mean(svrmodel2$MSE)
-  svrmodel4       = svm(y~., data = X,kernel = 'linear', cost = sqrt(10), cross= 5)
+  svrmodel4       = svm(y~., data = X, kernel='linear', cost=sqrt(10), cross=5)
   cv_svr[4]       = mean(svrmodel2$MSE)
-  svrmodel5       = svm(y~., data = X,kernel = 'linear', cost = 10)
+  svrmodel5       = svm(y~., data = X, kernel='linear', cost=10, cross=5)
   cv_svr[5]       = mean(svrmodel5$MSE)
   best_svr        = which.min(cv_svr)
-  svrmodel        = svm(y~., data = X, kernel = 'linear', cost = C[best_svr])
-  temp        = (t(svrmodel$coefs) %*% svrmodel$SV)
+  svrmodel        = svm(y~., data = X, kernel='linear', cost=C[best_svr])
+  temp            = (t(svrmodel$coefs) %*% svrmodel$SV)
   temp[temp < 0]  = 0
   rho[j,,'svr']   = (1-eta[j])*temp/sum(temp)
   
@@ -134,51 +289,51 @@ for(j in 1:ncol(Y)){
 }
 
 print('LaplaceEM')
-hundrediter_laplace = cv.emeth(Y,eta,mu,aber = aber, V='c', init = 'default',
-                               family = 'laplace', nu = penalty, folds = 5, maxiter = 50, verbose = TRUE)
+hundrediter_laplace = cv.emeth(ys, eta, mu, aber = aber, V='c', init = 'default',
+                               family = 'laplace', nu = penalty, folds = 5, 
+                               maxiter = 50, verbose = TRUE)
 rho[,,'LaplaceEM'] = hundrediter_laplace[[1]]$rho
 
 print('OriEM')
-hundrediter = cv.emeth(Y,eta,mu,aber = aber, V='c', init = 'default',
-                       family = 'normal', nu = penalty, folds = 5, maxiter = 50, verbose = TRUE)
+hundrediter = cv.emeth(ys, eta, mu, aber = aber, V='c', init = 'default',
+                       family = 'normal', nu = penalty, folds = 5, 
+                       maxiter = 50, verbose = TRUE)
 rho[,,'OriEM'] = hundrediter[[1]]$rho
 
-####################################################################
-# Suppose to run ICeDt
-#Yexpr  = fread('~/Hutch-Research/Data/Real/cleaned_expression_COAD_data.txt')
-#muexpr = fread('~/Hutch-Research/Data/Real/LM22.txt')
-#samname <- colnames(Yexpr)
-#for(i in 1:length(samname)){samname[i] <- str_replace(samname[i],"X","")}
-#colnames(Yexpr) <- samname
-#genesymbol <- unlist(Yexpr[,1])
-#Yexpr = subset(Yexpr,select = colnames(Y))
-#rownames(Yexpr) <- genesymbol
-#gene = intersect(genesymbol,muexpr$'Gene symbol')
-#Yexpr = as.matrix(exp(subset(Yexpr, rownames(Yexpr)  %in%  gene)))
-#muexpr = as.matrix(subset(muexpr,unlist(muexpr$'Gene symbol') %in% gene)[,-1])
-#rownames(Yexpr) = rownames(muexpr) = gene
-#icedt_COAD = ICeDT(Y=as.matrix(Yexpr),Z=muexpr, tumorPurity = eta, refVar = NULL)
+#---------------------------------------------------------------------
+# save the results
+#---------------------------------------------------------------------
 
-setwd('~/')
+dim(rho)
+rho[1,,]
+dimnames(rho)
+
+dim(deconv_expr)
+deconv_expr[1:2,]
+
 rho_COAD = rho
 deconv_expr_COAD = deconv_expr
-save(rho_COAD, file = 'rho_inf_COAD.RData')
-save(deconv_expr_COAD, file = 'deconv_expr_COAD.RData')
-#save(icedt_COAD, file = 'icedt_COAD.RData')
-dir.create('~/Hutch-Research/figures/MethyVSExpr/COAD')
-setwd("~/Hutch-Research/figures/MethyVSExpr/COAD")
+save(rho_COAD, file = '_results/rho_inf_COAD.RData')
+save(deconv_expr_COAD, file = '_results/deconv_expr_COAD.RData')
+
+#---------------------------------------------------------------------
+# generate plots
+#---------------------------------------------------------------------
+
+setwd("_figures_COAD")
 
 utypes = intersect(cellTypes,colnames(deconv_expr))
+utypes
 
-cormat <- matrix(NA,nrow = length(utypes),ncol = length(methods))
+cormat <- matrix(NA,nrow = length(utypes), ncol = length(methods))
 colnames(cormat) <- methods
 rownames(cormat) <- utypes
 
-err <- matrix(NA,nrow = length(utypes),ncol = length(methods))
+err <- matrix(NA,nrow = length(utypes), ncol = length(methods))
 colnames(err) <- methods
 rownames(err) <- utypes
 
-rss <- matrix(NA,nrow = length(utypes),ncol = length(methods))
+rss <- matrix(NA,nrow = length(utypes), ncol = length(methods))
 colnames(rss) <- methods
 rownames(rss) <- utypes
 
@@ -202,8 +357,10 @@ for(i in 1:length(utypes)){
   plist <- lapply(1:length(methods), FUN = function(j){
     tempdata = cbind(rho[,utypes[i],methods[j]],deconv_expr[,utypes[i]],eta)
     colnames(tempdata) <- c("methylation","expression","eta")
-    newplot <- ggplot(data = as.data.frame(tempdata), aes(x=methylation,y=expression,color=eta))+ xlim(0,0.3) + ylim(0,0.3) +
-      geom_point() + geom_abline(intercept = 0,slope = 1) + ggtitle(methods[j]) 
+    newplot <- ggplot(data = as.data.frame(tempdata), 
+                      aes(x=methylation,y=expression,color=eta)) + 
+      xlim(0,0.3) + ylim(0,0.3) + geom_point() + 
+      geom_abline(intercept = 0,slope = 1) + ggtitle(methods[j]) 
   })
   grid.arrange(grobs = plist,ncol=2)
   dev.off()
@@ -213,7 +370,8 @@ pdf('correlation.pdf')
 plist = list()
 plist <- lapply(1:length(utypes),FUN = function(i){
   tempdata = data.frame(methods,correlation = cormat[utypes[i],] )
-  corplot <- ggplot(tempdata,aes(methods,correlation))+geom_col()+ggtitle(utypes[i])
+  corplot <- ggplot(tempdata,aes(methods,correlation)) + 
+    geom_col()+ggtitle(utypes[i])
 })
 grid.arrange(grobs = plist, ncol = 2)
 dev.off()
@@ -222,7 +380,8 @@ pdf('RootedMSE.pdf')
 plist = list()
 plist <- lapply(1:length(utypes),FUN = function(i){
   tempdata = data.frame(methods, rootedMSE = sqrt(err[utypes[i],]) )
-  corplot <- ggplot(tempdata,aes(methods, rootedMSE))+geom_col()+ggtitle(utypes[i])
+  corplot <- ggplot(tempdata,aes(methods, rootedMSE)) + 
+    geom_col()+ggtitle(utypes[i])
 })
 grid.arrange(grobs = plist, ncol = 2)
 dev.off()
@@ -236,17 +395,23 @@ RMSE <- matrix(err,ncol = 1, byrow = FALSE )
 CellType <- rep(cellTypes,length(methods))
 Methods <- rep(methods,each = length(cellTypes))
 res <- cbind.data.frame(OneMinusCorr,RMSE,CellType,Methods)
+
 pdf('Comparison.pdf')
-complot<- ggplot(res, aes(x=OneMinusCorr,y=RMSE, color =  Methods))+ggtitle('COAD')+geom_point()+scale_y_continuous(trans = log2_trans(),
-                                                                                                                    breaks = trans_breaks('log10',function(x) 10^x),
-                                                                                                                    labels = trans_format('log10',math_format(10^.x)))+
+complot<- ggplot(res, aes(x=OneMinusCorr,y=RMSE, color =  Methods)) + 
+  ggtitle('COAD') + geom_point() + 
+  scale_y_continuous(trans = log2_trans(),
+                     breaks = trans_breaks('log10',function(x) 10^x),
+                     labels = trans_format('log10',math_format(10^.x))) + 
   geom_text(label = res[,3])+xlim(0.1,1.05)
 print(complot)
 dev.off()
 cormat_COAD <- cormat
 err_COAD <- err
-save(cormat_COAD,file='cormat_COAD.RData')
-save(err_COAD,file = 'err_COAD.RData')
+save(cormat_COAD, file='cormat_COAD.RData')
+save(err_COAD, file = 'err_COAD.RData')
+
+sessionInfo()
+gc()
 
 quit(save = 'no')
 
