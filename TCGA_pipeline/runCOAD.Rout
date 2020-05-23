@@ -1,7 +1,7 @@
 
-R version 3.6.2 (2019-12-12) -- "Dark and Stormy Night"
+R version 3.6.0 (2019-04-26) -- "Planting of a Tree"
 Copyright (C) 2019 The R Foundation for Statistical Computing
-Platform: x86_64-apple-darwin15.6.0 (64-bit)
+Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -23,6 +23,11 @@ Type 'q()' to quit R.
 > library(stringr)
 > library(e1071)
 > library(ggplot2)
+Registered S3 methods overwritten by 'ggplot2':
+  method         from 
+  [.quosures     rlang
+  c.quosures     rlang
+  print.quosures rlang
 > library(MASS)
 > library(gridExtra)
 > library(quantreg)
@@ -35,12 +40,15 @@ The following object is masked from ‘package:base’:
     backsolve
 
 > library(quadprog)
-> library(EMeth)
+> #library(EMeth)
 > 
 > # the raw data of DNA metylation is too large to be kept in gitHub
 > # here is the local path for DNA methylation data
-> path.data = "~/research/TCGA/COAD/_data2"
-> 
+> path.data = "~/Hutch-Research/Data/Processed"
+> source('~/EMeth/EMeth/R/emeth.R')
+> source('~/EMeth/EMeth/R/utils.R')
+> source('~/EMeth/EMeth/R/cv.emeth.R')
+> source('~/EMeth/source/_lib.R')
 > # ------------------------------------------------------------
 > # read in pure cell type data
 > # ------------------------------------------------------------
@@ -48,6 +56,9 @@ The following object is masked from ‘package:base’:
 > path.ref = "../cell_type_specific_reference/data"
 > 
 > info = fread(file.path(path.ref, "methylation_pure_ct_info.txt.gz"))
+Registered S3 method overwritten by 'R.oo':
+  method        from       
+  throw.default R.methodsS3
 > dim(info)
 [1] 220886     31
 > info[1:2,]
@@ -209,8 +220,27 @@ cg00000236    0.8424    0.8050    0.8104    0.8338    0.8415
 > 
 > load(file.path(path.ref, "ref_966probes.RData"))
 > ls()
- [1] "cpgs"      "dat"       "datM"      "info"      "infoM"     "mat1"     
- [7] "mat2"      "path.data" "path.ref"  "probe2use" "sam"      
+ [1] "bclassE"                       "cpgs"                         
+ [3] "cv.emeth"                      "dat"                          
+ [5] "datM"                          "deconv.init"                  
+ [7] "deconvEM"                      "deconvEM_CV"                  
+ [9] "deconvEM_CV_laplace"           "deconvEM_laplace"             
+[11] "dlaplace"                      "emeth"                        
+[13] "enet"                          "estmu"                        
+[15] "filterGene"                    "getCT"                        
+[17] "glm.log.normal"                "info"                         
+[19] "infoM"                         "iOverlap"                     
+[21] "log.normal.mixture"            "log.normal.mixture.binary"    
+[23] "log.normal.mixture.knownRho"   "log.normal.mixture.knownScale"
+[25] "ls.log.normal"                 "mat1"                         
+[27] "mat2"                          "mixEM"                        
+[29] "normal.mixture.binary"         "path.data"                    
+[31] "path.ref"                      "plot1"                        
+[33] "probe2use"                     "probeFilterRsq"               
+[35] "probeSelect"                   "rdirichlet"                   
+[37] "sam"                           "wls"                          
+[39] "wls_signal"                    "wls.log.normal"               
+[41] "wlsEM"                        
 > length(probe2use)
 [1] 966
 > length(unique(probe2use))
@@ -692,24 +722,24 @@ TRUE
 +   d = t(t(Xmat) %*% y)
 +   rho[j,,'qp']   = (solve.QP(D,d,t(A),b)$solution)
 + }
-10 Wed May 20 01:09:55 2020 
-20 Wed May 20 01:10:09 2020 
-30 Wed May 20 01:10:23 2020 
-40 Wed May 20 01:10:37 2020 
-50 Wed May 20 01:10:51 2020 
-60 Wed May 20 01:11:05 2020 
-70 Wed May 20 01:11:19 2020 
-80 Wed May 20 01:11:32 2020 
-90 Wed May 20 01:11:46 2020 
-100 Wed May 20 01:11:59 2020 
-110 Wed May 20 01:12:13 2020 
-120 Wed May 20 01:12:26 2020 
-130 Wed May 20 01:12:40 2020 
-140 Wed May 20 01:12:54 2020 
-150 Wed May 20 01:13:07 2020 
-160 Wed May 20 01:13:20 2020 
-170 Wed May 20 01:13:34 2020 
-180 Wed May 20 01:13:47 2020 
+10 Thu May 21 22:45:57 2020 
+20 Thu May 21 22:46:19 2020 
+30 Thu May 21 22:46:41 2020 
+40 Thu May 21 22:47:04 2020 
+50 Thu May 21 22:47:26 2020 
+60 Thu May 21 22:47:48 2020 
+70 Thu May 21 22:48:08 2020 
+80 Thu May 21 22:48:29 2020 
+90 Thu May 21 22:48:51 2020 
+100 Thu May 21 22:49:11 2020 
+110 Thu May 21 22:49:32 2020 
+120 Thu May 21 22:49:51 2020 
+130 Thu May 21 22:50:13 2020 
+140 Thu May 21 22:50:34 2020 
+150 Thu May 21 22:50:54 2020 
+160 Thu May 21 22:51:15 2020 
+170 Thu May 21 22:51:37 2020 
+180 Thu May 21 22:51:57 2020 
 There were 50 or more warnings (use warnings() to see the first 50)
 > 
 > print('LaplaceEM')
@@ -717,20 +747,51 @@ There were 50 or more warnings (use warnings() to see the first 50)
 > hundrediter_laplace = cv.emeth(ys, eta, mu, aber = TRUE, V='c', init = 'default',
 +                                family = 'laplace', nu = penalty, folds = 5, 
 +                                maxiter = 50, verbose = TRUE)
-50 Wed May 20 01:13:56 2020 
-100 Wed May 20 01:13:56 2020 
-150 Wed May 20 01:13:56 2020 
+50 Thu May 21 22:52:11 2020 
+100 Thu May 21 22:52:11 2020 
+150 Thu May 21 22:52:11 2020 
+[1] "Verbose = TRUE: iteration information will be printed."
+#########################################
+In cross validation, folds  =  1 
+nu =  9.66 
+nu =  96.6 
+nu =  966 
+nu =  9660 
+#########################################
+In cross validation, folds  =  2 
+nu =  9.66 
+nu =  96.6 
+nu =  966 
+nu =  9660 
+#########################################
+In cross validation, folds  =  3 
+nu =  9.66 
+nu =  96.6 
+nu =  966 
+nu =  9660 
+#########################################
+In cross validation, folds  =  4 
+nu =  9.66 
+nu =  96.6 
+nu =  966 
+nu =  9660 
+#########################################
+In cross validation, folds  =  5 
+nu =  9.66 
+nu =  96.6 
+nu =  966 
+nu =  9660 
 [1] "finish cross validation"
 -------------------
-10 Wed May 20 01:16:28 2020 
+10 Thu May 21 22:56:08 2020 
 -------------------
-20 Wed May 20 01:16:50 2020 
+20 Thu May 21 22:56:45 2020 
 -------------------
-30 Wed May 20 01:17:13 2020 
+30 Thu May 21 22:57:21 2020 
 -------------------
-40 Wed May 20 01:17:35 2020 
+40 Thu May 21 22:57:58 2020 
 -------------------
-50 Wed May 20 01:17:57 2020 
+50 Thu May 21 22:58:35 2020 
 There were 50 or more warnings (use warnings() to see the first 50)
 > rho[,,'LaplaceEM'] = hundrediter_laplace[[1]]$rho
 > 
@@ -739,20 +800,51 @@ There were 50 or more warnings (use warnings() to see the first 50)
 > hundrediter = cv.emeth(ys, eta, mu, aber = TRUE, V='c', init = 'default',
 +                        family = 'normal', nu = penalty, folds = 5, 
 +                        maxiter = 50, verbose = TRUE)
-50 Wed May 20 01:18:00 2020 
-100 Wed May 20 01:18:00 2020 
-150 Wed May 20 01:18:00 2020 
+50 Thu May 21 22:58:38 2020 
+100 Thu May 21 22:58:39 2020 
+150 Thu May 21 22:58:39 2020 
+[1] "Verbose = TRUE: iteration information will be printed."
+#########################################
+In cross validation, folds  =  1 
+parameter nu =  9.66 
+parameter nu =  96.6 
+parameter nu =  966 
+parameter nu =  9660 
+#########################################
+In cross validation, folds  =  2 
+parameter nu =  9.66 
+parameter nu =  96.6 
+parameter nu =  966 
+parameter nu =  9660 
+#########################################
+In cross validation, folds  =  3 
+parameter nu =  9.66 
+parameter nu =  96.6 
+parameter nu =  966 
+parameter nu =  9660 
+#########################################
+In cross validation, folds  =  4 
+parameter nu =  9.66 
+parameter nu =  96.6 
+parameter nu =  966 
+parameter nu =  9660 
+#########################################
+In cross validation, folds  =  5 
+parameter nu =  9.66 
+parameter nu =  96.6 
+parameter nu =  966 
+parameter nu =  9660 
 [1] "finish cross validation"
 -------------------
-10 Wed May 20 01:20:27 2020 
+10 Thu May 21 23:00:52 2020 
 -------------------
-20 Wed May 20 01:21:01 2020 
+20 Thu May 21 23:01:22 2020 
 -------------------
-30 Wed May 20 01:21:34 2020 
+30 Thu May 21 23:01:52 2020 
 -------------------
-40 Wed May 20 01:22:08 2020 
+40 Thu May 21 23:02:22 2020 
 -------------------
-50 Wed May 20 01:22:43 2020 
+50 Thu May 21 23:02:53 2020 
 > rho[,,'OriEM'] = hundrediter[[1]]$rho
 > 
 > #---------------------------------------------------------------------
@@ -762,22 +854,22 @@ There were 50 or more warnings (use warnings() to see the first 50)
 > dim(rho)
 [1] 185   7   6
 > rho[1,,]
-            LaplaceEM         OriEM         svr         ls         rls
-CD4T       0.02056698  6.894222e-03 0.019335272 0.00000000 0.000000000
-CD8T       0.00000000 -4.019258e-18 0.067540167 0.12346010 0.119316714
-Monocyte   0.03787344  5.501763e-02 0.056029383 0.03145094 0.032486828
-B          0.02621915  2.488973e-02 0.046140866 0.02314771 0.024156154
-NK         0.02221589  1.069264e-03 0.005883450 0.00000000 0.001562089
-Neutrophil 0.02102997  5.308029e-04 0.005070863 0.02194124 0.022478216
-Treg       0.07209457  1.115984e-01 0.000000000 0.00000000 0.000000000
+            LaplaceEM       OriEM          svr         ls         rls
+CD4T       0.02056698 0.026415214 0.0319012555 0.00000000 0.000000000
+CD8T       0.00000000 0.003385372 0.0409917716 0.12346010 0.119316714
+Monocyte   0.03787344 0.049698012 0.0576861975 0.03145094 0.032486828
+B          0.02621915 0.024464355 0.0532250575 0.02314771 0.024156154
+NK         0.02221589 0.010294409 0.0123506692 0.00000000 0.001562089
+Neutrophil 0.02102997 0.012566427 0.0029683220 0.02194124 0.022478216
+Treg       0.07209457 0.073176210 0.0008767268 0.00000000 0.000000000
                       qp
 CD4T        2.000000e-01
-CD8T       -8.686388e-18
-Monocyte    1.205043e-16
-B           0.000000e+00
-NK          1.524040e-16
-Neutrophil -1.019300e-16
-Treg       -3.707308e-17
+CD8T        1.341184e-16
+Monocyte   -1.614755e-16
+B          -4.396804e-18
+NK         -1.885055e-16
+Neutrophil  1.465050e-16
+Treg       -5.194160e-18
 > dimnames(rho)
 [[1]]
   [1] "5656" "6781" "5659" "3809" "5665" "2684" "3655" "6535" "6888" "6898"
@@ -900,32 +992,32 @@ null device
           1 
 > 
 > print(cormat)
-           LaplaceEM       OriEM        svr         ls        rls          qp
-CD4T       0.3679557 0.446611007 0.49282958 0.08801003 0.06966842  0.49953795
-CD8T       0.7104035 0.679540362 0.63464936 0.71717454 0.71778210  0.54415671
-Monocyte   0.8568955 0.779222800 0.86084101 0.88552692 0.88046198  0.45082608
-B          0.8591570 0.825872603 0.81646845 0.83587726 0.80235519  0.85460132
-NK         0.4591722 0.065423597 0.20458134 0.14190483 0.09724176 -0.07344627
-Neutrophil 0.3800801 0.351015287 0.39378378 0.39475578 0.39908466  0.02286734
-Treg       0.1239415 0.005159067 0.05898143 0.16996599 0.05470524  0.30333815
+           LaplaceEM     OriEM        svr         ls        rls          qp
+CD4T       0.3679557 0.5516509 0.45223237 0.08801003 0.06966842  0.49953795
+CD8T       0.7104035 0.7086675 0.60517220 0.71717454 0.71778210  0.54415671
+Monocyte   0.8568955 0.8285743 0.86114038 0.88552692 0.88046198  0.45082608
+B          0.8591570 0.8516808 0.81689051 0.83587726 0.80235519  0.85460132
+NK         0.4591722 0.2987380 0.18292608 0.14190483 0.09724176 -0.10497551
+Neutrophil 0.3800801 0.3812735 0.38924633 0.39475578 0.39908466  0.02286734
+Treg       0.1239415 0.2092878 0.08653592 0.16996599 0.05470524  0.30333815
 > print(err)
             LaplaceEM      OriEM        svr         ls        rls         qp
-CD4T       0.07204972 0.08517338 0.06133229 0.11088656 0.10960245 0.22784654
-CD8T       0.04066773 0.06462091 0.09919931 0.17829701 0.18248155 0.06750775
-Monocyte   0.03185397 0.03544655 0.03663723 0.01693766 0.01615915 0.05510732
-B          0.04666357 0.05080141 0.05222409 0.06624896 0.06840781 0.07964375
-NK         0.02104827 0.02890731 0.02773882 0.03256851 0.03211002 0.03491904
-Neutrophil 0.06518213 0.07652951 0.03604884 0.05009440 0.04806898 0.04064942
-Treg       0.04674953 0.05764706 0.03238207 0.03204792 0.03249932 0.03494645
+CD4T       0.07204972 0.06247812 0.06156632 0.11088656 0.10960245 0.22784654
+CD8T       0.04066773 0.03464608 0.09857234 0.17829701 0.18248155 0.06750775
+Monocyte   0.03185397 0.02837784 0.03654771 0.01693766 0.01615915 0.05510732
+B          0.04666357 0.04835377 0.05215716 0.06624896 0.06840781 0.07964375
+NK         0.02104827 0.02554749 0.02780113 0.03256851 0.03211002 0.03491904
+Neutrophil 0.06518213 0.06846757 0.03626409 0.05009440 0.04806898 0.04064942
+Treg       0.04674953 0.04503206 0.03246054 0.03204792 0.03249932 0.03494645
 > print(rss)
             LaplaceEM      OriEM        svr         ls        rls         qp
-CD4T       0.35249348 0.32637269 0.30867089 0.40453349 0.40571257 0.30595682
-CD8T       0.15615668 0.16968071 0.18827956 0.15310932 0.15283447 0.22190936
-Monocyte   0.03906414 0.05774601 0.03806782 0.03173025 0.03304517 0.11712853
-B          0.15602051 0.18943833 0.19864099 0.17953233 0.21225410 0.16067242
-NK         0.04021238 0.05073777 0.04882319 0.04992977 0.05047403 0.05068100
-Neutrophil 0.04019143 0.04118967 0.03969324 0.03965723 0.03949580 0.04695333
-Treg       0.05256418 0.05338282 0.05319852 0.05184205 0.05322448 0.04847214
+CD4T       0.35249348 0.28362327 0.32431273 0.40453349 0.40571257 0.30595682
+CD8T       0.15615668 0.15693333 0.19980117 0.15310932 0.15283447 0.22190936
+Monocyte   0.03906414 0.04608143 0.03799203 0.03173025 0.03304517 0.11712853
+B          0.15602051 0.16364165 0.19823024 0.17953233 0.21225410 0.16067242
+NK         0.04021238 0.04640834 0.04925079 0.04992977 0.05047403 0.05039434
+Neutrophil 0.04019143 0.04014875 0.03986015 0.03965723 0.03949580 0.04695333
+Treg       0.05256418 0.05104593 0.05298447 0.05184205 0.05322448 0.04847214
 > 
 > OneMinusCorr <- 1-matrix(cormat,ncol = 1, byrow = FALSE)
 > RMSE <- matrix(err,ncol = 1, byrow = FALSE )
@@ -953,41 +1045,44 @@ null device
 > save(err_COAD, file = 'err_COAD.RData')
 > 
 > sessionInfo()
-R version 3.6.2 (2019-12-12)
-Platform: x86_64-apple-darwin15.6.0 (64-bit)
-Running under: macOS Catalina 10.15.4
+R version 3.6.0 (2019-04-26)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 14.04.5 LTS
 
 Matrix products: default
-BLAS:   /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRblas.0.dylib
-LAPACK: /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRlapack.dylib
+BLAS/LAPACK: /app/easybuild/software/OpenBLAS/0.2.18-GCC-5.4.0-2.26-LAPACK-3.6.1/lib/libopenblas_prescottp-r0.2.18.so
 
 locale:
-[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] EMeth_1.0         quadprog_1.5-8    quantreg_5.55     SparseM_1.78     
- [5] gridExtra_2.3     MASS_7.3-51.5     ggplot2_3.2.1     e1071_1.7-3      
- [9] stringr_1.4.0     scales_1.1.0      data.table_1.12.8
+ [1] quadprog_1.5-8    quantreg_5.38     SparseM_1.77      gridExtra_2.3    
+ [5] MASS_7.3-51.4     ggplot2_3.1.1     e1071_1.7-1       stringr_1.4.0    
+ [9] scales_1.0.0      data.table_1.12.2
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.3         pillar_1.4.3       compiler_3.6.2     R.methodsS3_1.8.0 
- [5] R.utils_2.9.2      class_7.3-15       tools_3.6.2        digest_0.6.23     
- [9] lifecycle_0.1.0    tibble_2.1.3       gtable_0.3.0       lattice_0.20-38   
-[13] pkgconfig_2.0.3    rlang_0.4.4        Matrix_1.2-18      withr_2.1.2       
-[17] dplyr_0.8.4        MatrixModels_0.4-1 grid_3.6.2         tidyselect_1.0.0  
-[21] glue_1.3.1         R6_2.4.1           farver_2.0.3       purrr_0.3.3       
-[25] magrittr_1.5       assertthat_0.2.1   colorspace_1.4-1   labeling_0.3      
-[29] stringi_1.4.5      lazyeval_0.2.2     munsell_0.5.0      crayon_1.3.4      
-[33] R.oo_1.23.0       
+ [1] Rcpp_1.0.1         pillar_1.3.1       compiler_3.6.0     plyr_1.8.4        
+ [5] R.methodsS3_1.7.1  R.utils_2.8.0      class_7.3-15       tools_3.6.0       
+ [9] digest_0.6.18      tibble_2.1.1       gtable_0.3.0       lattice_0.20-38   
+[13] pkgconfig_2.0.2    rlang_0.4.5        Matrix_1.2-17      withr_2.1.2       
+[17] dplyr_0.8.5        MatrixModels_0.4-1 grid_3.6.0         tidyselect_0.2.5  
+[21] glue_1.3.1         R6_2.4.0           purrr_0.3.2        magrittr_1.5      
+[25] assertthat_0.2.1   colorspace_1.4-1   labeling_0.3       stringi_1.4.3     
+[29] lazyeval_0.2.2     munsell_0.5.0      crayon_1.3.4       R.oo_1.22.0       
 > gc()
-            used  (Mb) gc trigger   (Mb) limit (Mb)  max used   (Mb)
-Ncells   2692987 143.9    4483834  239.5         NA   4483834  239.5
-Vcells 114536796 873.9  351936282 2685.1      32768 351935743 2685.1
+            used  (Mb) gc trigger   (Mb)  max used   (Mb)
+Ncells   2690639 143.7    4482621  239.4   4482621  239.4
+Vcells 114513701 873.7  351938393 2685.1 351938393 2685.1
 > 
 > quit(save = 'no')
 > proc.time()
-   user  system elapsed 
-761.689  61.456 804.392 
+    user   system  elapsed 
+ 998.311   78.680 1073.207 

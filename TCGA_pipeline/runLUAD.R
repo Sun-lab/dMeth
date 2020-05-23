@@ -12,7 +12,8 @@ library(quadprog)
 
 # the raw data of DNA metylation is too large to be kept in gitHub
 # here is the local path for DNA methylation data
-path.data = "~/Hutch-Research/Data/Processed"
+path.data = "~/Hutch-Research/Data/Real"
+path.work = '~/dMeth/TCGA_pipeline'
 source('~/EMeth/EMeth/R/emeth.R')
 source('~/EMeth/EMeth/R/utils.R')
 source('~/EMeth/EMeth/R/cv.emeth.R')
@@ -45,52 +46,43 @@ rownames(dat) = info$ID
 # ------------------------------------------------------------
 # read DNA methylation data
 # ------------------------------------------------------------
+setwd('~/Hutch-Research/Data/Real')
+datM = fread(file = "luad_methylation.txt", header=TRUE)
+sampinfo = fread('luad_sample_info.txt',header = FALSE)
+cpg <- unlist(datM[,1])
+colnames(datM) <- gsub('^X',"",colnames(datM))
+datM <- datM[,-1]
+rownames(datM) = cpg
 
-datM = fread(file.path(path.data, "methylation_betaValue.txt"))
+dir0 = "../TCGA_results/clinical_data/"
+setwd('~/dMeth/TCGA_pipeline/')
+tcga_purity = fread(paste0(dir0, "TCGA_mastercalls.abs_tables_JSedit.fixed.txt"))
+barcode = list()
+base_string = '%s-%s-%s'
+for(i in 1:length(tcga_purity$array)){
+  v1 <- strsplit(tcga_purity$array[i],'-')[[1]][1:3]
+  temp <- do.call(sprintf,c(fmt = base_string, as.list(v1)))
+  barcode = c(barcode,temp)
+}
+sampbcr <- sampinfo[,2]
+uniq_bcr <- barcode[!(duplicated(barcode)|duplicated(barcode,fromLast = TRUE))]
+sampbcr <- sampbcr[!(duplicated(sampbcr)|duplicated(sampbcr,fromLast = TRUE))]
+sampinfo <- sampinfo[which(unlist(sampinfo[,2]) %in% unlist(sampbcr)),]
+ind <- which(sampinfo$V2 %in% barcode)
+mat2 <- unlist(intersect(unlist(sampinfo[,2]),barcode))
+
+patient_id <- sampinfo$V3[match(mat2, sampinfo$V2)] 
+datM <- subset(datM, select = patient_id)
+
+purity <- tcga_purity[match(mat2,barcode),]
+purity$patient_id <- patient_id
+filena <- which(is.na(purity$purity))
+purity <- subset(purity, !is.na(purity))
+rownames(purity) <- purity$patient_id
+datM <- subset(datM, select = -filena)
+rownames(datM) <- cpg
 dim(datM)
-datM[1:2, 1:5]
 
-infoM = fread(file.path(path.ref, "methylation_info.txt"))
-dim(infoM)
-names(infoM)
-infoM[1:2, 1:5]
-table(infoM$CHR)
-
-table(datM$id == infoM$Name)
-
-datM = data.matrix(datM[,-1])
-rownames(datM) = infoM$Name
-dim(datM)
-datM[1:2, 1:5]
-
-# ------------------------------------------------------------
-# take intersection of CpG probes between purified data and 
-# bulk tumor samples
-# ------------------------------------------------------------
-
-table(info$ID == info$Name)
-cpgs = intersect(info$ID, infoM$Name)
-length(cpgs)
-
-mat1  = match(cpgs, infoM$Name)
-datM  = datM[mat1,]
-infoM = infoM[mat1,]
-
-dim(datM)
-datM[1:2, 1:5]
-
-dim(infoM)
-infoM[1:2, 1:5]
-
-mat2 = match(cpgs, info$ID)
-dat  = dat[mat2,]
-info = info[mat2,]
-
-dim(dat)
-dat[1:2, 1:5]
-
-dim(info)
-info[1:2, 1:5]
 
 # ------------------------------------------------------------
 # read in probes to be used
@@ -114,32 +106,6 @@ table(sam$label)
 cellTypes = unique(sam$label)
 
 # ------------------------------------------------------------
-# read tumor purity 
-# ------------------------------------------------------------
-
-dir0 = "../TCGA_results/clinical_data/"
-
-emInfo = fread(paste0(dir0, "patient_coad_M_info_hyperMeth.txt"))
-dim(emInfo)
-emInfo[1, ]
-
-purity = fread(paste0(dir0, "TCGA_mastercalls.abs_tables_JSedit.fixed.txt"))
-dim(purity)
-purity[1, ]
-
-emInfo$array = substring(emInfo$methylation_barcode, 1, 15)
-table(emInfo$array %in% purity$array)
-table(purity$array %in% emInfo$array)
-
-emInfo = merge(emInfo, purity, by="array")
-dim(emInfo)
-emInfo[1, ]
-
-summary(emInfo$abs_purity)
-summary(emInfo$purity)
-cor(emInfo$abs_purity, emInfo$purity, use="pair")
-
-# ------------------------------------------------------------
 # extract methylation data from tumor samples
 # ------------------------------------------------------------
 
@@ -147,35 +113,18 @@ ys = datM[match(rownames(X), rownames(datM)),]
 dim(ys)
 ys[1:2,1:5]
 
-table(colnames(ys) %in% emInfo$patient_id)
-patient_id_2use = intersect(colnames(ys), emInfo$patient_id)
-
-ys = ys[,match(patient_id_2use,colnames(ys))]
-emInfo = emInfo[match(patient_id_2use,emInfo$patient_id),]
-
-dim(ys)
-dim(emInfo)
-
-stopifnot(all(colnames(ys) == emInfo$patient_id))
-emInfo$patient_id[1:5]
-
 ys_na      = which(apply(is.na(ys),2,any))
-eta_abs_na = which(is.na(emInfo$purity))
+eta_abs_na = which(is.na(purity$purity))
 
 any.na = union(ys_na,eta_abs_na)
 any.na
 
-ys = ys[,-any.na]
-emInfo = emInfo[-any.na,]
+ys = subset(ys,select = -any.na)
+purity <- purity[-any.na,]
 
 dim(ys)
 ys[1:2,1:5]
-
-dim(emInfo)
-emInfo[1:2,]
-
-table(colnames(ys) == emInfo$patient_id)
-
+table(colnames(ys) == purity$patient_id)
 #-------------------------------------------------------------
 # Estimate Mean Matrix mu
 #-------------------------------------------------------------
@@ -198,7 +147,7 @@ for(ct in cellTypes){
 # samples with cell type estimation from expression and DNA methylation
 #----------------------------------------------------------------------
 
-fnm = '_cibersortx_results/COAD_composition_cibersortx.txt'
+fnm = '_cibersortx_results/LUAD_composition_cibersortx.txt'
 est_expr = fread(fnm)
 dim(est_expr)
 est_expr[1:2,]
@@ -219,16 +168,12 @@ est_expr = est_expr[match(com_sample,rownames(est_expr)),]
 dim(est_expr)
 est_expr[1:2,]
 
-ys     = ys[,match(com_sample,colnames(ys))]
-emInfo = emInfo[match(com_sample, emInfo$patient_id),]
-
+ys     = subset(ys,select = match(com_sample,colnames(ys)))
+eta <- purity
+eta = eta[match(com_sample,eta$patient_id)]
 dim(ys)
 ys[1:2,1:4]
 
-dim(emInfo)
-emInfo[1:2,]
-
-table(colnames(ys) == emInfo$patient_id)
 table(colnames(ys) == rownames(est_expr))
 table(rownames(ys) == rownames(mu))
 
@@ -258,7 +203,7 @@ deconv_expr[1:2,]
 # Compare results with different methods and with expression data
 #---------------------------------------------------------------------
 
-eta = emInfo$purity
+eta = eta$purity
 summary(eta)
 eta[which(eta > 0.99)] = 0.99
 
@@ -277,7 +222,7 @@ rho     = array(data = NA, dim = c(ncol(ys), length(cellTypes), length(methods))
 
 alpha   = rep(1/length(cellTypes), length(cellTypes))
 simsize = ncol(ys)
-
+ys <- as.matrix(ys)
 C = c(0.1,1/sqrt(10),1,sqrt(10),10)
 
 for(j in 1:ncol(ys)){
@@ -341,16 +286,16 @@ dimnames(rho)
 dim(deconv_expr)
 deconv_expr[1:2,]
 
-rho_COAD = rho
-deconv_expr_COAD = deconv_expr
-save(rho_COAD, file = '../TCGA_results/deconv_methy_COAD.RData')
-save(deconv_expr_COAD, file = '../TCGA_results/deconv_expr_COAD.RData')
+rho_LUAD = rho
+deconv_expr_LUAD = deconv_expr
+save(rho_LUAD, file = '../TCGA_results/deconv_methy_LUAD.RData')
+save(deconv_expr_LUAD, file = '../TCGA_results/deconv_expr_LUAD.RData')
 
 #---------------------------------------------------------------------
 # generate plots
 #---------------------------------------------------------------------
 
-setwd("_figures_COAD")
+setwd("_figures_LUAD")
 
 utypes = intersect(cellTypes,colnames(deconv_expr))
 utypes
@@ -427,17 +372,17 @@ res <- cbind.data.frame(OneMinusCorr,RMSE,CellType,Methods)
 
 pdf('Comparison.pdf')
 complot<- ggplot(res, aes(x=OneMinusCorr,y=RMSE, color =  Methods)) + 
-  ggtitle('COAD') + geom_point() + 
+  ggtitle('LUAD') + geom_point() + 
   scale_y_continuous(trans = log2_trans(),
                      breaks = trans_breaks('log10',function(x) 10^x),
                      labels = trans_format('log10',math_format(10^.x))) + 
   geom_text(label = res[,3])+xlim(0.1,1.05)
 print(complot)
 dev.off()
-cormat_COAD <- cormat
-err_COAD <- err
-save(cormat_COAD, file='cormat_COAD.RData')
-save(err_COAD, file = 'err_COAD.RData')
+cormat_LUAD <- cormat
+err_LUAD <- err
+save(cormat_LUAD, file='cormat_LUAD.RData')
+save(err_LUAD, file = 'err_LUAD.RData')
 
 sessionInfo()
 gc()
