@@ -216,7 +216,7 @@ mu[mu > 0.95] = 0.95
 
 penalty = dim(ys)[1]*(10^seq(-2,1,1)) 
 
-methods = c("LaplaceEM","OriEM","svr","ls","rls","qp")
+methods = c("EMeth","svr","ls","rls","qp")
 rho     = array(data = NA, dim = c(ncol(ys), length(cellTypes), length(methods)),
                 dimnames = list(colnames(ys), cellTypes, methods))
 
@@ -263,17 +263,11 @@ for(j in 1:ncol(ys)){
   rho[j,,'qp']   = (solve.QP(D,d,t(A),b)$solution)
 }
 
-print('LaplaceEM')
-hundrediter_laplace = cv.emeth(ys, eta, mu, aber = TRUE, V='c', init = 'default',
-                               family = 'laplace', nu = penalty, folds = 5, 
-                               maxiter = 50, verbose = TRUE)
-rho[,,'LaplaceEM'] = hundrediter_laplace[[1]]$rho
-
-print('OriEM')
+print('EMeth')
 hundrediter = cv.emeth(ys, eta, mu, aber = TRUE, V='c', init = 'default',
                        family = 'normal', nu = penalty, folds = 5, 
                        maxiter = 50, verbose = TRUE)
-rho[,,'OriEM'] = hundrediter[[1]]$rho
+rho[,,'EMeth'] = hundrediter[[1]]$rho
 
 #---------------------------------------------------------------------
 # save the results

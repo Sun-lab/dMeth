@@ -447,7 +447,7 @@ A50Z 0.1980902 0.000000 0.09683446 0.1025273 0.14200072 0.432107479 0.02843987
 > 
 > penalty = dim(ys)[1]*(10^seq(-2,1,1)) 
 > 
-> methods = c("LaplaceEM","OriEM","svr","ls","rls","qp")
+> methods = c("EMeth","svr","ls","rls","qp")
 > rho     = array(data = NA, dim = c(ncol(ys), length(cellTypes), length(methods)),
 +                 dimnames = list(colnames(ys), cellTypes, methods))
 > 
@@ -493,85 +493,330 @@ A50Z 0.1980902 0.000000 0.09683446 0.1025273 0.14200072 0.432107479 0.02843987
 +   d = t(t(Xmat) %*% y)
 +   rho[j,,'qp']   = (solve.QP(D,d,t(A),b)$solution)
 + }
-10 Fri May 22 21:27:05 2020 
-20 Fri May 22 21:27:24 2020 
-30 Fri May 22 21:27:44 2020 
-40 Fri May 22 21:28:05 2020 
-50 Fri May 22 21:28:26 2020 
-60 Fri May 22 21:28:47 2020 
-70 Fri May 22 21:29:07 2020 
-80 Fri May 22 21:29:27 2020 
-90 Fri May 22 21:29:48 2020 
-100 Fri May 22 21:30:09 2020 
-110 Fri May 22 21:30:30 2020 
-120 Fri May 22 21:30:52 2020 
-130 Fri May 22 21:31:13 2020 
-140 Fri May 22 21:31:33 2020 
-150 Fri May 22 21:31:54 2020 
-160 Fri May 22 21:32:15 2020 
-170 Fri May 22 21:32:35 2020 
-180 Fri May 22 21:32:56 2020 
-190 Fri May 22 21:33:17 2020 
-200 Fri May 22 21:33:38 2020 
-210 Fri May 22 21:33:59 2020 
-220 Fri May 22 21:34:18 2020 
-230 Fri May 22 21:34:38 2020 
-240 Fri May 22 21:34:59 2020 
-250 Fri May 22 21:35:20 2020 
-260 Fri May 22 21:35:43 2020 
-270 Fri May 22 21:36:03 2020 
-280 Fri May 22 21:36:24 2020 
-290 Fri May 22 21:36:45 2020 
+10 Wed May 27 14:48:04 2020 
+20 Wed May 27 14:48:24 2020 
+30 Wed May 27 14:48:44 2020 
+40 Wed May 27 14:49:05 2020 
+50 Wed May 27 14:49:26 2020 
+60 Wed May 27 14:49:47 2020 
+70 Wed May 27 14:50:07 2020 
+80 Wed May 27 14:50:28 2020 
+90 Wed May 27 14:50:48 2020 
+100 Wed May 27 14:51:18 2020 
+110 Wed May 27 14:51:38 2020 
+120 Wed May 27 14:52:00 2020 
+130 Wed May 27 14:52:22 2020 
+140 Wed May 27 14:52:42 2020 
+150 Wed May 27 14:53:03 2020 
+160 Wed May 27 14:53:24 2020 
+170 Wed May 27 14:53:43 2020 
+180 Wed May 27 14:54:05 2020 
+190 Wed May 27 14:54:26 2020 
+200 Wed May 27 14:54:48 2020 
+210 Wed May 27 14:55:09 2020 
+220 Wed May 27 14:55:28 2020 
+230 Wed May 27 14:55:48 2020 
+240 Wed May 27 14:56:10 2020 
+250 Wed May 27 14:56:30 2020 
+260 Wed May 27 14:56:53 2020 
+270 Wed May 27 14:57:14 2020 
+280 Wed May 27 14:57:34 2020 
+290 Wed May 27 14:57:55 2020 
 There were 50 or more warnings (use warnings() to see the first 50)
 > 
-> print('LaplaceEM')
-[1] "LaplaceEM"
-> hundrediter_laplace = cv.emeth(ys, eta, mu, aber = TRUE, V='c', init = 'default',
-+                                family = 'laplace', nu = penalty, folds = 5, 
-+                                maxiter = 50, verbose = TRUE)
-50 Fri May 22 21:36:59 2020 
-100 Fri May 22 21:36:59 2020 
-150 Fri May 22 21:36:59 2020 
-200 Fri May 22 21:36:59 2020 
-250 Fri May 22 21:36:59 2020 
+> print('EMeth')
+[1] "EMeth"
+> hundrediter = cv.emeth(ys, eta, mu, aber = TRUE, V='c', init = 'default',
++                        family = 'normal', nu = penalty, folds = 5, 
++                        maxiter = 50, verbose = TRUE)
+50 Wed May 27 14:58:14 2020 
+100 Wed May 27 14:58:14 2020 
+150 Wed May 27 14:58:14 2020 
+200 Wed May 27 14:58:15 2020 
+250 Wed May 27 14:58:15 2020 
 [1] "Verbose = TRUE: iteration information will be printed."
 #########################################
 In cross validation, folds  =  1 
-nu =  9.66 
-nu =  96.6 
-nu =  966 
-nu =  9660 
+parameter nu =  9.66 
+parameter nu =  96.6 
+parameter nu =  966 
+parameter nu =  9660 
 #########################################
 In cross validation, folds  =  2 
-nu =  9.66 
-nu =  96.6 
-nu =  966 
-nu =  9660 
+parameter nu =  9.66 
+parameter nu =  96.6 
+parameter nu =  966 
+parameter nu =  9660 
 #########################################
 In cross validation, folds  =  3 
-nu =  9.66 
-nu =  96.6 
-nu =  966 
-nu =  9660 
+parameter nu =  9.66 
+parameter nu =  96.6 
+parameter nu =  966 
+parameter nu =  9660 
 #########################################
 In cross validation, folds  =  4 
-nu =  9.66 
-nu =  96.6 
-nu =  966 
-nu =  9660 
+parameter nu =  9.66 
+parameter nu =  96.6 
+parameter nu =  966 
+parameter nu =  9660 
 #########################################
 In cross validation, folds  =  5 
-nu =  9.66 
-nu =  96.6 
-nu =  966 
-nu =  9660 
+parameter nu =  9.66 
+parameter nu =  96.6 
+parameter nu =  966 
+parameter nu =  9660 
 [1] "finish cross validation"
 -------------------
-10 Fri May 22 21:39:29 2020 
+10 Wed May 27 15:00:50 2020 
 -------------------
-20 Fri May 22 21:40:01 2020 
-Error in optim(nu0[k], fn = function(a) { : 
-  function cannot be evaluated at initial parameters
-Calls: cv.emeth -> deconvEM_CV_laplace -> deconvEM_laplace -> optim
-In addition: There were 50 or more warnings (use warnings() to see the first 50)
-Execution halted
+20 Wed May 27 15:01:35 2020 
+-------------------
+30 Wed May 27 15:02:16 2020 
+-------------------
+40 Wed May 27 15:03:13 2020 
+-------------------
+50 Wed May 27 15:03:53 2020 
+> rho[,,'EMeth'] = hundrediter[[1]]$rho
+> 
+> #---------------------------------------------------------------------
+> # save the results
+> #---------------------------------------------------------------------
+> 
+> dim(rho)
+[1] 296   7   5
+> rho[1,,]
+                   EMeth        svr          ls         rls            qp
+CD4T       -6.116322e-17 0.20769534 0.000000000 0.008166193  3.877593e-01
+CD8T        1.135327e-01 0.04864061 0.294630259 0.301378010  3.105060e-02
+Monocyte    1.492672e-01 0.14924818 0.155026869 0.150076818  1.233630e-02
+B           1.574076e-01 0.12603490 0.132459221 0.128402044  1.588538e-01
+NK          1.006683e-01 0.05838097 0.004148921 0.000000000 -7.669316e-18
+Neutrophil  6.912424e-02 0.00000000 0.002147771 0.001976935  8.480823e-18
+Treg       -6.301451e-20 0.00000000 0.001586959 0.000000000  7.418009e-19
+> dimnames(rho)
+[[1]]
+  [1] "6546" "A50Z" "7809" "8083" "7843" "A5M9" "6845" "8169" "A5G8" "8626"
+ [11] "7545" "A4JB" "6844" "8622" "A56U" "6798" "A5EN" "8153" "A5HF" "A5C4"
+ [21] "A474" "A5HN" "A52S" "8071" "A5IB" "4587" "3394" "8455" "8007" "8065"
+ [31] "A4AH" "7454" "8049" "7341" "7140" "8288" "AASL" "5670" "A5CX" "A5ML"
+ [41] "5786" "5927" "7580" "A53L" "8020" "7964" "8021" "A513" "A5G1" "A4QQ"
+ [51] "7757" "8251" "7335" "7557" "8353" "A59I" "7142" "A5IX" "5240" "5784"
+ [61] "A4BY" "A4ED" "A5HJ" "7023" "8148" "A5GH" "7021" "7033" "5787" "A4CL"
+ [71] "5596" "7950" "6773" "A5MT" "8666" "2703" "A5HD" "A5G7" "AA0X" "7337"
+ [81] "A53I" "A5GB" "8504" "A538" "A475" "A5CR" "A5HH" "8354" "8072" "A4ZJ"
+ [91] "7658" "8390" "2709" "A50M" "A5MN" "7656" "7657" "8276" "8136" "A4QR"
+[101] "AASB" "7823" "A5MP" "7338" "7699" "8138" "8351" "3920" "8503" "6647"
+[111] "A5G3" "A5DS" "A522" "8624" "A5FZ" "6843" "7696" "8388" "A52V" "5128"
+[121] "A5MJ" "4605" "6143" "A46L" "A52N" "5040" "8628" "7767" "8154" "5897"
+[131] "7697" "7822" "A446" "4609" "8479" "7769" "6175" "8391" "7022" "6770"
+[141] "A4VJ" "A46J" "8133" "A52W" "8490" "6561" "8130" "5483" "A5MS" "A5HG"
+[151] "A512" "8481" "7107" "6738" "A4WN" "A524" "5783" "8144" "5928" "8308"
+[161] "A5MM" "8048" "8140" "A5B5" "A4BX" "8070" "8287" "8664" "8145" "7710"
+[171] "A56V" "A5EL" "7223" "AASD" "7698" "A46N" "2697" "A59Q" "8304" "A5MR"
+[181] "A4BW" "A5GW" "7139" "7463" "A4JL" "A5HL" "7755" "A4EE" "8009" "6560"
+[191] "8355" "5024" "8131" "8491" "7943" "A5MH" "5131" "7340" "8454" "8277"
+[201] "6202" "A53D" "A53H" "A5MU" "6842" "8456" "7582" "8064" "A5MY" "A4CN"
+[211] "A5MI" "A53B" "7810" "A5CT" "8116" "8629" "7766" "8307" "A5I6" "A5G6"
+[221] "7465" "7622" "8035" "8139" "A5HM" "5898" "7811" "5232" "A53J" "A52Q"
+[231] "7020" "A5GF" "8393" "8128" "A5HQ" "7222" "8387" "7141" "7544" "5479"
+[241] "5027" "8386" "8115" "8305" "A4JC" "A5MW" "7756" "8352" "7730" "6026"
+[251] "8625" "A4PA" "4593" "A4E7" "A49D" "8201" "A5HE" "7579" "7731" "5819"
+[261] "5234" "8250" "7812" "A5HO" "5241" "8350" "5022" "8584" "8022" "8023"
+[271] "A5MG" "8580" "8582" "5239" "A53C" "A510" "A539" "A5HR" "A5HP" "A5HT"
+[281] "8309" "A5HK" "5236" "8156" "2704" "A59J" "8143" "8052" "A5I4" "A5MB"
+[291] "8170" "8118" "5481" "8150" "8063" "A53A"
+
+[[2]]
+[1] "CD4T"       "CD8T"       "Monocyte"   "B"          "NK"        
+[6] "Neutrophil" "Treg"      
+
+[[3]]
+[1] "EMeth" "svr"   "ls"    "rls"   "qp"   
+
+> 
+> dim(deconv_expr)
+[1] 296   7
+> deconv_expr[1:2,]
+          CD4T       CD8T   Monocyte          B         NK  Neutrophil
+6546 0.1785366 0.07040708 0.08526741 0.21031966 0.03650193 0.001964585
+A50Z 0.1267777 0.00000000 0.06197406 0.06561747 0.09088046 0.276548787
+            Treg
+6546 0.007002724
+A50Z 0.018201514
+> 
+> rho_LUSC = rho
+> deconv_expr_LUSC = deconv_expr
+> save(rho_LUSC, file = '../TCGA_results/deconv_methy_LUSC.RData')
+> save(deconv_expr_LUSC, file = '../TCGA_results/deconv_expr_LUSC.RData')
+> 
+> #---------------------------------------------------------------------
+> # generate plots
+> #---------------------------------------------------------------------
+> 
+> setwd("_figures_LUSC")
+> 
+> utypes = intersect(cellTypes,colnames(deconv_expr))
+> utypes
+[1] "CD4T"       "CD8T"       "Monocyte"   "B"          "NK"        
+[6] "Neutrophil" "Treg"      
+> 
+> cormat <- matrix(NA,nrow = length(utypes), ncol = length(methods))
+> colnames(cormat) <- methods
+> rownames(cormat) <- utypes
+> 
+> err <- matrix(NA,nrow = length(utypes), ncol = length(methods))
+> colnames(err) <- methods
+> rownames(err) <- utypes
+> 
+> rss <- matrix(NA,nrow = length(utypes), ncol = length(methods))
+> colnames(rss) <- methods
+> rownames(rss) <- utypes
+> 
+> for(i in 1:length(utypes)){
++   cormat[i,] <- sapply(1:length(methods), FUN = function(j){
++     cor(rho[,utypes[i],methods[j]],deconv_expr[,utypes[i]])
++   })
++   err[i,] <- sapply(1:length(methods), FUN = function(j){
++     sqrt(mean((rho[,utypes[i],methods[j]] - deconv_expr[,utypes[i]])^2))
++   }) 
++   rss[i,] <- sapply(1:length(methods), FUN = function(j){
++     temp <- lm(deconv_expr[,utypes[i]]~rho[,utypes[i],methods[j]])
++     return(sum(temp$residuals^2))
++   })
++ }
+> 
+> for(i in 1:length(utypes)){
++   pdf(sprintf('%s_express_methy_discard_high_purity.pdf',utypes[i]))
++   plist = list()
++   plist <- lapply(1:length(methods), FUN = function(j){
++     tempdata = cbind(rho[,utypes[i],methods[j]],deconv_expr[,utypes[i]],eta)
++     colnames(tempdata) <- c("methylation","expression","eta")
++     newplot <- ggplot(data = as.data.frame(tempdata), 
++                       aes(x=methylation,y=expression,color=eta)) + 
++       xlim(0,0.3) + ylim(0,0.3) + geom_point() + 
++       geom_abline(intercept = 0,slope = 1) + ggtitle(methods[j]) 
++   })
++   grid.arrange(grobs = plist,ncol=2)
++   dev.off()
++ }
+There were 27 warnings (use warnings() to see them)
+> 
+> pdf('correlation.pdf')
+> plist = list()
+> plist <- lapply(1:length(utypes),FUN = function(i){
++   tempdata = data.frame(methods,correlation = cormat[utypes[i],] )
++   corplot <- ggplot(tempdata,aes(methods,correlation)) + 
++     geom_col()+ggtitle(utypes[i])
++ })
+> grid.arrange(grobs = plist, ncol = 2)
+> dev.off()
+null device 
+          1 
+> 
+> pdf('RootedMSE.pdf')
+> plist = list()
+> plist <- lapply(1:length(utypes),FUN = function(i){
++   tempdata = data.frame(methods, rootedMSE = sqrt(err[utypes[i],]) )
++   corplot <- ggplot(tempdata,aes(methods, rootedMSE)) + 
++     geom_col()+ggtitle(utypes[i])
++ })
+> grid.arrange(grobs = plist, ncol = 2)
+> dev.off()
+null device 
+          1 
+> 
+> print(cormat)
+                EMeth         svr          ls         rls          qp
+CD4T        0.2054924  0.26325401  0.10941689  0.02871905  0.11767780
+CD8T        0.5392632  0.43641656  0.45465358  0.44200925  0.39080375
+Monocyte    0.7704481  0.78783678  0.78972148  0.78621807  0.70319914
+B           0.8407878  0.78923865  0.79559422  0.76646386  0.82355305
+NK          0.3145279  0.28064884  0.23833392  0.14376023  0.15393363
+Neutrophil  0.5401327  0.51331964  0.50872746  0.50864883  0.34119244
+Treg       -0.1144282 -0.04801711 -0.03460993 -0.04038743 -0.08844092
+> print(err)
+                EMeth        svr         ls        rls         qp
+CD4T       0.15005795 0.10870413 0.16963466 0.16700217 0.19679590
+CD8T       0.11970537 0.13478179 0.21993134 0.23354955 0.10464782
+Monocyte   0.05215690 0.06000179 0.04244339 0.04118296 0.06573573
+B          0.07115510 0.08869531 0.09990925 0.10339995 0.09751493
+NK         0.03575945 0.03231139 0.03660900 0.03978041 0.04814894
+Neutrophil 0.08885361 0.04209497 0.05169303 0.04834816 0.03114730
+Treg       0.07547845 0.02144337 0.02022726 0.01894898 0.03904359
+> print(rss)
+                EMeth        svr         ls        rls         qp
+CD4T       1.59122007 1.54623740 1.64148507 1.66000487 1.63836831
+CD8T       0.19764530 0.22561050 0.22108166 0.22424136 0.23612596
+Monocyte   0.25766986 0.24049025 0.23860518 0.24210569 0.32050152
+B          0.86150131 1.10849863 1.07889030 1.21264806 0.94581998
+NK         0.12843716 0.13131130 0.13444154 0.13959231 0.13916062
+Neutrophil 0.12477883 0.12975519 0.13058207 0.13059616 0.15566821
+Treg       0.04502519 0.04551737 0.04556791 0.04554814 0.04526571
+> 
+> OneMinusCorr <- 1-matrix(cormat,ncol = 1, byrow = FALSE)
+> RMSE <- matrix(err,ncol = 1, byrow = FALSE )
+> CellType <- rep(cellTypes,length(methods))
+> Methods <- rep(methods,each = length(cellTypes))
+> res <- cbind.data.frame(OneMinusCorr,RMSE,CellType,Methods)
+> 
+> pdf('Comparison.pdf')
+> complot<- ggplot(res, aes(x=OneMinusCorr,y=RMSE, color =  Methods)) + 
++   ggtitle('LUSC') + geom_point() + 
++   scale_y_continuous(trans = log2_trans(),
++                      breaks = trans_breaks('log10',function(x) 10^x),
++                      labels = trans_format('log10',math_format(10^.x))) + 
++   geom_text(label = res[,3])+xlim(0.1,1.05)
+> print(complot)
+Warning messages:
+1: Removed 2 rows containing missing values (geom_point). 
+2: Removed 2 rows containing missing values (geom_text). 
+> dev.off()
+null device 
+          1 
+> cormat_LUSC <- cormat
+> err_LUSC <- err
+> save(cormat_LUSC, file='cormat_LUSC.RData')
+> save(err_LUSC, file = 'err_LUSC.RData')
+> 
+> sessionInfo()
+R version 3.6.0 (2019-04-26)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 14.04.6 LTS
+
+Matrix products: default
+BLAS/LAPACK: /app/easybuild/software/OpenBLAS/0.2.18-GCC-5.4.0-2.26-LAPACK-3.6.1/lib/libopenblas_prescottp-r0.2.18.so
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] quadprog_1.5-8    quantreg_5.38     SparseM_1.77      gridExtra_2.3    
+ [5] MASS_7.3-51.4     ggplot2_3.1.1     e1071_1.7-1       stringr_1.4.0    
+ [9] scales_1.0.0      data.table_1.12.2
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_1.0.1         pillar_1.3.1       compiler_3.6.0     plyr_1.8.4        
+ [5] R.methodsS3_1.7.1  R.utils_2.8.0      class_7.3-15       tools_3.6.0       
+ [9] digest_0.6.18      tibble_2.1.1       gtable_0.3.0       lattice_0.20-38   
+[13] pkgconfig_2.0.2    rlang_0.4.5        Matrix_1.2-17      withr_2.1.2       
+[17] dplyr_0.8.5        MatrixModels_0.4-1 grid_3.6.0         tidyselect_0.2.5  
+[21] glue_1.3.1         R6_2.4.0           purrr_0.3.2        magrittr_1.5      
+[25] assertthat_0.2.1   colorspace_1.4-1   labeling_0.3       stringi_1.4.3     
+[29] lazyeval_0.2.2     munsell_0.5.0      crayon_1.3.4       R.oo_1.22.0       
+> gc()
+            used   (Mb) gc trigger   (Mb)  max used   (Mb)
+Ncells   3347920  178.8    5419156  289.5   5419156  289.5
+Vcells 216991873 1655.6  467178453 3564.3 467178417 3564.3
+> 
+> quit(save = 'no')
+> proc.time()
+     user    system   elapsed 
+  933.716     2.408 11059.494 
