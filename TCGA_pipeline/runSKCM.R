@@ -8,16 +8,16 @@ library(MASS)
 library(gridExtra)
 library(quantreg)
 library(quadprog)
-#library(EMeth)
+library(EMeth)
 
 # the raw data of DNA metylation is too large to be kept in gitHub
 # here is the local path for DNA methylation data
-path.data = "~/Hutch-Research/Data/Real"
-path.work = '~/dMeth/TCGA_pipeline'
-source('~/EMeth/EMeth/R/emeth.R')
-source('~/EMeth/EMeth/R/utils.R')
-source('~/EMeth/EMeth/R/cv.emeth.R')
-source('~/EMeth/source/_lib.R')
+path.data = "C:/Users/Hanyu/Downloads/Real"
+path.work = 'C:/Users/Hanyu/Documents/GitHub/dMeth/TCGA_pipeline'
+#source('~/EMeth/EMeth/R/emeth.R')
+#source('~/EMeth/EMeth/R/utils.R')
+#source('~/EMeth/EMeth/R/cv.emeth.R')
+#source('~/EMeth/source/_lib.R')
 # ------------------------------------------------------------
 # read in pure cell type data
 # ------------------------------------------------------------
@@ -46,7 +46,7 @@ rownames(dat) = info$ID
 # ------------------------------------------------------------
 # read DNA methylation data
 # ------------------------------------------------------------
-setwd('~/Hutch-Research/Data/Real')
+setwd('C:/Users/Hanyu/Downloads/Real')
 datM = fread(file = "skcm_methylation.txt", header=TRUE)
 sampinfo = fread('skcm_sample_info.txt',header = FALSE)
 cpg <- unlist(datM[,1])
@@ -55,7 +55,7 @@ datM <- datM[,-1]
 rownames(datM) = cpg
 
 dir0 = "../TCGA_results/clinical_data/"
-setwd('~/dMeth/TCGA_pipeline/')
+setwd('C:/Users/Hanyu/Documents/GitHub/dMeth/TCGA_pipeline/')
 tcga_purity = fread(paste0(dir0, "TCGA_mastercalls.abs_tables_JSedit.fixed.txt"))
 barcode = list()
 base_string = '%s-%s-%s'

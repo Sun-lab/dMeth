@@ -8,19 +8,19 @@ library(MASS)
 library(gridExtra)
 library(quantreg)
 library(quadprog)
-#library(EMeth)
+library(EMeth)
 
 # the raw data of DNA metylation is too large to be kept in gitHub
 # here is the local path for DNA methylation data
-path.data = "~/Hutch-Research/Data/Processed"
-source('~/EMeth/EMeth/R/emeth.R')
-source('~/EMeth/EMeth/R/utils.R')
-source('~/EMeth/EMeth/R/cv.emeth.R')
-source('~/EMeth/source/_lib.R')
+path.data = "C:/Users/Hanyu/Downloads/Processed/"
+#source('~/EMeth/EMeth/R/emeth.R')
+#source('~/EMeth/EMeth/R/utils.R')
+#source('~/EMeth/EMeth/R/cv.emeth.R')
+#source('~/EMeth/source/_lib.R')
 # ------------------------------------------------------------
 # read in pure cell type data
 # ------------------------------------------------------------
-
+setwd('C:/Users/Hanyu/Documents/GitHub/dMeth/TCGA_pipeline')
 path.ref = "../cell_type_specific_reference/data"
 
 info = fread(file.path(path.ref, "methylation_pure_ct_info.txt.gz"))
