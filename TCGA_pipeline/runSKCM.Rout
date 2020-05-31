@@ -36,6 +36,15 @@ The following object is masked from 'package:base':
 
 > library(quadprog)
 > library(EMeth)
+> library(cowplot)
+
+********************************************************
+Note: As of version 1.0.0, cowplot does not change the
+  default ggplot2 theme anymore. To recover the previous
+  behavior, execute:
+  theme_set(theme_cowplot())
+********************************************************
+
 > 
 > # the raw data of DNA metylation is too large to be kept in gitHub
 > # here is the local path for DNA methylation data
@@ -466,45 +475,45 @@ A728 0.10700845
 +   d = t(t(Xmat) %*% y)
 +   rho[j,,'qp']   = (solve.QP(D,d,t(A),b)$solution)
 + }
-10 Fri May 29 00:30:44 2020 
-20 Fri May 29 00:31:10 2020 
-30 Fri May 29 00:31:35 2020 
-40 Fri May 29 00:32:05 2020 
-50 Fri May 29 00:32:32 2020 
-60 Fri May 29 00:33:00 2020 
-70 Fri May 29 00:33:27 2020 
-80 Fri May 29 00:33:56 2020 
-90 Fri May 29 00:34:25 2020 
-100 Fri May 29 00:34:52 2020 
-110 Fri May 29 00:35:20 2020 
-120 Fri May 29 00:35:47 2020 
-130 Fri May 29 00:36:16 2020 
-140 Fri May 29 00:36:45 2020 
-150 Fri May 29 00:37:15 2020 
-160 Fri May 29 00:37:42 2020 
-170 Fri May 29 00:38:08 2020 
-180 Fri May 29 00:38:36 2020 
-190 Fri May 29 00:39:00 2020 
-200 Fri May 29 00:39:27 2020 
-210 Fri May 29 00:39:55 2020 
-220 Fri May 29 00:40:20 2020 
-230 Fri May 29 00:40:45 2020 
-240 Fri May 29 00:41:12 2020 
-250 Fri May 29 00:41:39 2020 
-260 Fri May 29 00:42:08 2020 
-270 Fri May 29 00:42:34 2020 
-280 Fri May 29 00:43:00 2020 
-290 Fri May 29 00:43:28 2020 
-300 Fri May 29 00:43:55 2020 
-310 Fri May 29 00:44:22 2020 
-320 Fri May 29 00:44:50 2020 
-330 Fri May 29 00:45:17 2020 
-340 Fri May 29 00:45:44 2020 
-350 Fri May 29 00:46:13 2020 
-360 Fri May 29 00:46:39 2020 
-370 Fri May 29 00:47:07 2020 
-380 Fri May 29 00:47:35 2020 
-390 Fri May 29 00:48:03 2020 
+10 Fri May 29 18:59:46 2020 
+20 Fri May 29 19:00:12 2020 
+30 Fri May 29 19:00:37 2020 
+40 Fri May 29 19:01:06 2020 
+50 Fri May 29 19:01:35 2020 
+60 Fri May 29 19:02:02 2020 
+70 Fri May 29 19:02:30 2020 
+80 Fri May 29 19:02:58 2020 
+90 Fri May 29 19:03:26 2020 
+100 Fri May 29 19:03:53 2020 
+110 Fri May 29 19:04:21 2020 
+120 Fri May 29 19:04:48 2020 
+130 Fri May 29 19:05:17 2020 
+140 Fri May 29 19:05:46 2020 
+150 Fri May 29 19:06:16 2020 
+160 Fri May 29 19:06:43 2020 
+170 Fri May 29 19:07:09 2020 
+180 Fri May 29 19:07:37 2020 
+190 Fri May 29 19:08:02 2020 
+200 Fri May 29 19:08:29 2020 
+210 Fri May 29 19:08:57 2020 
+220 Fri May 29 19:09:22 2020 
+230 Fri May 29 19:09:47 2020 
+240 Fri May 29 19:10:14 2020 
+250 Fri May 29 19:10:41 2020 
+260 Fri May 29 19:11:09 2020 
+270 Fri May 29 19:11:36 2020 
+280 Fri May 29 19:12:03 2020 
+290 Fri May 29 19:12:30 2020 
+300 Fri May 29 19:12:57 2020 
+310 Fri May 29 19:13:24 2020 
+320 Fri May 29 19:13:51 2020 
+330 Fri May 29 19:14:19 2020 
+340 Fri May 29 19:14:46 2020 
+350 Fri May 29 19:15:16 2020 
+360 Fri May 29 19:15:41 2020 
+370 Fri May 29 19:16:08 2020 
+380 Fri May 29 19:16:37 2020 
+390 Fri May 29 19:17:04 2020 
 There were 50 or more warnings (use warnings() to see the first 50)
 > 
 > print('EMeth')
@@ -512,24 +521,24 @@ There were 50 or more warnings (use warnings() to see the first 50)
 > hundrediter = cv.emeth(ys, eta, mu, aber = TRUE, V='c', init = 'default',
 +                        family = 'normal', nu = penalty, folds = 5, 
 +                        maxiter = 50, verbose = TRUE)
-50 Fri May 29 00:48:10 2020 
-100 Fri May 29 00:48:10 2020 
-150 Fri May 29 00:48:10 2020 
-200 Fri May 29 00:48:10 2020 
-250 Fri May 29 00:48:10 2020 
-300 Fri May 29 00:48:10 2020 
-350 Fri May 29 00:48:10 2020 
+50 Fri May 29 19:17:11 2020 
+100 Fri May 29 19:17:11 2020 
+150 Fri May 29 19:17:11 2020 
+200 Fri May 29 19:17:11 2020 
+250 Fri May 29 19:17:11 2020 
+300 Fri May 29 19:17:12 2020 
+350 Fri May 29 19:17:12 2020 
 [1] "finish cross validation"
 -------------------
-10 Fri May 29 00:53:35 2020 
+10 Fri May 29 19:22:37 2020 
 -------------------
-20 Fri May 29 00:55:45 2020 
+20 Fri May 29 19:24:47 2020 
 -------------------
-30 Fri May 29 00:57:55 2020 
+30 Fri May 29 19:26:56 2020 
 -------------------
-40 Fri May 29 01:00:05 2020 
+40 Fri May 29 19:29:05 2020 
 -------------------
-50 Fri May 29 01:02:16 2020 
+50 Fri May 29 19:31:15 2020 
 > rho[,,'EMeth'] = hundrediter[[1]]$rho
 > 
 > #---------------------------------------------------------------------
@@ -540,13 +549,13 @@ There were 50 or more warnings (use warnings() to see the first 50)
 [1] 391   7   5
 > rho[1,,]
                    EMeth         svr         ls         rls           qp
-CD4T        4.647104e-01 0.381444658 0.35310646 0.364675454 4.895262e-01
-CD8T       -2.116480e-17 0.000000000 0.00000000 0.000000000 5.345828e-19
-Monocyte    2.140644e-19 0.034796783 0.04366372 0.035335965 2.338829e-18
-B           4.352896e-01 0.370653853 0.38580363 0.396619361 4.104738e-01
-NK          1.170793e-18 0.007193645 0.01178413 0.001574085 1.531097e-17
-Neutrophil  7.116820e-19 0.000000000 0.00000000 0.000000000 3.956396e-20
-Treg       -6.290615e-18 0.105911060 0.10564205 0.101795135 0.000000e+00
+CD4T        4.643562e-01 0.384154045 0.35310646 0.364675454 4.895262e-01
+CD8T       -1.163978e-17 0.000000000 0.00000000 0.000000000 5.345828e-19
+Monocyte   -5.503769e-19 0.033600316 0.04366372 0.035335965 2.338829e-18
+B           4.356438e-01 0.366820183 0.38580363 0.396619361 4.104738e-01
+NK         -1.734480e-19 0.009108515 0.01178413 0.001574085 1.531097e-17
+Neutrophil -4.341269e-18 0.000000000 0.00000000 0.000000000 3.956396e-20
+Treg       -1.391424e-18 0.106316941 0.10564205 0.101795135 0.000000e+00
 > dimnames(rho)
 [[1]]
   [1] "A51H" "A728" "A1PZ" "A2J7" "A5UL" "AAP7" "A3CC" "A3J7" "A1NK" "A2GN"
@@ -658,64 +667,73 @@ A728 0.075976001
 +     newplot <- ggplot(data = as.data.frame(tempdata), 
 +                       aes(x=methylation,y=expression,color=eta)) + 
 +       xlim(0,0.3) + ylim(0,0.3) + geom_point() + 
-+       geom_abline(intercept = 0,slope = 1) + ggtitle(methods[j]) 
++       geom_abline(intercept = 0,slope = 1) + ggtitle(sprintf('%s on %s',methods[j],utypes[i]))
 +   })
 +   grid.arrange(grobs = plist,ncol=2)
++   save(plist, file = sprintf('plist_%s_%s.RData',utypes[i],'SKCM'))
 +   dev.off()
 + }
 There were 27 warnings (use warnings() to see them)
 > 
 > pdf('correlation.pdf')
-> plist = list()
-> plist <- lapply(1:length(utypes),FUN = function(i){
-+   tempdata = data.frame(methods,correlation = cormat[utypes[i],] )
-+   corplot <- ggplot(tempdata,aes(methods,correlation)) + 
-+     geom_col()+ggtitle(utypes[i])
-+ })
-> grid.arrange(grobs = plist, ncol = 2)
+> tempdata <- melt(as.data.table(cormat))
+Warning message:
+In melt.data.table(as.data.table(cormat)) :
+  id.vars and measure.vars are internally guessed when both are 'NULL'. All non-numeric/integer/logical type columns are considered id.vars, which in this case are columns []. Consider providing at least one of 'id' or 'measure' vars in future.
+> colnames(tempdata) <- c('Methods','Correlation')
+> tempdata$cellType = rep(utypes,5)
+> p1 <- ggplot(tempdata,aes(x=Methods,y=Correlation)) + geom_boxplot() +
++   geom_point(size = 5,aes(colour = cellType)) + theme_cowplot() + ggtitle('Correlation for SKCM')
+> print(p1)
+> save(p1,file=sprintf('Cor_%s.RData','SKCM'))
 > dev.off()
 null device 
           1 
 > 
-> pdf('RootedMSE.pdf')
-> plist = list()
-> plist <- lapply(1:length(utypes),FUN = function(i){
-+   tempdata = data.frame(methods, rootedMSE = sqrt(err[utypes[i],]) )
-+   corplot <- ggplot(tempdata,aes(methods, rootedMSE)) + 
-+     geom_col()+ggtitle(utypes[i])
-+ })
-> grid.arrange(grobs = plist, ncol = 2)
+> 
+> pdf('correlation.pdf')
+> tempdata <- melt(as.data.table(err))
+Warning message:
+In melt.data.table(as.data.table(err)) :
+  id.vars and measure.vars are internally guessed when both are 'NULL'. All non-numeric/integer/logical type columns are considered id.vars, which in this case are columns []. Consider providing at least one of 'id' or 'measure' vars in future.
+> colnames(tempdata) <- c('Methods','RMSE')
+> tempdata$cellType = rep(utypes,5)
+> p2 <- ggplot(tempdata,aes(x=Methods,y=RMSE)) + geom_boxplot() +
++   geom_point(size = 5,aes(colour = cellType)) + theme_cowplot() + ggtitle('RMSE for SKCM')
+> print(p2)
+> save(p2,file=sprintf('err_%s.RData','SKCM'))
 > dev.off()
 null device 
           1 
+> 
 > 
 > print(cormat)
                 EMeth         svr         ls         rls         qp
-CD4T        0.4305550 0.541836066 0.41999529  0.41096056  0.5395446
-CD8T        0.8287662 0.760372003 0.81460070  0.79698603  0.7331478
-Monocyte    0.6751914 0.711557708 0.72822186  0.71816402  0.4650304
-B           0.9325333 0.926956997 0.93087221  0.92486714  0.8749410
-NK          0.2447053 0.341606953 0.35126206  0.22638980 -0.2509472
-Neutrophil  0.5870802 0.634433058 0.59414747  0.59634349  0.3056882
-Treg       -0.1399634 0.005940331 0.01682974 -0.01113644  0.1500778
+CD4T        0.4526934 0.547405464 0.41999529  0.41096056  0.5395446
+CD8T        0.8367225 0.763549434 0.81460070  0.79698603  0.7331478
+Monocyte    0.6779437 0.710480171 0.72822186  0.71816402  0.4650304
+B           0.9329738 0.926475821 0.93087221  0.92486714  0.8749410
+NK          0.2750712 0.339381448 0.35126206  0.22638980 -0.2509472
+Neutrophil  0.5728317 0.650708657 0.59414747  0.59634349  0.3056882
+Treg       -0.1306758 0.004437388 0.01682974 -0.01113644  0.1500778
 > print(err)
                 EMeth        svr         ls        rls         qp
-CD4T       0.09365618 0.07182725 0.10349143 0.10005729 0.19537571
-CD8T       0.09757693 0.08655414 0.13519071 0.13810958 0.09181468
-Monocyte   0.04948906 0.05212427 0.04140358 0.04204604 0.07054404
-B          0.03127790 0.03495302 0.03779211 0.03754715 0.05391413
-NK         0.03039828 0.03026174 0.03103747 0.03338617 0.03815009
-Neutrophil 0.05909666 0.02054039 0.02213641 0.02128823 0.01766295
-Treg       0.04546435 0.03455968 0.03346173 0.03423100 0.04072196
+CD4T       0.09021170 0.07104223 0.10349143 0.10005729 0.19537571
+CD8T       0.08890490 0.08323781 0.13519071 0.13810958 0.09181468
+Monocyte   0.04884827 0.05234276 0.04140358 0.04204604 0.07054404
+B          0.03092948 0.03493827 0.03779211 0.03754715 0.05391413
+NK         0.02980314 0.03021968 0.03103747 0.03338617 0.03815009
+Neutrophil 0.05869544 0.02042741 0.02213641 0.02128823 0.01766295
+Treg       0.04460606 0.03446205 0.03346173 0.03423100 0.04072196
 > print(rss)
                 EMeth        svr         ls        rls        qp
-CD4T       1.49941692 1.30024493 1.51594866 1.52976711 1.3048059
-CD8T       0.74679838 1.00599955 0.80231504 0.87001431 1.1029661
-Monocyte   0.45877440 0.41625328 0.39602372 0.40828953 0.6608196
-B          0.34264721 0.36989744 0.35078165 0.38006804 0.6162162
-NK         0.19808423 0.18611333 0.18470380 0.19990224 0.1974324
-Neutrophil 0.08044792 0.07334732 0.07942312 0.07910219 0.1112869
-Treg       0.24007557 0.24486393 0.24480321 0.24484220 0.2393572
+CD4T       1.46342587 1.28907891 1.51594866 1.52976711 1.3048059
+CD8T       0.71519705 0.99445188 0.80231504 0.87001431 1.1029661
+Monocyte   0.45563420 0.41754524 0.39602372 0.40828953 0.6608196
+B          0.34048738 0.37224119 0.35078165 0.38006804 0.6162162
+NK         0.19475863 0.18643266 0.18470380 0.19990224 0.1974324
+Neutrophil 0.08247674 0.07077966 0.07942312 0.07910219 0.1112869
+Treg       0.24069109 0.24486775 0.24480321 0.24484220 0.2393572
 > 
 > OneMinusCorr <- 1-matrix(cormat,ncol = 1, byrow = FALSE)
 > RMSE <- matrix(err,ncol = 1, byrow = FALSE )
@@ -760,9 +778,9 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] EMeth_1.0         quadprog_1.5-8    quantreg_5.55     SparseM_1.78     
- [5] gridExtra_2.3     MASS_7.3-51.5     ggplot2_3.3.0     e1071_1.7-3      
- [9] stringr_1.4.0     scales_1.1.1      data.table_1.12.8
+ [1] cowplot_1.0.0     EMeth_1.0         quadprog_1.5-8    quantreg_5.55    
+ [5] SparseM_1.78      gridExtra_2.3     MASS_7.3-51.5     ggplot2_3.3.0    
+ [9] e1071_1.7-3       stringr_1.4.0     scales_1.1.1      data.table_1.12.8
 
 loaded via a namespace (and not attached):
  [1] pillar_1.4.4       compiler_4.0.0     R.methodsS3_1.8.0  R.utils_2.9.2     
@@ -775,10 +793,10 @@ loaded via a namespace (and not attached):
 [29] crayon_1.3.4       R.oo_1.23.0       
 > gc()
             used   (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells   3448808  184.2    6415870  342.7   6415870  342.7
-Vcells 278106372 2121.8  564090851 4303.7 564090814 4303.7
+Ncells   3474126  185.6    6423818  343.1   6423818  343.1
+Vcells 278164076 2122.3  564103359 4303.8 564088486 4303.7
 > 
 > quit(save = 'no')
 > proc.time()
    user  system elapsed 
-1881.09  100.87 1976.65 
+1879.18  100.76 1972.11 

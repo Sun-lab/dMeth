@@ -9,6 +9,7 @@ library(gridExtra)
 library(quantreg)
 library(quadprog)
 library(EMeth)
+library(cowplot)
 
 # the raw data of DNA metylation is too large to be kept in gitHub
 # here is the local path for DNA methylation data
@@ -328,31 +329,34 @@ for(i in 1:length(utypes)){
     newplot <- ggplot(data = as.data.frame(tempdata), 
                       aes(x=methylation,y=expression,color=eta)) + 
       xlim(0,0.3) + ylim(0,0.3) + geom_point() + 
-      geom_abline(intercept = 0,slope = 1) + ggtitle(methods[j]) 
+      geom_abline(intercept = 0,slope = 1) + ggtitle(sprintf('%s on %s',methods[j],utypes[i]))
   })
   grid.arrange(grobs = plist,ncol=2)
+  save(plist, file = sprintf('plist_%s_%s.RData',utypes[i],'SKCM'))
   dev.off()
 }
 
 pdf('correlation.pdf')
-plist = list()
-plist <- lapply(1:length(utypes),FUN = function(i){
-  tempdata = data.frame(methods,correlation = cormat[utypes[i],] )
-  corplot <- ggplot(tempdata,aes(methods,correlation)) + 
-    geom_col()+ggtitle(utypes[i])
-})
-grid.arrange(grobs = plist, ncol = 2)
+tempdata <- melt(as.data.table(cormat))
+colnames(tempdata) <- c('Methods','Correlation')
+tempdata$cellType = rep(utypes,5)
+p1 <- ggplot(tempdata,aes(x=Methods,y=Correlation)) + geom_boxplot() +
+  geom_point(size = 5,aes(colour = cellType)) + theme_cowplot() + ggtitle('Correlation for SKCM')
+print(p1)
+save(p1,file=sprintf('Cor_%s.RData','SKCM'))
 dev.off()
 
-pdf('RootedMSE.pdf')
-plist = list()
-plist <- lapply(1:length(utypes),FUN = function(i){
-  tempdata = data.frame(methods, rootedMSE = sqrt(err[utypes[i],]) )
-  corplot <- ggplot(tempdata,aes(methods, rootedMSE)) + 
-    geom_col()+ggtitle(utypes[i])
-})
-grid.arrange(grobs = plist, ncol = 2)
+
+pdf('correlation.pdf')
+tempdata <- melt(as.data.table(err))
+colnames(tempdata) <- c('Methods','RMSE')
+tempdata$cellType = rep(utypes,5)
+p2 <- ggplot(tempdata,aes(x=Methods,y=RMSE)) + geom_boxplot() +
+  geom_point(size = 5,aes(colour = cellType)) + theme_cowplot() + ggtitle('RMSE for SKCM')
+print(p2)
+save(p2,file=sprintf('err_%s.RData','SKCM'))
 dev.off()
+
 
 print(cormat)
 print(err)
@@ -382,4 +386,6 @@ sessionInfo()
 gc()
 
 quit(save = 'no')
+
+
 
