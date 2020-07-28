@@ -29,7 +29,7 @@ library(survminer)
 library(readxl)
 library(stargazer)
 library(ggcorrplot)
-
+library(tidyr)
 theme_set(theme_bw())
 ```
 
@@ -330,9 +330,11 @@ for(c1 in cancer_types){
   mb1 = sc$raw_MB_hg38_SNV + sc$raw_MB_hg38_INDEL
   mb2 = sc$raw_MB_hg38_SNV*sc$prop_clonal + sc$raw_MB_hg38_INDEL
   mb  = cbind(mb1, mb2)
+  mb[mb < 10] = NA
+  mb = log10(mb)
   cf  = sc[,30:43]
   
-  cr1 = cor(mb, cf, method="spearman")
+  cr1 = cor(mb, cf, method="spearman", use="pairwise.complete.obs")
   pv1 = matrix(NA, nrow=2, ncol=14)
   
   for(j in 1:2){
@@ -352,11 +354,74 @@ for(c1 in cancer_types){
   
   gc2 = ggcorrplot(cr1[,8:14], lab = TRUE, title=paste0(c1, "-Meth"))
   
-  gga = ggarrange(gc1, gc2 + rremove("legend"), 
-          labels = c("A", "B"), ncol = 2, nrow = 1)
+  gga = ggarrange(gc1, gc2 + rremove("legend"), ncol = 2, nrow = 1)
   print(gga)
 }
 ```
+
+Illustrate cell type fraction estimates
+```{r warning = FALSE, message = FALSE, fig.height=4, fig.width=7}
+lapply(scL, dim)
+scDf = NULL
+for(c1 in cancer_types){
+  scDf = rbind(scDf, scL[[c1]])
+}
+dim(scDf)
+scDf[1:2,]
+
+names(scDf)
+names(scDf)[14] = "cancer_type"
+
+scE = scDf[,c(14,30:36)]
+rhos = scE %>% pivot_longer(-cancer_type, names_to=c("cell_type"))
+
+ggplot(rhos, aes(x=cell_type, y=value, fill=cancer_type)) +
+  geom_boxplot() + labs(title="Cell type fraction by gene expression")
+
+scM = scDf[,c(14,37:43)]
+rhos = scM %>% pivot_longer(-cancer_type, names_to=c("cell_type"))
+
+ggplot(rhos, aes(x=cell_type, y=value, fill=cancer_type)) +
+  geom_boxplot() + labs(title="Cell type fraction by DNA methylation")
+
+```
+
+Compare cell type fraction estimates between gene expression and DNA methylation
+```{r warning = FALSE, message = FALSE, fig.height=3, fig.width=12}
+cell_types = c("B", "CD4T", "CD8T", "Monocyte", "NK", "Neutrophil", "Treg")
+
+for(cc1 in cell_types){
+  g1 = ggplot(scDf, aes_string(x=paste0(cc1, ".E"), y=cc1, color="cancer_type")) + 
+    geom_point() + geom_smooth(method=lm) + facet_grid(~ cancer_type) + 
+    theme(legend.position = "none")
+  print(g1)
+}
+
+```
+
+Compare cell type fraction estimates vs. mutation load
+```{r warning = FALSE, message = FALSE, fig.height=3, fig.width=12}
+cell_types = c("B", "CD4T", "CD8T", "Monocyte", "NK", "Neutrophil", "Treg")
+mb = scDf$raw_MB_hg38_SNV + scDf$raw_MB_hg38_INDEL
+mb[which(mb < 10)] = NA
+scDf$mb = log10(mb)
+
+for(cc1 in cell_types){
+  g1 = ggplot(scDf, aes_string(x="mb", y=paste0(cc1, ".E"), color="cancer_type")) + 
+    geom_point() + geom_smooth(method=lm) + facet_grid(~ cancer_type) + 
+    theme(legend.position = "none")
+  print(g1)
+
+  g1 = ggplot(scDf, aes_string(x="mb", y=cc1, color="cancer_type")) + 
+    geom_point() + geom_smooth(method=lm) + facet_grid(~ cancer_type) + 
+    theme(legend.position = "none")
+  print(g1)
+}
+
+```
+
+
+Check association between 
 
 # Session information
 ```{r}
