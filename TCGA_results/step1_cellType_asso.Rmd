@@ -157,9 +157,7 @@ for(c1 in cancer_types){
     ct[[ctype1]] = log2(ct[[ctype1]])
   }
   df1 = t(sapply(cell_types, cox_summary, ct=ct, surv_var="DSS"))
-  df2 = as.data.frame(cbind(df1[1:7,], df1[8:14,]))
-  rownames(df2) = gsub(".E", "", rownames(df2), fixed=TRUE)
-  print(df2)
+  print(as.data.frame(df1))
 }
 ```
 
@@ -181,9 +179,7 @@ for(c1 in cancer_types){
   }
   
   df1 = t(sapply(cell_types, cox_summary, ct=ct, surv_var="PFI"))
-  df2 = as.data.frame(cbind(df1[1:7,], df1[8:14,]))
-  rownames(df2) = gsub(".E", "", rownames(df2), fixed=TRUE)
-  print(df2)
+  print(as.data.frame(df1))
 }
 ```
 
@@ -247,16 +243,44 @@ for(c1 in cancer_types){
   
   cell_types = paste0(cell_types, "_lr")
   df1 = t(sapply(cell_types, cox_summary, ct=ct, surv_var="DSS"))
-  kk  = (nrow(df1)/2)
-  df2 = as.data.frame(cbind(df1[1:kk,], df1[(kk+1):nrow(df1),]))
-  rownames(df2) = gsub(".E", "", rownames(df2), fixed=TRUE)
-  print(df2)
+  print(as.data.frame(df1))
 }
 ```
 
-Generate plots for log2 cell type fraction ratios for SKCM.
+Generate plots of survival curves with respect to **cell type fractions** for SKCM.
 
-```{r warning = FALSE, message = FALSE, fig.height=5, fig.width=5}
+```{r warning = FALSE, message = FALSE, fig.height=5, fig.width=4}
+
+ct = ctf[["SKCM"]]
+cell_types = c("CD4T", "CD8T", "Monocyte", "B", "NK", "Neutrophil", "Treg")
+
+glist = list()
+for(ctype1 in cell_types){
+  ctype1E = paste0(ctype1, ".E")
+  ab = rep("Low", nrow(ct))
+  ab[which(ct[[ctype1E]] > median(ct[[ctype1E]]))] = "High"
+  
+  fit1 = survfit(Surv(DSS.time, DSS) ~ ab, data=ct)
+  g1 = ggsurvplot(fit1, data = ct, risk.table = TRUE, 
+                  pval=TRUE, pval.method=TRUE, 
+                  title=paste(ctype1, ".E"))
+  
+  ab = rep("Low", nrow(ct))
+  ab[which(ct[[ctype1]] > median(ct[[ctype1]]))] = "High"
+
+  fit2 = survfit(Surv(DSS.time, DSS) ~ ab, data=ct)
+  g2 = ggsurvplot(fit2, data = ct, risk.table = TRUE, 
+                  pval=TRUE, pval.method=TRUE, 
+                  title=ctype1)
+
+  print(g1)
+  print(g2)
+}
+```
+
+Generate plots of survival curves with respect to **relative cell type fractions** for SKCM.
+
+```{r warning = FALSE, message = FALSE, fig.height=5, fig.width=4}
 
 ct = ctf[["SKCM"]]
 cell_types = c("CD4T", "Monocyte", "B", "NK", "Neutrophil", "Treg")
@@ -278,7 +302,7 @@ for(ctype1 in cell_types){
   rel.ab[which(ct.lr > median(ct.lr))] = "High"
 
   fit2 = survfit(Surv(DSS.time, DSS) ~ rel.ab, data=ct)
-  g2 = ggsurvplot(fit1, data = ct, risk.table = TRUE, 
+  g2 = ggsurvplot(fit2, data = ct, risk.table = TRUE, 
                   pval=TRUE, pval.method=TRUE, 
                   title=ctype1)
 
@@ -420,8 +444,35 @@ for(cc1 in cell_types){
 
 ```
 
+# Association between hypermutation status in COAD and immune cell fractions. 
 
-Check association between 
+First define the hypermutation subgroup with larger number of mutations. 
+
+```{r warning = FALSE, message = FALSE, fig.height=3, fig.width=3}
+coad = scL[["COAD"]]
+
+ggplot(coad, aes(x=log10(raw_MB_hg38_SNV)))+
+  geom_histogram(color="darkblue", fill="lightblue")  +
+  geom_vline(xintercept = log10(400))
+coad$hyper_mut = coad[,"raw_MB_hg38_SNV"] > 400
+```
+
+Next compare the cell type fractions between hypermuted and non-hypermutated groups. 
+```{r warning = FALSE, message = FALSE, fig.height=7.5, fig.width=4.5}
+ctypes = c("CD4T.E", "CD4T", "CD8T.E", "CD8T", "Treg.E", "Treg")
+gl = list()
+for(ct1 in ctypes){
+  w1 = wilcox.test(coad[[ct1]]~ coad$hyper_mut)
+
+  gl[[ct1]] = ggplot(coad, aes_string(x="hyper_mut", y=ct1, fill="hyper_mut")) + 
+    theme(legend.position = "none") + geom_violin(trim=FALSE) + 
+    geom_boxplot(width=0.1, fill="white") + 
+    labs(title=sprintf("Wilcox p=%.1e", w1$p.value), x="Hypermutation status")
+}
+
+ggarrange(gl[[1]], gl[[2]], gl[[3]], gl[[4]], gl[[5]], gl[[6]], nrow = 3, ncol = 2)
+```
+
 
 # Session information
 ```{r}
