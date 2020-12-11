@@ -458,8 +458,8 @@ coad$hyper_mut = coad[,"raw_MB_hg38_SNV"] > 400
 ```
 
 Next compare the cell type fractions between hypermuted and non-hypermutated groups. 
-```{r warning = FALSE, message = FALSE, fig.height=7.5, fig.width=4.5}
-ctypes = c("CD4T.E", "CD4T", "CD8T.E", "CD8T", "Treg.E", "Treg")
+```{r warning = FALSE, message = FALSE, fig.height=5, fig.width=4.5}
+ctypes = c("CD8T.E", "CD8T", "Treg.E", "Treg")
 gl = list()
 for(ct1 in ctypes){
   w1 = wilcox.test(coad[[ct1]]~ coad$hyper_mut)
@@ -470,7 +470,7 @@ for(ct1 in ctypes){
     labs(title=sprintf("Wilcox p=%.1e", w1$p.value), x="Hypermutation status")
 }
 
-ggarrange(gl[[1]], gl[[2]], gl[[3]], gl[[4]], gl[[5]], gl[[6]], nrow = 3, ncol = 2)
+ggarrange(gl[[1]], gl[[2]], gl[[3]], gl[[4]], nrow = 2, ncol = 2)
 ```
 
 
