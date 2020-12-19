@@ -4,4 +4,8 @@ This pipelines are codes to run real data analysis using TCGA data. The files in
 
 - runCOAD.R, runLUAD.R, runLUSC.R, runSKCM.R: preprocess methylation data for each cancer type and run EMeth and benchmark algorithms and compare with previously estimated result from CIBERSORTX. 
 
+
 - Cell type fraction estimated by cibersortx using gene expression data were saved in folder _cibersortx_results.
+*To be done: preprocess of preprocessing of gene expression data*
+
+The following files are used for gene expression data.

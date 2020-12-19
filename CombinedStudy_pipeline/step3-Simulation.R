@@ -6,7 +6,7 @@ library(ggplot2)
 library(e1071)
 
 dir = getwd()
-source("EstimatingMethylation.R")
+source("./step2-EstimatingMethylation.R")
 set.seed(1750905)
 
 #---------------------------------------------------------
@@ -18,7 +18,7 @@ gen_methy_beta <- function(mu,alpha,sample.size, pi=0, cellnum = 100, noise){
     beta = matrix(NA, nrow= nrow(mu), ncol = length(cellTypes))
     Y = V = matrix(0, nrow = nrow(mu),ncol = sample.size)
 
-    rho   = matrix(0.2*runif(sample.size * length(cellTypes))-0.1,ncol = length(cellTypes))
+    rho   = matrix(0.2*runif(sample.size * length(cellTypes))-0.15,ncol = length(cellTypes))
     rho   = rho + matrix(rep(alpha,sample.size),nrow = sample.size)
     rho   = rho/rowSums(rho)
     eta   = runif(sample.size)*0.1

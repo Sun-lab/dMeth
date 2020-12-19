@@ -1,6 +1,6 @@
 
-source('../../source/_lib.R')
-source("GetMethylationMatrix.R")
+source('../_lib.R')
+source("step1-GetMethylationMatrix.R")
 
 
 #----------------------------------------------------------

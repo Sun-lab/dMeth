@@ -1,8 +1,8 @@
 library(nnls)
 library(data.table)
 
-source('../../source/_lib.R')
-setwd("~/Hutch-Research/Data/Processed")
+source('../_lib.R')
+setwd("../cell_type_specific_reference")
 
 #---------------------------------------------------------------
 # Read cell type specific methylation data
@@ -33,7 +33,6 @@ rownames(dat) = info$ID
 # read DNA methylation data
 # ------------------------------------------------------------
 
-#setwd("~/Hutch-Research/TCGA/COAD/")
 
 datM = fread(file = "methylation_betaValue.txt", header=TRUE)
 dim(datM)
@@ -130,10 +129,9 @@ table(colnames(datM) == emInfo$patient_id)
 
 
 # ------------------------------------------------------------
-# read in probes to be used
+# filtering probes to be used
 # ------------------------------------------------------------
-load('~/Hutch-Research/Data/Processed/p2use_half_14.RData')
-if(1<0){panT = c("CD4T", "CD8T", "Treg")
+panT = c("CD4T", "CD8T", "Treg")
 p2use = levels = list()
 
 level1 = list()
@@ -245,7 +243,7 @@ for(nm1 in nms){
 }
 
 lapply(p2use, dim)
-}
+
 
 genes = NULL
 for(lb1 in names(p2use)){
@@ -271,12 +269,4 @@ dim(sam_est)
 table(sam_est$id == colnames(X))
 table(sam_est$label)
 
-setwd('~/Desktop/EMeth/pipelines/CombinedStudy')
-# ------------------------------------------------------------
-# extract methylation data from tumor samples
-# ------------------------------------------------------------
 
-#ys = datM[match(rownames(X), rownames(datM)),]
-#dim(ys)
-#ys[1:2,1:5]
-#cellTypes = unique(sam[,2])

@@ -4,12 +4,12 @@ library('gridExtra')
 library('cowplot')
 
 dir  = getwd()
-source("Simulation.R")
+source("./step3-Simulation.R")
   
 
 simsize  = 10 
 simnoise = 2   #(1,2,3,4,5,10)
-simpi = 0.1       #(0.01,0.1,0.5,0.9)
+simpi = 0.2       #(0.01,0.1,0.5,0.9)
 alpha = rep(1/7,7)
 #penalty = 1000
 penalty= (dim(mu)[1])*(10^seq(-2,1,0.5)) 

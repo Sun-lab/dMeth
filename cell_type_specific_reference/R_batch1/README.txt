@@ -65,7 +65,7 @@ methylation_pure_ct_info.txt:		Pure cell type information file, of the selected 
 
 obtain the following files: 
 
-methylation_pure_ct_rmPC2_data.txt.txt:		Pure cell type data file
+methylation_pure_ct_rmPC2_data.txt:		Pure cell type data file
 
 -----------------------------------------------------------------------------
 step3.0_reduce_file_size.R
