@@ -126,6 +126,7 @@ purity <- purity[-any.na,]
 dim(ys)
 ys[1:2,1:5]
 table(colnames(ys) == purity$patient_id)
+
 #-------------------------------------------------------------
 # Estimate Mean Matrix mu
 #-------------------------------------------------------------
