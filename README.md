@@ -10,10 +10,14 @@ To test the codes or reproduce part of our analysis, please first clone this rep
  ```
 The subdirectories includes codes for different steps. 
 
-1. cell_type_specific_reference: source data and codes for preparation for cell type specific reference data. This reference data is used both for CombinedStudy and TCGA study.
-2. CombinedStudy_pipeline: source code for the simulation study.
+1. Blueprint_pipeline: source code for the *in silico* mixture study using the BLUEPRINT data. 
+
+2. Simulation_pipeline: source code for the simulation study, where we simulated mixture based on cell type-specific reference data. 
+
 3. TCGA_pipeline: source code for the TCGA study, comparing cell type deconvolution from gene expression data and DNA methylation data.
-4. Blueprint_pipeline: source code for the blueprint data study.
+
+4. cell_type_specific_reference: source data and codes for preparation for cell type specific reference data. This reference data is used by both  simulation study and TCGA study. 
+
 
 Details of each pipeline can be found in README.md in each subdirectory.
 

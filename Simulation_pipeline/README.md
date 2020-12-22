@@ -1,4 +1,4 @@
-Combined Study
+# Simulation  Study
 
 After generating a cell type specific reference data in cell_type_specific_reference, one could repeat our combined simulation study. This pipeline also requires the following packages:
 nnls
@@ -10,9 +10,9 @@ e1071
 
 This pipeline include four steps. 
 
-step1 - GetMethylationMatrix.R:--------------------------------------------------------
+## step1 - GetMethylationMatrix.R
 
-1.Read cell type specific methylation data. The following files are required:
+### 1.Read cell type specific methylation data. The following files are required:
 
 methylation_pure_ct_rmPC2_data.txt:     Pure cell type data file after removing PC2
 methylation_pure_ct_sample.txt:	        Pure cell type sample file
@@ -24,23 +24,28 @@ methylation_info.txt
 
 take intersections of common CpG sites in two source of data and create the dataset with 189 samples of cell type-specific DNA methylation data.
 
-2. Split this data set into two parts: one for generating reference data, one fore generating pseudo mixtures.
+### 2. Split this data set into two parts: one for generating reference data, one fore generating pseudo mixtures.
 
-3. read in methylation sample information.
+###3. read in methylation sample information.
+
 "patient_coad_short_table_nMut.txt"
 "patient_coad_M_info_hyperMeth.txt"
 
-4. filter CpG to use.
+### 4. filter CpG to use.
 Filter differentiatly methylated CpG sites, p-value threshold equals 0.01. Around 1000 CpGs are selected.
 
-step2 - EstimatingMethylation.R: --------------------------------------------------------
+## step2 - EstimatingMethylation.R
+
 1. Estimate mean and variance for each probe
 2. Remove CpGs with NA entries
 3. Further select probes by checking residuals. Regress each cell type methylation on all other cell types, remove CpG's with small residuals to eliminate collinearity.
 
-step3- Simulation.R: --------------------------------------------------------------------------
+## step3- Simulation.R
+
 functions to generate simulation data from mixture model and run different algorithms:
-gen_methy_beta: generating pseudo mixtures given experiment setting parameters:
+
+### gen_methy_beta: generating pseudo mixtures given experiment setting parameters:
+
 parameters:
 	mu = reference data
 	alpha = expected mean of proportion of each cell type
@@ -48,7 +53,8 @@ parameters:
 	pi = average proportion of inconsistent CpGs in each sample
 	cellnum = approximately number of cells in the bulk tissue, 1/cellnum is set to be sigma_c^2
 	noise = ratio between aberrant CpGs and consistent CpGs
-returns a list of
+	
+It returns a list of
 	bulk_sample = a matrix of size K*N, K=number of CpGs, N= number of samples.
 	mix = true proportion of each cell type
 	V = variance 
@@ -56,7 +62,7 @@ returns a list of
 	nu0 = generated methylation for unknown cell type
 	idic = an indicator of whether a CpG is consistent or aberrant
 
-runsim: main function to run a setting of simulation
+### runsim: main function to run a setting of simulation
 parameters
 	simsize = sample size
 	simnoise = ratio between aberrant CpGs and consistent CpGs
@@ -65,7 +71,8 @@ parameters
 	penalty = parameter for ridge penalty
 	cellnum = approximately number of cells in the bulk tissue, 1/cellnum is set to be sigma_c^2
 	maxiter = maximum iteration time of EM
-return a list:
+	
+It return a list:
 	rho = estimated proportion
 	err = square root of mean square error
 	cor = correlation between rho and true label
@@ -76,7 +83,8 @@ return a list:
 	
 	
 
-step4 - batchsim.R: -------------------------------------------------------------
+## step4 - batchsim.R
+
 script to generate experiments with repetitions under different settings.
 Generate a string "setting" to indicate the experiment settings
 Create the following files:
