@@ -1,6 +1,6 @@
-# Chen
+# Pipeline for the BLUEPRINT data
 
-This is the pipelines for results in Chen data. Details of experimental design and results are provided in the supplementary materials of our paper (Zhang et al. (2021)). This pipeline includes:
+This is the pipelines to use the BLUEPRINT data (Chen et al. (2016)) to construct *in silico* mixture using cell type-specific DNA methylation and gene expression data in three human immune cell types (Monocytes, Neutrophils and naive CD4 T cells) from 197 individuals. Details of experimental design and results are provided in the supplementary materials of our paper (Zhang et al. (2021)). This pipeline includes:
 
 * step0-GetData.R: preprocess the methylation data matrix.
 
@@ -10,7 +10,7 @@ This is the pipelines for results in Chen data. Details of experimental design a
 
 * step3-RunMethy.R: generate methylation mixture and run cell type deconvolution. 
 
-* step4-runExpr.R: generate DNA expression mixture data and then perform CIBERSORT and compare the result with results from methylation data.
+* step4-runExpr.R: generate gene expression mixture data and then perform CIBERSORT and compare the result with results from methylation data.
 
 # Reference
 
