@@ -1,0 +1,214 @@
+---
+title: "Preare gene expression data for TCGA LUAD samples"
+output:
+  html_document:
+    df_print: paged
+---
+
+
+# Load required library
+```{r warning=FALSE, echo = TRUE, results = 'hide', warning = FALSE, message = FALSE}
+library(data.table)
+```
+
+# Read in raw data and gene length infomration
+The raw data were downloaded from NCI GDC: https://portal.gdc.cancer.gov/, using the HTSeq - Counts format. 
+
+```{r}
+data_dir = "TCGA_data/LUAD/gdc_download_20201221_234745.015148/"
+info_dir = "TCGA_data/LUAD"
+
+# sample information
+sample_info = read.table(file.path(info_dir, "gdc_sample_sheet.2020-12-21.tsv"), 
+                        header = TRUE, sep = "\t", as.is = TRUE)
+dim(sample_info)
+sample_info[1:3,]
+
+table(sample_info$Sample.Type)
+sample_info = sample_info[which(sample_info$Sample.Type == "Primary Tumor"),]
+dim(sample_info)
+
+table(sample_info$Data.Category)
+table(sample_info$Data.Type)
+table(sample_info$Project.ID)
+table(table(sample_info$Case.ID))
+table(table(sample_info$Sample.ID))
+
+# gene information
+geneinfo = fread("TCGA_data/gencode.v22.genes.txt", header = TRUE, 
+                 sep = "\t", drop = 8, na.strings = c("NA", ""))
+head(geneinfo)
+
+# gene length information, only consider exonic regions
+load("TCGA_data/Gene_Lengths.RData")
+dim(GeneLengths.Mat)
+head(GeneLengths.Mat)
+
+table(GeneLengths.Mat$Gencode.ID == geneinfo$geneId)
+```
+
+# Prepare count matrix
+- read in each count data
+- match the filename of count data to the sample ID
+- check the gene ID of each new file is the same as the previous files
+- combine the count data of all the samples to a single count matrix
+```{r}
+countfiles = paste0(data_dir, sample_info$File.ID, "/", sample_info$File.Name)
+
+gene.id = NA
+n.genes = NA
+
+count.df = data.frame(matrix(numeric(), 0, length(countfiles),
+                dimnames=list(c(), sample_info$Sample.ID)))
+
+for (f in countfiles) {
+  cf = fread(f, col.names = c("ensembl.ID", "counts"))
+  # when reading in the first count file, save the gene names to gene.id, 
+  # and save the counts to the corresponding column in the count matrix
+  if (anyNA(gene.id)){
+    gene.id = cf$ensembl.ID
+    n.genes = nrow(cf)
+    count.df[1:n.genes, match(f,countfiles)] = cf$counts
+  } else {
+    # starting from the second file, first check if number of rows match, 
+    # then check whether its gene names match those in the first file
+    # if so, save the counts to the corresponding column in the count matrix
+    if(nrow(cf) != n.genes){ stop("number of genes do not match") }
+    
+    if (all(gene.id == cf$ensembl.ID)){
+      count.df[,match(f,countfiles)] = cf$counts
+    } else {
+      cat("mismatched ensembl id in ", f, "\n")
+      next
+    }
+  }
+}
+
+rownames(count.df) = gene.id
+dim(count.df)
+count.df[1:3,1:5]
+anyNA(count.df)
+
+rm(cf)
+
+count.df[(nrow(count.df) - 5):nrow(count.df),1:5]
+
+plot(unlist(count.df[60488,]), unlist(count.df[60485,]), 
+     xlab="alignment_not_unique", ylab="ambiguous", pch=20, cex=0.6)
+
+plot(unlist(count.df[60488,]), unlist(count.df[60484,]), 
+     xlab="alignment_not_unique", ylab="no_feature", pch=20, cex=0.6)
+
+not_unique_ratio = unlist(count.df[60488,])/colSums(count.df[1:60483,])
+summary(not_unique_ratio)
+
+plot(colSums(count.df[1:60483,]), unlist(count.df[60488,]),  
+     xlab="total read-depth", ylab="alignment_not_unique", pch=20, cex=0.6)
+abline(0,1)
+
+w2kp = which(not_unique_ratio < 1)
+count.df = count.df[,w2kp]
+
+# Count.df has 60488 rows:
+# - the last 5 rows are QC statistics, the others are counts for genes. 
+# Match the rows of count.df to the rows of geneinfo by ensembl ID: 
+# - 60483 gene ensembl ID in the data 
+# - all matched to those in the gene info matrix in the same order
+count.df = count.df[match(geneinfo$geneId, gene.id),]
+dim(count.df)
+count.df[c(1:3, nrow(count.df)), 1:5]
+gene.id = row.names(count.df)
+
+# save the raw matrix of count
+saveRDS(count.df, file="TCGA_data/TCGA_LUAD_raw_counts.rds")
+```
+
+# Transform count data to TPM data
+```{r}
+calculate_TPM = function(count, gene_length) {
+  if (nrow(count) != length(gene_length)) {
+    stop("Number of rows of the count matrix does not match gene lengths!")
+  }
+  TPM = count / gene_length
+  t(t(TPM)*1e6/colSums(TPM))
+}
+```
+
+Genome-wide TPM normalization
+```{r}
+table(GeneLengths.Mat$Gencode.ID == rownames(count.df))
+
+geneLength = GeneLengths.Mat$Exonic
+LUAD_TPM   = calculate_TPM(count.df, geneLength) 
+dim(LUAD_TPM)
+LUAD_TPM[1:5,1:5]
+```
+
+# Step 3: Match gene ensembl ID to gene names
+```{r}
+# Some ensembl IDs miss hgnc symbols
+missing.id = which(is.na(geneinfo$hgnc_symbol))
+length(missing.id)
+geneinfo.nomissing = geneinfo[-missing.id,]
+
+# Some ensembl IDs have duplicated hgnc symbols
+duplicated.id = which(duplicated(geneinfo.nomissing$hgnc_symbol))
+length(duplicated.id)
+geneinfo.filtered = geneinfo.nomissing[-duplicated.id,]
+rm(geneinfo.nomissing)
+
+dim(geneinfo.filtered)
+geneinfo.filtered[1:2.]
+table(geneinfo.filtered$geneId %in% gene.id)
+
+table(gene.id == rownames(LUAD_TPM))
+
+# Update LUAD_TPM to  genes with 1-1 mapping between 
+# their ensembl ID and hgnc symbols 
+w2match = match(geneinfo.filtered$geneId, gene.id)
+LUAD_TPM_filtered = data.frame(geneSymbol = geneinfo.filtered$hgnc_symbol) 
+LUAD_TPM_filtered = cbind(LUAD_TPM_filtered, LUAD_TPM[w2match,])
+dim(LUAD_TPM_filtered)
+LUAD_TPM_filtered[1:5,1:5]
+
+rm(LUAD_TPM)
+```
+
+Filter data and singature matrix using the genes shared between TCGA data and two signature matrices. One is the LM22 mattrix used by CIBERSORT and the other one was derived from single cell RNA-seq data from Sade-Feldman et al. (2018). "Defining T cell states associated with response to checkpoint immunotherapy in melanoma." Cell 175.4 (2018): 998-1013.
+
+```{r}
+LM22_genes = read.table("TCGA_data/LM22_genes.txt", header = TRUE, 
+                         sep = "\t", as.is = TRUE)
+dim(LM22_genes)
+LM22_genes$geneSymbol[1:5]
+
+
+SF2018_sigmat = read.table("TCGA_data/SF2018_sig_gene_matrix.txt", header = TRUE, 
+                         sep = "\t", as.is = TRUE)
+dim(SF2018_sigmat)
+SF2018_sigmat[1:2,1:5]
+
+genes2use = union(LM22_genes$geneSymbol, SF2018_sigmat$geneSymbol)
+length(genes2use)
+
+genes2use = intersect(genes2use, LUAD_TPM_filtered$geneSymbol)
+length(genes2use)
+
+match.TCGA = match(genes2use, LUAD_TPM_filtered$geneSymbol)
+
+LUAD_TPM_filtered = LUAD_TPM_filtered[match.TCGA,]
+LUAD_TPM_filtered[,-1] = signif(LUAD_TPM_filtered[,-1], 5)
+
+dim(LUAD_TPM_filtered)
+LUAD_TPM_filtered[1:2,1:5]
+
+write.table(LUAD_TPM_filtered, file = "TCGA_data/TCGA_LUAD_TPM.txt", 
+            quote = FALSE, row.names = FALSE, sep="\t")
+
+```
+
+
+```{r}
+gc()
+sessionInfo()
+```

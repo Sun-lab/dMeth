@@ -12,13 +12,14 @@ library(data.table)
 ```
 
 # Read in raw data and gene length infomration
-The raw data were downloaded from NCI GDC \url{https://portal.gdc.cancer.gov/}, using the HTSeq - Counts format. 
+The raw data were downloaded from NCI GDC: https://portal.gdc.cancer.gov/, using the HTSeq - Counts format. 
 
 ```{r}
-datafolder = "TCGA_data/SKCM/gdc_download_20201012_225902.677830/"
+data_dir = "TCGA_data/SKCM/gdc_download_20201012_225902.677830/"
+info_dir = "TCGA_data/SKCM"
 
 # sample information
-sample_info = read.table("TCGA_data/SKCM/gdc_sample_sheet.2020-10-12.tsv", 
+sample_info = read.table(file.path(info_dir, "gdc_sample_sheet.2020-10-12.tsv"), 
                         header = TRUE, sep = "\t", as.is = TRUE)
 dim(sample_info)
 sample_info[1:3,]
@@ -31,39 +32,37 @@ table(table(sample_info$Sample.ID))
 table(sample_info$Sample.Type)
 
 tab.case = table(sample_info$Case.ID)
-sam2 = sample_info[which(sample_info$Case.ID %in% names(tab.case)[tab.case > 1]),6:8]
+sam2 = sample_info[sample_info$Case.ID %in% names(tab.case)[tab.case > 1],6:8]
 sam2[order(sam2$Case.ID),]
 
-# Info matrix on the genes: 60483 genes
-geneinfo = fread(paste0(TCGAfolder, "gencode.v22.genes.txt"), header = TRUE, 
+# gene information
+geneinfo = fread("TCGA_data/gencode.v22.genes.txt", header = TRUE, 
                  sep = "\t", drop = 8, na.strings = c("NA", ""))
 head(geneinfo)
 
-# Info matrix on the length of each gene: 60483 genes
-load(paste0(TCGAfolder,"Gene_Lengths.RData"))
+# gene length information, only consider exonic regions
+load("TCGA_data/Gene_Lengths.RData")
 dim(GeneLengths.Mat)
 head(GeneLengths.Mat)
 
 table(GeneLengths.Mat$Gencode.ID == geneinfo$geneId)
 ```
 
-# Step 1: Prepare count matrix
+# Prepare count matrix
 - read in each count data
 - match the filename of count data to the sample ID
-- check the gene ID of each new file is the same with the previous files
-- combine the count data of all samples to a single count matrix
+- check the gene ID of each new file is the same as the previous files
+- combine the count data of all the samples to a single count matrix
 ```{r}
-# file paths for all individual count files
-countfiles = paste0(datafolder, sample_info$File.ID, "/", sample_info$File.Name)
-# save the gene names in the count files
+countfiles = paste0(data_dir, sample_info$File.ID, "/", sample_info$File.Name)
+
 gene.id = NA
 n.genes = NA
-# save the gene counts for each sample, col.names are sample ID
+
 count.df = data.frame(matrix(numeric(), 0, length(countfiles),
                 dimnames=list(c(), sample_info$Sample.ID)))
 
 for (f in countfiles) {
-  # read in the count file
   cf = fread(f, col.names = c("ensembl.ID", "counts"))
   # when reading in the first count file, save the gene names to gene.id, 
   # and save the counts to the corresponding column in the count matrix
@@ -80,8 +79,7 @@ for (f in countfiles) {
     if (all(gene.id == cf$ensembl.ID)){
       count.df[,match(f,countfiles)] = cf$counts
     } else {
-      # if not matching, print error message, skip this sample
-      cat("wrong ensembl id in ", f, "\n")
+      cat("mismatched ensembl id in ", f, "\n")
       next
     }
   }
@@ -102,10 +100,15 @@ plot(unlist(count.df[60488,]), unlist(count.df[60485,]),
 plot(unlist(count.df[60488,]), unlist(count.df[60484,]), 
      xlab="alignment_not_unique", ylab="no_feature", pch=20, cex=0.6)
 
+not_unique_ratio = unlist(count.df[60488,])/colSums(count.df[1:60483,])
+summary(not_unique_ratio)
+
 plot(colSums(count.df[1:60483,]), unlist(count.df[60488,]),  
      xlab="total read-depth", ylab="alignment_not_unique", pch=20, cex=0.6)
+abline(0,1)
 
-names(count.df)[which(count.df[60488,] > 5e7)]
+w2kp = which(not_unique_ratio < 1)
+count.df = count.df[,w2kp]
 
 # Count.df has 60488 rows:
 # - the last 5 rows are QC statistics, the others are counts for genes. 
@@ -118,10 +121,10 @@ count.df[c(1:3, nrow(count.df)), 1:5]
 gene.id = row.names(count.df)
 
 # save the raw matrix of count
-saveRDS(count.df, file="TCGA_SKCM_raw_counts.rds")
+saveRDS(count.df, file="TCGA_data/TCGA_SKCM_raw_counts.rds")
 ```
 
-# Step 2: Transform count data to TPM data
+# Transform count data to TPM data
 ```{r}
 calculate_TPM = function(count, gene_length) {
   if (nrow(count) != length(gene_length)) {
@@ -161,8 +164,8 @@ table(geneinfo.filtered$geneId %in% gene.id)
 
 table(gene.id == rownames(SKCM_TPM))
 
-# Update SKCM_TPM to only genes with 1-1 mapping between 
-# their ensembl ID and hgnc symbols, 35295 genes remained in the end. 
+# Update SKCM_TPM to  genes with 1-1 mapping between 
+# their ensembl ID and hgnc symbols 
 w2match = match(geneinfo.filtered$geneId, gene.id)
 SKCM_TPM_filtered = data.frame(geneSymbol = geneinfo.filtered$hgnc_symbol) 
 SKCM_TPM_filtered = cbind(SKCM_TPM_filtered, SKCM_TPM[w2match,])
@@ -172,167 +175,37 @@ SKCM_TPM_filtered[1:5,1:5]
 rm(SKCM_TPM)
 ```
 
-Filter data and singature matrix using the genes shared between TCGA data and LM22 data: 535 genes in common. 
+Filter data and singature matrix using the genes shared between TCGA data and two signature matrices. One is the LM22 mattrix used by CIBERSORT and the other one was derived from single cell RNA-seq data from Sade-Feldman et al. (2018). "Defining T cell states associated with response to checkpoint immunotherapy in melanoma." Cell 175.4 (2018): 998-1013.
+
 ```{r}
-# LM22 signature matrix
-LM22_sigmat = read.table("../../_reference/LM22.txt", header = TRUE, 
+LM22_genes = read.table("TCGA_data/LM22_genes.txt", header = TRUE, 
                          sep = "\t", as.is = TRUE)
-LM22_sigmat[1:5,1:5] # 547*23
+dim(LM22_genes)
+LM22_genes$geneSymbol[1:5]
 
-genes2use = intersect(LM22_sigmat$Gene.symbol, SKCM_TPM_filtered$geneSymbol)
-match.TCGA = match(genes2use, SKCM_TPM_filtered$geneSymbol)
-match.LM22 = match(genes2use, LM22_sigmat$Gene.symbol)
 
-SKCM_TPM_LM22 = SKCM_TPM_filtered[match.TCGA,]
-dim(SKCM_TPM_LM22)
-SKCM_TPM_LM22[1:2,1:5]
-
-SKCM_LM22_sigmat = LM22_sigmat[match.LM22,]
-dim(SKCM_LM22_sigmat)
-SKCM_LM22_sigmat[1:2,1:5]
-```
-
-Filter data and singature matrix using the genes shared between TCGA data and the signature matrix `SF2018_sig_gene_matrix.txt`: 531 genes in common.
-
-```{r}
-SF2018_sigmat = read.table("../SF2018_analysis/output/SF2018_sig_gene_matrix.txt", 
-                           header = TRUE, sep = "\t", as.is = TRUE)
+SF2018_sigmat = read.table("TCGA_data/SF2018_sig_gene_matrix.txt", header = TRUE, 
+                         sep = "\t", as.is = TRUE)
 dim(SF2018_sigmat)
-SF2018_sigmat[1:5,1:5]
+SF2018_sigmat[1:2,1:5]
 
-genes2use    = intersect(SF2018_sigmat$geneSymbol, SKCM_TPM_filtered$geneSymbol)
-match.TCGA   = match(genes2use, SKCM_TPM_filtered$geneSymbol)
-match.SF2018 = match(genes2use, SF2018_sigmat$geneSymbol)
+genes2use = union(LM22_genes$geneSymbol, SF2018_sigmat$geneSymbol)
+length(genes2use)
 
-SKCM_TPM_SF2018 = SKCM_TPM_filtered[match.TCGA,]
-dim(SKCM_TPM_SF2018)
-SKCM_TPM_SF2018[1:2,1:5]
+genes2use = intersect(genes2use, SKCM_TPM_filtered$geneSymbol)
+length(genes2use)
 
-SKCM_SF2018_sigmat = SF2018_sigmat[match.SF2018,] 
-dim(SKCM_SF2018_sigmat)
-SKCM_SF2018_sigmat[1:2,1:5]
-```
+match.TCGA = match(genes2use, SKCM_TPM_filtered$geneSymbol)
 
-# Generate CIBERSORT input
+SKCM_TPM_filtered = SKCM_TPM_filtered[match.TCGA,]
+SKCM_TPM_filtered[,-1] = signif(SKCM_TPM_filtered[,-1], 5)
 
-```{r}
-CBSTfolder = "./CIBERSORT"
-sig_file_LM22   = file.path(CBSTfolder, "signature_gene_LM22.txt")
-mix_file_LM22   = file.path(CBSTfolder, "observed_TPM_LM22.txt")
-sig_file_SF2018 = file.path(CBSTfolder, "signature_gene_SF2018.txt")
-mix_file_SF2018 = file.path(CBSTfolder, "observed_TPM_SF2018.txt")
+dim(SKCM_TPM_filtered)
+SKCM_TPM_filtered[1:2,1:5]
 
-# generate matrices as input for CIBERSORT online
-write.table(SKCM_TPM_LM22, file = mix_file_LM22, quote = FALSE,
-            row.names = FALSE, sep="\t")
-
-write.table(SKCM_LM22_sigmat, file = sig_file_LM22, quote = FALSE,
-            row.names = FALSE, sep="\t")
-
-write.table(SKCM_TPM_SF2018, file = mix_file_SF2018, 
+write.table(SKCM_TPM_filtered, file = "TCGA_data/TCGA_SKCM_TPM.txt", 
             quote = FALSE, row.names = FALSE, sep="\t")
 
-write.table(SKCM_SF2018_sigmat, file = sig_file_SF2018,
-            quote = FALSE, row.names = FALSE, sep="\t")
-```
-
-# Run ICeDT
-
-## Read in tumor purity information. 
-```{r}
-fnm = "pan_cancer_data/TCGA_mastercalls.abs_tables_JSedit.fixed.txt"
-tumor_purity = fread(fnm)
-dim(tumor_purity)
-tumor_purity[1:2,]
-
-length(unique(tumor_purity$array))
-sample_id = names(SKCM_TPM_filtered)[-1]
-sample_id[1:2]
-sample_id = gsub(".", "-", sample_id, fixed = TRUE)
-sample_id = substring(sample_id, 1, 15)
-sample_id[1:2]
-
-table(sample_id %in% tumor_purity$array)
-sample2use  = intersect(sample_id, tumor_purity$array)
-SKCM_purity = tumor_purity[match(sample2use, tumor_purity$array),]
-dim(SKCM_purity)
-SKCM_purity[1:2,]
-
-summary(SKCM_purity$purity)
-summary(SKCM_purity$ploidy)
-summary(SKCM_purity$`Subclonal genome fraction`)
-
-hist(SKCM_purity$purity, breaks=50, xlab="tumor purity", main="")
-plot(SKCM_purity$purity, SKCM_purity$`Subclonal genome fraction`, 
-     xlab="tumor purity", ylab="subclonal genome fraction")
-
-table(SKCM_purity$purity < 0.95, useNA = "ifany")
-table(SKCM_purity$purity < 0.99, useNA = "ifany")
-
-SKCM_purity = SKCM_purity[which(SKCM_purity$purity < 0.99),]
-dim(SKCM_purity)
-```
-
-## Run ICeDT using SF2018 signature matirx
-
-```{r}
-SKCM_TPM_SF2018_mtrx = data.matrix(SKCM_TPM_SF2018[,-1])
-rownames(SKCM_TPM_SF2018_mtrx) = SKCM_TPM_SF2018$geneSymbol
-SKCM_TPM_SF2018_mtrx = SKCM_TPM_SF2018_mtrx[,match(SKCM_purity$array, sample_id)]
-
-SKCM_SF2018_sigmat_mtrx = data.matrix(SKCM_SF2018_sigmat[,-1])
-rownames(SKCM_SF2018_sigmat_mtrx) = SKCM_SF2018_sigmat$geneSymbol
-
-dim(SKCM_TPM_SF2018_mtrx)
-SKCM_TPM_SF2018_mtrx[1:2,1:5]
-
-dim(SKCM_SF2018_sigmat_mtrx)
-SKCM_SF2018_sigmat_mtrx[1:2,1:5]
-
-tcga_id = gsub(".", "-", colnames(SKCM_TPM_SF2018_mtrx), fixed = TRUE)
-tcga_id = substring(tcga_id, 1, 15)
-table(tcga_id == SKCM_purity$array)
-
-date()
-icedt_SF2018 = ICeDT(Y = SKCM_TPM_SF2018_mtrx, 
-                     Z = SKCM_SF2018_sigmat_mtrx, 
-                     tumorPurity = SKCM_purity$purity, refVar = NULL)
-date()
-
-summary(icedt_SF2018$cProp)
-
-saveRDS(icedt_SF2018, "ICeDT/SKCM_ICeDT_SF2018.rds")
-```
-
-## Run ICeDT using LM22 signature matirx
-
-```{r}
-SKCM_TPM_LM22_mtrx = data.matrix(SKCM_TPM_LM22[,-1])
-rownames(SKCM_TPM_LM22_mtrx) = SKCM_TPM_LM22$geneSymbol
-SKCM_TPM_LM22_mtrx = SKCM_TPM_LM22_mtrx[,match(SKCM_purity$array, sample_id)]
-
-SKCM_LM22_sigmat_mtrx = data.matrix(SKCM_LM22_sigmat[,-1])
-rownames(SKCM_LM22_sigmat_mtrx) = SKCM_LM22_sigmat$Gene.symbol
-
-dim(SKCM_TPM_LM22_mtrx)
-SKCM_TPM_LM22_mtrx[1:2,1:5]
-
-dim(SKCM_LM22_sigmat_mtrx)
-SKCM_LM22_sigmat_mtrx[1:2,1:5]
-
-tcga_id = gsub(".", "-", colnames(SKCM_TPM_LM22_mtrx), fixed = TRUE)
-tcga_id = substring(tcga_id, 1, 15)
-table(tcga_id == SKCM_purity$array)
-
-date()
-icedt_LM22 = ICeDT(Y = SKCM_TPM_LM22_mtrx, 
-                   Z = SKCM_LM22_sigmat_mtrx, 
-                   tumorPurity = SKCM_purity$purity, refVar = NULL)
-date()
-
-summary(icedt_LM22$cProp)
-
-saveRDS(icedt_LM22, "ICeDT/SKCM_ICeDT_LM22.rds")
 ```
 
 
