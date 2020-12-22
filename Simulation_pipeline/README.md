@@ -1,12 +1,7 @@
 # Simulation  Study
 
-After generating a cell type specific reference data in cell_type_specific_reference, one could repeat our combined simulation study. This pipeline also requires the following packages:
-nnls
-data.table
-MASS
-quadprog
-ggplot2
-e1071
+After generating a cell type specific reference data in cell_type_specific_reference, one could repeat our combined simulation study. This pipeline also requires the following packages: 
+```nnls, data.table, MASS, quadprog, ggplot2, e1071```
 
 This pipeline include four steps. 
 
@@ -14,13 +9,14 @@ This pipeline include four steps.
 
 ### 1.Read cell type specific methylation data. The following files are required:
 
-methylation_pure_ct_rmPC2_data.txt:     Pure cell type data file after removing PC2
-methylation_pure_ct_sample.txt:	        Pure cell type sample file
-methylation_pure_ct_info.txt:		Pure cell type information file, of the selected probes
+* methylation_pure_ct_rmPC2_data.txt:    	Pure cell type data file after removing PC2
+* methylation_pure_ct_sample.txt:	        	Pure cell type sample file
+* methylation_pure_ct_info.txt:			Pure cell type information file, of the selected probes
 
 and a different methylation data file:
-methylation_betaValue.txt
-methylation_info.txt
+
+* methylation_betaValue.txt
+* methylation_info.txt
 
 take intersections of common CpG sites in two source of data and create the dataset with 189 samples of cell type-specific DNA methylation data.
 
