@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+2ff7c627-f607-53b0-adfe-cd6f4a289da7	15927	case	62e928c1-df8b-4771-ae46-5da40794daf2	History of acceptable prior treatment related to a prior/other malignancy	Notification	2013-04-18T00:00:00	Approved	Patient received local radiation for a prior DCIS in the left breast.

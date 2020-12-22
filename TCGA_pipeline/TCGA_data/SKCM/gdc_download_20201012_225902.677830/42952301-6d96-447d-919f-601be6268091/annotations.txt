@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+aa6eefb7-3a92-5006-9aff-8ac92e0ff8a8	15625	case	3a8cfea5-1dcd-4dbb-bbd9-5bb602c54922	Prior malignancy	Notification	2013-03-12T00:00:00	Approved	Patient had a prior adenocarcinoma of the rectum. No radiation or systemic chemotherapy.

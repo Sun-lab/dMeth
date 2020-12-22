@@ -1,0 +1,3 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+baaa1c5c-4de7-574c-88fb-385fed3ef996	11721	case	b4ff0f49-b787-48ec-91cc-ee26786ff1bf	Prior malignancy	Notification	2012-10-31T00:00:00	Approved	Prior malignancy L LUSC. No systemic chemotherapy or radiation.
+85347fe8-f8df-5129-9fdb-10526e2c1cd1	26864	case	b4ff0f49-b787-48ec-91cc-ee26786ff1bf	Case submitted is found to be a recurrence after submission	Notification	2015-02-26T00:00:00	Approved	Other Malignancy form states patient had prior lung squamous malignancy in same lung 9.5 years before TCGA tumor procurement.

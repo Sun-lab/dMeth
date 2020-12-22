@@ -1,0 +1,4 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+9b1c3d57-f929-58d2-8764-626e5209897a	11930	case	25f64b80-0672-4980-9875-956b1699309b	Neoadjuvant therapy	Notification	2012-11-10T00:00:00	Approved	Prior malignancy and neo-adjuvant treatment per enrollment form.
+40f39321-ed5a-5c0c-a37e-19dcb47b4841	11715	case	25f64b80-0672-4980-9875-956b1699309b	Prior malignancy	Notification	2012-10-31T00:00:00	Approved	Prior malignancy and neo-adjuvant treatment per enrollment form.
+c9a6ff03-605f-50a6-8ebe-e8acf46a86de	636	case	25f64b80-0672-4980-9875-956b1699309b	Neoadjuvant therapy	Notification	2010-09-02T00:00:00	Approved	[intgen.org]: Subject Positive for Neo-Adjuvant Therapy

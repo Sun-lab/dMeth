@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+a2d54f79-5938-5725-9281-26c1e64d0ade	11786	case	5e7074a6-5011-4dc5-950c-41365dbc6d09	Prior malignancy	Notification	2012-10-31T00:00:00	Approved	Prior malignancy SCC of the inguinal lymph nodes. No systemic chemotherapy or radiation.

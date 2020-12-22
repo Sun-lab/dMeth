@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+de39e0cb-7858-5eb6-bb1b-8adbc860d56c	15925	case	1068ad76-612e-40ee-b2fa-916da14b7916	Neoadjuvant therapy	Notification	2013-04-18T00:00:00	Approved	Patient received chemotherapy for the TCGA tumor.

@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+33e06a33-2b6c-548d-a6c0-8da7d4ad9f7e	15623	case	16182443-12a1-4b0f-a6ab-33c2942e2991	Prior malignancy	Notification	2013-03-12T00:00:00	Approved	Patient had a prior basaloid squamous cell carincoma of the head and neck, and a squamous cell carincoma of the head and neck. No radiation or systemic chemotherapy.

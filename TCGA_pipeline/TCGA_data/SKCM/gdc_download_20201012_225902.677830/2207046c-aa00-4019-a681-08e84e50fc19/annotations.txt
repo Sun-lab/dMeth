@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+667bd67e-8970-550e-8cbe-904a6caa412b	15627	case	449c9d70-d8aa-41d4-beeb-0bbfc73a23d8	Synchronous malignancy	Notification	2013-03-12T00:00:00	Approved	Patient had a basal cell carcinoma of the chest wall. No radiation or systemic chemotherapy.

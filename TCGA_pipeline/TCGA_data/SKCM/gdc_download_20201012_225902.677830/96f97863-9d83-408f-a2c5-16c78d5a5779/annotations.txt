@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+f134d9a4-f116-5441-ac25-2679f064d28b	15629	case	ea240769-e51c-45f5-a131-ba123e598622	Prior malignancy	Notification	2013-03-12T00:00:00	Approved	Patient had a prior adenocarcinoma of the rectosigmoid junction. No radiation or systemic chemotherapy.

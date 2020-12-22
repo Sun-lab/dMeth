@@ -1,0 +1,3 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+a48de0e2-0bf0-593b-9895-148797de6a7e	15919	case	0153f141-625e-4623-9f8a-296678002c63	Prior malignancy	Notification	2013-04-18T00:00:00	Approved	Patient had a fibrosarcoma of the groin, basal cell carcinoma of the face and trunk, and prostate carcinoma. No radiation or systemic chemotherapy.
+13af7b92-f245-5e90-905e-0f077e95b6e9	20753	case	0153f141-625e-4623-9f8a-296678002c63	Neoadjuvant therapy	Notification	2014-06-16T00:00:00	Approved	systemic treatment

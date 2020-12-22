@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+2bff563b-fc3e-5e0e-82c8-00aed85f6004	661	case	a41c46da-7ed4-4192-bd16-b3cbb94a5133	Prior malignancy	Notification	2010-09-15T00:00:00	Approved	[intgen.org]: Prior Malignancy

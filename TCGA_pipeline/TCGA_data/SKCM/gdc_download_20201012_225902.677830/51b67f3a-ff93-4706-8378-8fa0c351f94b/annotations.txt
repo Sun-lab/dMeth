@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+cce8411d-dc96-5597-b198-fb47c5cf691c	15934	case	7ce09a09-074e-4f38-bed7-98ab34347fbe	Acceptable treatment for TCGA tumor	Notification	2013-04-18T00:00:00	Approved	Patient received interferon for the specimen submitted to TCGA.

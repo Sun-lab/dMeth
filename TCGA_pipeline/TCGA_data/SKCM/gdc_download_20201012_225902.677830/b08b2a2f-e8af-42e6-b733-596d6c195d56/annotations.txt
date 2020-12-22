@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+b2c1f93d-12f8-56b8-bcd3-6e9156643f25	15631	case	e5bc45ce-8a14-40b5-b9b5-ce45609fef3a	Prior malignancy	Notification	2013-03-12T00:00:00	Approved	Patient had a prior squamous cell carincoma of the cheek. No radiation or systemic chemotherapy.

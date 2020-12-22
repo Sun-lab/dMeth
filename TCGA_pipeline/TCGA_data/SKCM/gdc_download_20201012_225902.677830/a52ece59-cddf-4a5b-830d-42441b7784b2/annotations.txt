@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+6835d08d-77b3-5955-b220-4878649212b2	15921	case	bda2f09a-82c4-40ec-90e8-0bf63916a5c7	Neoadjuvant therapy	Notification	2013-04-18T00:00:00	Approved	Patient received immunotherapy/vaccine for the TCGA tumor.

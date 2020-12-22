@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+33336cdf-2cf0-5af2-bb52-fecd3427f180	15630	case	e0d36cc0-652c-4224-bb10-09d15c7bd8f1	Prior malignancy	Notification	2013-03-12T00:00:00	Approved	Patient had a prior lymphoma. Unknown radiation or systemic chemotherapy.

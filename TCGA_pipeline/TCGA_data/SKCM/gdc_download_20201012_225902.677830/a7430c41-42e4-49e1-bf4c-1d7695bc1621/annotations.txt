@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+f39a1922-5334-5e02-b2d0-a078c15e9c84	26859	case	5359d381-e7f2-4155-a559-7da9cda42ed9	Neoadjuvant therapy	Notification	2015-02-24T00:00:00	Approved	During Enrollment it was found that patient received chemotherapy and IFN prior to TCGA tumor procurement.

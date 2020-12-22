@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+0365ba15-1b97-57a1-a38d-598be7dc4e21	11964	case	294ff941-aea1-4588-9a0e-e9f5393e2bb6	Synchronous malignancy	Notification	2012-11-10T00:00:00	Approved	Pt with synchronous L breast cancer

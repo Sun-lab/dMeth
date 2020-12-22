@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+e2671578-04c1-5aac-a347-a44aec1bba66	28962	case	1b354837-4925-4480-ac32-6b44d0957314	Neoadjuvant therapy	Notification	2015-09-02T00:00:00	Approved	Patient was diagnosed with stage IV LUAD with brain mets. The patient presented with brain symptoms and was given brain radiation 1 month prior to lung primary resection. The lung primary had no prior direct treatment.

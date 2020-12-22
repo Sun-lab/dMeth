@@ -1,0 +1,4 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+56eaaa75-aa40-544a-9dae-121f6bf582c5	1035	case	972476b7-d7f3-4865-b978-0c13f29457cb	Prior malignancy	Notification	2010-12-06T00:00:00	Approved	[intgen.org]: Subject has Hx of prior malignancy
+9f1ee78d-f022-5495-b6ad-fa6aa56bafdb	11929	case	972476b7-d7f3-4865-b978-0c13f29457cb	History of acceptable prior treatment related to a prior/other malignancy	Notification	2012-11-10T00:00:00	Approved	Prior malignancy prostate cancer treated w/ radation
+221d1625-dae4-5ed4-9209-281bb0a9abff	1451	analyte	ac1860cc-17c6-49ac-8b0b-0ac1d0c455e9	Item is noncanonical	Notification	2011-03-14T00:00:00	Approved	Lung Squamous Cell Carcinoma  60-70%

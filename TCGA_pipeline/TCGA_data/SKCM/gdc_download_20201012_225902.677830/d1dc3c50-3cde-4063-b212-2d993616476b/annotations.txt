@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+0927c9aa-290f-5911-8597-7eefc9186f95	20900	case	ec4c4296-6ab4-420c-80a4-e7a34b9bf4a2	Neoadjuvant therapy	Notification	2014-06-30T00:00:00	Approved	Patient had isolated limb profusion for the malignancy submitted to TCGA prior to tumor resection, treated with Actinomycin D and Melphalan.

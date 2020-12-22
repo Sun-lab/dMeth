@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+d51f66bd-4be8-52bd-9c38-5615e9825e9f	11734	case	0780eb43-d5b5-4c3d-9825-beacba5cc723	Prior malignancy	Notification	2012-10-31T00:00:00	Approved	Prior malignancy lymphoma. No systemic chemotherapy or radiation.

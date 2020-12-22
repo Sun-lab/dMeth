@@ -1,0 +1,3 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+3fc6e3a4-d46d-511c-b0be-0bc262da7fd5	11944	case	f3501466-cf32-4866-b5fb-e94dd32341bc	Synchronous malignancy	Notification	2012-11-10T00:00:00	Approved	Pt with synchronous R breast cancer treated with Femara prior to procurement of tumor submitted to TCGA.
+7f8edfca-2b65-5a79-b1d6-221947ae8b85	11945	case	f3501466-cf32-4866-b5fb-e94dd32341bc	History of unacceptable prior treatment related to a prior/other malignancy	Notification	2012-11-10T00:00:00	Approved	Pt with synchronous R breast cancer treated with Femara prior to procurement of tumor submitted to TCGA.

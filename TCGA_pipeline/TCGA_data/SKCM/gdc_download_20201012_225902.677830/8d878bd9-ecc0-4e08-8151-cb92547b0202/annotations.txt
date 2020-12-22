@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+ad22c8a4-7767-5427-9271-5f4b506a124c	15628	case	8ab09143-daf6-40a9-85d3-0fe9de7b3e06	Prior malignancy	Notification	2013-03-12T00:00:00	Approved	Patient had a prior squamous cell carincoma of the neck. No radiation or systemic chemotherapy.

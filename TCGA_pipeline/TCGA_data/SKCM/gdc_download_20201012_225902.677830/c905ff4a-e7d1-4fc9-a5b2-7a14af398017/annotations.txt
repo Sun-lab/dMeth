@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+02aa12cb-7108-5710-9d55-6b10555b8e39	21869	case	b85b14d7-3b5a-4800-af12-622ec03b9fe5	Neoadjuvant therapy	Notification	2014-08-14T00:00:00	Approved	Interferon was given less than 90 days prior to cancer procurement, which is exclusionary. (per Kristen Leraas/BCR TCGA-2222)

@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+423792a5-fac5-5bed-abed-036b5e5102a6	11712	case	99599b60-4f5c-456b-8755-371b1aa7074e	Prior malignancy	Notification	2012-10-31T00:00:00	Approved	Prior malignancy squamous cell carcinoma of the foot. No systemic chemotherapy or radiation.

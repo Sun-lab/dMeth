@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+425f042c-0d60-51be-8ffc-69b39c3b4ad4	11709	case	95b83006-02c9-4c4d-bf84-a45115f7d86d	Prior malignancy	Notification	2012-10-31T00:00:00	Approved	Prior malignancy L LUSC. No systemic chemotherapy or radiation.

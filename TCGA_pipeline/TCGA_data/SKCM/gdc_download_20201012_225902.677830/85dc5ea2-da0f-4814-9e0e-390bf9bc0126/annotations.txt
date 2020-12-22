@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+574b02d5-2de1-5aab-be8d-2c9d251dde9e	20875	case	714f58d6-14bf-4e60-96ac-104d4abd45ed	Neoadjuvant therapy	Notification	2014-06-20T00:00:00	Approved	Prior Interferon Treatment < 90 days from TCGA cancer procurement

@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+9aa0942d-42fb-5ec6-84fc-27f197b06d4d	11924	case	a33f0741-2161-4818-89f2-ec8ccae57949	Synchronous malignancy	Notification	2012-11-10T00:00:00	Approved	Pt with synchronous malignancy of the larynx.

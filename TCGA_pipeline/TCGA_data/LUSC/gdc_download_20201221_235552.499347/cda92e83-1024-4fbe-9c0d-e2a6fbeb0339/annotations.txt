@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+89dce91c-3189-50de-9770-364e25a94a9b	11713	case	6eb61cab-8e83-4c18-a59a-ae0985ec9d2e	Prior malignancy	Notification	2012-10-31T00:00:00	Approved	Prior malignancy melanoma of the left chest. Prior malignancy melanoma of the arm.  Unknown treatment history.

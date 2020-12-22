@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+9348dbca-9b9a-5215-9eac-d32455afd0f1	15626	case	783eb662-7d7a-4637-8500-e2d86d73ec7b	Prior malignancy	Notification	2013-03-12T00:00:00	Approved	Patient had a prior squamous cell carincoma of the left lower leg. No radiation or systemic chemotherapy.

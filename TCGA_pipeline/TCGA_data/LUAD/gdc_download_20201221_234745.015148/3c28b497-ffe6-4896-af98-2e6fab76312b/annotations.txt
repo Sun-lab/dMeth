@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+b05e5fa2-a21a-55e6-8aa1-5e83818cd897	11662	case	3434b91a-c05f-460f-a078-7b1bb6e7085d	Prior malignancy	Notification	2012-10-31T00:00:00	Approved	Prior maligancy cancer of the penis. No systemic chemotherapy or radiation.

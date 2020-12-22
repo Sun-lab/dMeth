@@ -1,0 +1,3 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+0d145a27-52f2-56a4-ba8f-f1cd3d0a0fb7	11956	case	bff77f70-973a-4b49-8fd9-4a767f5df2c0	History of unacceptable prior treatment related to a prior/other malignancy	Notification	2012-11-10T00:00:00	Approved	Prior malignancy  breast cancer treated w/ tamoxifen and radiation and tymus cancer treated w/ cancerrboplatin and Paclitaxel
+140098ef-3eec-59d0-bde7-ce23997b25ff	740	case	bff77f70-973a-4b49-8fd9-4a767f5df2c0	Prior malignancy	Notification	2010-10-11T00:00:00	Approved	[intgen.org]: Subject has Hx of prior malignancy

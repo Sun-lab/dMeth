@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+53c25616-061d-5047-9039-81468e9d81cb	28779	case	f7368803-c545-4407-9a14-2220560a8f80	Neoadjuvant therapy	Notification	2015-08-21T00:00:00	Approved	Patient received systemic pharma treatment (Temozolamide) 2 years prior to TCGA tumor resection.

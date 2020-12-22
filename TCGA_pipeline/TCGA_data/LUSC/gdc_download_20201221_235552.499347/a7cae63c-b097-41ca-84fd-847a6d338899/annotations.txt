@@ -1,0 +1,3 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+257ddf69-f7c7-5799-a84b-67a505b92507	11928	case	28f899c5-ea17-4df6-83e6-e744e04d0ea1	History of unacceptable prior treatment related to a prior/other malignancy	Notification	2012-11-10T00:00:00	Approved	Prior malignancy  breast cancer treated with chemo and radiation per path report
+5e30050f-1b76-5b98-8818-da9963ad7f64	1036	case	28f899c5-ea17-4df6-83e6-e744e04d0ea1	Prior malignancy	Notification	2010-12-06T00:00:00	Approved	[intgen.org]: Subject has Hx of prior malignancy

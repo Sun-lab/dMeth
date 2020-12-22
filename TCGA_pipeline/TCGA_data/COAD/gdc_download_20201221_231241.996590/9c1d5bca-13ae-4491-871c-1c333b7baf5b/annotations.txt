@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+711ed8da-1ce4-5ebc-9c9a-5eb6c11ede9e	6120	aliquot	e110017a-7907-42a5-a01d-c874dad24d0f	Item is noncanonical	Notification	2012-06-26T00:00:00	Approved	FFPE COAD Pilot 1

@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+804c690c-65d6-5108-9b49-4f472c822b60	20898	case	18e7b73c-4520-42cd-ac9b-23bac1c8ecc6	General	Observation	2014-06-30T00:00:00	Approved	Same patient as EX-A449...2 different primaries.

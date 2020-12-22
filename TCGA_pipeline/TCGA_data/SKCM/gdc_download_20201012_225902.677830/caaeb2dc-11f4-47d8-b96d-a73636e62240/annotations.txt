@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+7fad06cd-27b3-50ed-8919-a04b2bfbf0e0	15926	case	e35be832-6972-4677-b985-02e90d51141a	Neoadjuvant therapy	Notification	2013-04-18T00:00:00	Approved	Patient received an unknown systemic therapy for the TCGA tumor.

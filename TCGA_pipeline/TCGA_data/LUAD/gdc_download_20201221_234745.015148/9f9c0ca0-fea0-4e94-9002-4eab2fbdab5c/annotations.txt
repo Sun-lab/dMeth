@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+d2037039-65d6-5842-9baa-c6398b3cab50	11668	case	d94fe32f-bedd-4f4c-9feb-fcb60d40f4bb	Prior malignancy	Notification	2012-10-31T00:00:00	Approved	Prior malignancy  breast cancer. No systemic chemotherapy or radiation.

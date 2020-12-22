@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+81e42f79-e4a0-56cc-9d76-379cc122d0ad	15624	case	7ee2f8d5-6c31-4f5f-a779-b43979e66d0b	Prior malignancy	Notification	2013-03-12T00:00:00	Approved	Patient had a prior Merkel cell carcinoma. No radiation or systemic chemotherapy.

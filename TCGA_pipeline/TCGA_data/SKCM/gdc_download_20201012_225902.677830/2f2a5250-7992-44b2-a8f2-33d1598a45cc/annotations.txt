@@ -1,0 +1,3 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+8b0f59f1-39e8-5041-9254-9f4a5b4b5fa5	20752	case	c58638ed-a38c-4494-a41e-6ee5283a7a59	Neoadjuvant therapy	Notification	2014-06-16T00:00:00	Approved	systemic treatment
+dd169577-b8d3-5800-aeb3-34c4e027533a	15622	case	c58638ed-a38c-4494-a41e-6ee5283a7a59	Prior malignancy	Notification	2013-03-12T00:00:00	Approved	Patient had a prior squamous cell carincoma of the skin on the nose and leg. No radiation or systemic chemotherapy.

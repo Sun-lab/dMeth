@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+9895b432-b09e-5b6d-ab55-93cf26eed349	11940	case	127bf818-f7e5-46b5-a9de-39f6d96b8b83	History of unacceptable prior treatment related to a prior/other malignancy	Notification	2012-11-10T00:00:00	Approved	Prior malignancy  of the larynx treated with chemotherapy and radiation.
