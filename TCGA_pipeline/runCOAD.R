@@ -10,19 +10,18 @@ library(quantreg)
 library(quadprog)
 library(EMeth)
 library(cowplot)
+library(ggpubr)
+theme_set(theme_classic2())
 
 # the raw data of DNA metylation is too large to be kept in gitHub
 # here is the local path for DNA methylation data
-path.data = "C:/Users/Hanyu/Downloads/Processed/"
-#source('~/EMeth/EMeth/R/emeth.R')
-#source('~/EMeth/EMeth/R/utils.R')
-#source('~/EMeth/EMeth/R/cv.emeth.R')
-#source('~/EMeth/source/_lib.R')
+# path.data = "C:/Users/Hanyu/Downloads/Processed/"
+path.data = "~/research/TCGA/COAD/_data2"
+
 # ------------------------------------------------------------
 # read in pure cell type data
 # ------------------------------------------------------------
 
-setwd('C:/Users/Hanyu/Documents/GitHub/dMeth/TCGA_pipeline')
 path.ref = "../cell_type_specific_reference/data"
 
 info = fread(file.path(path.ref, "methylation_pure_ct_info.txt.gz"))
@@ -119,7 +118,7 @@ cellTypes = unique(sam$label)
 # read tumor purity 
 # ------------------------------------------------------------
 
-dir0 = "../TCGA_results/clinical_data/"
+dir0 = "TCGA_results/clinical_data/"
 
 emInfo = fread(paste0(dir0, "patient_coad_M_info_hyperMeth.txt"))
 dim(emInfo)
@@ -200,12 +199,12 @@ for(ct in cellTypes){
 # samples with cell type estimation from expression and DNA methylation
 #----------------------------------------------------------------------
 
-fnm = '_cibersortx_results/COAD_composition_cibersortx.txt'
+fnm = '_cibersortx_results/CIBERSORTx_COAD_Adjusted.txt'
 est_expr = fread(fnm)
 dim(est_expr)
 est_expr[1:2,]
 
-samname  = str_replace(est_expr$Mixture, "^X", "")
+samname  = substr(est_expr$Mixture, 9, 12)
 length(samname)
 samname[1:5]
 
@@ -339,14 +338,12 @@ deconv_expr[1:2,]
 
 rho_COAD = rho
 deconv_expr_COAD = deconv_expr
-save(rho_COAD, file = '../TCGA_results/deconv_methy_COAD.RData')
-save(deconv_expr_COAD, file = '../TCGA_results/deconv_expr_COAD.RData')
+save(rho_COAD, file = 'TCGA_results/deconv_methy_COAD.RData')
+save(deconv_expr_COAD, file = 'TCGA_results/deconv_expr_COAD.RData')
 
 #---------------------------------------------------------------------
 # generate plots
 #---------------------------------------------------------------------
-
-setwd("_figures_COAD")
 
 utypes = intersect(cellTypes,colnames(deconv_expr))
 utypes
@@ -377,38 +374,44 @@ for(i in 1:length(utypes)){
 }
 
 for(i in 1:length(utypes)){
-  pdf(sprintf('%s_express_methy_discard_high_purity.pdf',utypes[i]))
+  pdf(sprintf('_figures_COAD/%s_expression_methylation.pdf',utypes[i]), 
+      width=6, height=7.5)
   plist = list()
   plist <- lapply(1:length(methods), FUN = function(j){
     tempdata = cbind(rho[,utypes[i],methods[j]],deconv_expr[,utypes[i]],eta)
     colnames(tempdata) <- c("methylation","expression","eta")
     newplot <- ggplot(data = as.data.frame(tempdata), 
-                      aes(x=methylation,y=expression,color=eta)) + 
-      xlim(0,0.3) + ylim(0,0.3) + geom_point() + 
-      geom_abline(intercept = 0,slope = 1) + ggtitle(sprintf('%s on %s',methods[j],utypes[i]))
+                      aes(x=methylation, y=expression, color=eta)) + 
+      xlim(0,0.3) + ylim(0,0.3) + geom_point(size=0.8) + 
+      geom_abline(intercept = 0,slope = 1) + 
+      scale_color_gradient2(limit = c(0,1), low = "blue", high = "red", 
+                           mid = "cadetblue1", midpoint = 0.5) + 
+      ggtitle(sprintf('%s on %s',methods[j],utypes[i]))
   })
   grid.arrange(grobs = plist,ncol=2)
-  save(plist, file = sprintf('plist_%s_%s.RData',utypes[i],'COAD'))
+  save(plist, file = sprintf('_figures_COAD/plist_%s_%s.RData',utypes[i],'COAD'))
   dev.off()
 }
 
-pdf('correlation.pdf')
+pdf('_figures_COAD/correlation.pdf', width=4.5, height=3.5)
 tempdata <- melt(as.data.table(cormat))
 colnames(tempdata) <- c('Methods','Correlation')
 tempdata$cellType = rep(utypes,5)
 p1 <- ggplot(tempdata,aes(x=Methods,y=Correlation)) + geom_boxplot() +
-  geom_point(size = 5,aes(colour = cellType)) + theme_cowplot() + ggtitle('Correlation for COAD')
+  geom_point(size = 2,aes(colour = cellType)) + theme_cowplot() + 
+  ggtitle('Correlation for COAD')
 print(p1)
-save(p1,file=sprintf('Cor_%s.RData','COAD'))
+save(p1,file=sprintf('_figures_COAD/Cor_%s.RData','COAD'))
 dev.off()
 
 
-pdf('correlation.pdf')
+pdf('_figures_COAD/RMSE.pdf', width=4.5, height=3.5)
 tempdata <- melt(as.data.table(err))
 colnames(tempdata) <- c('Methods','RMSE')
 tempdata$cellType = rep(utypes,5)
 p2 <- ggplot(tempdata,aes(x=Methods,y=RMSE)) + geom_boxplot() +
-  geom_point(size = 5,aes(colour = cellType)) + theme_cowplot() + ggtitle('RMSE for COAD')
+  geom_point(size = 2,aes(colour = cellType)) + theme_cowplot() + 
+  ggtitle('RMSE for COAD')
 print(p2)
 save(p2,file=sprintf('err_%s.RData','COAD'))
 dev.off()
