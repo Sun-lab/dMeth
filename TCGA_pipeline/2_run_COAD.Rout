@@ -1,0 +1,1054 @@
+
+R version 3.6.2 (2019-12-12) -- "Dark and Stormy Night"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> 
+> library(data.table)
+> library(scales)
+> library(stringr)
+> library(e1071)
+> library(ggplot2)
+> library(MASS)
+> library(gridExtra)
+> library(quantreg)
+Loading required package: SparseM
+
+Attaching package: ‘SparseM’
+
+The following object is masked from ‘package:base’:
+
+    backsolve
+
+> library(quadprog)
+> library(EMeth)
+> library(cowplot)
+
+********************************************************
+Note: As of version 1.0.0, cowplot does not change the
+  default ggplot2 theme anymore. To recover the previous
+  behavior, execute:
+  theme_set(theme_cowplot())
+********************************************************
+
+> library(ggpubr)
+
+Attaching package: ‘ggpubr’
+
+The following object is masked from ‘package:cowplot’:
+
+    get_legend
+
+> theme_set(theme_classic2())
+> 
+> # the raw data of DNA metylation is too large to be kept in gitHub
+> # here is the local path for DNA methylation data
+> # path.data = "C:/Users/Hanyu/Downloads/Processed/"
+> path.data = "~/research/TCGA/COAD/_data2"
+> 
+> # ------------------------------------------------------------
+> # read in pure cell type data
+> # ------------------------------------------------------------
+> 
+> path.ref = "../cell_type_specific_reference/data"
+> 
+> info = fread(file.path(path.ref, "methylation_pure_ct_info.txt.gz"))
+> dim(info)
+[1] 220886     31
+> info[1:2,]
+           ID       Name Infinium_Design_Type Next_Base Color_Channel
+1: cg00000029 cg00000029                   II                        
+2: cg00000236 cg00000236                   II                        
+   Genome_Build CHR  MAPINFO Chromosome_36 Coordinate_36 Strand Probe_SNPs
+1:           37  16 53468112            16      52025613      F         NA
+2:           37   8 42263294             8      42382451      R         NA
+   Probe_SNPs_10 Random_Loci Methyl27_Loci UCSC_RefGene_Name
+1:            NA          NA            NA              RBL2
+2:            NA          NA            NA       VDAC3;VDAC3
+   UCSC_RefGene_Accession UCSC_RefGene_Group   UCSC_CpG_Islands_Name
+1:              NM_005611            TSS1500 chr16:53468284-53469209
+2: NM_005662;NM_001135694        3'UTR;3'UTR                        
+   Relation_to_UCSC_CpG_Island Phantom DMR Enhancer HMM_Island
+1:                     N_Shore                   NA           
+2:                                               NA           
+   Regulatory_Feature_Name Regulatory_Feature_Group  DHS RANGE_START RANGE_END
+1:    16:53467838-53469685      Promoter_Associated TRUE    53468112  53468235
+2:                                                    NA    42263294  42263417
+       RANGE_GB SPOT_ID
+1:  NC_000016.9      NA
+2: NC_000008.10      NA
+> 
+> fnm = file.path(path.ref, "methylation_pure_ct_rmPC2_data_signif4.txt.gz")
+> dat = fread(fnm)
+> dim(dat)
+[1] 220886    189
+> dat[1:2,1:5]
+   GSM861653 GSM861654 GSM861655 GSM861656 GSM861657
+1:    0.6328    0.6211    0.6287    0.6397    0.6260
+2:    0.8424    0.8050    0.8104    0.8338    0.8415
+> 
+> sam = fread(file.path(path.ref, "methylation_pure_ct_sample.txt"))
+> dim(sam)
+[1] 189   3
+> sam[1:2,]
+          id label   study
+1: GSM861653  CD4T Reinius
+2: GSM861654  CD4T Reinius
+> 
+> table(names(dat) == sam$id)
+
+TRUE 
+ 189 
+> 
+> dat = data.matrix(dat)
+> table(sam$label)
+
+         B       CD4T       CD8T   Monocyte Neutrophil         NK       Treg 
+         6         60         37         40         21         21          4 
+> rownames(dat) = info$ID
+> 
+> # ------------------------------------------------------------
+> # read DNA methylation data
+> # ------------------------------------------------------------
+> 
+> datM = fread(file.path(path.data, "methylation_betaValue.txt"))
+> dim(datM)
+[1] 332836    214
+> datM[1:2, 1:5]
+           id      2671     2675     2679     2681
+1: cg00000029 0.0756061 0.107137 0.147173 0.107314
+2: cg00000165 0.1065510 0.252285 0.662233 0.117635
+> 
+> infoM = fread(file.path(path.ref, "methylation_info.txt"))
+> dim(infoM)
+[1] 332836     22
+> names(infoM)
+ [1] "Name"                        "Infinium_Design_Type"       
+ [3] "Next_Base"                   "Color_Channel"              
+ [5] "Genome_Build"                "CHR"                        
+ [7] "MAPINFO"                     "Strand"                     
+ [9] "Random_Loci"                 "Methyl27_Loci"              
+[11] "UCSC_RefGene_Name"           "UCSC_RefGene_Accession"     
+[13] "UCSC_RefGene_Group"          "UCSC_CpG_Islands_Name"      
+[15] "Relation_to_UCSC_CpG_Island" "Phantom"                    
+[17] "DMR"                         "Enhancer"                   
+[19] "HMM_Island"                  "Regulatory_Feature_Name"    
+[21] "Regulatory_Feature_Group"    "DHS"                        
+> infoM[1:2, 1:5]
+         Name Infinium_Design_Type Next_Base Color_Channel Genome_Build
+1: cg00000029                   II                                   37
+2: cg00000165                   II                                   37
+> table(infoM$CHR)
+
+    1    10    11    12    13    14    15    16    17    18    19     2    20 
+32378 16631 19983 16818  8182 10419 10629 15134 19890  4197 17967 23733  7159 
+   21    22     3     4     5     6     7     8     9     X     Y 
+ 2917  5889 17227 13420 16601 23911 20104 13869  6791  8953    34 
+> 
+> table(datM$id == infoM$Name)
+
+  TRUE 
+332836 
+> 
+> datM = data.matrix(datM[,-1])
+> rownames(datM) = infoM$Name
+> dim(datM)
+[1] 332836    213
+> datM[1:2, 1:5]
+                2671     2675     2679     2681     2682
+cg00000029 0.0756061 0.107137 0.147173 0.107314 0.178150
+cg00000165 0.1065510 0.252285 0.662233 0.117635 0.167473
+> 
+> # ------------------------------------------------------------
+> # take intersection of CpG probes between purified data and 
+> # bulk tumor samples
+> # ------------------------------------------------------------
+> 
+> table(info$ID == info$Name)
+
+  TRUE 
+220886 
+> cpgs = intersect(info$ID, infoM$Name)
+> length(cpgs)
+[1] 196555
+> 
+> mat1  = match(cpgs, infoM$Name)
+> datM  = datM[mat1,]
+> infoM = infoM[mat1,]
+> 
+> dim(datM)
+[1] 196555    213
+> datM[1:2, 1:5]
+                2671     2675     2679     2681     2682
+cg00000029 0.0756061 0.107137 0.147173 0.107314 0.178150
+cg00000236 0.9047640 0.890161 0.898555 0.890185 0.870316
+> 
+> dim(infoM)
+[1] 196555     22
+> infoM[1:2, 1:5]
+         Name Infinium_Design_Type Next_Base Color_Channel Genome_Build
+1: cg00000029                   II                                   37
+2: cg00000236                   II                                   37
+> 
+> mat2 = match(cpgs, info$ID)
+> dat  = dat[mat2,]
+> info = info[mat2,]
+> 
+> dim(dat)
+[1] 196555    189
+> dat[1:2, 1:5]
+           GSM861653 GSM861654 GSM861655 GSM861656 GSM861657
+cg00000029    0.6328    0.6211    0.6287    0.6397    0.6260
+cg00000236    0.8424    0.8050    0.8104    0.8338    0.8415
+> 
+> dim(info)
+[1] 196555     31
+> info[1:2, 1:5]
+           ID       Name Infinium_Design_Type Next_Base Color_Channel
+1: cg00000029 cg00000029                   II                        
+2: cg00000236 cg00000236                   II                        
+> 
+> # ------------------------------------------------------------
+> # read in probes to be used
+> # ------------------------------------------------------------
+> 
+> load(file.path(path.ref, "ref_966probes.RData"))
+> ls()
+ [1] "cpgs"      "dat"       "datM"      "fnm"       "info"      "infoM"    
+ [7] "mat1"      "mat2"      "path.data" "path.ref"  "probe2use" "sam"      
+> length(probe2use)
+[1] 966
+> length(unique(probe2use))
+[1] 966
+> 
+> table(probe2use %in% rownames(datM))
+
+TRUE 
+ 966 
+> table(probe2use %in% rownames(dat))
+
+TRUE 
+ 966 
+> 
+> X  = dat[match(probe2use, rownames(dat)),]
+> dim(X)
+[1] 966 189
+> X[1:2,1:5]
+           GSM861653 GSM861654 GSM861655 GSM861656 GSM861657
+cg10472651    0.4202    0.4898    0.4347    0.5290    0.4395
+cg27603015    0.6243    0.6421    0.6768    0.6456    0.7165
+> 
+> dim(sam)
+[1] 189   3
+> table(sam$id == colnames(X))
+
+TRUE 
+ 189 
+> table(sam$label)
+
+         B       CD4T       CD8T   Monocyte Neutrophil         NK       Treg 
+         6         60         37         40         21         21          4 
+> cellTypes = unique(sam$label)
+> 
+> # ------------------------------------------------------------
+> # read tumor purity 
+> # ------------------------------------------------------------
+> 
+> dir0 = "TCGA_results/clinical_data/"
+> 
+> emInfo = fread(paste0(dir0, "patient_coad_M_info_hyperMeth.txt"))
+> dim(emInfo)
+[1] 213  28
+> emInfo[1, ]
+    race gender              ethnicity bcr_patient_barcode patient_id
+1: WHITE   MALE NOT HISPANIC OR LATINO        TCGA-A6-2671       2671
+   tissue_source_site birth_days_to last_contact_days_to death_days_to
+1:                 A6        -31329                  648          1331
+   vital_status tumor_status ajcc_pathologic_tumor_stage
+1:         Dead   WITH TUMOR                    Stage IV
+   age_at_initial_pathologic_diagnosis     noHM_PC1    noHM_PC2   noHM_PC3
+1:                                  85 -0.009249593 0.004130469 0.01562243
+      noHM_PC4          methylation_barcode
+1: 0.003222672 TCGA-A6-2671-01A-01D-1407-05
+                                                                methylation_file
+1: jhu-usc.edu_COAD.HumanMethylation450.1.lvl-3.TCGA-A6-2671-01A-01D-1407-05.txt
+              platform                                                array
+1: HumanMethylation450 RARER_p_TCGA_MixedRedos_N_GenomeWideSNP_6_D05_747712
+   segment_count abs_call abs_purity abs_ploidy abs_doublings hyperMeth
+1:           182   called       0.73       3.57             1         0
+   CIMP.Status
+1:    Negative
+> 
+> purity = fread(paste0(dir0, "TCGA_mastercalls.abs_tables_JSedit.fixed.txt"))
+> dim(purity)
+[1] 10786    10
+> purity[1, ]
+             array                       sample call status purity ploidy
+1: TCGA-OR-A5J1-01 TCGA-OR-A5J1-01A-11D-A29H-01      called    0.9      2
+   Genome doublings Coverage for 80% power Cancer DNA fraction
+1:                0                      9                 0.9
+   Subclonal genome fraction solution
+1:                      0.02      new
+> 
+> emInfo$array = substring(emInfo$methylation_barcode, 1, 15)
+> table(emInfo$array %in% purity$array)
+
+FALSE  TRUE 
+    2   211 
+> table(purity$array %in% emInfo$array)
+
+FALSE  TRUE 
+10575   211 
+> 
+> emInfo = merge(emInfo, purity, by="array")
+> dim(emInfo)
+[1] 211  37
+> emInfo[1, ]
+             array  race gender              ethnicity bcr_patient_barcode
+1: TCGA-A6-2671-01 WHITE   MALE NOT HISPANIC OR LATINO        TCGA-A6-2671
+   patient_id tissue_source_site birth_days_to last_contact_days_to
+1:       2671                 A6        -31329                  648
+   death_days_to vital_status tumor_status ajcc_pathologic_tumor_stage
+1:          1331         Dead   WITH TUMOR                    Stage IV
+   age_at_initial_pathologic_diagnosis     noHM_PC1    noHM_PC2   noHM_PC3
+1:                                  85 -0.009249593 0.004130469 0.01562243
+      noHM_PC4          methylation_barcode
+1: 0.003222672 TCGA-A6-2671-01A-01D-1407-05
+                                                                methylation_file
+1: jhu-usc.edu_COAD.HumanMethylation450.1.lvl-3.TCGA-A6-2671-01A-01D-1407-05.txt
+              platform segment_count abs_call abs_purity abs_ploidy
+1: HumanMethylation450           182   called       0.73       3.57
+   abs_doublings hyperMeth CIMP.Status                       sample call status
+1:             1         0    Negative TCGA-A6-2671-01A-01D-1549-01      called
+   purity ploidy Genome doublings Coverage for 80% power Cancer DNA fraction
+1:   0.73   3.57                1                     18                0.83
+   Subclonal genome fraction solution
+1:                      0.29      new
+> 
+> summary(emInfo$abs_purity)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+ 0.1700  0.5000  0.6300  0.6283  0.7600  1.0000      10 
+> summary(emInfo$purity)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+ 0.1700  0.5100  0.6300  0.6261  0.7600  0.9500       1 
+> cor(emInfo$abs_purity, emInfo$purity, use="pair")
+[1] 0.9117456
+> 
+> # ------------------------------------------------------------
+> # extract methylation data from tumor samples
+> # ------------------------------------------------------------
+> 
+> ys = datM[match(rownames(X), rownames(datM)),]
+> dim(ys)
+[1] 966 213
+> ys[1:2,1:5]
+               2671     2675     2679     2681     2682
+cg10472651 0.745277 0.622263 0.723362 0.570732 0.580721
+cg27603015 0.898193 0.891410 0.884388 0.858770 0.787302
+> 
+> table(colnames(ys) %in% emInfo$patient_id)
+
+FALSE  TRUE 
+    2   211 
+> patient_id_2use = intersect(colnames(ys), emInfo$patient_id)
+> 
+> ys = ys[,match(patient_id_2use,colnames(ys))]
+> emInfo = emInfo[match(patient_id_2use,emInfo$patient_id),]
+> 
+> dim(ys)
+[1] 966 211
+> dim(emInfo)
+[1] 211  37
+> 
+> stopifnot(all(colnames(ys) == emInfo$patient_id))
+> emInfo$patient_id[1:5]
+[1] "2671" "2675" "2679" "2681" "2684"
+> 
+> ys_na      = which(apply(is.na(ys),2,any))
+> eta_abs_na = which(is.na(emInfo$purity))
+> 
+> any.na = union(ys_na,eta_abs_na)
+> any.na
+ [1]  22  24  25  37  45  51  60  73  79  88  90  98 121 130 151 152 177 184 188
+[20] 191 193 196 205 100
+> 
+> ys = ys[,-any.na]
+> emInfo = emInfo[-any.na,]
+> 
+> dim(ys)
+[1] 966 187
+> ys[1:2,1:5]
+               2671     2675     2679     2681     2684
+cg10472651 0.745277 0.622263 0.723362 0.570732 0.652065
+cg27603015 0.898193 0.891410 0.884388 0.858770 0.911921
+> 
+> dim(emInfo)
+[1] 187  37
+> emInfo[1:2,]
+             array  race gender              ethnicity bcr_patient_barcode
+1: TCGA-A6-2671-01 WHITE   MALE NOT HISPANIC OR LATINO        TCGA-A6-2671
+2: TCGA-A6-2675-01 WHITE   MALE NOT HISPANIC OR LATINO        TCGA-A6-2675
+   patient_id tissue_source_site birth_days_to last_contact_days_to
+1:       2671                 A6        -31329                  648
+2:       2675                 A6        -28813                 1321
+   death_days_to vital_status tumor_status ajcc_pathologic_tumor_stage
+1:          1331         Dead   WITH TUMOR                    Stage IV
+2:            NA        Alive   TUMOR FREE                   Stage IIA
+   age_at_initial_pathologic_diagnosis     noHM_PC1    noHM_PC2   noHM_PC3
+1:                                  85 -0.009249593 0.004130469 0.01562243
+2:                                  78  0.098222522 0.023360098 0.04020544
+       noHM_PC4          methylation_barcode
+1: 0.0032226720 TCGA-A6-2671-01A-01D-1407-05
+2: 0.0009877077 TCGA-A6-2675-01A-02D-1721-05
+                                                                methylation_file
+1: jhu-usc.edu_COAD.HumanMethylation450.1.lvl-3.TCGA-A6-2671-01A-01D-1407-05.txt
+2: jhu-usc.edu_COAD.HumanMethylation450.3.lvl-3.TCGA-A6-2675-01A-02D-1721-05.txt
+              platform segment_count abs_call abs_purity abs_ploidy
+1: HumanMethylation450           182   called       0.73       3.57
+2: HumanMethylation450           230   called       0.42       3.37
+   abs_doublings hyperMeth CIMP.Status                       sample call status
+1:             1         0    Negative TCGA-A6-2671-01A-01D-1549-01      called
+2:             1         0    Negative TCGA-A6-2675-01A-02D-1717-01      called
+   purity ploidy Genome doublings Coverage for 80% power Cancer DNA fraction
+1:   0.73   3.57                1                     18                0.83
+2:   0.42   3.31                1                     31                0.55
+   Subclonal genome fraction solution
+1:                      0.29      new
+2:                      0.17      new
+> 
+> table(colnames(ys) == emInfo$patient_id)
+
+TRUE 
+ 187 
+> 
+> #-------------------------------------------------------------
+> # Estimate Mean Matrix mu
+> #-------------------------------------------------------------
+> 
+> mu = matrix(NA, nrow = dim(X)[1], ncol = length(cellTypes))
+> s2 = matrix(NA, nrow = dim(X)[1], ncol = length(cellTypes))
+> 
+> row.names(mu) = row.names(s2) = rownames(X)
+> colnames(mu)  = colnames(s2)  = cellTypes
+> 
+> for(ct in cellTypes){
++   sam.ct = unlist(sam[which(sam[,2]==ct),1])
++   dat.ct = X[,sam.ct]
++   mu[,ct] = rowMeans(dat.ct,na.rm=TRUE)
++   s2[,ct] = apply(dat.ct,1,sd,na.rm = TRUE)^2
++ }
+> 
+> #----------------------------------------------------------------------
+> # Read Estimation from Expression Data, take intersection of the 
+> # samples with cell type estimation from expression and DNA methylation
+> #----------------------------------------------------------------------
+> 
+> fnm = '_cibersortx_results/CIBERSORTx_COAD_Adjusted.txt'
+> est_expr = fread(fnm)
+> dim(est_expr)
+[1] 441  26
+> est_expr[1:2,]
+            Mixture B cells naive B cells memory Plasma cells T cells CD8
+1: TCGA.NH.A6GA.01A    0.07158183    0.000000000  0.010652472   0.1207421
+2: TCGA.D5.6537.01A    0.01657612    0.005787387  0.001731572   0.1289301
+   T cells CD4 naive T cells CD4 memory resting T cells CD4 memory activated
+1:                 0                  0.1809564                   0.06080302
+2:                 0                  0.1646398                   0.15938879
+   T cells follicular helper T cells regulatory (Tregs) T cells gamma delta
+1:                0.00885433                 0.03752451                   0
+2:                0.00000000                 0.00000000                   0
+   NK cells resting NK cells activated   Monocytes Macrophages M0
+1:      0.006557011        0.007937278 0.004293393      0.1700818
+2:      0.012962146        0.000000000 0.005040917      0.1932161
+   Macrophages M1 Macrophages M2 Dendritic cells resting
+1:     0.04444216     0.09858073             0.079505208
+2:     0.08072135     0.06866159             0.003188478
+   Dendritic cells activated Mast cells resting Mast cells activated
+1:                0.02213454          0.0709626          0.003025101
+2:                0.01096375          0.0000000          0.087181894
+   Eosinophils Neutrophils P-value Correlation      RMSE
+1:           0 0.001365539       0  0.08483048 1.0437155
+2:           0 0.061009947       0  0.58213517 0.8259516
+> 
+> samname  = substr(est_expr$Mixture, 9, 12)
+> length(samname)
+[1] 441
+> samname[1:5]
+[1] "A6GA" "6537" "4684" "6302" "3862"
+> 
+> est_expr = data.matrix(est_expr[,-1])
+> rownames(est_expr) = samname
+> dim(est_expr)
+[1] 441  25
+> est_expr[1:2,]
+     B cells naive B cells memory Plasma cells T cells CD8 T cells CD4 naive
+A6GA    0.07158183    0.000000000  0.010652472   0.1207421                 0
+6537    0.01657612    0.005787387  0.001731572   0.1289301                 0
+     T cells CD4 memory resting T cells CD4 memory activated
+A6GA                  0.1809564                   0.06080302
+6537                  0.1646398                   0.15938879
+     T cells follicular helper T cells regulatory (Tregs) T cells gamma delta
+A6GA                0.00885433                 0.03752451                   0
+6537                0.00000000                 0.00000000                   0
+     NK cells resting NK cells activated   Monocytes Macrophages M0
+A6GA      0.006557011        0.007937278 0.004293393      0.1700818
+6537      0.012962146        0.000000000 0.005040917      0.1932161
+     Macrophages M1 Macrophages M2 Dendritic cells resting
+A6GA     0.04444216     0.09858073             0.079505208
+6537     0.08072135     0.06866159             0.003188478
+     Dendritic cells activated Mast cells resting Mast cells activated
+A6GA                0.02213454          0.0709626          0.003025101
+6537                0.01096375          0.0000000          0.087181894
+     Eosinophils Neutrophils P-value Correlation      RMSE
+A6GA           0 0.001365539       0  0.08483048 1.0437155
+6537           0 0.061009947       0  0.58213517 0.8259516
+> 
+> com_sample = intersect(rownames(est_expr), colnames(ys))
+> length(com_sample)
+[1] 184
+> 
+> est_expr = est_expr[match(com_sample,rownames(est_expr)),]
+> dim(est_expr)
+[1] 184  25
+> est_expr[1:2,]
+     B cells naive B cells memory Plasma cells T cells CD8 T cells CD4 naive
+3697    0.08463883              0   0.02749052  0.08475483                 0
+6606    0.07332543              0   0.00000000  0.06157739                 0
+     T cells CD4 memory resting T cells CD4 memory activated
+3697                  0.1561050                   0.10685181
+6606                  0.2408331                   0.06907315
+     T cells follicular helper T cells regulatory (Tregs) T cells gamma delta
+3697                0.02411560                 0.00000000                   0
+6606                0.04726565                 0.02872555                   0
+     NK cells resting NK cells activated   Monocytes Macrophages M0
+3697       0.03040442        0.000000000 0.000000000      0.1966907
+6606       0.01972032        0.009253435 0.006057451      0.2000886
+     Macrophages M1 Macrophages M2 Dendritic cells resting
+3697     0.04481669      0.1365377              0.00538479
+6606     0.03910011      0.1492219              0.00000000
+     Dendritic cells activated Mast cells resting Mast cells activated
+3697                0.01462932        0.036328235           0.04977948
+6606                0.03435328        0.005581454           0.01123587
+     Eosinophils Neutrophils P-value Correlation      RMSE
+3697 0.000000000 0.001471994       0   0.5183110 0.8623317
+6606 0.004587217 0.000000000       0   0.4010069 0.9160240
+> 
+> ys     = ys[,match(com_sample,colnames(ys))]
+> emInfo = emInfo[match(com_sample, emInfo$patient_id),]
+> 
+> dim(ys)
+[1] 966 184
+> ys[1:2,1:4]
+               3697     6606     4947     3712
+cg10472651 0.766973 0.589171 0.682667 0.743062
+cg27603015 0.924687 0.928558 0.841252 0.857199
+> 
+> dim(emInfo)
+[1] 184  37
+> emInfo[1:2,]
+             array  race gender              ethnicity bcr_patient_barcode
+1: TCGA-AA-3697-01  <NA>   MALE                   <NA>        TCGA-AA-3697
+2: TCGA-AZ-6606-01 WHITE   MALE NOT HISPANIC OR LATINO        TCGA-AZ-6606
+   patient_id tissue_source_site birth_days_to last_contact_days_to
+1:       3697                 AA        -28367                 2587
+2:       6606                 AZ        -29704                   NA
+   death_days_to vital_status tumor_status ajcc_pathologic_tumor_stage
+1:            NA        Alive   WITH TUMOR                   Stage III
+2:           357         Dead   WITH TUMOR                    Stage IV
+   age_at_initial_pathologic_diagnosis    noHM_PC1     noHM_PC2    noHM_PC3
+1:                                  77 -0.03132083 -0.012075228 -0.02927158
+2:                                  81 -0.02561825  0.003979017 -0.01523863
+     noHM_PC4          methylation_barcode
+1: 0.02142166 TCGA-AA-3697-01A-01D-1721-05
+2: 0.03779045 TCGA-AZ-6606-01A-11D-1837-05
+                                                                methylation_file
+1: jhu-usc.edu_COAD.HumanMethylation450.3.lvl-3.TCGA-AA-3697-01A-01D-1721-05.txt
+2: jhu-usc.edu_COAD.HumanMethylation450.6.lvl-3.TCGA-AZ-6606-01A-11D-1837-05.txt
+              platform segment_count abs_call abs_purity abs_ploidy
+1: HumanMethylation450           188   called       0.67       3.86
+2: HumanMethylation450           107   called       0.80       2.36
+   abs_doublings hyperMeth CIMP.Status                       sample call status
+1:             1         0    Negative      COAD-TCGA-AA-3697-Tumor legacy_call
+2:             0         1      CIMP-H TCGA-AZ-6606-01A-11D-1834-01      called
+   purity ploidy Genome doublings Coverage for 80% power Cancer DNA fraction
+1:   0.67   3.86                1                     20                0.80
+2:   0.80   2.32                0                     11                0.83
+   Subclonal genome fraction solution
+1:                        NA      old
+2:                       0.1      new
+> 
+> table(colnames(ys) == emInfo$patient_id)
+
+TRUE 
+ 184 
+> table(colnames(ys) == rownames(est_expr))
+
+TRUE 
+ 184 
+> table(rownames(ys) == rownames(mu))
+
+TRUE 
+ 966 
+> 
+> #----------------------------------------------------------------------
+> # collapse cell types from expression data into fewer cell types
+> #----------------------------------------------------------------------
+> 
+> deconv_expr = matrix(NA, nrow = nrow(est_expr),ncol = length(cellTypes))
+> colnames(deconv_expr) = cellTypes 
+> rownames(deconv_expr) = rownames(est_expr)
+> colnames(est_expr)
+ [1] "B cells naive"                "B cells memory"              
+ [3] "Plasma cells"                 "T cells CD8"                 
+ [5] "T cells CD4 naive"            "T cells CD4 memory resting"  
+ [7] "T cells CD4 memory activated" "T cells follicular helper"   
+ [9] "T cells regulatory (Tregs)"   "T cells gamma delta"         
+[11] "NK cells resting"             "NK cells activated"          
+[13] "Monocytes"                    "Macrophages M0"              
+[15] "Macrophages M1"               "Macrophages M2"              
+[17] "Dendritic cells resting"      "Dendritic cells activated"   
+[19] "Mast cells resting"           "Mast cells activated"        
+[21] "Eosinophils"                  "Neutrophils"                 
+[23] "P-value"                      "Correlation"                 
+[25] "RMSE"                        
+> 
+> colnames(est_expr)
+ [1] "B cells naive"                "B cells memory"              
+ [3] "Plasma cells"                 "T cells CD8"                 
+ [5] "T cells CD4 naive"            "T cells CD4 memory resting"  
+ [7] "T cells CD4 memory activated" "T cells follicular helper"   
+ [9] "T cells regulatory (Tregs)"   "T cells gamma delta"         
+[11] "NK cells resting"             "NK cells activated"          
+[13] "Monocytes"                    "Macrophages M0"              
+[15] "Macrophages M1"               "Macrophages M2"              
+[17] "Dendritic cells resting"      "Dendritic cells activated"   
+[19] "Mast cells resting"           "Mast cells activated"        
+[21] "Eosinophils"                  "Neutrophils"                 
+[23] "P-value"                      "Correlation"                 
+[25] "RMSE"                        
+> other = rowSums(est_expr[,c(10,19,20,21)])
+> deconv_expr[,"B"]    = rowSums(est_expr[,1:3])/0.4
+> deconv_expr[,"CD4T"] = rowSums(est_expr[,5:8])/0.4
+> deconv_expr[,"CD8T"] = as.matrix(est_expr[,4])/0.4
+> deconv_expr[,"Treg"] = as.matrix(est_expr[,9])/0.4
+> deconv_expr[,"NK"] = rowSums(est_expr[,11:12])/0.42
+> deconv_expr[,"Monocyte"] = rowSums(est_expr[,13:18])/1.40
+> deconv_expr[,"Neutrophil"] = as.matrix(est_expr[,22])/0.15
+> deconv_expr = deconv_expr / rowSums(deconv_expr)
+> 
+> dim(deconv_expr)
+[1] 184   7
+> deconv_expr[1:2,]
+          CD4T       CD8T  Monocyte         B         NK  Neutrophil      Treg
+3697 0.4552588 0.13440992 0.1803626 0.1778223 0.04592131 0.006225033 0.0000000
+6606 0.5323656 0.09178124 0.1826169 0.1092917 0.04112899 0.000000000 0.0428155
+> 
+> #---------------------------------------------------------------------
+> # Compare results with different methods and with expression data
+> #---------------------------------------------------------------------
+> 
+> eta = emInfo$purity
+> summary(eta)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.1700  0.5075  0.6200  0.6207  0.7500  0.9500 
+> eta[which(eta > 0.99)] = 0.99
+> 
+> temp <- rownames(deconv_expr)
+> deconv_expr <- diag(1-eta) %*% deconv_expr
+> rownames(deconv_expr) <- temp
+> 
+> mu[mu < 0.05] = 0.05
+> mu[mu > 0.95] = 0.95
+> 
+> penalty = dim(ys)[1]*(10^seq(-2,1,1)) 
+> 
+> methods = c("EMeth","svr","ls","rls","qp")
+> rho     = array(data = NA, dim = c(ncol(ys), length(cellTypes), length(methods)),
++                 dimnames = list(colnames(ys), cellTypes, methods))
+> 
+> alpha   = rep(1/length(cellTypes), length(cellTypes))
+> simsize = ncol(ys)
+> 
+> C = c(0.1,1/sqrt(10),1,sqrt(10),10)
+> 
+> for(j in 1:ncol(ys)){
++   if(j %% 10 == 0){ cat(j, date(), "\n") }
++   y    = ys[,j]
++   X    = as.data.frame(mu)
++   Xmat = mu
++   
++   cv_svr = rep(0,5)
++   svrmodel1       = svm(y~., data = X, kernel='linear', cost=0.1, cross=5)
++   cv_svr[1]       = mean(svrmodel1$MSE)
++   svrmodel2       = svm(y~., data = X, kernel='linear', cost=1/sqrt(10), cross=5)
++   cv_svr[2]       = mean(svrmodel2$MSE)
++   svrmodel3       = svm(y~., data = X, kernel='linear', cost=1, cross=5)
++   cv_svr[3]       = mean(svrmodel2$MSE)
++   svrmodel4       = svm(y~., data = X, kernel='linear', cost=sqrt(10), cross=5)
++   cv_svr[4]       = mean(svrmodel2$MSE)
++   svrmodel5       = svm(y~., data = X, kernel='linear', cost=10, cross=5)
++   cv_svr[5]       = mean(svrmodel5$MSE)
++   best_svr        = which.min(cv_svr)
++   svrmodel        = svm(y~., data = X, kernel='linear', cost=C[best_svr])
++   temp            = (t(svrmodel$coefs) %*% svrmodel$SV)
++   temp[temp < 0]  = 0
++   rho[j,,'svr']   = (1-eta[j])*temp/sum(temp)
++   
++   temp            = lm(y ~ .-1,data = X)$coefficients
++   temp[temp < 0]  = 0
++   rho[j,,'ls']    = (1-eta[j])*temp/sum(temp)
++   
++   temp            = rlm(y ~ .-1,data = X)$coefficients
++   temp[temp < 0]  = 0
++   rho[j,,'rls']   = (1-eta[j])*temp/sum(temp)
++   
++   A = rbind(diag(rep(1,length(cellTypes))),rep(-1,length(cellTypes)))
++   b = c(rep(0,length(cellTypes)),-1+eta[j])
++   D = t(Xmat) %*% Xmat
++   d = t(t(Xmat) %*% y)
++   rho[j,,'qp']   = (solve.QP(D,d,t(A),b)$solution)
++ }
+10 Tue Dec 22 16:52:29 2020 
+20 Tue Dec 22 16:52:45 2020 
+30 Tue Dec 22 16:53:00 2020 
+40 Tue Dec 22 16:53:13 2020 
+50 Tue Dec 22 16:53:30 2020 
+60 Tue Dec 22 16:53:44 2020 
+70 Tue Dec 22 16:53:59 2020 
+80 Tue Dec 22 16:54:12 2020 
+90 Tue Dec 22 16:54:26 2020 
+100 Tue Dec 22 16:54:39 2020 
+110 Tue Dec 22 16:54:52 2020 
+120 Tue Dec 22 16:55:06 2020 
+130 Tue Dec 22 16:55:20 2020 
+140 Tue Dec 22 16:55:34 2020 
+150 Tue Dec 22 16:55:47 2020 
+160 Tue Dec 22 16:56:01 2020 
+170 Tue Dec 22 16:56:16 2020 
+180 Tue Dec 22 16:56:29 2020 
+There were 50 or more warnings (use warnings() to see the first 50)
+> 
+> print('EMeth')
+[1] "EMeth"
+> hundrediter = cv.emeth(ys, eta, mu, aber = TRUE, V='c', init = 'default',
++                        family = 'normal', nu = penalty, folds = 5, 
++                        maxiter = 50, verbose = TRUE)
+50 Tue Dec 22 16:56:37 2020 
+100 Tue Dec 22 16:56:37 2020 
+150 Tue Dec 22 16:56:37 2020 
+[1] "finish cross validation"
+-------------------
+10 Tue Dec 22 16:59:25 2020 
+-------------------
+20 Tue Dec 22 17:00:01 2020 
+-------------------
+30 Tue Dec 22 17:00:38 2020 
+-------------------
+40 Tue Dec 22 17:01:14 2020 
+-------------------
+50 Tue Dec 22 17:01:52 2020 
+> rho[,,'EMeth'] = hundrediter[[1]]$rho
+> 
+> #---------------------------------------------------------------------
+> # save the results
+> #---------------------------------------------------------------------
+> 
+> dim(rho)
+[1] 184   7   5
+> rho[1,,]
+                EMeth        svr         ls        rls            qp
+CD4T       0.04837768 0.06765764 0.00000000 0.00000000  3.300000e-01
+CD8T       0.01617911 0.11321401 0.20038539 0.20908966 -1.299611e-16
+Monocyte   0.05491333 0.04872797 0.04516142 0.03943471  2.873483e-17
+B          0.07897976 0.07336073 0.04444909 0.04062237 -1.387779e-17
+NK         0.02340945 0.00875919 0.00000000 0.00000000  1.115402e-16
+Neutrophil 0.02046280 0.01828046 0.04000410 0.04085326  1.381644e-16
+Treg       0.08767786 0.00000000 0.00000000 0.00000000  0.000000e+00
+> dimnames(rho)
+[[1]]
+  [1] "3697" "6606" "4947" "3712" "3779" "5341" "3810" "6808" "6162" "6704"
+ [11] "6888" "4105" "6569" "6899" "6651" "6928" "A28K" "6196" "6165" "5537"
+ [21] "6922" "6674" "A28A" "6320" "3495" "5868" "5541" "6541" "A1HA" "6680"
+ [31] "6164" "A28H" "6898" "3662" "5864" "6677" "A1D9" "6930" "3494" "6627"
+ [41] "6625" "5656" "6854" "4313" "6535" "6678" "6534" "3496" "A282" "6805"
+ [51] "6460" "5407" "5862" "5916" "4614" "2675" "6781" "4315" "6626" "A1D7"
+ [61] "5662" "6807" "6533" "6746" "A288" "4107" "A0XF" "6531" "4615" "2684"
+ [71] "6607" "4308" "6963" "5666" "A280" "6530" "6137" "A1D6" "6923" "2681"
+ [81] "6463" "6532" "3489" "6171" "A28C" "5860" "6628" "6310" "6806" "5539"
+ [91] "6601" "6307" "4747" "5667" "3713" "6676" "2679" "A28M" "A0X9" "5659"
+[101] "6598" "6163" "4751" "6924" "3502" "7000" "6540" "6932" "5912" "3655"
+[111] "6299" "A0XD" "6004" "A28E" "6315" "6459" "6926" "6747" "A1D8" "6314"
+[121] "6588" "5348" "6295" "5915" "5665" "6303" "A1DB" "6170" "A285" "6920"
+[131] "5349" "4682" "6603" "5403" "6890" "6782" "2671" "3663" "6294" "5538"
+[141] "6679" "3809" "6161" "3660" "6166" "A28G" "6140" "3492" "A1DA" "6855"
+[151] "6856" "6311" "4951" "4323" "6648" "6321" "6172" "6927" "6539" "2686"
+[161] "6461" "6895" "3510" "4616" "3506" "6964" "6586" "6529" "6703" "6931"
+[171] "6605" "6965" "6538" "6317" "6751" "6548" "5913" "6929" "5821" "A28F"
+[181] "6142" "6304" "6138" "5820"
+
+[[2]]
+[1] "CD4T"       "CD8T"       "Monocyte"   "B"          "NK"        
+[6] "Neutrophil" "Treg"      
+
+[[3]]
+[1] "EMeth" "svr"   "ls"    "rls"   "qp"   
+
+> 
+> dim(deconv_expr)
+[1] 184   7
+> deconv_expr[1:2,]
+          CD4T       CD8T   Monocyte          B          NK  Neutrophil
+3697 0.1502354 0.04435527 0.05951967 0.05868135 0.015154031 0.002054261
+6606 0.1064731 0.01835625 0.03652339 0.02185835 0.008225799 0.000000000
+            Treg
+3697 0.000000000
+6606 0.008563101
+> 
+> rho_COAD = rho
+> deconv_expr_COAD = deconv_expr
+> save(rho_COAD, file = 'TCGA_results/deconv_methy_COAD.RData')
+> save(deconv_expr_COAD, file = 'TCGA_results/deconv_expr_COAD.RData')
+> 
+> #---------------------------------------------------------------------
+> # calculate summary statistics
+> #---------------------------------------------------------------------
+> 
+> # load('TCGA_results/deconv_methy_COAD.RData')
+> # load('TCGA_results/deconv_expr_COAD.RData')
+> # rho = rho_COAD
+> # deconv_expr = deconv_expr_COAD
+> 
+> utypes = intersect(cellTypes,colnames(deconv_expr))
+> utypes
+[1] "CD4T"       "CD8T"       "Monocyte"   "B"          "NK"        
+[6] "Neutrophil" "Treg"      
+> 
+> methods = c("EMeth","svr","ls","rls","qp")
+> 
+> cormat <- matrix(NA,nrow = length(utypes), ncol = length(methods))
+> colnames(cormat) <- methods
+> rownames(cormat) <- utypes
+> 
+> err <- rss <- cormat
+> 
+> for(i in 1:length(utypes)){
++   cormat[i,] <- sapply(1:length(methods), FUN = function(j){
++     cor(rho[,utypes[i],methods[j]], deconv_expr[,utypes[i]])
++   })
++   err[i,] <- sapply(1:length(methods), FUN = function(j){
++     sqrt(mean((rho[,utypes[i],methods[j]] - deconv_expr[,utypes[i]])^2))
++   }) 
++   rss[i,] <- sapply(1:length(methods), FUN = function(j){
++     temp <- lm(deconv_expr[,utypes[i]] ~ rho[,utypes[i],methods[j]])
++     return(sum(temp$residuals^2))
++   })
++ }
+> 
+> #---------------------------------------------------------------------
+> # scatter plots of cell type proportion estimates by 
+> # DNA methylation vs. gene expression
+> #---------------------------------------------------------------------
+> 
+> for(i in 1:length(utypes)){
++   
++   pdf(sprintf('_figures_COAD/COAD_expr_vs_methy_%s.pdf',utypes[i]), 
++       width=6, height=7.5)
++   
++   plist = list()
++   
++   plist <- lapply(1:length(methods), FUN = function(j){
++     tempdata = cbind(rho[,utypes[i],methods[j]],deconv_expr[,utypes[i]],eta)
++     colnames(tempdata) <- c("methylation","expression","eta")
++     newplot <- ggplot(data = as.data.frame(tempdata), 
++                       aes(x=methylation, y=expression, color=eta)) + 
++       xlim(0,0.3) + ylim(0,0.3) + geom_point(size=0.8) + 
++       geom_abline(intercept = 0,slope = 1) + 
++       scale_color_gradient2(limit = c(0,1), low = "blue", high = "red", 
++                            mid = "cadetblue1", midpoint = 0.5) + 
++       ggtitle(sprintf('%s on %s',methods[j],utypes[i]))
++   })
++   
++   grid.arrange(grobs = plist,ncol=2)
++   dev.off()
++   
++   fnm = sprintf('_figures_COAD/COAD_plot_list_%s.RData', utypes[i])
++   save(plist, file = fnm)
++   
++ }
+There were 26 warnings (use warnings() to see them)
+> 
+> #---------------------------------------------------------------------
+> # Summarize correlation and RMSE
+> #---------------------------------------------------------------------
+> 
+> pdf('_figures_COAD/COAD_box_plot_correlation.pdf', width=4.5, height=3.5)
+> tempdata <- melt(as.data.table(cormat))
+Warning message:
+In melt.data.table(as.data.table(cormat)) :
+  id.vars and measure.vars are internally guessed when both are 'NULL'. All non-numeric/integer/logical type columns are considered id.vars, which in this case are columns []. Consider providing at least one of 'id' or 'measure' vars in future.
+> colnames(tempdata) <- c('Methods','Correlation')
+> tempdata$cellType = rep(utypes,5)
+> p1_cor <- ggplot(tempdata,aes(x=Methods,y=Correlation)) + geom_boxplot() +
++   geom_point(size = 2,aes(colour = cellType)) + theme_cowplot() + 
++   ggtitle('Correlation for COAD')
+> print(p1_cor)
+> dev.off()
+null device 
+          1 
+> 
+> 
+> pdf('_figures_COAD/COAD_box_plot_RMSE.pdf', width=4.5, height=3.5)
+> tempdata <- melt(as.data.table(err))
+Warning message:
+In melt.data.table(as.data.table(err)) :
+  id.vars and measure.vars are internally guessed when both are 'NULL'. All non-numeric/integer/logical type columns are considered id.vars, which in this case are columns []. Consider providing at least one of 'id' or 'measure' vars in future.
+> colnames(tempdata) <- c('Methods','RMSE')
+> tempdata$cellType = rep(utypes,5)
+> p2_RMSE <- ggplot(tempdata,aes(x=Methods,y=RMSE)) + geom_boxplot() +
++   geom_point(size = 2,aes(colour = cellType)) + theme_cowplot() + 
++   ggtitle('RMSE for COAD')
+> print(p2_RMSE)
+> dev.off()
+null device 
+          1 
+> 
+> save(p1_cor, p2_RMSE, file='_figures_COAD/COAD_box_plot_cor_RMSE.RData')
+> 
+> 
+> print(cormat)
+                EMeth          svr         ls        rls          qp
+CD4T       0.60838991  0.455778943 0.05393891 0.03785123  0.51058165
+CD8T       0.69414828  0.635816298 0.70668443 0.69857988  0.56487128
+Monocyte   0.80330895  0.790644293 0.81336423 0.81451740  0.45744267
+B          0.79334521  0.785100043 0.78354849 0.76314376  0.78819163
+NK         0.06874173  0.050944797 0.05328489 0.02482741 -0.06330552
+Neutrophil 0.44368874  0.379363050 0.37145009 0.37418540  0.03795694
+Treg       0.12104304 -0.003176699 0.09328513 0.03213556  0.12220196
+> print(err)
+                EMeth        svr         ls        rls         qp
+CD4T       0.09940659 0.09472300 0.15484448 0.15347922 0.19139482
+CD8T       0.03725905 0.09347129 0.17350330 0.17783763 0.06877303
+Monocyte   0.02976466 0.02910710 0.03312648 0.03398281 0.08417844
+B          0.03124972 0.02936289 0.03014219 0.03152389 0.04114353
+NK         0.03195776 0.02157137 0.02257995 0.02242992 0.02337186
+Neutrophil 0.06797726 0.03770047 0.05098565 0.04897122 0.04097729
+Treg       0.05406635 0.02450245 0.02138538 0.02172541 0.03125086
+> print(rss)
+                EMeth        svr         ls        rls         qp
+CD4T       0.44033643 0.55387297 0.69706619 0.69809855 0.51684921
+CD8T       0.19537013 0.22462126 0.18874879 0.19304299 0.25673921
+Monocyte   0.13887017 0.14677374 0.13250557 0.13177060 0.30959315
+B          0.14175753 0.14673565 0.14766661 0.15973840 0.14487516
+NK         0.03625561 0.03633320 0.03632431 0.03640529 0.03628176
+Neutrophil 0.04427149 0.04718988 0.04751738 0.04740495 0.05504356
+Treg       0.04156339 0.04218099 0.04181434 0.04213785 0.04155150
+> 
+> OneMinusCorr <- 1-matrix(cormat,ncol = 1, byrow = FALSE)
+> RMSE     <- matrix(err,ncol = 1, byrow = FALSE )
+> CellType <- rep(cellTypes,length(methods))
+> Methods  <- rep(methods,each = length(cellTypes))
+> res      <- cbind.data.frame(OneMinusCorr, RMSE, CellType, Methods)
+> 
+> pdf('_figures_COAD/COAD_corr_vs_RMSE.pdf', width=5, height=4.5)
+> complot<- ggplot(res, aes(x=OneMinusCorr,y=RMSE, color =  Methods)) + 
++   ggtitle('COAD') + geom_point() + 
++   scale_y_continuous(trans = log2_trans(),
++                      breaks = trans_breaks('log10',function(x) 10^x),
++                      labels = trans_format('log10',math_format(10^.x))) + 
++   geom_text(label = res[,3])+xlim(0.1,1.05)
+> print(complot)
+Warning messages:
+1: Removed 1 rows containing missing values (geom_point). 
+2: Removed 1 rows containing missing values (geom_text). 
+> dev.off()
+null device 
+          1 
+> 
+> cormat_COAD <- cormat
+> err_COAD    <- err
+> save(cormat_COAD, file = '_figures_COAD/COAD_metrics_cor.RData')
+> save(err_COAD,    file = '_figures_COAD/COAD_metrics_RMSE.RData')
+> 
+> #---------------------------------------------------------------------
+> # a final summary plot
+> #---------------------------------------------------------------------
+> 
+> load('_figures_COAD/COAD_box_plot_cor_RMSE.RData')
+> 
+> load('_figures_COAD/COAD_plot_list_B.RData')
+> p31 <- plist[[1]]+theme_cowplot()
+> p32 <- plist[[2]]+theme_cowplot()
+> 
+> load('_figures_COAD/COAD_plot_list_NK.RData')
+> p41 <- plist[[1]]+theme_cowplot()
+> p42 <- plist[[2]]+theme_cowplot()
+> 
+> pdf('_figures_COAD/COAD_full.pdf',width=8, height = 10)
+> grid.arrange(grobs = list(p1_cor, p2_RMSE, p31, p32, p41, p42), ncol = 2)
+Warning messages:
+1: Removed 5 rows containing missing values (geom_point). 
+2: Removed 1 rows containing missing values (geom_point). 
+3: Removed 1 rows containing missing values (geom_point). 
+> dev.off()
+null device 
+          1 
+> 
+> sessionInfo()
+R version 3.6.2 (2019-12-12)
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+Running under: macOS Catalina 10.15.7
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] ggpubr_0.4.0.999  cowplot_1.0.0     EMeth_1.0         quadprog_1.5-8   
+ [5] quantreg_5.55     SparseM_1.78      gridExtra_2.3     MASS_7.3-51.5    
+ [9] ggplot2_3.3.1     e1071_1.7-3       stringr_1.4.0     scales_1.1.0     
+[13] data.table_1.12.8
+
+loaded via a namespace (and not attached):
+ [1] tidyselect_1.0.0   purrr_0.3.3        haven_2.3.0        lattice_0.20-38   
+ [5] carData_3.0-4      colorspace_1.4-1   vctrs_0.3.0        generics_0.0.2    
+ [9] rlang_0.4.6        R.oo_1.23.0        pillar_1.4.3       R.utils_2.9.2     
+[13] foreign_0.8-75     glue_1.3.1         withr_2.1.2        readxl_1.3.1      
+[17] lifecycle_0.2.0    MatrixModels_0.4-1 munsell_0.5.0      ggsignif_0.6.0    
+[21] gtable_0.3.0       cellranger_1.1.0   R.methodsS3_1.8.0  zip_2.0.4         
+[25] labeling_0.3       rio_0.5.16         forcats_0.5.0      curl_4.3          
+[29] class_7.3-15       broom_0.5.6        Rcpp_1.0.3         backports_1.1.5   
+[33] abind_1.4-5        farver_2.0.3       digest_0.6.23      hms_0.5.3         
+[37] stringi_1.4.5      openxlsx_4.1.5     rstatix_0.6.0      dplyr_0.8.4       
+[41] grid_3.6.2         tools_3.6.2        magrittr_1.5       tibble_3.0.1      
+[45] crayon_1.3.4       tidyr_1.0.2        car_3.0-8          pkgconfig_2.0.3   
+[49] ellipsis_0.3.0     Matrix_1.2-18      assertthat_0.2.1   R6_2.4.1          
+[53] nlme_3.1-144       compiler_3.6.2    
+> gc()
+            used  (Mb) gc trigger   (Mb) limit (Mb)  max used   (Mb)
+Ncells   3047897 162.8    5095530  272.2         NA   5095530  272.2
+Vcells 114696065 875.1  352136590 2686.6      32768 352136358 2686.6
+> 
+> quit(save = 'no')
+> proc.time()
+   user  system elapsed 
+573.124  47.295 600.127 

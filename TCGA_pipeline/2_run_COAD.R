@@ -28,8 +28,8 @@ info = fread(file.path(path.ref, "methylation_pure_ct_info.txt.gz"))
 dim(info)
 info[1:2,]
 
-dat = fread(file.path(path.ref, 
-                      "methylation_pure_ct_rmPC2_data_signif4.txt.gz"))
+fnm = file.path(path.ref, "methylation_pure_ct_rmPC2_data_signif4.txt.gz")
+dat = fread(fnm)
 dim(dat)
 dat[1:2,1:5]
 
@@ -242,6 +242,7 @@ colnames(deconv_expr) = cellTypes
 rownames(deconv_expr) = rownames(est_expr)
 colnames(est_expr)
 
+colnames(est_expr)
 other = rowSums(est_expr[,c(10,19,20,21)])
 deconv_expr[,"B"]    = rowSums(est_expr[,1:3])/0.4
 deconv_expr[,"CD4T"] = rowSums(est_expr[,5:8])/0.4
@@ -342,41 +343,50 @@ save(rho_COAD, file = 'TCGA_results/deconv_methy_COAD.RData')
 save(deconv_expr_COAD, file = 'TCGA_results/deconv_expr_COAD.RData')
 
 #---------------------------------------------------------------------
-# generate plots
+# calculate summary statistics
 #---------------------------------------------------------------------
+
+# load('TCGA_results/deconv_methy_COAD.RData')
+# load('TCGA_results/deconv_expr_COAD.RData')
+# rho = rho_COAD
+# deconv_expr = deconv_expr_COAD
 
 utypes = intersect(cellTypes,colnames(deconv_expr))
 utypes
+
+methods = c("EMeth","svr","ls","rls","qp")
 
 cormat <- matrix(NA,nrow = length(utypes), ncol = length(methods))
 colnames(cormat) <- methods
 rownames(cormat) <- utypes
 
-err <- matrix(NA,nrow = length(utypes), ncol = length(methods))
-colnames(err) <- methods
-rownames(err) <- utypes
-
-rss <- matrix(NA,nrow = length(utypes), ncol = length(methods))
-colnames(rss) <- methods
-rownames(rss) <- utypes
+err <- rss <- cormat
 
 for(i in 1:length(utypes)){
   cormat[i,] <- sapply(1:length(methods), FUN = function(j){
-    cor(rho[,utypes[i],methods[j]],deconv_expr[,utypes[i]])
+    cor(rho[,utypes[i],methods[j]], deconv_expr[,utypes[i]])
   })
   err[i,] <- sapply(1:length(methods), FUN = function(j){
     sqrt(mean((rho[,utypes[i],methods[j]] - deconv_expr[,utypes[i]])^2))
   }) 
   rss[i,] <- sapply(1:length(methods), FUN = function(j){
-    temp <- lm(deconv_expr[,utypes[i]]~rho[,utypes[i],methods[j]])
+    temp <- lm(deconv_expr[,utypes[i]] ~ rho[,utypes[i],methods[j]])
     return(sum(temp$residuals^2))
   })
 }
 
+#---------------------------------------------------------------------
+# scatter plots of cell type proportion estimates by 
+# DNA methylation vs. gene expression
+#---------------------------------------------------------------------
+
 for(i in 1:length(utypes)){
-  pdf(sprintf('_figures_COAD/%s_expression_methylation.pdf',utypes[i]), 
+  
+  pdf(sprintf('_figures_COAD/COAD_expr_vs_methy_%s.pdf',utypes[i]), 
       width=6, height=7.5)
+  
   plist = list()
+  
   plist <- lapply(1:length(methods), FUN = function(j){
     tempdata = cbind(rho[,utypes[i],methods[j]],deconv_expr[,utypes[i]],eta)
     colnames(tempdata) <- c("methylation","expression","eta")
@@ -388,33 +398,41 @@ for(i in 1:length(utypes)){
                            mid = "cadetblue1", midpoint = 0.5) + 
       ggtitle(sprintf('%s on %s',methods[j],utypes[i]))
   })
+  
   grid.arrange(grobs = plist,ncol=2)
-  save(plist, file = sprintf('_figures_COAD/plist_%s_%s.RData',utypes[i],'COAD'))
   dev.off()
+  
+  fnm = sprintf('_figures_COAD/COAD_plot_list_%s.RData', utypes[i])
+  save(plist, file = fnm)
+  
 }
 
-pdf('_figures_COAD/correlation.pdf', width=4.5, height=3.5)
+#---------------------------------------------------------------------
+# Summarize correlation and RMSE
+#---------------------------------------------------------------------
+
+pdf('_figures_COAD/COAD_box_plot_correlation.pdf', width=4.5, height=3.5)
 tempdata <- melt(as.data.table(cormat))
 colnames(tempdata) <- c('Methods','Correlation')
 tempdata$cellType = rep(utypes,5)
-p1 <- ggplot(tempdata,aes(x=Methods,y=Correlation)) + geom_boxplot() +
+p1_cor <- ggplot(tempdata,aes(x=Methods,y=Correlation)) + geom_boxplot() +
   geom_point(size = 2,aes(colour = cellType)) + theme_cowplot() + 
   ggtitle('Correlation for COAD')
-print(p1)
-save(p1,file=sprintf('_figures_COAD/Cor_%s.RData','COAD'))
+print(p1_cor)
 dev.off()
 
 
-pdf('_figures_COAD/RMSE.pdf', width=4.5, height=3.5)
+pdf('_figures_COAD/COAD_box_plot_RMSE.pdf', width=4.5, height=3.5)
 tempdata <- melt(as.data.table(err))
 colnames(tempdata) <- c('Methods','RMSE')
 tempdata$cellType = rep(utypes,5)
-p2 <- ggplot(tempdata,aes(x=Methods,y=RMSE)) + geom_boxplot() +
+p2_RMSE <- ggplot(tempdata,aes(x=Methods,y=RMSE)) + geom_boxplot() +
   geom_point(size = 2,aes(colour = cellType)) + theme_cowplot() + 
   ggtitle('RMSE for COAD')
-print(p2)
-save(p2,file=sprintf('err_%s.RData','COAD'))
+print(p2_RMSE)
 dev.off()
+
+save(p1_cor, p2_RMSE, file='_figures_COAD/COAD_box_plot_cor_RMSE.RData')
 
 
 print(cormat)
@@ -422,12 +440,12 @@ print(err)
 print(rss)
 
 OneMinusCorr <- 1-matrix(cormat,ncol = 1, byrow = FALSE)
-RMSE <- matrix(err,ncol = 1, byrow = FALSE )
+RMSE     <- matrix(err,ncol = 1, byrow = FALSE )
 CellType <- rep(cellTypes,length(methods))
-Methods <- rep(methods,each = length(cellTypes))
-res <- cbind.data.frame(OneMinusCorr,RMSE,CellType,Methods)
+Methods  <- rep(methods,each = length(cellTypes))
+res      <- cbind.data.frame(OneMinusCorr, RMSE, CellType, Methods)
 
-pdf('Comparison.pdf')
+pdf('_figures_COAD/COAD_corr_vs_RMSE.pdf', width=5, height=4.5)
 complot<- ggplot(res, aes(x=OneMinusCorr,y=RMSE, color =  Methods)) + 
   ggtitle('COAD') + geom_point() + 
   scale_y_continuous(trans = log2_trans(),
@@ -436,10 +454,29 @@ complot<- ggplot(res, aes(x=OneMinusCorr,y=RMSE, color =  Methods)) +
   geom_text(label = res[,3])+xlim(0.1,1.05)
 print(complot)
 dev.off()
+
 cormat_COAD <- cormat
-err_COAD <- err
-save(cormat_COAD, file='cormat_COAD.RData')
-save(err_COAD, file = 'err_COAD.RData')
+err_COAD    <- err
+save(cormat_COAD, file = '_figures_COAD/COAD_metrics_cor.RData')
+save(err_COAD,    file = '_figures_COAD/COAD_metrics_RMSE.RData')
+
+#---------------------------------------------------------------------
+# a final summary plot
+#---------------------------------------------------------------------
+
+load('_figures_COAD/COAD_box_plot_cor_RMSE.RData')
+
+load('_figures_COAD/COAD_plot_list_B.RData')
+p31 <- plist[[1]]+theme_cowplot()
+p32 <- plist[[2]]+theme_cowplot()
+
+load('_figures_COAD/COAD_plot_list_NK.RData')
+p41 <- plist[[1]]+theme_cowplot()
+p42 <- plist[[2]]+theme_cowplot()
+
+pdf('_figures_COAD/COAD_full.pdf',width=8, height = 10)
+grid.arrange(grobs = list(p1_cor, p2_RMSE, p31, p32, p41, p42), ncol = 2)
+dev.off()
 
 sessionInfo()
 gc()
