@@ -265,9 +265,9 @@ eta = emInfo$purity
 summary(eta)
 eta[which(eta > 0.99)] = 0.99
 
-temp <- rownames(deconv_expr)
-deconv_expr <- diag(1-eta) %*% deconv_expr
-rownames(deconv_expr) <- temp
+temp = rownames(deconv_expr)
+deconv_expr = diag(1-eta) %*% deconv_expr
+rownames(deconv_expr) = temp
 
 mu[mu < 0.05] = 0.05
 mu[mu > 0.95] = 0.95
@@ -359,21 +359,21 @@ utypes
 
 methods = c("EMeth","svr","ls","rls","qp")
 
-cormat <- matrix(NA, nrow = length(utypes), ncol = length(methods))
-colnames(cormat) <- methods
-rownames(cormat) <- utypes
+cormat = matrix(NA, nrow = length(utypes), ncol = length(methods))
+colnames(cormat) = methods
+rownames(cormat) = utypes
 
-err <- rss <- cormat
+err = rss = cormat
 
 for(i in 1:length(utypes)){
-  cormat[i,] <- sapply(1:length(methods), FUN = function(j){
+  cormat[i,] = sapply(1:length(methods), FUN = function(j){
     cor(rho[,utypes[i],methods[j]], deconv_expr[,utypes[i]])
   })
-  err[i,] <- sapply(1:length(methods), FUN = function(j){
+  err[i,] = sapply(1:length(methods), FUN = function(j){
     sqrt(mean((rho[,utypes[i],methods[j]] - deconv_expr[,utypes[i]])^2))
   }) 
-  rss[i,] <- sapply(1:length(methods), FUN = function(j){
-    temp <- lm(deconv_expr[,utypes[i]] ~ rho[,utypes[i],methods[j]])
+  rss[i,] = sapply(1:length(methods), FUN = function(j){
+    temp = lm(deconv_expr[,utypes[i]] ~ rho[,utypes[i],methods[j]])
     return(sum(temp$residuals^2))
   })
 }
@@ -390,10 +390,10 @@ for(i in 1:length(utypes)){
   
   plist = list()
   
-  plist <- lapply(1:length(methods), FUN = function(j){
+  plist = lapply(1:length(methods), FUN = function(j){
     tempdata = cbind(rho[,utypes[i],methods[j]],deconv_expr[,utypes[i]],eta)
-    colnames(tempdata) <- c("methylation","expression","eta")
-    newplot <- ggplot(data = as.data.frame(tempdata), 
+    colnames(tempdata) = c("methylation","expression","eta")
+    newplot = ggplot(data = as.data.frame(tempdata), 
                       aes(x=methylation, y=expression, color=eta)) + 
       xlim(0,0.3) + ylim(0,0.3) + geom_point(size=0.8) + 
       geom_abline(intercept = 0,slope = 1) + 
@@ -415,10 +415,10 @@ for(i in 1:length(utypes)){
 #---------------------------------------------------------------------
 
 pdf('_figures_COAD/COAD_box_plot_correlation.pdf', width=4.5, height=3.5)
-tempdata <- melt(as.data.table(cormat))
-colnames(tempdata) <- c('Methods','Correlation')
+tempdata = melt(as.data.table(cormat))
+colnames(tempdata) = c('Methods','Correlation')
 tempdata$cellType = rep(utypes,5)
-p1_cor <- ggplot(tempdata,aes(x=Methods,y=Correlation)) + geom_boxplot() +
+p1_cor = ggplot(tempdata,aes(x=Methods,y=Correlation)) + geom_boxplot() +
   geom_point(size = 2,aes(colour = cellType)) + theme_cowplot() + 
   ggtitle('Correlation for COAD')
 print(p1_cor)
@@ -426,10 +426,10 @@ dev.off()
 
 
 pdf('_figures_COAD/COAD_box_plot_RMSE.pdf', width=4.5, height=3.5)
-tempdata <- melt(as.data.table(err))
-colnames(tempdata) <- c('Methods','RMSE')
+tempdata = melt(as.data.table(err))
+colnames(tempdata) = c('Methods','RMSE')
 tempdata$cellType = rep(utypes,5)
-p2_RMSE <- ggplot(tempdata,aes(x=Methods,y=RMSE)) + geom_boxplot() +
+p2_RMSE = ggplot(tempdata,aes(x=Methods,y=RMSE)) + geom_boxplot() +
   geom_point(size = 2,aes(colour = cellType)) + theme_cowplot() + 
   ggtitle('RMSE for COAD')
 print(p2_RMSE)
@@ -442,14 +442,14 @@ print(cormat)
 print(err)
 print(rss)
 
-OneMinusCorr <- 1-matrix(cormat,ncol = 1, byrow = FALSE)
-RMSE     <- matrix(err,ncol = 1, byrow = FALSE )
-CellType <- rep(cellTypes,length(methods))
-Methods  <- rep(methods,each = length(cellTypes))
-res      <- cbind.data.frame(OneMinusCorr, RMSE, CellType, Methods)
+OneMinusCorr = 1-matrix(cormat,ncol = 1, byrow = FALSE)
+RMSE     = matrix(err,ncol = 1, byrow = FALSE )
+CellType = rep(cellTypes,length(methods))
+Methods  = rep(methods,each = length(cellTypes))
+res      = cbind.data.frame(OneMinusCorr, RMSE, CellType, Methods)
 
 pdf('_figures_COAD/COAD_corr_vs_RMSE.pdf', width=5, height=4.5)
-complot<- ggplot(res, aes(x=OneMinusCorr,y=RMSE, color =  Methods)) + 
+complot= ggplot(res, aes(x=OneMinusCorr,y=RMSE, color =  Methods)) + 
   ggtitle('COAD') + geom_point() + 
   scale_y_continuous(trans = log2_trans(),
                      breaks = trans_breaks('log10',function(x) 10^x),
@@ -458,8 +458,8 @@ complot<- ggplot(res, aes(x=OneMinusCorr,y=RMSE, color =  Methods)) +
 print(complot)
 dev.off()
 
-cormat_COAD <- cormat
-err_COAD    <- err
+cormat_COAD = cormat
+err_COAD    = err
 save(cormat_COAD, file = '_figures_COAD/COAD_metrics_cor.RData')
 save(err_COAD,    file = '_figures_COAD/COAD_metrics_RMSE.RData')
 
@@ -470,12 +470,12 @@ save(err_COAD,    file = '_figures_COAD/COAD_metrics_RMSE.RData')
 load('_figures_COAD/COAD_box_plot_cor_RMSE.RData')
 
 load('_figures_COAD/COAD_plot_list_B.RData')
-p31 <- plist[[1]]+theme_cowplot()
-p32 <- plist[[2]]+theme_cowplot()
+p31 = plist[[1]]+theme_cowplot()
+p32 = plist[[2]]+theme_cowplot()
 
 load('_figures_COAD/COAD_plot_list_NK.RData')
-p41 <- plist[[1]]+theme_cowplot()
-p42 <- plist[[2]]+theme_cowplot()
+p41 = plist[[1]]+theme_cowplot()
+p42 = plist[[2]]+theme_cowplot()
 
 pdf('_figures_COAD/COAD_full.pdf',width=8, height = 10)
 grid.arrange(grobs = list(p1_cor, p2_RMSE, p31, p32, p41, p42), ncol = 2)
