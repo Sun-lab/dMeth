@@ -115,7 +115,8 @@ table(sam$label)
 cellTypes = unique(sam$label)
 
 # ------------------------------------------------------------
-# read tumor purity 
+# read tumor purity from pan cancer study, and compare it 
+# with the purity from ASCAT from our earlier study
 # ------------------------------------------------------------
 
 dir0 = "TCGA_results/clinical_data/"
@@ -196,7 +197,8 @@ for(ct in cellTypes){
 
 #----------------------------------------------------------------------
 # Read Estimation from Expression Data, take intersection of the 
-# samples with cell type estimation from expression and DNA methylation
+# samples with cell type proportion estimates from expression or 
+# DNA methylation
 #----------------------------------------------------------------------
 
 fnm = '_cibersortx_results/CIBERSORTx_COAD_Adjusted.txt'
@@ -324,6 +326,12 @@ hundrediter = cv.emeth(ys, eta, mu, aber = TRUE, V='c', init = 'default',
                        family = 'normal', nu = penalty, folds = 5, 
                        maxiter = 50, verbose = TRUE)
 rho[,,'EMeth'] = hundrediter[[1]]$rho
+
+dim(rho[,,'EMeth'])
+rho[1:2,,'EMeth']
+
+EM_purity = 1 - rowSums(rho[,,'EMeth'])
+summary(EM_purity - eta)
 
 #---------------------------------------------------------------------
 # save the results

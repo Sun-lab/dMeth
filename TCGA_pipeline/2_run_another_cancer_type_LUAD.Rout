@@ -1,0 +1,913 @@
+> 
+> library(data.table)
+> library(scales)
+> library(stringr)
+> library(e1071)
+> library(ggplot2)
+> library(MASS)
+> library(gridExtra)
+> library(quantreg)
+Loading required package: SparseM
+
+Attaching package: ‘SparseM’
+
+The following object is masked from ‘package:base’:
+
+    backsolve
+
+> library(quadprog)
+> library(EMeth)
+> library(cowplot)
+
+********************************************************
+Note: As of version 1.0.0, cowplot does not change the
+  default ggplot2 theme anymore. To recover the previous
+  behavior, execute:
+  theme_set(theme_cowplot())
+********************************************************
+
+> library(ggpubr)
+
+Attaching package: ‘ggpubr’
+
+The following object is masked from ‘package:cowplot’:
+
+    get_legend
+
+> theme_set(theme_classic2())
+> 
+> args=(commandArgs(TRUE))
+> args
+[1] "cancer_type='LUAD'"
+> 
+> if (length(args) != 1) {
++   message("one argument is expected, use 'SKCM' as default.\n")
++   cancer_type = "SKCM"
++ }else{
++   eval(parse(text=args[[1]]))
++ }
+> 
+> ctype = tolower(cancer_type)
+> cancer_type
+[1] "LUAD"
+> ctype
+[1] "luad"
+> 
+> # the raw data of DNA metylation is too large to be kept in gitHub
+> # here is the local path for DNA methylation data
+> path.data = "~/research/TCGA/data_EMeth"
+> 
+> # ------------------------------------------------------------
+> # read in pure cell type data
+> # ------------------------------------------------------------
+> 
+> path.ref = "../cell_type_specific_reference/data"
+> 
+> info = fread(file.path(path.ref, "methylation_pure_ct_info.txt.gz"))
+> dim(info)
+[1] 220886     31
+> info[1:2,]
+           ID       Name Infinium_Design_Type Next_Base Color_Channel
+1: cg00000029 cg00000029                   II                        
+2: cg00000236 cg00000236                   II                        
+   Genome_Build CHR  MAPINFO Chromosome_36 Coordinate_36 Strand Probe_SNPs
+1:           37  16 53468112            16      52025613      F         NA
+2:           37   8 42263294             8      42382451      R         NA
+   Probe_SNPs_10 Random_Loci Methyl27_Loci UCSC_RefGene_Name
+1:            NA          NA            NA              RBL2
+2:            NA          NA            NA       VDAC3;VDAC3
+   UCSC_RefGene_Accession UCSC_RefGene_Group   UCSC_CpG_Islands_Name
+1:              NM_005611            TSS1500 chr16:53468284-53469209
+2: NM_005662;NM_001135694        3'UTR;3'UTR                        
+   Relation_to_UCSC_CpG_Island Phantom DMR Enhancer HMM_Island
+1:                     N_Shore                   NA           
+2:                                               NA           
+   Regulatory_Feature_Name Regulatory_Feature_Group  DHS RANGE_START RANGE_END
+1:    16:53467838-53469685      Promoter_Associated TRUE    53468112  53468235
+2:                                                    NA    42263294  42263417
+       RANGE_GB SPOT_ID
+1:  NC_000016.9      NA
+2: NC_000008.10      NA
+> 
+> fnm = file.path(path.ref, "methylation_pure_ct_rmPC2_data_signif4.txt.gz")
+> dat = fread(fnm)
+> dim(dat)
+[1] 220886    189
+> dat[1:2,1:5]
+   GSM861653 GSM861654 GSM861655 GSM861656 GSM861657
+1:    0.6328    0.6211    0.6287    0.6397    0.6260
+2:    0.8424    0.8050    0.8104    0.8338    0.8415
+> 
+> sam = fread(file.path(path.ref, "methylation_pure_ct_sample.txt"))
+> dim(sam)
+[1] 189   3
+> sam[1:2,]
+          id label   study
+1: GSM861653  CD4T Reinius
+2: GSM861654  CD4T Reinius
+> 
+> table(names(dat) == sam$id)
+
+TRUE 
+ 189 
+> 
+> dat = data.matrix(dat)
+> table(sam$label)
+
+         B       CD4T       CD8T   Monocyte Neutrophil         NK       Treg 
+         6         60         37         40         21         21          4 
+> rownames(dat) = info$ID
+> 
+> # ------------------------------------------------------------
+> # read DNA methylation data
+> # ------------------------------------------------------------
+> 
+> fnm_data   = sprintf("%s_methylation.txt.gz", ctype)
+> fnm_sample = sprintf("%s_sample_info.txt", ctype)
+> 
+> datM = fread(file.path(path.data, fnm_data))
+> dim(datM)
+[1] 396065    492
+> datM[1:2, 1:5]
+          cpg    X4384    X4390    X4396    X4405
+1: cg00000029 0.271459 0.229904 0.178549 0.421797
+2: cg00000165 0.237847 0.684000 0.769536 0.572464
+> 
+> sampinfo = fread(file.path(path.data, fnm_sample), header = FALSE)
+> names(sampinfo) = c("id", "barcode", "patient_id")
+> dim(sampinfo)
+[1] 491   3
+> sampinfo[1:2,]
+     id      barcode patient_id
+1: 4821 TCGA-05-4384       4384
+2: 4822 TCGA-05-4390       4390
+> 
+> table(table(sampinfo$barcode))
+
+  1   2   3 
+429  28   2 
+> 
+> cpg = datM$cpg
+> names(datM) = gsub('^X', "", names(datM))
+> datM[,cpg:=NULL]
+> datM = data.matrix(datM)
+> rownames(datM) = cpg
+> datM[1:2,1:3]
+               4384     4390     4396
+cg00000029 0.271459 0.229904 0.178549
+cg00000165 0.237847 0.684000 0.769536
+> 
+> # ------------------------------------------------------------
+> # read tumor purity data
+> # ------------------------------------------------------------
+> 
+> dir0 = "TCGA_results/clinical_data/"
+> fnm0 = paste0(dir0, "TCGA_mastercalls.abs_tables_JSedit.fixed.txt")
+> tcga_purity = fread(fnm0)
+> dim(tcga_purity)
+[1] 10786    10
+> tcga_purity[1:2,]
+             array                       sample call status purity ploidy
+1: TCGA-OR-A5J1-01 TCGA-OR-A5J1-01A-11D-A29H-01      called   0.90    2.0
+2: TCGA-OR-A5J2-01 TCGA-OR-A5J2-01A-11D-A29H-01      called   0.89    1.3
+   Genome doublings Coverage for 80% power Cancer DNA fraction
+1:                0                      9                0.90
+2:                0                      6                0.84
+   Subclonal genome fraction solution
+1:                      0.02      new
+2:                      0.16      new
+> 
+> tcga_purity = tcga_purity[which(!is.na(tcga_purity$purity)),]
+> dim(tcga_purity)
+[1] 10642    10
+> tcga_purity[1:2,]
+             array                       sample call status purity ploidy
+1: TCGA-OR-A5J1-01 TCGA-OR-A5J1-01A-11D-A29H-01      called   0.90    2.0
+2: TCGA-OR-A5J2-01 TCGA-OR-A5J2-01A-11D-A29H-01      called   0.89    1.3
+   Genome doublings Coverage for 80% power Cancer DNA fraction
+1:                0                      9                0.90
+2:                0                      6                0.84
+   Subclonal genome fraction solution
+1:                      0.02      new
+2:                      0.16      new
+> 
+> tcga_purity$barcode = substr(tcga_purity$array, 1, 12)
+> 
+> # one barcode may correspond to a fe samples, here we just
+> # use the first one
+> uniq_barcodes = intersect(sampinfo$barcode, tcga_purity$barcode)
+> length(uniq_barcodes)
+[1] 446
+> 
+> table(sampinfo$patient_id == colnames(datM))
+
+TRUE 
+ 491 
+> 
+> mat1 = match(uniq_barcodes, sampinfo$barcode)
+> sampinfo = sampinfo[mat1,] 
+> datM     = datM[, mat1]
+> 
+> table(sampinfo$patient_id == colnames(datM))
+
+TRUE 
+ 446 
+> dim(datM)
+[1] 396065    446
+> datM[1:2,1:4]
+               4384     4390     4396     4405
+cg00000029 0.271459 0.229904 0.178549 0.421797
+cg00000165 0.237847 0.684000 0.769536 0.572464
+> 
+> purity = tcga_purity[match(uniq_barcodes, tcga_purity$barcode),]
+> dim(purity)
+[1] 446  11
+> 
+> anyNA(purity$purity)
+[1] FALSE
+> 
+> # ------------------------------------------------------------
+> # read in probes to be used
+> # ------------------------------------------------------------
+> 
+> load(file.path(path.ref, "ref_966probes.RData"))
+> ls()
+ [1] "args"          "cancer_type"   "cpg"           "ctype"        
+ [5] "dat"           "datM"          "dir0"          "fnm"          
+ [9] "fnm_data"      "fnm_sample"    "fnm0"          "info"         
+[13] "mat1"          "path.data"     "path.ref"      "probe2use"    
+[17] "purity"        "sam"           "sampinfo"      "tcga_purity"  
+[21] "uniq_barcodes"
+> length(probe2use)
+[1] 966
+> length(unique(probe2use))
+[1] 966
+> 
+> table(probe2use %in% rownames(datM))
+
+TRUE 
+ 966 
+> table(probe2use %in% rownames(dat))
+
+TRUE 
+ 966 
+> 
+> X  = dat[match(probe2use, rownames(dat)),]
+> dim(X)
+[1] 966 189
+> X[1:2,1:5]
+           GSM861653 GSM861654 GSM861655 GSM861656 GSM861657
+cg10472651    0.4202    0.4898    0.4347    0.5290    0.4395
+cg27603015    0.6243    0.6421    0.6768    0.6456    0.7165
+> 
+> dim(sam)
+[1] 189   3
+> table(sam$id == colnames(X))
+
+TRUE 
+ 189 
+> 
+> table(sam$label)
+
+         B       CD4T       CD8T   Monocyte Neutrophil         NK       Treg 
+         6         60         37         40         21         21          4 
+> cellTypes = unique(sam$label)
+> 
+> # ------------------------------------------------------------
+> # extract methylation data from tumor samples
+> # ------------------------------------------------------------
+> 
+> ys = datM[match(rownames(X), rownames(datM)),]
+> dim(ys)
+[1] 966 446
+> ys[1:2,1:5]
+               4384     4390     4396     4405     4410
+cg10472651 0.391124 0.702806 0.704656 0.389577 0.423626
+cg27603015 0.496923 0.817323 0.809448 0.714030 0.702150
+> 
+> ys_no_na = which(colSums(is.na(ys)) == 0)
+> 
+> ys     = ys[,ys_no_na]
+> purity = purity[ys_no_na,]
+> 
+> dim(ys)
+[1] 966 419
+> ys[1:2,1:5]
+               4390     4396     4405     4410     4415
+cg10472651 0.702806 0.704656 0.389577 0.423626 0.749399
+cg27603015 0.817323 0.809448 0.714030 0.702150 0.744003
+> 
+> dim(purity)
+[1] 419  11
+> purity[1:2,]
+             array                       sample call status purity ploidy
+1: TCGA-05-4390-01 TCGA-05-4390-01A-02D-1752-01      called   0.57   3.89
+2: TCGA-05-4396-01 TCGA-05-4396-01A-21D-1854-01      called   0.82   1.86
+   Genome doublings Coverage for 80% power Cancer DNA fraction
+1:                1                     25                0.72
+2:                0                      9                0.80
+   Subclonal genome fraction solution      barcode
+1:                      0.36      new TCGA-05-4390
+2:                      0.16      new TCGA-05-4396
+> 
+> purity$patient_id = substr(purity$barcode, 9, 12)
+> table(colnames(ys) == purity$patient_id)
+
+TRUE 
+ 419 
+> 
+> #-------------------------------------------------------------
+> # Estimate Mean Matrix mu
+> #-------------------------------------------------------------
+> 
+> mu = matrix(NA, nrow = dim(X)[1], ncol = length(cellTypes))
+> s2 = matrix(NA, nrow = dim(X)[1], ncol = length(cellTypes))
+> 
+> row.names(mu) = row.names(s2) = rownames(X)
+> colnames(mu)  = colnames(s2)  = cellTypes
+> 
+> for(ct in cellTypes){
++   sam.ct = unlist(sam[which(sam[,2]==ct),1])
++   dat.ct = X[,sam.ct]
++   mu[,ct] = rowMeans(dat.ct,na.rm=TRUE)
++   s2[,ct] = apply(dat.ct,1,sd,na.rm = TRUE)^2
++ }
+> 
+> #----------------------------------------------------------------------
+> # Read Estimation from Expression Data, take intersection of the 
+> # samples with cell type estimation from expression and DNA methylation
+> #----------------------------------------------------------------------
+> 
+> fnm = sprintf('_cibersortx_results/CIBERSORTx_%s_Adjusted.txt', cancer_type)
+> est_expr = fread(fnm)
+> dim(est_expr)
+[1] 516  26
+> est_expr[1:2,]
+            Mixture B cells naive B cells memory Plasma cells T cells CD8
+1: TCGA.91.6840.01A     0.1379944              0   0.08312470  0.13491574
+2: TCGA.55.6986.01A     0.1134665              0   0.04636918  0.09933023
+   T cells CD4 naive T cells CD4 memory resting T cells CD4 memory activated
+1:                 0                  0.1469522                  0.009867093
+2:                 0                  0.1546519                  0.011655351
+   T cells follicular helper T cells regulatory (Tregs) T cells gamma delta
+1:                0.04345534                 0.03066841                   0
+2:                0.01831847                 0.02231024                   0
+   NK cells resting NK cells activated  Monocytes Macrophages M0 Macrophages M1
+1:                0         0.02771573 0.00000000     0.12757621     0.10584622
+2:                0         0.02217755 0.01968871     0.06724316     0.03034507
+   Macrophages M2 Dendritic cells resting Dendritic cells activated
+1:     0.09693409             0.005276603                0.00000000
+2:     0.22876496             0.083154748                0.01163922
+   Mast cells resting Mast cells activated Eosinophils  Neutrophils P-value
+1:         0.04904004                    0           0 0.0006332787       0
+2:         0.06357676                    0           0 0.0073079886       0
+   Correlation      RMSE
+1:   0.5664346 0.8326562
+2:   0.6986487 0.7797674
+> 
+> samname  = substr(est_expr$Mixture, 9, 12)
+> length(samname)
+[1] 516
+> samname[1:5]
+[1] "6840" "6986" "4395" "7672" "2662"
+> 
+> est_expr = data.matrix(est_expr[,-1])
+> rownames(est_expr) = samname
+> dim(est_expr)
+[1] 516  25
+> est_expr[1:2,]
+     B cells naive B cells memory Plasma cells T cells CD8 T cells CD4 naive
+6840     0.1379944              0   0.08312470  0.13491574                 0
+6986     0.1134665              0   0.04636918  0.09933023                 0
+     T cells CD4 memory resting T cells CD4 memory activated
+6840                  0.1469522                  0.009867093
+6986                  0.1546519                  0.011655351
+     T cells follicular helper T cells regulatory (Tregs) T cells gamma delta
+6840                0.04345534                 0.03066841                   0
+6986                0.01831847                 0.02231024                   0
+     NK cells resting NK cells activated  Monocytes Macrophages M0
+6840                0         0.02771573 0.00000000     0.12757621
+6986                0         0.02217755 0.01968871     0.06724316
+     Macrophages M1 Macrophages M2 Dendritic cells resting
+6840     0.10584622     0.09693409             0.005276603
+6986     0.03034507     0.22876496             0.083154748
+     Dendritic cells activated Mast cells resting Mast cells activated
+6840                0.00000000         0.04904004                    0
+6986                0.01163922         0.06357676                    0
+     Eosinophils  Neutrophils P-value Correlation      RMSE
+6840           0 0.0006332787       0   0.5664346 0.8326562
+6986           0 0.0073079886       0   0.6986487 0.7797674
+> 
+> com_sample = intersect(rownames(est_expr), colnames(ys))
+> length(com_sample)
+[1] 414
+> 
+> est_expr = est_expr[match(com_sample,rownames(est_expr)),]
+> dim(est_expr)
+[1] 414  25
+> est_expr[1:2,]
+     B cells naive B cells memory Plasma cells T cells CD8 T cells CD4 naive
+6840     0.1379944              0   0.08312470  0.13491574                 0
+6986     0.1134665              0   0.04636918  0.09933023                 0
+     T cells CD4 memory resting T cells CD4 memory activated
+6840                  0.1469522                  0.009867093
+6986                  0.1546519                  0.011655351
+     T cells follicular helper T cells regulatory (Tregs) T cells gamma delta
+6840                0.04345534                 0.03066841                   0
+6986                0.01831847                 0.02231024                   0
+     NK cells resting NK cells activated  Monocytes Macrophages M0
+6840                0         0.02771573 0.00000000     0.12757621
+6986                0         0.02217755 0.01968871     0.06724316
+     Macrophages M1 Macrophages M2 Dendritic cells resting
+6840     0.10584622     0.09693409             0.005276603
+6986     0.03034507     0.22876496             0.083154748
+     Dendritic cells activated Mast cells resting Mast cells activated
+6840                0.00000000         0.04904004                    0
+6986                0.01163922         0.06357676                    0
+     Eosinophils  Neutrophils P-value Correlation      RMSE
+6840           0 0.0006332787       0   0.5664346 0.8326562
+6986           0 0.0073079886       0   0.6986487 0.7797674
+> 
+> ys  = ys[,match(com_sample,colnames(ys))]
+> eta = purity
+> eta = eta[match(com_sample,eta$patient_id)]
+> 
+> dim(ys)
+[1] 966 414
+> ys[1:2,1:4]
+               6840     6986     7672     2662
+cg10472651 0.714801 0.369166 0.587387 0.517934
+cg27603015 0.824778 0.687843 0.745962 0.667508
+> 
+> dim(eta)
+[1] 414  12
+> eta[1:2,]
+             array                       sample call status purity ploidy
+1: TCGA-91-6840-01 TCGA-91-6840-01A-11D-1943-01      called   0.62   2.84
+2: TCGA-55-6986-01 TCGA-55-6986-01A-11D-1943-01      called   0.40   1.96
+   Genome doublings Coverage for 80% power Cancer DNA fraction
+1:                1                     17                0.70
+2:                0                     21                0.39
+   Subclonal genome fraction solution      barcode patient_id
+1:                      0.15      new TCGA-91-6840       6840
+2:                      0.28      new TCGA-55-6986       6986
+> 
+> table(colnames(ys) == rownames(est_expr))
+
+TRUE 
+ 414 
+> table(rownames(ys) == rownames(mu))
+
+TRUE 
+ 966 
+> 
+> #----------------------------------------------------------------------
+> # collapse cell types from expression data into fewer cell types
+> #----------------------------------------------------------------------
+> 
+> deconv_expr = matrix(NA, nrow = nrow(est_expr),ncol = length(cellTypes))
+> colnames(deconv_expr) = cellTypes 
+> rownames(deconv_expr) = rownames(est_expr)
+> colnames(est_expr)
+ [1] "B cells naive"                "B cells memory"              
+ [3] "Plasma cells"                 "T cells CD8"                 
+ [5] "T cells CD4 naive"            "T cells CD4 memory resting"  
+ [7] "T cells CD4 memory activated" "T cells follicular helper"   
+ [9] "T cells regulatory (Tregs)"   "T cells gamma delta"         
+[11] "NK cells resting"             "NK cells activated"          
+[13] "Monocytes"                    "Macrophages M0"              
+[15] "Macrophages M1"               "Macrophages M2"              
+[17] "Dendritic cells resting"      "Dendritic cells activated"   
+[19] "Mast cells resting"           "Mast cells activated"        
+[21] "Eosinophils"                  "Neutrophils"                 
+[23] "P-value"                      "Correlation"                 
+[25] "RMSE"                        
+> 
+> other = rowSums(est_expr[,c(10,19,20,21)])
+> deconv_expr[,"B"]    = rowSums(est_expr[,1:3])/0.4
+> deconv_expr[,"CD4T"] = rowSums(est_expr[,5:8])/0.4
+> deconv_expr[,"CD8T"] = as.matrix(est_expr[,4])/0.4
+> deconv_expr[,"Treg"] = as.matrix(est_expr[,9])/0.4
+> deconv_expr[,"NK"] = rowSums(est_expr[,11:12])/0.42
+> deconv_expr[,"Monocyte"] = rowSums(est_expr[,13:18])/1.40
+> deconv_expr[,"Neutrophil"] = as.matrix(est_expr[,22])/0.15
+> deconv_expr = deconv_expr / rowSums(deconv_expr)
+> 
+> dim(deconv_expr)
+[1] 414   7
+> deconv_expr[1:2,]
+          CD4T      CD8T  Monocyte         B         NK  Neutrophil       Treg
+6840 0.2816969 0.1897662 0.1348817 0.3110158 0.03712730 0.002375308 0.04313676
+6986 0.2918225 0.1570030 0.1990836 0.2526389 0.03338496 0.030803013 0.03526394
+> 
+> #---------------------------------------------------------------------
+> # Compare results with different methods and with expression data
+> #---------------------------------------------------------------------
+> 
+> eta = eta$purity
+> summary(eta)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.0900  0.3100  0.4300  0.4571  0.5800  1.0000 
+> eta[which(eta > 0.99)] = 0.99
+> 
+> temp = rownames(deconv_expr)
+> deconv_expr = diag(1-eta) %*% deconv_expr
+> rownames(deconv_expr) = temp
+> 
+> mu[mu < 0.05] = 0.05
+> mu[mu > 0.95] = 0.95
+> 
+> penalty = dim(ys)[1]*(10^seq(-2,1,1)) 
+> 
+> methods = c("EMeth","svr","ls","rls","qp")
+> rho     = array(data = NA, dim = c(ncol(ys), length(cellTypes), length(methods)),
++                 dimnames = list(colnames(ys), cellTypes, methods))
+> 
+> alpha   = rep(1/length(cellTypes), length(cellTypes))
+> simsize = ncol(ys)
+> 
+> C = c(0.1,1/sqrt(10),1,sqrt(10),10)
+> 
+> for(j in 1:ncol(ys)){
++   if(j %% 10 == 0){ cat(j, date(), "\n") }
++   y    = ys[,j]
++   X    = as.data.frame(mu)
++   Xmat = mu
++   
++   cv_svr = rep(0,5)
++   svrmodel1       = svm(y~., data = X, kernel='linear', cost=0.1, cross=5)
++   cv_svr[1]       = mean(svrmodel1$MSE)
++   svrmodel2       = svm(y~., data = X, kernel='linear', cost=1/sqrt(10), cross=5)
++   cv_svr[2]       = mean(svrmodel2$MSE)
++   svrmodel3       = svm(y~., data = X, kernel='linear', cost=1, cross=5)
++   cv_svr[3]       = mean(svrmodel2$MSE)
++   svrmodel4       = svm(y~., data = X, kernel='linear', cost=sqrt(10), cross=5)
++   cv_svr[4]       = mean(svrmodel2$MSE)
++   svrmodel5       = svm(y~., data = X, kernel='linear', cost=10, cross=5)
++   cv_svr[5]       = mean(svrmodel5$MSE)
++   best_svr        = which.min(cv_svr)
++   svrmodel        = svm(y~., data = X, kernel='linear', cost=C[best_svr])
++   temp            = (t(svrmodel$coefs) %*% svrmodel$SV)
++   temp[temp < 0]  = 0
++   rho[j,,'svr']   = (1-eta[j])*temp/sum(temp)
++   
++   temp            = lm(y ~ .-1,data = X)$coefficients
++   temp[temp < 0]  = 0
++   rho[j,,'ls']    = (1-eta[j])*temp/sum(temp)
++   
++   temp            = rlm(y ~ .-1,data = X)$coefficients
++   temp[temp < 0]  = 0
++   rho[j,,'rls']   = (1-eta[j])*temp/sum(temp)
++   
++   A = rbind(diag(rep(1,length(cellTypes))),rep(-1,length(cellTypes)))
++   b = c(rep(0,length(cellTypes)),-1+eta[j])
++   D = t(Xmat) %*% Xmat
++   d = t(t(Xmat) %*% y)
++   rho[j,,'qp']   = (solve.QP(D,d,t(A),b)$solution)
++ }
+10 Wed Dec 23 09:53:01 2020 
+20 Wed Dec 23 09:53:21 2020 
+30 Wed Dec 23 09:53:41 2020 
+40 Wed Dec 23 09:54:00 2020 
+50 Wed Dec 23 09:54:20 2020 
+60 Wed Dec 23 09:54:39 2020 
+70 Wed Dec 23 09:54:58 2020 
+80 Wed Dec 23 09:55:17 2020 
+90 Wed Dec 23 09:55:37 2020 
+100 Wed Dec 23 09:55:55 2020 
+110 Wed Dec 23 09:56:14 2020 
+120 Wed Dec 23 09:56:32 2020 
+130 Wed Dec 23 09:56:52 2020 
+140 Wed Dec 23 09:57:11 2020 
+150 Wed Dec 23 09:57:30 2020 
+160 Wed Dec 23 09:57:49 2020 
+170 Wed Dec 23 09:58:08 2020 
+180 Wed Dec 23 09:58:28 2020 
+190 Wed Dec 23 09:58:47 2020 
+200 Wed Dec 23 09:59:06 2020 
+210 Wed Dec 23 09:59:27 2020 
+220 Wed Dec 23 09:59:46 2020 
+230 Wed Dec 23 10:00:05 2020 
+240 Wed Dec 23 10:00:25 2020 
+250 Wed Dec 23 10:00:45 2020 
+260 Wed Dec 23 10:01:04 2020 
+270 Wed Dec 23 10:01:21 2020 
+280 Wed Dec 23 10:01:37 2020 
+290 Wed Dec 23 10:01:55 2020 
+300 Wed Dec 23 10:02:12 2020 
+310 Wed Dec 23 10:02:29 2020 
+320 Wed Dec 23 10:02:46 2020 
+330 Wed Dec 23 10:03:06 2020 
+340 Wed Dec 23 10:03:23 2020 
+350 Wed Dec 23 10:03:41 2020 
+360 Wed Dec 23 10:03:59 2020 
+370 Wed Dec 23 10:04:17 2020 
+380 Wed Dec 23 10:04:35 2020 
+390 Wed Dec 23 10:04:53 2020 
+400 Wed Dec 23 10:05:11 2020 
+410 Wed Dec 23 10:05:28 2020 
+There were 50 or more warnings (use warnings() to see the first 50)
+> 
+> print('EMeth')
+[1] "EMeth"
+> hundrediter = cv.emeth(ys, eta, mu, aber = TRUE, V='c', init = 'default',
++                        family = 'normal', nu = penalty, folds = 5, 
++                        maxiter = 50, verbose = TRUE)
+50 Wed Dec 23 10:05:38 2020 
+100 Wed Dec 23 10:05:38 2020 
+150 Wed Dec 23 10:05:38 2020 
+200 Wed Dec 23 10:05:38 2020 
+250 Wed Dec 23 10:05:38 2020 
+300 Wed Dec 23 10:05:38 2020 
+350 Wed Dec 23 10:05:38 2020 
+400 Wed Dec 23 10:05:38 2020 
+[1] "finish cross validation"
+-------------------
+10 Wed Dec 23 10:09:20 2020 
+-------------------
+20 Wed Dec 23 10:10:46 2020 
+-------------------
+30 Wed Dec 23 10:12:08 2020 
+-------------------
+40 Wed Dec 23 10:13:29 2020 
+-------------------
+50 Wed Dec 23 10:14:49 2020 
+> rho[,,'EMeth'] = hundrediter[[1]]$rho
+> 
+> #---------------------------------------------------------------------
+> # save the results
+> #---------------------------------------------------------------------
+> 
+> dim(rho)
+[1] 414   7   5
+> rho[1,,]
+                   EMeth         svr         ls        rls            qp
+CD4T        6.527711e-02 0.169344564 0.05004264 0.09353112  3.800000e-01
+CD8T       -1.398293e-18 0.000000000 0.08467521 0.05086987 -9.544476e-17
+Monocyte    5.060629e-02 0.065360684 0.08159159 0.07563189  2.529029e-17
+B           5.653567e-02 0.074098635 0.07241928 0.07475072  0.000000e+00
+NK          2.489295e-02 0.035103098 0.03780525 0.04566664  7.711807e-17
+Neutrophil -3.075167e-19 0.007166198 0.02544876 0.02319989  9.586117e-17
+Treg        1.826880e-01 0.028926821 0.02801726 0.01634986  0.000000e+00
+> dimnames(rho)
+[[1]]
+  [1] "6840" "6986" "7672" "2662" "8175" "8087" "7160" "A4E5" "A4LX" "8359"
+ [11] "6145" "7155" "8025" "A47G" "8615" "7499" "7711" "8075" "7955" "8508"
+ [21] "A4DG" "7771" "6849" "5781" "6146" "7552" "6829" "7458" "4424" "2666"
+ [31] "6775" "4631" "7283" "7567" "8497" "7540" "A48Y" "7995" "7764" "7947"
+ [41] "A4TH" "7725" "A5IP" "7554" "8619" "7145" "A479" "A93V" "7633" "A4YP"
+ [51] "7535" "6970" "6543" "4490" "A471" "A456" "4512" "5122" "A48X" "6982"
+ [61] "5045" "8513" "A4TC" "5146" "7167" "8194" "A4M0" "7661" "8205" "A48Z"
+ [71] "5645" "5428" "8255" "5125" "8097" "7152" "A4TF" "6836" "A47A" "A57B"
+ [81] "8207" "7576" "A494" "7043" "A443" "7974" "A4YG" "7760" "A4JN" "8073"
+ [91] "A7SV" "A4JP" "7163" "A55R" "A4M7" "A44F" "8399" "4514" "5643" "A4AE"
+[101] "4415" "6830" "6745" "A4P7" "6975" "7039" "4487" "7727" "5644" "7914"
+[111] "A46R" "6207" "7813" "4410" "8620" "5774" "A4D0" "A444" "A4T7" "A4BD"
+[121] "7994" "8028" "8171" "6216" "6848" "2665" "7701" "7156" "6642" "7149"
+[131] "7146" "A4P8" "6217" "8640" "7670" "5941" "5779" "A46O" "8459" "A4JF"
+[141] "A4AG" "6774" "5066" "8119" "AAR2" "6779" "8669" "5715" "A491" "8496"
+[151] "8254" "A4VP" "8039" "8076" "2659" "8203" "A5C7" "7220" "7153" "7910"
+[161] "5778" "7815" "6985" "7761" "A4N4" "6972" "A4M1" "5908" "8179" "8174"
+[171] "6777" "A46P" "8089" "A4N5" "8671" "A46V" "3918" "6592" "6831" "6987"
+[181] "8672" "A4JQ" "8177" "4396" "6978" "8453" "7109" "5049" "8660" "6828"
+[191] "6590" "8176" "5935" "7281" "4488" "A55A" "8494" "7158" "7347" "7953"
+[201] "5072" "A46S" "A4EZ" "7973" "8204" "5375" "7539" "A4VK" "5055" "7667"
+[211] "A4TI" "6979" "7284" "6778" "6776" "2656" "4676" "8673" "8395" "A4SS"
+[221] "8358" "6968" "7547" "2655" "6212" "4390" "8674" "6742" "A4SW" "5815"
+[231] "A4T8" "A4YI" "8302" "4405" "7147" "2668" "6971" "6591" "7944" "A4YF"
+[241] "8091" "4112" "8397" "5942" "8206" "8094" "5423" "AAR4" "A4M3" "6984"
+[251] "4427" "8281" "A4SU" "5147" "7546" "8585" "8301" "6562" "A4AD" "8510"
+[261] "8033" "7978" "8054" "7660" "8662" "7027" "A4M6" "A4SV" "A4JO" "7937"
+[271] "6206" "A472" "AA5R" "8085" "8117" "8506" "A7XG" "1679" "8616" "6178"
+[281] "7348" "4658" "5607" "8505" "8172" "A52J" "7537" "8398" "AAQV" "8621"
+[291] "7626" "7669" "8067" "A4M2" "4425" "7763" "8056" "8512" "7025" "5930"
+[301] "6214" "A743" "5939" "7161" "8547" "8280" "7166" "8499" "6725" "7980"
+[311] "A8F4" "4433" "A492" "5936" "7662" "7154" "7498" "5933" "8507" "AA1A"
+[321] "7948" "6595" "7903" "5611" "7624" "6835" "A50W" "5044" "7714" "8402"
+[331] "7162" "AAR0" "7726" "A46Y" "6980" "A4SY" "7148" "A493" "6744" "7143"
+[341] "5051" "6851" "6205" "6743" "6597" "A490" "8032" "8279" "A4M5" "7536"
+[351] "8208" "7562" "A4TK" "6761" "6593" "7728" "8090" "7271" "8514" "5932"
+[361] "A4VN" "7954" "A4BC" "5126" "6211" "A470" "7911" "8460" "6981" "8120"
+[371] "8614" "8552" "8253" "8668" "8074" "7765" "8092" "A4YQ" "6983" "8394"
+[381] "7659" "6712" "7553" "8655" "7724" "6673" "7542" "7570" "A4DF" "7573"
+[391] "5068" "7150" "A4TA" "7907" "5899" "7574" "6148" "A4N1" "5429" "6847"
+[401] "8511" "5944" "8457" "7159" "6215" "A4T9" "7938" "5425" "7913" "4417"
+[411] "6203" "8096" "6767" "A4TE"
+
+[[2]]
+[1] "CD4T"       "CD8T"       "Monocyte"   "B"          "NK"        
+[6] "Neutrophil" "Treg"      
+
+[[3]]
+[1] "EMeth" "svr"   "ls"    "rls"   "qp"   
+
+> 
+> dim(deconv_expr)
+[1] 414   7
+> deconv_expr[1:2,]
+          CD4T       CD8T   Monocyte         B         NK   Neutrophil
+6840 0.1070448 0.07211116 0.05125505 0.1181860 0.01410837 0.0009026169
+6986 0.1750935 0.09420182 0.11945016 0.1515834 0.02003098 0.0184818078
+           Treg
+6840 0.01639197
+6986 0.02115836
+> 
+> save(rho, file = sprintf('TCGA_results/deconv_methy_%s.RData', cancer_type))
+> save(deconv_expr, 
++      file = sprintf('TCGA_results/deconv_expr_%s.RData', cancer_type))
+> 
+> #---------------------------------------------------------------------
+> # generate plots
+> #---------------------------------------------------------------------
+> 
+> setwd(sprintf("_figures_%s", cancer_type))
+> 
+> utypes = intersect(cellTypes, colnames(deconv_expr))
+> utypes
+[1] "CD4T"       "CD8T"       "Monocyte"   "B"          "NK"        
+[6] "Neutrophil" "Treg"      
+> 
+> methods = c("EMeth","svr","ls","rls","qp")
+> 
+> cormat = matrix(NA, nrow = length(utypes), ncol = length(methods))
+> colnames(cormat) = methods
+> rownames(cormat) = utypes
+> 
+> err <- rss <- cormat
+> 
+> for(i in 1:length(utypes)){
++   cormat[i,] = sapply(1:length(methods), FUN = function(j){
++     cor(rho[,utypes[i],methods[j]], deconv_expr[,utypes[i]])
++   })
++   err[i,] = sapply(1:length(methods), FUN = function(j){
++     sqrt(mean((rho[,utypes[i],methods[j]] - deconv_expr[,utypes[i]])^2))
++   }) 
++   rss[i,] = sapply(1:length(methods), FUN = function(j){
++     temp = lm(deconv_expr[,utypes[i]] ~ rho[,utypes[i],methods[j]])
++     return(sum(temp$residuals^2))
++   })
++ }
+> 
+> for(i in 1:length(utypes)){
++   pdf(sprintf('%s_expr_vs_methy_%s.pdf', cancer_type, utypes[i]), 
++       width=6, height=7.5)
++   
++   plist = list()
++   plist = lapply(1:length(methods), FUN = function(j){
++     tempdata = cbind(rho[,utypes[i],methods[j]],deconv_expr[,utypes[i]],eta)
++     colnames(tempdata) = c("methylation","expression","eta")
++     newplot = ggplot(data = as.data.frame(tempdata), 
++                       aes(x=methylation,y=expression,color=eta)) + 
++       xlim(0,0.3) + ylim(0,0.3) + geom_point(size=0.8) + 
++       geom_abline(intercept = 0,slope = 1) + 
++       scale_color_gradient2(limit = c(0,1), low = "blue", high = "red", 
++                             mid = "cadetblue1", midpoint = 0.5) + 
++       ggtitle(sprintf('%s on %s',methods[j],utypes[i]))
++   })
++   
++   grid.arrange(grobs = plist,ncol=2)
++   dev.off()
++   
++   fnm = sprintf('%s_plot_list_%s.RData', cancer_type, utypes[i])
++   save(plist, file = fnm)
++   
++ }
+There were 29 warnings (use warnings() to see them)
+> 
+> #---------------------------------------------------------------------
+> # Summarize correlation and RMSE
+> #---------------------------------------------------------------------
+> 
+> pdf(sprintf('%s_box_plot_correlation.pdf', cancer_type), 
++     width=4.5, height=3.5)
+> tempdata = melt(as.data.table(cormat))
+Warning message:
+In melt.data.table(as.data.table(cormat)) :
+  id.vars and measure.vars are internally guessed when both are 'NULL'. All non-numeric/integer/logical type columns are considered id.vars, which in this case are columns []. Consider providing at least one of 'id' or 'measure' vars in future.
+> colnames(tempdata) = c('Methods','Correlation')
+> tempdata$cellType = rep(utypes,5)
+> p1_cor = ggplot(tempdata,aes(x=Methods,y=Correlation)) + geom_boxplot() +
++   geom_point(size = 2,aes(colour = cellType)) + theme_cowplot() + 
++   ggtitle(sprintf('Correlation for %s', cancer_type))
+> print(p1_cor)
+> dev.off()
+null device 
+          1 
+> 
+> pdf(sprintf('%s_box_plot_RMSE.pdf', cancer_type), 
++     width=4.5, height=3.5)
+> tempdata = melt(as.data.table(err))
+Warning message:
+In melt.data.table(as.data.table(err)) :
+  id.vars and measure.vars are internally guessed when both are 'NULL'. All non-numeric/integer/logical type columns are considered id.vars, which in this case are columns []. Consider providing at least one of 'id' or 'measure' vars in future.
+> colnames(tempdata) = c('Methods','RMSE')
+> tempdata$cellType = rep(utypes,5)
+> p2_RMSE = ggplot(tempdata,aes(x=Methods,y=RMSE)) + geom_boxplot() +
++   geom_point(size = 2,aes(colour = cellType)) + theme_cowplot() + 
++   ggtitle(sprintf('RMSE for %s', cancer_type))
+> print(p2_RMSE)
+> dev.off()
+null device 
+          1 
+> 
+> save(p1_cor, p2_RMSE, 
++      file=sprintf('%s_box_plot_cor_RMSE.RData', cancer_type))
+> 
+> print(cormat)
+                  EMeth        svr          ls         rls          qp
+CD4T        0.003053533  0.2343822  0.03365727 -0.01673646 -0.20961431
+CD8T        0.678601050  0.6859180  0.70526223  0.69350080  0.72061115
+Monocyte    0.791737505  0.7483856  0.73422310  0.72131932  0.59701529
+B           0.787889152  0.7042079  0.68929568  0.65271396  0.72263074
+NK          0.234474051  0.1672815  0.18210759  0.11540691 -0.15933688
+Neutrophil  0.371528027  0.3927666  0.40466729  0.40072197  0.14633232
+Treg       -0.168180715 -0.0989087 -0.08882567 -0.06857965 -0.04700884
+> print(err)
+                EMeth        svr         ls        rls         qp
+CD4T       0.15049755 0.11804215 0.17611603 0.17577359 0.20304474
+CD8T       0.11517189 0.13331835 0.23195822 0.24821677 0.13590599
+Monocyte   0.04804038 0.05491714 0.03450134 0.03520617 0.08289031
+B          0.05416034 0.06094089 0.07869567 0.08327320 0.07303995
+NK         0.03580864 0.02054152 0.02094459 0.02165325 0.02289781
+Neutrophil 0.05915282 0.03456783 0.04543077 0.04201900 0.03267586
+Treg       0.07906860 0.03370399 0.03256723 0.03113329 0.05653479
+> print(rss)
+                EMeth        svr         ls       rls         qp
+CD4T       1.90206065 1.79758769 1.89992369 1.9015456 1.81850456
+CD8T       0.70637555 0.69330317 0.65806785 0.6796080 0.62941273
+Monocyte   0.37388415 0.44078245 0.46182113 0.4806400 0.64483596
+B          0.86750456 1.15312791 1.20066338 1.3129655 1.09299662
+NK         0.07725306 0.07945983 0.07903637 0.0806586 0.07967195
+Neutrophil 0.19484097 0.19117173 0.18902658 0.1897448 0.22120200
+Treg       0.12054624 0.12284149 0.12307632 0.1234717 0.12378097
+> 
+> OneMinusCorr = 1-matrix(cormat,ncol = 1, byrow = FALSE)
+> RMSE = matrix(err,ncol = 1, byrow = FALSE )
+> CellType = rep(cellTypes,length(methods))
+> Methods = rep(methods,each = length(cellTypes))
+> res = cbind.data.frame(OneMinusCorr,RMSE,CellType,Methods)
+> 
+> pdf(sprintf('%s_corr_vs_RMSE.pdf', cancer_type), width=5, height=4.5)
+> 
+> complot= ggplot(res, aes(x=OneMinusCorr,y=RMSE, color =  Methods)) + 
++   ggtitle('SKCM') + geom_point() + 
++   scale_y_continuous(trans = log2_trans(),
++                      breaks = trans_breaks('log10',function(x) 10^x),
++                      labels = trans_format('log10',math_format(10^.x))) + 
++   geom_text(label = res[,3])+xlim(0.1,1.05)
+> print(complot)
+Warning messages:
+1: Removed 6 rows containing missing values (geom_point). 
+2: Removed 6 rows containing missing values (geom_text). 
+> dev.off()
+null device 
+          1 
+> 
+> save(cormat, file = sprintf('%s_metrics_cor.RData', cancer_type))
+> save(err,    file = sprintf('%s_metrics_cor.RData', cancer_type))
+> 
+> sessionInfo()
+R version 3.6.2 (2019-12-12)
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+Running under: macOS Catalina 10.15.7
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] ggpubr_0.4.0.999  cowplot_1.0.0     EMeth_1.0         quadprog_1.5-8   
+ [5] quantreg_5.55     SparseM_1.78      gridExtra_2.3     MASS_7.3-51.5    
+ [9] ggplot2_3.3.1     e1071_1.7-3       stringr_1.4.0     scales_1.1.0     
+[13] data.table_1.12.8
+
+loaded via a namespace (and not attached):
+ [1] tidyselect_1.0.0   purrr_0.3.3        haven_2.3.0        lattice_0.20-38   
+ [5] carData_3.0-4      colorspace_1.4-1   vctrs_0.3.0        generics_0.0.2    
+ [9] rlang_0.4.6        R.oo_1.23.0        pillar_1.4.3       R.utils_2.9.2     
+[13] foreign_0.8-75     glue_1.3.1         withr_2.1.2        readxl_1.3.1      
+[17] lifecycle_0.2.0    MatrixModels_0.4-1 munsell_0.5.0      ggsignif_0.6.0    
+[21] gtable_0.3.0       cellranger_1.1.0   R.methodsS3_1.8.0  zip_2.0.4         
+[25] labeling_0.3       rio_0.5.16         forcats_0.5.0      curl_4.3          
+[29] class_7.3-15       broom_0.5.6        Rcpp_1.0.3         backports_1.1.5   
+[33] abind_1.4-5        farver_2.0.3       digest_0.6.23      hms_0.5.3         
+[37] stringi_1.4.5      openxlsx_4.1.5     rstatix_0.6.0      dplyr_0.8.4       
+[41] grid_3.6.2         tools_3.6.2        magrittr_1.5       tibble_3.0.1      
+[45] crayon_1.3.4       tidyr_1.0.2        car_3.0-8          pkgconfig_2.0.3   
+[49] ellipsis_0.3.0     Matrix_1.2-18      assertthat_0.2.1   R6_2.4.1          
+[53] nlme_3.1-144       compiler_3.6.2    
+> gc()
+            used   (Mb) gc trigger   (Mb) limit (Mb)  max used   (Mb)
+Ncells   3123385  166.9    5284751  282.3         NA   5284751  282.3
+Vcells 275716417 2103.6  701759470 5354.0      32768 701759470 5354.0
+> 
+> quit(save = 'no')
+> proc.time()
+    user   system  elapsed 
+1302.689   98.949 1380.334 
