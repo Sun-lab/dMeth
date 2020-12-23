@@ -242,7 +242,6 @@ colnames(deconv_expr) = cellTypes
 rownames(deconv_expr) = rownames(est_expr)
 colnames(est_expr)
 
-colnames(est_expr)
 other = rowSums(est_expr[,c(10,19,20,21)])
 deconv_expr[,"B"]    = rowSums(est_expr[,1:3])/0.4
 deconv_expr[,"CD4T"] = rowSums(est_expr[,5:8])/0.4
@@ -337,10 +336,8 @@ dimnames(rho)
 dim(deconv_expr)
 deconv_expr[1:2,]
 
-rho_COAD = rho
-deconv_expr_COAD = deconv_expr
-save(rho_COAD, file = 'TCGA_results/deconv_methy_COAD.RData')
-save(deconv_expr_COAD, file = 'TCGA_results/deconv_expr_COAD.RData')
+save(rho, file = 'TCGA_results/deconv_methy_COAD.RData')
+save(deconv_expr, file = 'TCGA_results/deconv_expr_COAD.RData')
 
 #---------------------------------------------------------------------
 # calculate summary statistics
@@ -348,15 +345,13 @@ save(deconv_expr_COAD, file = 'TCGA_results/deconv_expr_COAD.RData')
 
 # load('TCGA_results/deconv_methy_COAD.RData')
 # load('TCGA_results/deconv_expr_COAD.RData')
-# rho = rho_COAD
-# deconv_expr = deconv_expr_COAD
 
 utypes = intersect(cellTypes,colnames(deconv_expr))
 utypes
 
 methods = c("EMeth","svr","ls","rls","qp")
 
-cormat <- matrix(NA,nrow = length(utypes), ncol = length(methods))
+cormat <- matrix(NA, nrow = length(utypes), ncol = length(methods))
 colnames(cormat) <- methods
 rownames(cormat) <- utypes
 

@@ -10,15 +10,27 @@ library(quantreg)
 library(quadprog)
 library(EMeth)
 library(cowplot)
+library(ggpubr)
+theme_set(theme_classic2())
+
+args=(commandArgs(TRUE))
+args
+
+if (length(args) != 1) {
+  message("one argument is expected, use 'SKCM' as default.\n")
+  cancer_type = "SKCM"
+}else{
+  eval(parse(text=args[[1]]))
+}
+
+ctype = tolower(cancer_type)
+cancer_type
+ctype
 
 # the raw data of DNA metylation is too large to be kept in gitHub
 # here is the local path for DNA methylation data
-path.data = "C:/Users/Hanyu/Downloads/Real"
-path.work = 'C:/Users/Hanyu/Documents/GitHub/dMeth/TCGA_pipeline'
-#source('~/EMeth/EMeth/R/emeth.R')
-#source('~/EMeth/EMeth/R/utils.R')
-#source('~/EMeth/EMeth/R/cv.emeth.R')
-#source('~/EMeth/source/_lib.R')
+path.data = "~/research/TCGA/data_EMeth"
+
 # ------------------------------------------------------------
 # read in pure cell type data
 # ------------------------------------------------------------
@@ -29,8 +41,8 @@ info = fread(file.path(path.ref, "methylation_pure_ct_info.txt.gz"))
 dim(info)
 info[1:2,]
 
-dat = fread(file.path(path.ref, 
-                      "methylation_pure_ct_rmPC2_data_signif4.txt.gz"))
+fnm = file.path(path.ref, "methylation_pure_ct_rmPC2_data_signif4.txt.gz")
+dat = fread(fnm)
 dim(dat)
 dat[1:2,1:5]
 
@@ -47,43 +59,63 @@ rownames(dat) = info$ID
 # ------------------------------------------------------------
 # read DNA methylation data
 # ------------------------------------------------------------
-setwd('C:/Users/Hanyu/Downloads/Real')
-datM = fread(file = "skcm_methylation.txt", header=TRUE)
-sampinfo = fread('skcm_sample_info.txt',header = FALSE)
-cpg <- unlist(datM[,1])
-colnames(datM) <- gsub('^X',"",colnames(datM))
-datM <- datM[,-1]
-rownames(datM) = cpg
 
-dir0 = "../TCGA_results/clinical_data/"
-setwd('C:/Users/Hanyu/Documents/GitHub/dMeth/TCGA_pipeline/')
-tcga_purity = fread(paste0(dir0, "TCGA_mastercalls.abs_tables_JSedit.fixed.txt"))
-barcode = list()
-base_string = '%s-%s-%s'
-for(i in 1:length(tcga_purity$array)){
-  v1 <- strsplit(tcga_purity$array[i],'-')[[1]][1:3]
-  temp <- do.call(sprintf,c(fmt = base_string, as.list(v1)))
-  barcode = c(barcode,temp)
-}
-sampbcr <- sampinfo[,2]
-uniq_bcr <- barcode[!(duplicated(barcode)|duplicated(barcode,fromLast = TRUE))]
-sampbcr <- sampbcr[!(duplicated(sampbcr)|duplicated(sampbcr,fromLast = TRUE))]
-sampinfo <- sampinfo[which(unlist(sampinfo[,2]) %in% unlist(sampbcr)),]
-ind <- which(sampinfo$V2 %in% barcode)
-mat2 <- unlist(intersect(unlist(sampinfo[,2]),barcode))
+fnm_data   = sprintf("%s_methylation.txt.gz", ctype)
+fnm_sample = sprintf("%s_sample_info.txt", ctype)
 
-patient_id <- sampinfo$V3[match(mat2, sampinfo$V2)] 
-datM <- subset(datM, select = patient_id)
-
-purity <- tcga_purity[match(mat2,barcode),]
-purity$patient_id <- patient_id
-filena <- which(is.na(purity$purity))
-purity <- subset(purity, !is.na(purity))
-rownames(purity) <- purity$patient_id
-datM <- subset(datM, select = -filena)
-rownames(datM) <- cpg
+datM = fread(file.path(path.data, fnm_data))
 dim(datM)
+datM[1:2, 1:5]
 
+sampinfo = fread(file.path(path.data, fnm_sample), header = FALSE)
+names(sampinfo) = c("id", "barcode", "patient_id")
+dim(sampinfo)
+sampinfo[1:2,]
+
+table(table(sampinfo$barcode))
+
+cpg = datM$cpg
+names(datM) = gsub('^X', "", names(datM))
+datM[,cpg:=NULL]
+datM = data.matrix(datM)
+rownames(datM) = cpg
+datM[1:2,1:3]
+
+# ------------------------------------------------------------
+# read tumor purity data
+# ------------------------------------------------------------
+
+dir0 = "TCGA_results/clinical_data/"
+fnm0 = paste0(dir0, "TCGA_mastercalls.abs_tables_JSedit.fixed.txt")
+tcga_purity = fread(fnm0)
+dim(tcga_purity)
+tcga_purity[1:2,]
+
+tcga_purity = tcga_purity[which(!is.na(tcga_purity$purity)),]
+dim(tcga_purity)
+tcga_purity[1:2,]
+
+tcga_purity$barcode = substr(tcga_purity$array, 1, 12)
+
+# one barcode may correspond to a fe samples, here we just
+# use the first one
+uniq_barcodes = intersect(sampinfo$barcode, tcga_purity$barcode)
+length(uniq_barcodes)
+
+table(sampinfo$patient_id == colnames(datM))
+
+mat1 = match(uniq_barcodes, sampinfo$barcode)
+sampinfo = sampinfo[mat1,] 
+datM     = datM[, mat1]
+
+table(sampinfo$patient_id == colnames(datM))
+dim(datM)
+datM[1:2,1:4]
+
+purity = tcga_purity[match(uniq_barcodes, tcga_purity$barcode),]
+dim(purity)
+
+anyNA(purity$purity)
 
 # ------------------------------------------------------------
 # read in probes to be used
@@ -103,6 +135,7 @@ X[1:2,1:5]
 
 dim(sam)
 table(sam$id == colnames(X))
+
 table(sam$label)
 cellTypes = unique(sam$label)
 
@@ -114,17 +147,18 @@ ys = datM[match(rownames(X), rownames(datM)),]
 dim(ys)
 ys[1:2,1:5]
 
-ys_na      = which(apply(is.na(ys),2,any))
-eta_abs_na = which(is.na(purity$purity))
+ys_no_na = which(colSums(is.na(ys)) == 0)
 
-any.na = union(ys_na,eta_abs_na)
-any.na
-
-ys = subset(ys,select = -any.na)
-purity <- purity[-any.na,]
+ys     = ys[,ys_no_na]
+purity = purity[ys_no_na,]
 
 dim(ys)
 ys[1:2,1:5]
+
+dim(purity)
+purity[1:2,]
+
+purity$patient_id = substr(purity$barcode, 9, 12)
 table(colnames(ys) == purity$patient_id)
 
 #-------------------------------------------------------------
@@ -149,12 +183,12 @@ for(ct in cellTypes){
 # samples with cell type estimation from expression and DNA methylation
 #----------------------------------------------------------------------
 
-fnm = '_cibersortx_results/SKCM_composition_cibersortx.txt'
+fnm = sprintf('_cibersortx_results/CIBERSORTx_%s_Adjusted.txt', cancer_type)
 est_expr = fread(fnm)
 dim(est_expr)
 est_expr[1:2,]
 
-samname  = str_replace(est_expr$Mixture, "^X", "")
+samname  = substr(est_expr$Mixture, 9, 12)
 length(samname)
 samname[1:5]
 
@@ -170,11 +204,15 @@ est_expr = est_expr[match(com_sample,rownames(est_expr)),]
 dim(est_expr)
 est_expr[1:2,]
 
-ys     = subset(ys,select = match(com_sample,colnames(ys)))
-eta <- purity
+ys  = ys[,match(com_sample,colnames(ys))]
+eta = purity
 eta = eta[match(com_sample,eta$patient_id)]
+
 dim(ys)
 ys[1:2,1:4]
+
+dim(eta)
+eta[1:2,]
 
 table(colnames(ys) == rownames(est_expr))
 table(rownames(ys) == rownames(mu))
@@ -209,9 +247,9 @@ eta = eta$purity
 summary(eta)
 eta[which(eta > 0.99)] = 0.99
 
-temp <- rownames(deconv_expr)
-deconv_expr <- diag(1-eta) %*% deconv_expr
-rownames(deconv_expr) <- temp
+temp = rownames(deconv_expr)
+deconv_expr = diag(1-eta) %*% deconv_expr
+rownames(deconv_expr) = temp
 
 mu[mu < 0.05] = 0.05
 mu[mu > 0.95] = 0.95
@@ -224,7 +262,7 @@ rho     = array(data = NA, dim = c(ncol(ys), length(cellTypes), length(methods))
 
 alpha   = rep(1/length(cellTypes), length(cellTypes))
 simsize = ncol(ys)
-ys <- as.matrix(ys)
+
 C = c(0.1,1/sqrt(10),1,sqrt(10),10)
 
 for(j in 1:ncol(ys)){
@@ -282,95 +320,107 @@ dimnames(rho)
 dim(deconv_expr)
 deconv_expr[1:2,]
 
-rho_SKCM = rho
-deconv_expr_SKCM = deconv_expr
-save(rho_SKCM, file = '../TCGA_results/deconv_methy_SKCM.RData')
-save(deconv_expr_SKCM, file = '../TCGA_results/deconv_expr_SKCM.RData')
+save(rho, file = sprintf('TCGA_results/deconv_methy_%s.RData', cancer_type))
+save(deconv_expr, 
+     file = sprintf('TCGA_results/deconv_expr_%s.RData', cancer_type))
 
 #---------------------------------------------------------------------
 # generate plots
 #---------------------------------------------------------------------
 
-setwd("_figures_SKCM")
+setwd(sprintf("_figures_%s", cancer_type))
 
-utypes = intersect(cellTypes,colnames(deconv_expr))
+utypes = intersect(cellTypes, colnames(deconv_expr))
 utypes
 
-cormat <- matrix(NA,nrow = length(utypes), ncol = length(methods))
-colnames(cormat) <- methods
-rownames(cormat) <- utypes
+methods = c("EMeth","svr","ls","rls","qp")
 
-err <- matrix(NA,nrow = length(utypes), ncol = length(methods))
-colnames(err) <- methods
-rownames(err) <- utypes
+cormat = matrix(NA, nrow = length(utypes), ncol = length(methods))
+colnames(cormat) = methods
+rownames(cormat) = utypes
 
-rss <- matrix(NA,nrow = length(utypes), ncol = length(methods))
-colnames(rss) <- methods
-rownames(rss) <- utypes
+err <- rss <- cormat
 
 for(i in 1:length(utypes)){
-  cormat[i,] <- sapply(1:length(methods), FUN = function(j){
-    cor(rho[,utypes[i],methods[j]],deconv_expr[,utypes[i]])
+  cormat[i,] = sapply(1:length(methods), FUN = function(j){
+    cor(rho[,utypes[i],methods[j]], deconv_expr[,utypes[i]])
   })
-  err[i,] <- sapply(1:length(methods), FUN = function(j){
+  err[i,] = sapply(1:length(methods), FUN = function(j){
     sqrt(mean((rho[,utypes[i],methods[j]] - deconv_expr[,utypes[i]])^2))
   }) 
-  rss[i,] <- sapply(1:length(methods), FUN = function(j){
-    temp <- lm(deconv_expr[,utypes[i]]~rho[,utypes[i],methods[j]])
+  rss[i,] = sapply(1:length(methods), FUN = function(j){
+    temp = lm(deconv_expr[,utypes[i]] ~ rho[,utypes[i],methods[j]])
     return(sum(temp$residuals^2))
   })
 }
 
 for(i in 1:length(utypes)){
-  pdf(sprintf('%s_express_methy_discard_high_purity.pdf',utypes[i]))
+  pdf(sprintf('%s_expr_vs_methy_%s.pdf', cancer_type, utypes[i]), 
+      width=6, height=7.5)
+  
   plist = list()
-  plist <- lapply(1:length(methods), FUN = function(j){
+  plist = lapply(1:length(methods), FUN = function(j){
     tempdata = cbind(rho[,utypes[i],methods[j]],deconv_expr[,utypes[i]],eta)
-    colnames(tempdata) <- c("methylation","expression","eta")
-    newplot <- ggplot(data = as.data.frame(tempdata), 
+    colnames(tempdata) = c("methylation","expression","eta")
+    newplot = ggplot(data = as.data.frame(tempdata), 
                       aes(x=methylation,y=expression,color=eta)) + 
-      xlim(0,0.3) + ylim(0,0.3) + geom_point() + 
-      geom_abline(intercept = 0,slope = 1) + ggtitle(sprintf('%s on %s',methods[j],utypes[i]))
+      xlim(0,0.3) + ylim(0,0.3) + geom_point(size=0.8) + 
+      geom_abline(intercept = 0,slope = 1) + 
+      scale_color_gradient2(limit = c(0,1), low = "blue", high = "red", 
+                            mid = "cadetblue1", midpoint = 0.5) + 
+      ggtitle(sprintf('%s on %s',methods[j],utypes[i]))
   })
+  
   grid.arrange(grobs = plist,ncol=2)
-  save(plist, file = sprintf('plist_%s_%s.RData',utypes[i],'SKCM'))
   dev.off()
+  
+  fnm = sprintf('%s_plot_list_%s.RData', cancer_type, utypes[i])
+  save(plist, file = fnm)
+  
 }
 
-pdf('correlation.pdf')
-tempdata <- melt(as.data.table(cormat))
-colnames(tempdata) <- c('Methods','Correlation')
+#---------------------------------------------------------------------
+# Summarize correlation and RMSE
+#---------------------------------------------------------------------
+
+pdf(sprintf('%s_box_plot_correlation.pdf', cancer_type), 
+    width=4.5, height=3.5)
+tempdata = melt(as.data.table(cormat))
+colnames(tempdata) = c('Methods','Correlation')
 tempdata$cellType = rep(utypes,5)
-p1 <- ggplot(tempdata,aes(x=Methods,y=Correlation)) + geom_boxplot() +
-  geom_point(size = 5,aes(colour = cellType)) + theme_cowplot() + ggtitle('Correlation for SKCM')
-print(p1)
-save(p1,file=sprintf('Cor_%s.RData','SKCM'))
+p1_cor = ggplot(tempdata,aes(x=Methods,y=Correlation)) + geom_boxplot() +
+  geom_point(size = 2,aes(colour = cellType)) + theme_cowplot() + 
+  ggtitle(sprintf('Correlation for %s', cancer_type))
+print(p1_cor)
 dev.off()
 
-
-pdf('correlation.pdf')
-tempdata <- melt(as.data.table(err))
-colnames(tempdata) <- c('Methods','RMSE')
+pdf(sprintf('%s_box_plot_RMSE.pdf', cancer_type), 
+    width=4.5, height=3.5)
+tempdata = melt(as.data.table(err))
+colnames(tempdata) = c('Methods','RMSE')
 tempdata$cellType = rep(utypes,5)
-p2 <- ggplot(tempdata,aes(x=Methods,y=RMSE)) + geom_boxplot() +
-  geom_point(size = 5,aes(colour = cellType)) + theme_cowplot() + ggtitle('RMSE for SKCM')
-print(p2)
-save(p2,file=sprintf('err_%s.RData','SKCM'))
+p2_RMSE = ggplot(tempdata,aes(x=Methods,y=RMSE)) + geom_boxplot() +
+  geom_point(size = 2,aes(colour = cellType)) + theme_cowplot() + 
+  ggtitle(sprintf('RMSE for %s', cancer_type))
+print(p2_RMSE)
 dev.off()
 
+save(p1_cor, p2_RMSE, 
+     file=sprintf('%s_box_plot_cor_RMSE.RData', cancer_type))
 
 print(cormat)
 print(err)
 print(rss)
 
-OneMinusCorr <- 1-matrix(cormat,ncol = 1, byrow = FALSE)
-RMSE <- matrix(err,ncol = 1, byrow = FALSE )
-CellType <- rep(cellTypes,length(methods))
-Methods <- rep(methods,each = length(cellTypes))
-res <- cbind.data.frame(OneMinusCorr,RMSE,CellType,Methods)
+OneMinusCorr = 1-matrix(cormat,ncol = 1, byrow = FALSE)
+RMSE = matrix(err,ncol = 1, byrow = FALSE )
+CellType = rep(cellTypes,length(methods))
+Methods = rep(methods,each = length(cellTypes))
+res = cbind.data.frame(OneMinusCorr,RMSE,CellType,Methods)
 
-pdf('Comparison.pdf')
-complot<- ggplot(res, aes(x=OneMinusCorr,y=RMSE, color =  Methods)) + 
+pdf(sprintf('%s_corr_vs_RMSE.pdf', cancer_type), width=5, height=4.5)
+
+complot= ggplot(res, aes(x=OneMinusCorr,y=RMSE, color =  Methods)) + 
   ggtitle('SKCM') + geom_point() + 
   scale_y_continuous(trans = log2_trans(),
                      breaks = trans_breaks('log10',function(x) 10^x),
@@ -378,10 +428,9 @@ complot<- ggplot(res, aes(x=OneMinusCorr,y=RMSE, color =  Methods)) +
   geom_text(label = res[,3])+xlim(0.1,1.05)
 print(complot)
 dev.off()
-cormat_SKCM <- cormat
-err_SKCM <- err
-save(cormat_SKCM, file='cormat_SKCM.RData')
-save(err_SKCM, file = 'err_SKCM.RData')
+
+save(cormat, file = sprintf('%s_metrics_cor.RData', cancer_type))
+save(err,    file = sprintf('%s_metrics_cor.RData', cancer_type))
 
 sessionInfo()
 gc()
