@@ -2,10 +2,28 @@
 
 This pipelines are codes to run real data analysis using TCGA data. The files include:
 
-- runCOAD.R, runLUAD.R, runLUSC.R, runSKCM.R: preprocess methylation data for each cancer type and run EMeth and benchmark algorithms and compare with previously estimated result from CIBERSORTX. 
+- The procedure for preparing gene expression count are included in 1\_eData\_\{CancerType\}.Rmd files.  The processed gene expression data are then uploaded into CIbertSortx website and obtained an estimate of cell type proportion. See the corresponding RMD files for more details.
 
+- EMeth-\{CancerType\}.R: run estimates of cell type proportions for each cancer type.  It include the following steps.
 
-- Cell type fraction estimated by cibersortx using gene expression data were saved in folder _cibersortx_results.
-*To be done: preprocess of preprocessing of gene expression data*
+  - read in pure cell type data: data are stored in ../cell_type_specific_reference/data, include
 
-The following files are used for gene expression data.
+    - methylation_pure_ct_info.txt.gz
+    - methylation_pure_ct_rmPC2_data_signif4.txt.gz
+    - methylation_pure_ct_sample.txt
+
+  - read in DNA methylation data: the source files are
+
+    - methylation_betaValue.txt
+    - methylation_info.txt
+
+  - take intersection of CpG probes between purified data and bulk tumor samples.
+
+  - read in probes to be used: ref_966probes.RData, located in
+
+    ../cell_type_specific_reference/data, this is also used in the Simulation Study.
+
+  - Compute and compare estimation results from DNA methylation data
+
+- \{CancerType\}_ct_prop_comparison.R: compares estimates of cell type proportions for each cancer type from Methylation and gene expression data. And generate corresponding plots.
+
