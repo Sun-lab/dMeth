@@ -10,8 +10,8 @@ This pipeline include four steps.
 ### 1.Read cell type specific methylation data. The following files are required:
 
 * methylation_pure_ct_rmPC2_data.txt:    	Pure cell type data file after removing PC2
-* methylation_pure_ct_sample.txt:	        	Pure cell type sample file
-* methylation_pure_ct_info.txt:			Pure cell type information file, of the selected probes
+* methylation_pure_ct_sample.txt:        	Pure cell type sample file
+* methylation_pure_ct_info.txt:	Pure cell type information file, of the selected probes
 
 and a different methylation data file:
 
@@ -24,8 +24,8 @@ take intersections of common CpG sites in two source of data and create the data
 
 ### 3. read in methylation sample information.
 
-"patient_coad_short_table_nMut.txt"
-"patient_coad_M_info_hyperMeth.txt"
+patient_coad_short_table_nMut.txt
+patient_coad_M_info_hyperMeth.txt
 
 ### 4. filter CpG to use.
 Filter differentiatly methylated CpG sites, p-value threshold equals 0.01. Around 1000 CpGs are selected.
@@ -50,7 +50,7 @@ parameters:
 * pi = average proportion of inconsistent CpGs in each sample
 * cellnum = approximately number of cells in the bulk tissue, 1/cellnum is set to be sigma_c^2
 * noise = ratio between aberrant CpGs and consistent CpGs
-	
+
 It returns a list of the following components:
 
 * bulk_sample = a matrix of size K*N, K=number of CpGs, N= number of samples.
@@ -70,7 +70,7 @@ parameters:
 * penalty = parameter for ridge penalty
 * cellnum = approximately number of cells in the bulk tissue, 1/cellnum is set to be sigma_c^2
 * maxiter = maximum iteration time of EM
-	
+
 It returns a list of the following components:
 
 * rho = estimated proportion
@@ -80,8 +80,8 @@ It returns a list of the following components:
 * ori = all outputs from emeth with normal likelihood
 * true = the sample generated in this run of simulation
 * nu0cor = correlation between estimated nu0 and true nu0
-	
-	
+
+  ​
 ## step4 - batchsim.R
 
 script to generate experiments with repetitions under different settings.
