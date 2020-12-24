@@ -6,7 +6,6 @@ loadfromfile = TRUE
 perturb = TRUE
 use_new_probe = TRUE
 
-setwd('~/Hutch-Research/R_batch3')
 dim(datM)
 dim(samp)
 

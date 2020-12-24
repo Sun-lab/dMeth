@@ -3,11 +3,11 @@ library(gridExtra)
 library(scales)
 set.seed(2014012168)
 
-setwd('~/Hutch-Research/R_batch3')
 load('truerho.Rdata')
 load('samp_est.RData')
 load('samp_gen.RData')
 source('CIBERSORT.R')
+source('../_lib.R')
 cellTypes <- c("Monocyte","Neutrophill","Tcell")
 perturbconst = 5
 
@@ -56,7 +56,6 @@ level5 = list('tcel',c('neut','mono'))
 level6 = list('mono',c('tcel','neut'))
 levels = list(level1,level2,level3,level4,level5,level6)
 labels = rep(c('mono','neut','tcel'),each = length(common_est))
-source('selectGene.R')
 
 mu.all <- matrix(NA,dim(mono)[1],3)
 sd.all <- matrix(NA,dim(mono)[1],3)

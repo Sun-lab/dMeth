@@ -6,11 +6,11 @@ library(ggplot2)
 library(MASS)
 library(gridExtra)
 library(quantreg)
-setwd('~/Hutch-Research/R_batch3')
+
 perturbconst = 5
-source('~/Desktop/EMeth/source/_lib.R')
-source('~/Desktop/EMeth/pipelines/Chen/step1-estMeanVar.R')
-source('~/Desktop/EMeth/pipelines/Chen/step2-filterProbes.R')
+source('../_lib.R')
+source('step1-estMeanVar.R')
+source('step2-filterProbes.R')
 
 sampsize = dim(dat.gen[[1]])[2]
 use_new_probe = TRUE
@@ -244,7 +244,7 @@ print(cormat)
 print(err)
 save(cormat,file = sprintf('cormat_%d.RData',perturbconst))
 save(err,file = sprintf('err_%d,RData',perturbconst))
-setwd('~/Hutch-Research/R_batch3')
+
 samp_est <- colnames(dat.est)
 save(samp_est,file = 'samp_est.RData')
 samp_gen <- colnames(dat.gen[[1]])
