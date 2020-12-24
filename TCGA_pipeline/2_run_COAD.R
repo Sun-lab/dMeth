@@ -116,7 +116,7 @@ cellTypes = unique(sam$label)
 
 # ------------------------------------------------------------
 # read tumor purity from pan cancer study, and compare it 
-# with the purity from ASCAT from our earlier study
+# with the purity estimates from an earlier study
 # ------------------------------------------------------------
 
 dir0 = "TCGA_results/clinical_data/"
