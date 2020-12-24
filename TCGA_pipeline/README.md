@@ -2,9 +2,9 @@
 
 This pipelines are codes to run real data analysis using TCGA data. The files include:
 
-- The procedure for preparing gene expression count are included in 1\_eData\_\{CancerType\}.Rmd files.  The processed gene expression data are then uploaded into CIbertSortx website and obtained an estimate of cell type proportion. See the corresponding RMD files for more details.
+- The procedure for preparing gene expression data are included in 1\_eData\_\{CancerType\}.Rmd files.  The processed gene expression data are then uploaded into CIBERSORTx website to obtain estimates of cell type proportions for each bulk tumor sample. 
 
-- EMeth-\{CancerType\}.R: run estimates of cell type proportions for each cancer type.  It include the following steps.
+- 2\_run\_COAD.R and 2\_run\_another\_cancer_type.R:  estimates of cell type proportions for each cancer type. The code for COAD is a bit different from other cancer types because it has its own input and output file formats. The other file 2\_run_another_cancer_type.R can be used to run multiple cancer types using the shell script  2_run_another_cancer_type.sh. These files include the following steps.
 
   - read in pure cell type data: data are stored in ../cell_type_specific_reference/data, include
 
