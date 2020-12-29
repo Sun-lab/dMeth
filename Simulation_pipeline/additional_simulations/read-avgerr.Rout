@@ -1,86 +1,211 @@
 
-R version 3.6.0 (2019-04-26) -- "Planting of a Tree"
+R version 3.6.2 (2019-12-12) -- "Dark and Stormy Night"
 Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-apple-darwin15.6.0 (64-bit)
 
-R是自由软件，不带任何担保。
-在某些条件下你可以将其自由散布。
-用'license()'或'licence()'来看散布的详细条件。
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
 
-R是个合作计划，有许多人为之做出了贡献.
-用'contributors()'来看合作者的详细情况
-用'citation()'会告诉你如何在出版物中正确地引用R或R程序包。
+  Natural language support but running in an English locale
 
-用'demo()'来看一些示范程序，用'help()'来阅读在线帮助文件，或
-用'help.start()'通过HTML浏览器来看帮助文件。
-用'q()'退出R.
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
 
-[原来保存的工作空间已还原]
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
 
 > # sigma2 is the variance of normal CpGs
 > # lambda = sigma_aberrant^2 / sigma_consistent^2
 > 
+> # install.packages("stargazer")
+> library(stargazer)
+
+Please cite as: 
+
+ Hlavac, Marek (2018). stargazer: Well-Formatted Regression and Summary Statistics Tables.
+ R package version 5.2.2. https://CRAN.R-project.org/package=stargazer 
+
+> 
 > load("avgerr.RData")
 > noiselevel = dimnames(avgerr)[1]
+> 
+> dim(avgerr)
+[1] 6 8 3 2
+> avgerr[1,,,1]
+            lambda=2  lambda=10 lambda=100
+LaplaceEM 0.03425355 0.03498183 0.03217694
+MaxVarEM  0.03249420 0.03473918 0.03275949
+BinomEM   0.04396532 0.04641469 0.04455699
+OriEM     0.03109297 0.03205444 0.03086344
+svr       0.04232731 0.04421839 0.04706686
+ls        0.10385291 0.10737478 0.11681273
+rls       0.05341681 0.05922832 0.06894910
+qp        0.09326005 0.09594198 0.10237567
+> 
+> stargazer(t(avgerr[1,-2,,1]), summary=FALSE)
+
+% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Tue, Dec 29, 2020 - 11:12:08
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}} cccccccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & LaplaceEM & BinomEM & OriEM & svr & ls & rls & qp \\ 
+\hline \\[-1.8ex] 
+lambda=2 & $0.034$ & $0.044$ & $0.031$ & $0.042$ & $0.104$ & $0.053$ & $0.093$ \\ 
+lambda=10 & $0.035$ & $0.046$ & $0.032$ & $0.044$ & $0.107$ & $0.059$ & $0.096$ \\ 
+lambda=100 & $0.032$ & $0.045$ & $0.031$ & $0.047$ & $0.117$ & $0.069$ & $0.102$ \\ 
+\hline \\[-1.8ex] 
+\end{tabular} 
+\end{table} 
+> 
 > for(i in 1:6){
 +   cat("MSE when Noise level = ", noiselevel[[1]][i],"------------\n")
-+   print(t(avgerr[i,,,1]))
++   stargazer(t(avgerr[i,-2,,1]), summary=FALSE)
 + }
 MSE when Noise level =  sigma2=0.004 ------------
-            LaplaceEM   MaxVarEM    BinomEM      OriEM        svr        ls
-lambda=2   0.03425355 0.03249420 0.04396532 0.03109297 0.04232731 0.1038529
-lambda=10  0.03498183 0.03473918 0.04641469 0.03205444 0.04421839 0.1073748
-lambda=100 0.03217694 0.03275949 0.04455699 0.03086344 0.04706686 0.1168127
-                  rls         qp
-lambda=2   0.05341681 0.09326005
-lambda=10  0.05922832 0.09594198
-lambda=100 0.06894910 0.10237567
+
+% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Tue, Dec 29, 2020 - 11:12:08
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}} cccccccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & LaplaceEM & BinomEM & OriEM & svr & ls & rls & qp \\ 
+\hline \\[-1.8ex] 
+lambda=2 & $0.034$ & $0.044$ & $0.031$ & $0.042$ & $0.104$ & $0.053$ & $0.093$ \\ 
+lambda=10 & $0.035$ & $0.046$ & $0.032$ & $0.044$ & $0.107$ & $0.059$ & $0.096$ \\ 
+lambda=100 & $0.032$ & $0.045$ & $0.031$ & $0.047$ & $0.117$ & $0.069$ & $0.102$ \\ 
+\hline \\[-1.8ex] 
+\end{tabular} 
+\end{table} 
 MSE when Noise level =  sigma2=0.00298 ------------
-            LaplaceEM   MaxVarEM    BinomEM      OriEM        svr        ls
-lambda=2   0.03243863 0.03005724 0.04120746 0.02956062 0.04107093 0.1022485
-lambda=10  0.03292252 0.03278293 0.04369745 0.03104730 0.04269011 0.1054457
-lambda=100 0.03205938 0.03064771 0.04292320 0.02979770 0.04547965 0.1144771
-                  rls         qp
-lambda=2   0.04989747 0.09198592
-lambda=10  0.05517509 0.09449544
-lambda=100 0.06453612 0.10083804
+
+% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Tue, Dec 29, 2020 - 11:12:08
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}} cccccccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & LaplaceEM & BinomEM & OriEM & svr & ls & rls & qp \\ 
+\hline \\[-1.8ex] 
+lambda=2 & $0.032$ & $0.041$ & $0.030$ & $0.041$ & $0.102$ & $0.050$ & $0.092$ \\ 
+lambda=10 & $0.033$ & $0.044$ & $0.031$ & $0.043$ & $0.105$ & $0.055$ & $0.094$ \\ 
+lambda=100 & $0.032$ & $0.043$ & $0.030$ & $0.045$ & $0.114$ & $0.065$ & $0.101$ \\ 
+\hline \\[-1.8ex] 
+\end{tabular} 
+\end{table} 
 MSE when Noise level =  sigma2=0.00221 ------------
-            LaplaceEM   MaxVarEM    BinomEM      OriEM        svr        ls
-lambda=2   0.03040920 0.02824229 0.03891296 0.02873194 0.04002398 0.1007665
-lambda=10  0.03159677 0.02986124 0.04107475 0.02982207 0.04156858 0.1036614
-lambda=100 0.03019646 0.02946258 0.04108262 0.02877326 0.04405315 0.1122307
-                  rls         qp
-lambda=2   0.04679247 0.09079681
-lambda=10  0.05148365 0.09312390
-lambda=100 0.06038580 0.09929726
+
+% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Tue, Dec 29, 2020 - 11:12:08
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}} cccccccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & LaplaceEM & BinomEM & OriEM & svr & ls & rls & qp \\ 
+\hline \\[-1.8ex] 
+lambda=2 & $0.030$ & $0.039$ & $0.029$ & $0.040$ & $0.101$ & $0.047$ & $0.091$ \\ 
+lambda=10 & $0.032$ & $0.041$ & $0.030$ & $0.042$ & $0.104$ & $0.051$ & $0.093$ \\ 
+lambda=100 & $0.030$ & $0.041$ & $0.029$ & $0.044$ & $0.112$ & $0.060$ & $0.099$ \\ 
+\hline \\[-1.8ex] 
+\end{tabular} 
+\end{table} 
 MSE when Noise level =  sigma2=0.00141 ------------
-            LaplaceEM   MaxVarEM    BinomEM      OriEM        svr         ls
-lambda=2   0.02911900 0.02704937 0.03549937 0.02716157 0.03871612 0.09875331
-lambda=10  0.02965914 0.02807672 0.03771442 0.02840996 0.04000235 0.10124082
-lambda=100 0.02851819 0.02851220 0.03826380 0.02760558 0.04223786 0.10899823
-                  rls         qp
-lambda=2   0.04289196 0.08916714
-lambda=10  0.04668836 0.09121551
-lambda=100 0.05470974 0.09701786
+
+% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Tue, Dec 29, 2020 - 11:12:08
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}} cccccccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & LaplaceEM & BinomEM & OriEM & svr & ls & rls & qp \\ 
+\hline \\[-1.8ex] 
+lambda=2 & $0.029$ & $0.035$ & $0.027$ & $0.039$ & $0.099$ & $0.043$ & $0.089$ \\ 
+lambda=10 & $0.030$ & $0.038$ & $0.028$ & $0.040$ & $0.101$ & $0.047$ & $0.091$ \\ 
+lambda=100 & $0.029$ & $0.038$ & $0.028$ & $0.042$ & $0.109$ & $0.055$ & $0.097$ \\ 
+\hline \\[-1.8ex] 
+\end{tabular} 
+\end{table} 
 MSE when Noise level =  sigma2=0.00118 ------------
-            LaplaceEM   MaxVarEM    BinomEM      OriEM        svr         ls
-lambda=2   0.02861509 0.02690833 0.03452344 0.02647657 0.03833219 0.09806353
-lambda=10  0.02915361 0.02763051 0.03668004 0.02787852 0.03942964 0.10042087
-lambda=100 0.02861533 0.02822700 0.03735522 0.02756703 0.04165475 0.10783678
-                  rls         qp
-lambda=2   0.04164323 0.08860873
-lambda=10  0.04512946 0.09057278
-lambda=100 0.05276913 0.09619482
+
+% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Tue, Dec 29, 2020 - 11:12:08
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}} cccccccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & LaplaceEM & BinomEM & OriEM & svr & ls & rls & qp \\ 
+\hline \\[-1.8ex] 
+lambda=2 & $0.029$ & $0.035$ & $0.026$ & $0.038$ & $0.098$ & $0.042$ & $0.089$ \\ 
+lambda=10 & $0.029$ & $0.037$ & $0.028$ & $0.039$ & $0.100$ & $0.045$ & $0.091$ \\ 
+lambda=100 & $0.029$ & $0.037$ & $0.028$ & $0.042$ & $0.108$ & $0.053$ & $0.096$ \\ 
+\hline \\[-1.8ex] 
+\end{tabular} 
+\end{table} 
 MSE when Noise level =  sigma2=0.001 ------------
-            LaplaceEM   MaxVarEM    BinomEM      OriEM        svr         ls
-lambda=2   0.02832977 0.02670184 0.03360614 0.02627040 0.03793535 0.09742164
-lambda=10  0.02868959 0.02733463 0.03570194 0.02761201 0.03891636 0.09965659
-lambda=100 0.02833067 0.02759522 0.03661813 0.02734010 0.04103653 0.10673372
-                  rls         qp
-lambda=2   0.04053537 0.08809493
-lambda=10  0.04373045 0.08997453
-lambda=100 0.05099604 0.09541209
+
+% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Tue, Dec 29, 2020 - 11:12:08
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}} cccccccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & LaplaceEM & BinomEM & OriEM & svr & ls & rls & qp \\ 
+\hline \\[-1.8ex] 
+lambda=2 & $0.028$ & $0.034$ & $0.026$ & $0.038$ & $0.097$ & $0.041$ & $0.088$ \\ 
+lambda=10 & $0.029$ & $0.036$ & $0.028$ & $0.039$ & $0.100$ & $0.044$ & $0.090$ \\ 
+lambda=100 & $0.028$ & $0.037$ & $0.027$ & $0.041$ & $0.107$ & $0.051$ & $0.095$ \\ 
+\hline \\[-1.8ex] 
+\end{tabular} 
+\end{table} 
 > 
+> 
+> sessionInfo()
+R version 3.6.2 (2019-12-12)
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+Running under: macOS Catalina 10.15.7
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] stargazer_5.2.2
+
+loaded via a namespace (and not attached):
+[1] compiler_3.6.2
+> gc()
+         used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)
+Ncells 455633 24.4     978340 52.3         NA   646937 34.6
+Vcells 796368  6.1    8388608 64.0      32768  1868590 14.3
+> 
+> quit(save = 'no')
 > proc.time()
- 用户  系统  流逝 
-0.182 0.046 0.217 
+   user  system elapsed 
+  0.328   0.073   0.416 
