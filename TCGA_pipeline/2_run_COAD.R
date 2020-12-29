@@ -325,6 +325,10 @@ print('EMeth')
 hundrediter = cv.emeth(ys, eta, mu, aber = TRUE, V='c', init = 'default',
                        family = 'normal', nu = penalty, folds = 5, 
                        maxiter = 50, verbose = TRUE)
+
+names(hundrediter)
+summary(hundrediter[[1]]$pi_a)
+
 rho[,,'EMeth'] = hundrediter[[1]]$rho
 
 dim(rho[,,'EMeth'])

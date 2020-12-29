@@ -710,24 +710,24 @@ TRUE
 +   d = t(t(Xmat) %*% y)
 +   rho[j,,'qp']   = (solve.QP(D,d,t(A),b)$solution)
 + }
-10 Wed Dec 23 10:25:00 2020 
-20 Wed Dec 23 10:25:14 2020 
-30 Wed Dec 23 10:25:28 2020 
-40 Wed Dec 23 10:25:41 2020 
-50 Wed Dec 23 10:25:55 2020 
-60 Wed Dec 23 10:26:09 2020 
-70 Wed Dec 23 10:26:23 2020 
-80 Wed Dec 23 10:26:37 2020 
-90 Wed Dec 23 10:26:51 2020 
-100 Wed Dec 23 10:27:05 2020 
-110 Wed Dec 23 10:27:18 2020 
-120 Wed Dec 23 10:27:32 2020 
-130 Wed Dec 23 10:27:46 2020 
-140 Wed Dec 23 10:28:00 2020 
-150 Wed Dec 23 10:28:13 2020 
-160 Wed Dec 23 10:28:27 2020 
-170 Wed Dec 23 10:28:42 2020 
-180 Wed Dec 23 10:28:55 2020 
+10 Mon Dec 28 23:25:49 2020 
+20 Mon Dec 28 23:26:04 2020 
+30 Mon Dec 28 23:26:18 2020 
+40 Mon Dec 28 23:26:31 2020 
+50 Mon Dec 28 23:26:45 2020 
+60 Mon Dec 28 23:27:00 2020 
+70 Mon Dec 28 23:27:14 2020 
+80 Mon Dec 28 23:27:29 2020 
+90 Mon Dec 28 23:27:43 2020 
+100 Mon Dec 28 23:27:57 2020 
+110 Mon Dec 28 23:28:10 2020 
+120 Mon Dec 28 23:28:23 2020 
+130 Mon Dec 28 23:28:37 2020 
+140 Mon Dec 28 23:28:50 2020 
+150 Mon Dec 28 23:29:04 2020 
+160 Mon Dec 28 23:29:18 2020 
+170 Mon Dec 28 23:29:31 2020 
+180 Mon Dec 28 23:29:44 2020 
 There were 50 or more warnings (use warnings() to see the first 50)
 > 
 > print('EMeth')
@@ -735,36 +735,103 @@ There were 50 or more warnings (use warnings() to see the first 50)
 > hundrediter = cv.emeth(ys, eta, mu, aber = TRUE, V='c', init = 'default',
 +                        family = 'normal', nu = penalty, folds = 5, 
 +                        maxiter = 50, verbose = TRUE)
-50 Wed Dec 23 10:29:02 2020 
-100 Wed Dec 23 10:29:02 2020 
-150 Wed Dec 23 10:29:02 2020 
+50 Mon Dec 28 23:29:51 2020 
+100 Mon Dec 28 23:29:51 2020 
+150 Mon Dec 28 23:29:51 2020 
+[1] "In cross validation"
+penalty parameter 9.66-------------------
+10 Mon Dec 28 23:29:57 2020 
+[1] "In cross validation"
+penalty parameter 96.6-------------------
+10 Mon Dec 28 23:30:03 2020 
+[1] "In cross validation"
+penalty parameter 966-------------------
+10 Mon Dec 28 23:30:10 2020 
+[1] "In cross validation"
+penalty parameter 9660-------------------
+10 Mon Dec 28 23:30:16 2020 
+[1] "In cross validation"
+penalty parameter 9.66-------------------
+10 Mon Dec 28 23:30:21 2020 
+[1] "In cross validation"
+penalty parameter 96.6-------------------
+10 Mon Dec 28 23:30:27 2020 
+[1] "In cross validation"
+penalty parameter 966-------------------
+10 Mon Dec 28 23:30:32 2020 
+[1] "In cross validation"
+penalty parameter 9660-------------------
+10 Mon Dec 28 23:30:38 2020 
+[1] "In cross validation"
+penalty parameter 9.66-------------------
+10 Mon Dec 28 23:30:44 2020 
+[1] "In cross validation"
+penalty parameter 96.6-------------------
+10 Mon Dec 28 23:30:49 2020 
+[1] "In cross validation"
+penalty parameter 966-------------------
+10 Mon Dec 28 23:30:55 2020 
+[1] "In cross validation"
+penalty parameter 9660-------------------
+10 Mon Dec 28 23:31:01 2020 
+[1] "In cross validation"
+penalty parameter 9.66-------------------
+10 Mon Dec 28 23:31:06 2020 
+[1] "In cross validation"
+penalty parameter 96.6-------------------
+10 Mon Dec 28 23:31:11 2020 
+[1] "In cross validation"
+penalty parameter 966-------------------
+10 Mon Dec 28 23:31:17 2020 
+[1] "In cross validation"
+penalty parameter 9660-------------------
+10 Mon Dec 28 23:31:23 2020 
+[1] "In cross validation"
+penalty parameter 9.66-------------------
+10 Mon Dec 28 23:31:28 2020 
+[1] "In cross validation"
+penalty parameter 96.6-------------------
+10 Mon Dec 28 23:31:34 2020 
+[1] "In cross validation"
+penalty parameter 966-------------------
+10 Mon Dec 28 23:31:40 2020 
+[1] "In cross validation"
+penalty parameter 9660-------------------
+10 Mon Dec 28 23:31:46 2020 
 [1] "finish cross validation"
 -------------------
-10 Wed Dec 23 10:31:30 2020 
+10 Mon Dec 28 23:32:14 2020 
 -------------------
-20 Wed Dec 23 10:32:04 2020 
+20 Mon Dec 28 23:32:48 2020 
 -------------------
-30 Wed Dec 23 10:32:37 2020 
+30 Mon Dec 28 23:33:23 2020 
 -------------------
-40 Wed Dec 23 10:33:10 2020 
+40 Mon Dec 28 23:33:56 2020 
 -------------------
-50 Wed Dec 23 10:33:44 2020 
+50 Mon Dec 28 23:34:30 2020 
+> 
+> names(hundrediter)
+[1] "result"   "choosenu" "losslist"
+> summary(hundrediter[[1]]$pi_a)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.2545  0.3845  0.4479  0.4603  0.5219  0.7327 
+> 
 > rho[,,'EMeth'] = hundrediter[[1]]$rho
 > 
 > dim(rho[,,'EMeth'])
 [1] 184   7
 > rho[1:2,,'EMeth']
-           CD4T         CD8T    Monocyte          B         NK  Neutrophil
-3697 0.03084480 5.828536e-18 0.057830048 0.08420139 0.01657809 0.005341671
-6606 0.04302674 3.054946e-02 0.004766485 0.04113550 0.00000000 0.014569853
+           CD4T       CD8T    Monocyte          B          NK Neutrophil
+3697 0.04837768 0.01617911 0.054913334 0.07897976 0.023409454 0.02046280
+6606 0.04528836 0.03531881 0.004046749 0.04048880 0.005838083 0.01960252
            Treg
-3697 0.13520400
-6606 0.06595197
+3697 0.08767786
+6606 0.04941667
 > 
 > EM_purity = 1 - rowSums(rho[,,'EMeth'])
 > summary(EM_purity - eta)
       Min.    1st Qu.     Median       Mean    3rd Qu.       Max. 
--1.665e-16  0.000e+00  0.000e+00 -6.939e-18  0.000e+00  1.110e-16 
+-1.665e-16  0.000e+00  0.000e+00 -5.732e-18  0.000e+00  1.110e-16 
 > 
 > #---------------------------------------------------------------------
 > # save the results
@@ -773,14 +840,14 @@ There were 50 or more warnings (use warnings() to see the first 50)
 > dim(rho)
 [1] 184   7   5
 > rho[1,,]
-                  EMeth        svr         ls        rls            qp
-CD4T       3.084480e-02 0.06765764 0.00000000 0.00000000  3.300000e-01
-CD8T       5.828536e-18 0.11321401 0.20038539 0.20908966 -1.299611e-16
-Monocyte   5.783005e-02 0.04872797 0.04516142 0.03943471  2.873483e-17
-B          8.420139e-02 0.07336073 0.04444909 0.04062237 -1.387779e-17
-NK         1.657809e-02 0.00875919 0.00000000 0.00000000  1.115402e-16
-Neutrophil 5.341671e-03 0.01828046 0.04000410 0.04085326  1.381644e-16
-Treg       1.352040e-01 0.00000000 0.00000000 0.00000000  0.000000e+00
+                EMeth        svr         ls        rls            qp
+CD4T       0.04837768 0.06932245 0.00000000 0.00000000  3.300000e-01
+CD8T       0.01617911 0.10795255 0.20038539 0.20908966 -1.299611e-16
+Monocyte   0.05491333 0.05214425 0.04516142 0.03943471  2.873483e-17
+B          0.07897976 0.07224687 0.04444909 0.04062237 -1.387779e-17
+NK         0.02340945 0.01137163 0.00000000 0.00000000  1.115402e-16
+Neutrophil 0.02046280 0.01696225 0.04000410 0.04085326  1.381644e-16
+Treg       0.08767786 0.00000000 0.00000000 0.00000000  0.000000e+00
 > dimnames(rho)
 [[1]]
   [1] "3697" "6606" "4947" "3712" "3779" "5341" "3810" "6808" "6162" "6704"
@@ -929,32 +996,32 @@ null device
 > 
 > 
 > print(cormat)
-                 EMeth         svr         ls        rls          qp
-CD4T        0.45376784 0.474068891 0.05393891 0.03785123  0.51058165
-CD8T        0.67611945 0.642283114 0.70668443 0.69857988  0.56487128
-Monocyte    0.76010051 0.795868031 0.81336423 0.81451740  0.45744267
-B           0.77555933 0.782997181 0.78354849 0.76314376  0.78819163
-NK         -0.05540765 0.048167152 0.05328489 0.02482741 -0.06330552
-Neutrophil  0.41608582 0.364497844 0.37145009 0.37418540  0.03795694
-Treg       -0.01020469 0.002513347 0.09328513 0.03213556  0.12220196
+                EMeth         svr         ls        rls          qp
+CD4T       0.60838991 0.485013872 0.05393891 0.03785123  0.51058165
+CD8T       0.69414828 0.632816791 0.70668443 0.69857988  0.56487128
+Monocyte   0.80330895 0.791374757 0.81336423 0.81451740  0.45744267
+B          0.79334521 0.778382298 0.78354849 0.76314376  0.78819163
+NK         0.06874173 0.047955787 0.05328489 0.02482741 -0.06330552
+Neutrophil 0.44368874 0.358974850 0.37145009 0.37418540  0.03795694
+Treg       0.12104304 0.005143847 0.09328513 0.03213556  0.12220196
 > print(err)
                 EMeth        svr         ls        rls         qp
-CD4T       0.11542564 0.09397327 0.15484448 0.15347922 0.19139482
-CD8T       0.06346231 0.09127086 0.17350330 0.17783763 0.06877303
-Monocyte   0.03276849 0.02875319 0.03312648 0.03398281 0.08417844
-B          0.03441244 0.02976734 0.03014219 0.03152389 0.04114353
-NK         0.02870311 0.02141773 0.02257995 0.02242992 0.02337186
-Neutrophil 0.07563835 0.03970401 0.05098565 0.04897122 0.04097729
-Treg       0.06494569 0.02445834 0.02138538 0.02172541 0.03125086
+CD4T       0.09940659 0.09364073 0.15484448 0.15347922 0.19139482
+CD8T       0.03725905 0.09364701 0.17350330 0.17783763 0.06877303
+Monocyte   0.02976466 0.02905741 0.03312648 0.03398281 0.08417844
+B          0.03124972 0.02986953 0.03014219 0.03152389 0.04114353
+NK         0.03195776 0.02160163 0.02257995 0.02242992 0.02337186
+Neutrophil 0.06797726 0.03938791 0.05098565 0.04897122 0.04097729
+Treg       0.05406635 0.02435408 0.02138538 0.02172541 0.03125086
 > print(rss)
                 EMeth        svr         ls        rls         qp
-CD4T       0.55515177 0.54198347 0.69706619 0.69809855 0.51684921
-CD8T       0.20468483 0.22150488 0.18874879 0.19304299 0.25673921
-Monocyte   0.16531833 0.14352900 0.13250557 0.13177060 0.30959315
-B          0.15243107 0.14799696 0.14766661 0.15973840 0.14487516
-NK         0.03631591 0.03634323 0.03632431 0.03640529 0.03628176
-Neutrophil 0.04557968 0.04779941 0.04751738 0.04740495 0.05504356
-Treg       0.04217702 0.04218114 0.04181434 0.04213785 0.04155150
+CD4T       0.44033643 0.53464492 0.69706619 0.69809855 0.51684921
+CD8T       0.19537013 0.22605603 0.18874879 0.19304299 0.25673921
+Monocyte   0.13887017 0.14632129 0.13250557 0.13177060 0.30959315
+B          0.14175753 0.15075313 0.14766661 0.15973840 0.14487516
+NK         0.03625561 0.03634397 0.03632431 0.03640529 0.03628176
+Neutrophil 0.04427149 0.04801967 0.04751738 0.04740495 0.05504356
+Treg       0.04156339 0.04218029 0.04181434 0.04213785 0.04155150
 > 
 > OneMinusCorr = 1-matrix(cormat,ncol = 1, byrow = FALSE)
 > RMSE     = matrix(err,ncol = 1, byrow = FALSE )
@@ -971,8 +1038,8 @@ Treg       0.04217702 0.04218114 0.04181434 0.04213785 0.04155150
 +   geom_text(label = res[,3])+xlim(0.1,1.05)
 > print(complot)
 Warning messages:
-1: Removed 2 rows containing missing values (geom_point). 
-2: Removed 2 rows containing missing values (geom_text). 
+1: Removed 1 rows containing missing values (geom_point). 
+2: Removed 1 rows containing missing values (geom_text). 
 > dev.off()
 null device 
           1 
@@ -999,9 +1066,9 @@ null device
 > pdf('_figures_COAD/COAD_full.pdf',width=8, height = 10)
 > grid.arrange(grobs = list(p1_cor, p2_RMSE, p31, p32, p41, p42), ncol = 2)
 Warning messages:
-1: Removed 8 rows containing missing values (geom_point). 
+1: Removed 5 rows containing missing values (geom_point). 
 2: Removed 1 rows containing missing values (geom_point). 
-3: Removed 9 rows containing missing values (geom_point). 
+3: Removed 1 rows containing missing values (geom_point). 
 > dev.off()
 null device 
           1 
@@ -1044,10 +1111,10 @@ loaded via a namespace (and not attached):
 [53] nlme_3.1-144       compiler_3.6.2    
 > gc()
             used  (Mb) gc trigger   (Mb) limit (Mb)  max used   (Mb)
-Ncells   3047907 162.8    5095530  272.2         NA   5095530  272.2
-Vcells 114700574 875.1  352136590 2686.6      32768 352136552 2686.6
+Ncells   3047966 162.8    5095530  272.2         NA   5095530  272.2
+Vcells 114696629 875.1  352136590 2686.6      32768 352136573 2686.6
 > 
 > quit(save = 'no')
 > proc.time()
    user  system elapsed 
-543.341  37.235 559.538 
+539.416  39.319 556.831 
