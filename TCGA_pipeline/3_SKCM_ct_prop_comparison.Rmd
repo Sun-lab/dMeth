@@ -138,27 +138,28 @@ rho_SF11 = rho_expr_sf11
 
 
 ## compare cell type proportion between methods
-```{r corrplot, fig.height=3, fig.width=3.6}
+```{r corrplot, fig.height=4, fig.width=4.8}
 rho_SF11  = rho_SF11[,order(colnames(rho_SF11))]
 rho_LM22  = rho_LM22[,order(colnames(rho_LM22))]
 rho_EMeth = rho_methy[,,"EMeth"]
 rho_EMeth = rho_EMeth[,order(colnames(rho_EMeth))]
 
-ggcorrplot(cor(rho_SF11, rho_LM22), tl.cex = 10) + 
+ggcorrplot(cor(rho_SF11, rho_LM22), tl.cex = 10, lab=TRUE) + 
   labs(x = 'SF11', y = 'LM22') +
   theme(
     axis.title.x = element_text(size=12, face="bold"),
     axis.title.y = element_text(angle = 90, size=12, face="bold")
   )
 
-ggcorrplot(cor(rho_SF11, rho_EMeth), tl.cex = 10) + 
+
+ggcorrplot(cor(rho_SF11, rho_EMeth), tl.cex = 10, lab=TRUE) + 
   labs(x = 'SF11', y = 'EMeth') + 
   theme(
     axis.title.x = element_text(size=12, face="bold"),
     axis.title.y = element_text(angle = 90, size=12, face="bold")
   )
 
-ggcorrplot(cor(rho_LM22, rho_EMeth), tl.cex = 10) + 
+ggcorrplot(cor(rho_LM22, rho_EMeth), tl.cex = 10, lab=TRUE) + 
   labs(x = 'LM22', y = 'EMeth') + 
   theme(
     axis.title.x = element_text(size=12, face="bold"),
