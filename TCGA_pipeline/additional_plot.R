@@ -1,28 +1,36 @@
+
 library(gridExtra)
 library(data.table)
 library(ggplot2)
 library(cowplot)
 
-setwd('~/GitHub/dMeth/TCGA_pipeline')
-setwd('./_figures_SKCM')
-load('Cor_SKCM.RData')
-corplot <- p1
-load('err_SKCM.RData')
+#---------------------------------------------------------------------
+# a final summary plot
+#---------------------------------------------------------------------
 
-tempdata <- melt(as.data.table(err_SKCM))
-colnames(tempdata) <- c('Methods','RMSE')
-tempdata$cellType = rep(rownames(err_SKCM),5)
-p2 <- ggplot(tempdata,aes(x=Methods,y=RMSE)) + geom_boxplot() +
-  geom_point(size = 5,aes(colour = cellType)) + theme_cowplot() + ggtitle('RMSE for SKCM')
+cancer_types = c("LUAD", "LUSC", "SKCM")
 
-load('plist_B_SKCM.RData')
-p31 <- plist[[1]]+theme_cowplot()
-p32 <- plist[[2]]+theme_cowplot()
+for(ct1 in cancer_types){
+  load(sprintf('_figures_%s/%s_box_plot_cor_RMSE.RData', ct1, ct1))
+  
+  load(sprintf('_figures_%s/%s_plot_list_B.RData', ct1, ct1))
+  p31 = plist[[1]]+theme_cowplot()
+  p32 = plist[[2]]+theme_cowplot()
+  
+  load(sprintf('_figures_%s/%s_plot_list_NK.RData', ct1, ct1))
+  p41 = plist[[1]]+theme_cowplot()
+  p42 = plist[[2]]+theme_cowplot()
+  
+  pdf(sprintf('_figures_%s/%s_full.pdf', ct1, ct1), width=8, height = 10)
+  grid.arrange(grobs = list(p1_cor, p2_RMSE, p31, p32, p41, p42), ncol = 2)
+  dev.off()
+  
+}
 
-load('plist_NK_SKCM.RData')
-p41 <- plist[[1]]+theme_cowplot()
-p42 <- plist[[2]]+theme_cowplot()
+sessionInfo()
+gc()
 
-pdf('SKCM_full.pdf',width=12,height = 16)
-grid.arrange(grobs = list(p1,p2,p31,p32,p41,p42),ncol = 2)
-dev.off()
+quit(save = 'no')
+
+
+
