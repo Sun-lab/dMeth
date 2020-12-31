@@ -82,23 +82,21 @@ for(c1 in cancer_types){
   load(sprintf("deconv_expr_%s.RData", c1))
   load(sprintf("deconv_methy_%s.RData", c1))
   
-  deconv_expr = list(as.name(sprintf("deconv_expr_%s", c1)))
-  deconv_meth = list(as.name(sprintf("rho_%s", c1)))
+  deconv_meth = rho
 
   cat("\ncell type fraction estimates from expression\n")
-  print(do.call(dim, deconv_expr))
-  print(eval(deconv_expr[[1]])[1:2,])
+  print(dim(deconv_expr))
+  print(deconv_expr[1:2,])
   
   cat("\ncell type fraction estimates from methylation\n")
-  print(do.call(dim, deconv_meth))
-  print(eval(deconv_meth[[1]])[1,,])
+  print(dim(deconv_meth))
+  print(deconv_meth[1,,])
   
-  stopifnot(all(do.call(rownames, deconv_expr) == 
-                  do.call(dimnames, deconv_meth)[[1]]))
+  stopifnot(all(rownames(deconv_expr) == dimnames(deconv_meth)[[1]]))
 
-  ct = eval(deconv_expr[[1]])
+  ct = deconv_expr
   colnames(ct) = paste0(colnames(ct), ".E")
-  ct = cbind(ct, eval(deconv_meth[[1]])[,,"EMeth"])
+  ct = cbind(ct, deconv_meth[,,"EMeth"])
   
   dim(ct)
   ct[1:2,]
@@ -288,8 +286,8 @@ cell_types = c("CD4T", "Monocyte", "B", "NK", "Neutrophil", "Treg")
 glist = list()
 for(ctype1 in cell_types){
   ctype1E = paste0(ctype1, ".E")
-  ct.lrE = log2(ct[[ctype1E]]/ct[["CD8T.E"]])
-  rel.ab = rep("Low", length(ct.lrE))
+  ct.lrE  = log2(ct[[ctype1E]]/ct[["CD8T.E"]])
+  rel.ab  = rep("Low", length(ct.lrE))
   rel.ab[which(ct.lrE > median(ct.lrE))] = "High"
   
   fit1 = survfit(Surv(DSS.time, DSS) ~ rel.ab, data=ct)
@@ -476,5 +474,6 @@ ggarrange(gl[[1]], gl[[2]], gl[[3]], gl[[4]], nrow = 2, ncol = 2)
 
 # Session information
 ```{r}
+gc()
 sessionInfo()
 ```
