@@ -1,0 +1,272 @@
+---
+title: "Compare cell type proportion estimates for TCGA SKCM samples"
+output:
+  html_document:
+    df_print: paged
+    keep_md: TRUE
+---
+
+
+## Load required library
+```{r warning=FALSE, echo = TRUE, results = 'hide', warning = FALSE, message = FALSE}
+library(data.table)
+library(stringr)
+library(MASS)
+
+library(ggplot2)
+library(gridExtra)
+library(cowplot)
+library(ggcorrplot)
+library(GGally)
+library(ggpubr)
+theme_set(theme_bw())
+
+library(tidyr)
+```
+
+## read in cell type proportion estimates
+
+Read in cell type proportion estimates by EMeth using methylaiton data and the estimates by CIBERSORT, using two references: one was LM22, the default signature of CIBERSORT, and the other one was 11 cell types generated using scRNA-seq ata from SF2018
+
+
+```{r}
+load("TCGA_results/deconv_methy_SKCM.RData")
+ls()
+rho_methy = rho
+
+load("TCGA_results/deconv_expr_SKCM.RData")
+ls()
+rho_LM22 = deconv_expr
+
+dim(rho_methy)
+rho_methy[1,,]
+
+dim(rho_LM22)
+rho_LM22[1:2,]
+
+table(rownames(rho_LM22) == dimnames(rho_methy)[[1]])
+
+fnm = "CIBERSORTx_SKCM_SF2018_signature_Adjusted.txt"
+rho_SF11 = as.data.frame(fread(paste0("_cibersortx_results/", fnm)))
+dim(rho_SF11)
+rho_SF11[1:2,]
+
+rho_SF11$patient_id = substr(rho_SF11$Mixture, 9, 12)
+```
+
+## read in tumor purity information
+```{r}
+dir0 = "TCGA_results/clinical_data/"
+fnm  = paste0(dir0, "TCGA_mastercalls.abs_tables_JSedit.fixed.txt")
+tcga_purity = fread(fnm)
+
+dim(tcga_purity)
+tcga_purity[1:2,]
+
+rho_SF11$array = substr(rho_SF11$Mixture, 1, 15)
+rho_SF11$array = gsub(".", "-", rho_SF11$array, fixed=TRUE)
+dim(rho_SF11)
+rho_SF11[1:2,(ncol(rho_SF11) -5):ncol(rho_SF11)]
+
+table(rho_SF11$array %in% tcga_purity$array)
+
+array2use   = intersect(rho_SF11$array, tcga_purity$array)
+rho_SF11    = rho_SF11[match(array2use, rho_SF11$array),]
+tcga_purity = tcga_purity[match(array2use, tcga_purity$array),]
+
+dim(rho_SF11)
+dim(tcga_purity)
+table(rho_SF11$array == tcga_purity$array)
+rho_SF11$purity = tcga_purity$purity
+
+patient_id = intersect(rownames(rho_LM22), rho_SF11$patient_id)
+length(patient_id)
+
+# note that if a patient has more than one sample, we just 
+# use the first one
+rho_SF11  = rho_SF11[match(patient_id,  rho_SF11$patient_id),]
+rho_LM22  = rho_LM22[match(patient_id,  rownames(rho_LM22)),]
+rho_methy = rho_methy[match(patient_id, dimnames(rho_methy)[[1]]),,]
+
+dim(rho_SF11)
+dim(rho_LM22)
+dim(rho_methy)
+```
+
+
+## collapse cell types proportion estimates to fewer cell types
+
+```{r}
+ct_list = list()
+ct_list[["B"]] = c("B_cells", "Plasma_cells")
+ct_list[["CD4T"]] = c("CD4T_memory")
+ct_list[["CD8T"]] = c("CD8T_B", "CD8T_G")
+ct_list[["Treg"]] = c("Tregs")
+ct_list[["NK"]]   = c("NK1", "NK2", "NK3")
+ct_list[["Monocyte"]]   = c("Monocytes_Macrophages", "Dendritic_cells")
+cell_size_factors = c(0.4, 0.4, 0.4, 0.4, 0.42, 1.40)
+names(cell_size_factors) = c("B", "CD4T", "CD8T", "Treg", "NK", "Monocyte")
+
+rho_expr_sf11 = matrix(NA, nrow = nrow(rho_SF11), ncol = length(ct_list))
+colnames(rho_expr_sf11) = names(ct_list) 
+rownames(rho_expr_sf11) = rho_SF11$Mixture
+
+for(ct1 in names(ct_list)){
+  cts = ct_list[[ct1]]
+  rho_expr_sf11[,ct1] = rowSums(as.matrix(rho_SF11[,cts]))
+}
+
+rho_expr_sf11 = rho_expr_sf11 / rowSums(rho_expr_sf11)
+
+dim(rho_expr_sf11)
+rho_expr_sf11[1:2,]
+```
+
+## correct for tumor purity
+```{r}
+eta = rho_SF11$purity
+summary(eta)
+eta[which(eta > 0.99)] = 0.99
+
+rho_expr_sf11 = diag(1-eta) %*% rho_expr_sf11
+rownames(rho_expr_sf11) = rho_SF11$patient_id
+dim(rho_expr_sf11)
+rho_expr_sf11[1:2,]
+
+rho_SF11 = rho_expr_sf11
+```
+
+
+## compare cell type proportion between methods
+```{r corrplot, fig.height=4, fig.width=4.8}
+rho_SF11  = rho_SF11[,order(colnames(rho_SF11))]
+rho_LM22  = rho_LM22[,order(colnames(rho_LM22))]
+rho_EMeth = rho_methy[,,"EMeth"]
+rho_EMeth = rho_EMeth[,order(colnames(rho_EMeth))]
+
+ggcorrplot(cor(rho_SF11, rho_LM22), tl.cex = 10, lab=TRUE) + 
+  labs(x = 'SF11', y = 'LM22') +
+  theme(
+    axis.title.x = element_text(size=12, face="bold"),
+    axis.title.y = element_text(angle = 90, size=12, face="bold")
+  )
+
+
+ggcorrplot(cor(rho_SF11, rho_EMeth), tl.cex = 10, lab=TRUE) + 
+  labs(x = 'SF11', y = 'EMeth') + 
+  theme(
+    axis.title.x = element_text(size=12, face="bold"),
+    axis.title.y = element_text(angle = 90, size=12, face="bold")
+  )
+
+ggcorrplot(cor(rho_LM22, rho_EMeth), tl.cex = 10, lab=TRUE) + 
+  labs(x = 'LM22', y = 'EMeth') + 
+  theme(
+    axis.title.x = element_text(size=12, face="bold"),
+    axis.title.y = element_text(angle = 90, size=12, face="bold")
+  )
+```
+
+
+## compare cell type proportion between methylation and LM22
+```{r}
+methods = c("EMeth","svr","ls","rls","qp")
+cellTypes = dimnames(rho_methy)[[2]]
+
+utypes = intersect(cellTypes, colnames(rho_LM22))
+utypes
+
+cor_LM22 <- matrix(NA,nrow = length(utypes), ncol = length(methods))
+colnames(cor_LM22) <- methods
+rownames(cor_LM22) <- utypes
+
+err_LM22 = cor_LM22
+
+for(i in 1:length(utypes)){
+  rho_e_i = rho_LM22[,utypes[i]]
+  
+  cor_LM22[i,] <- sapply(1:length(methods), FUN = function(j){
+    cor(rho_methy[,utypes[i],methods[j]], rho_e_i, use="pair")
+  })
+  err_LM22[i,] <- sapply(1:length(methods), FUN = function(j){
+    sqrt(mean((rho_methy[,utypes[i],methods[j]] - rho_e_i)^2, na.rm=TRUE))
+  }) 
+}
+```
+
+## compare cell type proportion between methylation and SF11
+
+```{r}
+utypes = intersect(cellTypes, colnames(rho_SF11))
+utypes
+
+cor_SF11 <- matrix(NA,nrow = length(utypes), ncol = length(methods))
+colnames(cor_SF11) <- methods
+rownames(cor_SF11) <- utypes
+
+err_SF11 = cor_SF11
+
+for(i in 1:length(utypes)){
+  rho_e_i = rho_SF11[,utypes[i]]
+  
+  cor_SF11[i,] <- sapply(1:length(methods), FUN = function(j){
+    cor(rho_methy[,utypes[i],methods[j]], rho_e_i, use="pair")
+  })
+  err_SF11[i,] <- sapply(1:length(methods), FUN = function(j){
+    sqrt(mean((rho_methy[,utypes[i],methods[j]] - rho_e_i)^2, na.rm=TRUE))
+  }) 
+}
+```
+
+## Check the comparison results
+
+```{r barplot, fig.height=3, fig.width=6}
+
+cor_LM22
+err_LM22
+
+cor_SF11
+err_SF11
+
+df_cor_LM22 = pivot_longer(data.frame(cor_LM22, cell_type=rownames(cor_LM22)), 
+                           !cell_type, names_to = "method", values_to = "corr")
+
+p_cor_LM22 <- ggplot(data=df_cor_LM22, aes(x=cell_type, y=corr, fill=method)) +
+  geom_bar(stat="identity", color="black", position=position_dodge()) + 
+  theme_minimal()
+
+df_cor_SF11 = pivot_longer(data.frame(cor_SF11, cell_type=rownames(cor_SF11)), 
+                           !cell_type, names_to = "method", values_to = "corr")
+
+p_cor_SF11 <- ggplot(data=df_cor_SF11, aes(x=cell_type, y=corr, fill=method)) +
+  geom_bar(stat="identity", color="black", position=position_dodge()) + 
+  theme_minimal()
+
+p_cor_LM22
+p_cor_SF11
+```
+
+
+## Check a few cell types
+```{r scatters, fig.height=5, fig.width=5}
+Treg_e_LM22 = rho_LM22[,"Treg"]
+Treg_e_SF11 = rho_SF11[,"Treg"]
+Treg_methy  = rho_methy[, "Treg", "EMeth"]
+
+df1 = data.frame(Treg_e_LM22, Treg_e_SF11, Treg_methy)
+ggpairs(df1)
+
+CD8T_e_LM22 = rho_LM22[,"CD8T"]
+CD8T_e_SF11 = rho_SF11[,"CD8T"]
+CD8T_methy  = rho_methy[, "CD8T", "EMeth"]
+
+df1 = data.frame(CD8T_e_LM22, CD8T_e_SF11, CD8T_methy)
+ggpairs(df1)
+```
+
+```{r}
+gc()
+sessionInfo()
+```
+
+
