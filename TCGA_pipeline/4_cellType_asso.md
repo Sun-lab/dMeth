@@ -490,7 +490,7 @@ for(ctype1 in cell_types){
 }
 ```
 
-![](4_cellType_asso_files/figure-html/unnamed-chunk-10-1.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-10-2.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-10-3.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-10-4.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-10-5.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-10-6.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-10-7.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-10-8.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-10-9.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-10-10.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-10-11.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-10-12.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-10-13.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-10-14.png)<!-- -->
+![](4_cellType_asso_files/figure-html/SKCM_survival_plot-1.png)<!-- -->![](4_cellType_asso_files/figure-html/SKCM_survival_plot-2.png)<!-- -->![](4_cellType_asso_files/figure-html/SKCM_survival_plot-3.png)<!-- -->![](4_cellType_asso_files/figure-html/SKCM_survival_plot-4.png)<!-- -->![](4_cellType_asso_files/figure-html/SKCM_survival_plot-5.png)<!-- -->![](4_cellType_asso_files/figure-html/SKCM_survival_plot-6.png)<!-- -->![](4_cellType_asso_files/figure-html/SKCM_survival_plot-7.png)<!-- -->![](4_cellType_asso_files/figure-html/SKCM_survival_plot-8.png)<!-- -->![](4_cellType_asso_files/figure-html/SKCM_survival_plot-9.png)<!-- -->![](4_cellType_asso_files/figure-html/SKCM_survival_plot-10.png)<!-- -->![](4_cellType_asso_files/figure-html/SKCM_survival_plot-11.png)<!-- -->![](4_cellType_asso_files/figure-html/SKCM_survival_plot-12.png)<!-- -->![](4_cellType_asso_files/figure-html/SKCM_survival_plot-13.png)<!-- -->![](4_cellType_asso_files/figure-html/SKCM_survival_plot-14.png)<!-- -->
 
 Generate plots of survival curves with respect to **relative cell type fractions** for SKCM.
 
@@ -525,7 +525,7 @@ for(ctype1 in cell_types){
 }
 ```
 
-![](4_cellType_asso_files/figure-html/unnamed-chunk-11-1.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-11-2.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-11-3.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-11-4.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-11-5.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-11-6.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-11-7.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-11-8.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-11-9.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-11-10.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-11-11.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-11-12.png)<!-- -->
+![](4_cellType_asso_files/figure-html/SKCM_survival_plot_relative_fraction-1.png)<!-- -->![](4_cellType_asso_files/figure-html/SKCM_survival_plot_relative_fraction-2.png)<!-- -->![](4_cellType_asso_files/figure-html/SKCM_survival_plot_relative_fraction-3.png)<!-- -->![](4_cellType_asso_files/figure-html/SKCM_survival_plot_relative_fraction-4.png)<!-- -->![](4_cellType_asso_files/figure-html/SKCM_survival_plot_relative_fraction-5.png)<!-- -->![](4_cellType_asso_files/figure-html/SKCM_survival_plot_relative_fraction-6.png)<!-- -->![](4_cellType_asso_files/figure-html/SKCM_survival_plot_relative_fraction-7.png)<!-- -->![](4_cellType_asso_files/figure-html/SKCM_survival_plot_relative_fraction-8.png)<!-- -->![](4_cellType_asso_files/figure-html/SKCM_survival_plot_relative_fraction-9.png)<!-- -->![](4_cellType_asso_files/figure-html/SKCM_survival_plot_relative_fraction-10.png)<!-- -->![](4_cellType_asso_files/figure-html/SKCM_survival_plot_relative_fraction-11.png)<!-- -->![](4_cellType_asso_files/figure-html/SKCM_survival_plot_relative_fraction-12.png)<!-- -->
 
 # Assess the associations between mutation load and cell type fractions
 
@@ -590,7 +590,7 @@ lapply(scL, dim)
 ## [1] 359  76
 ```
 
-Next assess the associations between mutation load and cell type fractions 
+Next assess the associations between mutation burden and cell type fractions 
 
 
 ```r
@@ -654,7 +654,7 @@ for(c1 in cancer_types){
 ## Treg         -0.154 -0.153   0.0410   0.0430
 ```
 
-![](4_cellType_asso_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
+![](4_cellType_asso_files/figure-html/mb_vs_ct_fraction_cor-1.png)<!-- -->
 
 ```
 ## 
@@ -678,7 +678,7 @@ for(c1 in cancer_types){
 ## Treg         -0.155 -0.152  2.6e-03  3.8e-03
 ```
 
-![](4_cellType_asso_files/figure-html/unnamed-chunk-13-2.png)<!-- -->
+![](4_cellType_asso_files/figure-html/mb_vs_ct_fraction_cor-2.png)<!-- -->
 
 ```
 ## 
@@ -702,7 +702,7 @@ for(c1 in cancer_types){
 ## Treg          0.170  0.202  2.9e-03  4.0e-04
 ```
 
-![](4_cellType_asso_files/figure-html/unnamed-chunk-13-3.png)<!-- -->
+![](4_cellType_asso_files/figure-html/mb_vs_ct_fraction_cor-3.png)<!-- -->
 
 ```
 ## 
@@ -726,7 +726,7 @@ for(c1 in cancer_types){
 ## Treg         -0.091 -0.097   0.0860    0.072
 ```
 
-![](4_cellType_asso_files/figure-html/unnamed-chunk-13-4.png)<!-- -->
+![](4_cellType_asso_files/figure-html/mb_vs_ct_fraction_cor-4.png)<!-- -->
 
 Illustrate cell type fraction estimates
 
@@ -870,7 +870,7 @@ ggplot(rhos, aes(x=cell_type, y=value, fill=cancer_type)) +
   geom_boxplot() + labs(title="Cell type fraction by gene expression")
 ```
 
-![](4_cellType_asso_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
+![](4_cellType_asso_files/figure-html/ct_fraction_boxplot-1.png)<!-- -->
 
 ```r
 scM = scDf[,c(14,37:43)]
@@ -880,7 +880,7 @@ ggplot(rhos, aes(x=cell_type, y=value, fill=cancer_type)) +
   geom_boxplot() + labs(title="Cell type fraction by DNA methylation")
 ```
 
-![](4_cellType_asso_files/figure-html/unnamed-chunk-14-2.png)<!-- -->
+![](4_cellType_asso_files/figure-html/ct_fraction_boxplot-2.png)<!-- -->
 
 Compare cell type fraction estimates between gene expression and DNA methylation
 
@@ -895,9 +895,9 @@ for(cc1 in cell_types){
 }
 ```
 
-![](4_cellType_asso_files/figure-html/unnamed-chunk-15-1.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-15-2.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-15-3.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-15-4.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-15-5.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-15-6.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-15-7.png)<!-- -->
+![](4_cellType_asso_files/figure-html/ct_fraction_scatter_plot-1.png)<!-- -->![](4_cellType_asso_files/figure-html/ct_fraction_scatter_plot-2.png)<!-- -->![](4_cellType_asso_files/figure-html/ct_fraction_scatter_plot-3.png)<!-- -->![](4_cellType_asso_files/figure-html/ct_fraction_scatter_plot-4.png)<!-- -->![](4_cellType_asso_files/figure-html/ct_fraction_scatter_plot-5.png)<!-- -->![](4_cellType_asso_files/figure-html/ct_fraction_scatter_plot-6.png)<!-- -->![](4_cellType_asso_files/figure-html/ct_fraction_scatter_plot-7.png)<!-- -->
 
-Compare cell type fraction estimates vs. mutation load
+Compare cell type fraction estimates vs. mutation burden
 
 ```r
 cell_types = c("B", "CD4T", "CD8T", "Monocyte", "NK", "Neutrophil", "Treg")
@@ -918,7 +918,7 @@ for(cc1 in cell_types){
 }
 ```
 
-![](4_cellType_asso_files/figure-html/unnamed-chunk-16-1.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-16-2.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-16-3.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-16-4.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-16-5.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-16-6.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-16-7.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-16-8.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-16-9.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-16-10.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-16-11.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-16-12.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-16-13.png)<!-- -->![](4_cellType_asso_files/figure-html/unnamed-chunk-16-14.png)<!-- -->
+![](4_cellType_asso_files/figure-html/mb_vs_ct_fraction-1.png)<!-- -->![](4_cellType_asso_files/figure-html/mb_vs_ct_fraction-2.png)<!-- -->![](4_cellType_asso_files/figure-html/mb_vs_ct_fraction-3.png)<!-- -->![](4_cellType_asso_files/figure-html/mb_vs_ct_fraction-4.png)<!-- -->![](4_cellType_asso_files/figure-html/mb_vs_ct_fraction-5.png)<!-- -->![](4_cellType_asso_files/figure-html/mb_vs_ct_fraction-6.png)<!-- -->![](4_cellType_asso_files/figure-html/mb_vs_ct_fraction-7.png)<!-- -->![](4_cellType_asso_files/figure-html/mb_vs_ct_fraction-8.png)<!-- -->![](4_cellType_asso_files/figure-html/mb_vs_ct_fraction-9.png)<!-- -->![](4_cellType_asso_files/figure-html/mb_vs_ct_fraction-10.png)<!-- -->![](4_cellType_asso_files/figure-html/mb_vs_ct_fraction-11.png)<!-- -->![](4_cellType_asso_files/figure-html/mb_vs_ct_fraction-12.png)<!-- -->![](4_cellType_asso_files/figure-html/mb_vs_ct_fraction-13.png)<!-- -->![](4_cellType_asso_files/figure-html/mb_vs_ct_fraction-14.png)<!-- -->
 
 # Association between hypermutation status in COAD and immune cell fractions. 
 
@@ -933,7 +933,7 @@ ggplot(coad, aes(x=log10(raw_MB_hg38_SNV)))+
   geom_vline(xintercept = log10(400))
 ```
 
-![](4_cellType_asso_files/figure-html/unnamed-chunk-17-1.png)<!-- -->
+![](4_cellType_asso_files/figure-html/COAD_mb_hist-1.png)<!-- -->
 
 ```r
 coad$hyper_mut = coad[,"raw_MB_hg38_SNV"] > 400
@@ -956,7 +956,7 @@ for(ct1 in ctypes){
 ggarrange(gl[[1]], gl[[2]], gl[[3]], gl[[4]], nrow = 2, ncol = 2)
 ```
 
-![](4_cellType_asso_files/figure-html/unnamed-chunk-18-1.png)<!-- -->
+![](4_cellType_asso_files/figure-html/COAD_mb_vs_ct_fraction_wilcox-1.png)<!-- -->
 
 
 # Session information
@@ -967,8 +967,8 @@ gc()
 
 ```
 ##           used  (Mb) gc trigger  (Mb) limit (Mb) max used  (Mb)
-## Ncells 2278199 121.7    4319441 230.7         NA  4319441 230.7
-## Vcells 4379016  33.5   10146329  77.5      32768  8826317  67.4
+## Ncells 2278207 121.7    4319168 230.7         NA  4319168 230.7
+## Vcells 4379215  33.5   10146329  77.5      32768  9211517  70.3
 ```
 
 ```r

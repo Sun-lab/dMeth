@@ -49,7 +49,7 @@ cdr = cdr[which(cdr$type %in% cancer_types),]
 table(cdr$type)
 ```
 
-```{r include=FALSE}
+```{r check_survival_time_consistency, include=FALSE}
 # check the survival time consistency between the TCGA pan cancer study 
 # and our earlier work
 sc = readRDS("TCGA_Results/clinical_data/COAD_somatic_clinic.rds")
@@ -65,7 +65,8 @@ cdr.COAD = cdr[match(sc$barcode, cdr$bcr_patient_barcode),]
 dim(cdr.COAD)
 cdr.COAD[1:2,]
 
-plot(cdr.COAD$OS.time, sc$Time)
+plot(cdr.COAD$OS.time, sc$Time, xlab="TCGA pan-can survival time", 
+     ylab="survival time of our earlier work")
 table(cdr.COAD$OS, sc$Delta)
 ```
 
@@ -248,7 +249,7 @@ for(c1 in cancer_types){
 
 Generate plots of survival curves with respect to **cell type fractions** for SKCM.
 
-```{r warning = FALSE, message = FALSE, fig.height=5, fig.width=4}
+```{r SKCM_survival_plot, warning = FALSE, message = FALSE, fig.height=5, fig.width=4}
 
 ct = ctf[["SKCM"]]
 cell_types = c("CD4T", "CD8T", "Monocyte", "B", "NK", "Neutrophil", "Treg")
@@ -279,7 +280,7 @@ for(ctype1 in cell_types){
 
 Generate plots of survival curves with respect to **relative cell type fractions** for SKCM.
 
-```{r warning = FALSE, message = FALSE, fig.height=5, fig.width=4}
+```{r SKCM_survival_plot_relative_fraction, warning = FALSE, message = FALSE, fig.height=5, fig.width=4}
 
 ct = ctf[["SKCM"]]
 cell_types = c("CD4T", "Monocyte", "B", "NK", "Neutrophil", "Treg")
@@ -341,9 +342,9 @@ lapply(ctf, dim)
 lapply(scL, dim)
 ```
 
-Next assess the associations between mutation load and cell type fractions 
+Next assess the associations between mutation burden and cell type fractions 
 
-```{r warning = FALSE, message = FALSE, fig.height=4, fig.width=6}
+```{r mb_vs_ct_fraction_cor, warning = FALSE, message = FALSE, fig.height=4, fig.width=6}
 for(c1 in cancer_types){
   cat("\n--------------------------------------------------------------\n")
   cat(c1)
@@ -383,7 +384,7 @@ for(c1 in cancer_types){
 ```
 
 Illustrate cell type fraction estimates
-```{r warning = FALSE, message = FALSE, fig.height=4, fig.width=7}
+```{r ct_fraction_boxplot, warning = FALSE, message = FALSE, fig.height=4, fig.width=7}
 lapply(scL, dim)
 scDf = NULL
 for(c1 in cancer_types){
@@ -410,7 +411,7 @@ ggplot(rhos, aes(x=cell_type, y=value, fill=cancer_type)) +
 ```
 
 Compare cell type fraction estimates between gene expression and DNA methylation
-```{r warning = FALSE, message = FALSE, fig.height=3, fig.width=12}
+```{r ct_fraction_scatter_plot, warning = FALSE, message = FALSE, fig.height=3, fig.width=12}
 cell_types = c("B", "CD4T", "CD8T", "Monocyte", "NK", "Neutrophil", "Treg")
 
 for(cc1 in cell_types){
@@ -422,8 +423,8 @@ for(cc1 in cell_types){
 
 ```
 
-Compare cell type fraction estimates vs. mutation load
-```{r warning = FALSE, message = FALSE, fig.height=3, fig.width=12}
+Compare cell type fraction estimates vs. mutation burden
+```{r mb_vs_ct_fraction, warning = FALSE, message = FALSE, fig.height=3, fig.width=12}
 cell_types = c("B", "CD4T", "CD8T", "Monocyte", "NK", "Neutrophil", "Treg")
 mb = scDf$raw_MB_hg38_SNV + scDf$raw_MB_hg38_INDEL
 mb[which(mb < 10)] = NA
@@ -447,7 +448,7 @@ for(cc1 in cell_types){
 
 First define the hypermutation subgroup with larger number of mutations. 
 
-```{r warning = FALSE, message = FALSE, fig.height=3, fig.width=3}
+```{r COAD_mb_hist, warning = FALSE, message = FALSE, fig.height=3, fig.width=3}
 coad = scL[["COAD"]]
 
 ggplot(coad, aes(x=log10(raw_MB_hg38_SNV)))+
@@ -457,7 +458,7 @@ coad$hyper_mut = coad[,"raw_MB_hg38_SNV"] > 400
 ```
 
 Next compare the cell type fractions between hypermuted and non-hypermutated groups. 
-```{r warning = FALSE, message = FALSE, fig.height=5, fig.width=4.5}
+```{r COAD_mb_vs_ct_fraction_wilcox, warning = FALSE, message = FALSE, fig.height=5, fig.width=4.5}
 ctypes = c("CD8T.E", "CD8T", "Treg.E", "Treg")
 gl = list()
 for(ct1 in ctypes){
